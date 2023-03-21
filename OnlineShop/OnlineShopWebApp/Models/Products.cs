@@ -1,9 +1,11 @@
-﻿
+﻿using System;
+
 namespace OnlineShopWebApp.Models
 {
     public class Product
-    { 
-        public int Id { get; set; }
+    {
+        private static int counter = 1;
+        public int Id { get; }
         public string Name { get; set; }
         public decimal Cost { get; set; }
         public string Description { get; set; }
@@ -13,9 +15,9 @@ namespace OnlineShopWebApp.Models
         public int Year { get; set; }
         public bool IsPromo { get; set; }
 
-        public Product(int id,string name, decimal cost, string description, string genre,  string paintingTechnique, string size, int year, bool ispromo)
+        public Product(string name, decimal cost, string description, string genre,  string paintingTechnique, string size, int year, bool ispromo)
         {
-            Id = id;
+            Id = counter++;
             Name = name;
             Cost = cost;
             Description = description;
