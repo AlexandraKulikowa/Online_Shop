@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Controllers
         {
             _logger = logger;
         }
-        private List<Product> ProductList()
+        private void ProductList()
         {
             var Products = new List<Product>()
             {
@@ -29,13 +29,13 @@ namespace OnlineShopWebApp.Controllers
 
             var jsonProducts = JsonConvert.SerializeObject(Products);
             System.IO.File.WriteAllText(@"jsonproducts.json", jsonProducts);
-            var ListOfProducts = JsonConvert.DeserializeObject<List<Product>>(jsonProducts);
-            return Products;
+            
         }
         public string Index()
         {
-            var Products = ProductList();
-            var result = String.Join("", Products);
+            var jsonListProducts = System.IO.File.ReadAllText(@"jsonproducts.json");
+            var ListOfProducts = JsonConvert.DeserializeObject<List<Product>>(jsonListProducts);
+            var result = String.Join("", ListOfProducts);
             return result;
         }
         public IActionResult Privacy()
