@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OnlineShopWebApp.Models;
-using Newtonsoft.Json;
 
 namespace OnlineShopWebApp.Controllers
-{    public class HomeController : Controller
+{
+    public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -15,12 +14,12 @@ namespace OnlineShopWebApp.Controllers
         {
             _logger = logger;
         }
-        
+
         public string Index()
         {
-            ProductList productList = new ProductList();
+            var Products = new ProductList();
 
-            var result = String.Join("", productList.Products);
+            var result = String.Join("", Products.GetProducts());
             return result;
         }
         public IActionResult Privacy()

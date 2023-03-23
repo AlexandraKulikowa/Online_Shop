@@ -1,4 +1,3 @@
-
 namespace OnlineShopWebApp.Models
 {
     public class ErrorViewModel

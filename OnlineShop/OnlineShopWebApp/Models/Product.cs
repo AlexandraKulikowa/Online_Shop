@@ -1,20 +1,7 @@
-﻿
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-
-namespace OnlineShopWebApp.Models
+﻿namespace OnlineShopWebApp.Models
 {
     public class Product
     {
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum GenreEnum 
-        { 
-            Landscape, 
-            Portrait, 
-            StillLife, 
-            Animalism
-        }
-
         private static int counter = 1;
         public int Id { get; }
         public string Name { get; set; }
@@ -38,9 +25,9 @@ namespace OnlineShopWebApp.Models
             Year = year;
             IsPromo = ispromo;
         }
-        public override string ToString() 
+        public override string ToString()
         {
             return $"{Id} \n{Name} \n{Cost} \n\n";
         }
-}
+    }
 }
