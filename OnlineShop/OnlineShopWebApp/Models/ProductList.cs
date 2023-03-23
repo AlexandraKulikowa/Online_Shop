@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Models
         {
             listProducts = MakeFullProductList();
         }
-        public List<Product> MakeFullProductList()
+        public static List<Product> MakeFullProductList()
         {
             listProducts = new List<Product>()
             {
@@ -26,8 +26,7 @@ namespace OnlineShopWebApp.Models
         }
         public List<Product> GetProducts()
         {
-            var ListProducts = listProducts;
-            return ListProducts; 
+            return listProducts;
         }
     }
 }
