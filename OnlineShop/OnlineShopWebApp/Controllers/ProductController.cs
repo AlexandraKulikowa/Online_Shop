@@ -5,10 +5,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private static ProductList products;
+        private static ProductRepository products;
         public ProductController()
         {
-            products = new ProductList();
+            products = new ProductRepository();
         }
         public string Index(int id)
         {

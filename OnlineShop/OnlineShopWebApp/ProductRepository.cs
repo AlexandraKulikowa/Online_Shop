@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class ProductList
+    public class ProductRepository
     {
         private static List<Product> listProducts = new List<Product>()
             {

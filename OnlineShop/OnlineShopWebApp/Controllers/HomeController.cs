@@ -6,10 +6,10 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private static ProductList products;
+        private static ProductRepository products;
         public HomeController()
         {
-            products = new ProductList();
+            products = new ProductRepository();
         }
         public string Index()
         {
