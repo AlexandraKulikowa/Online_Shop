@@ -7,10 +7,14 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private static ProductList Products = new ProductList();
+        private static ProductList products;
+        public HomeController()
+        {
+            products = new ProductList();
+        }
         public string Index()
         {
-            var result = String.Join("", Products.GetProducts());
+            var result = String.Join("\n", products.GetAll());
             return result;
         }
         public IActionResult Privacy()

@@ -4,15 +4,7 @@ namespace OnlineShopWebApp.Models
 {
     public class ProductList
     {
-        private static List<Product> listProducts { get; set; }
-
-        public ProductList()
-        {
-            listProducts = MakeFullProductList();
-        }
-        public static List<Product> MakeFullProductList()
-        {
-            listProducts = new List<Product>()
+        private static List<Product> listProducts = new List<Product>()
             {
                 new Product ("Картина Золотая осень", 8000, "Осенний пейзаж",GenreEnum.Landscape, "масло", new Size (50, 60, true),2022,false),
                 new Product ("Картина Пеннивайз", 6000, "Клоун из Оно",GenreEnum.Portrait, "масло",new Size (25, 30, false),2022,false),
@@ -21,12 +13,10 @@ namespace OnlineShopWebApp.Models
                 new Product ("Картина Лара Крофт", 2000, "Анджелина Джоли в роли Лары Крофт",GenreEnum.Portrait, "масло",new Size(20, 25, false),2021,true),
                 new Product ("Картина Девушка и ветер", 4000, "Картина в подарок подруге", GenreEnum.Portrait, "масло", new Size(20, 25, false),2021,false),
             };
-
-            return listProducts;
-        }
-        public List<Product> GetProducts()
+        public List<Product> GetAll()
         {
             return listProducts;
         }
     }
 }
+
