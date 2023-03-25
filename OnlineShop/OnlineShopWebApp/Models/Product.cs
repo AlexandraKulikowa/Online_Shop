@@ -12,7 +12,6 @@
         public Size Size { get; }
         public int Year { get; }
         public bool IsPromo { get; }
-
         public Product(string name, decimal cost, string description, GenreEnum genre, string paintingTechnique, Size size, int year, bool ispromo)
         {
             Id = counter;
@@ -28,7 +27,14 @@
         }
         public override string ToString()
         {
-            return $"\n{Id} \n{Name} \n{Cost}";
+            return $"{Id} \n{Name} \n{Cost}";
+        }
+        public string ToStringFullInfo()
+        {
+            if (IsPromo)
+                return $"{Id} \n{Name} \n{Cost} \n{Description} \n{Genre} \n{PaintingTechnique} \n{Size} \n{Year} \nАкция на товар!";
+
+            return $"{Id} \n{Name} \n{Cost} \n{Description} \n{Genre} \n{PaintingTechnique} \n{Size} \n{Year}";
         }
     }
 }

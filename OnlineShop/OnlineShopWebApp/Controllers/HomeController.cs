@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
 
@@ -7,25 +6,15 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private static ProductList products;
+        private static ProductRepository products;
         public HomeController()
         {
-            products = new ProductList();
+            products = new ProductRepository();
         }
         public string Index()
         {
             var result = String.Join("\n", products.GetAll());
             return result;
-        }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
