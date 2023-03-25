@@ -1,28 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private static ProductList products;
+        public HomeController()
         {
-            _logger = logger;
+            products = new ProductList();
         }
-
-        public IActionResult Index()
+        public string Index()
         {
-            return View();
+            var result = String.Join("\n", products.GetAll());
+            return result;
         }
-
         public IActionResult Privacy()
         {
             return View();
