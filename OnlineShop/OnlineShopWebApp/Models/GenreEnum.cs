@@ -2,10 +2,10 @@
 {
     public enum GenreEnum
     {
-        Landscape,
-        Portrait,
-        StillLife,
-        Animalism
+        Пейзаж,
+        Портрет,
+        Натюрморт,
+        Анималистика
     }
 }
 
