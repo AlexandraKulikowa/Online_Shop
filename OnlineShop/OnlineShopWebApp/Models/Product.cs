@@ -29,12 +29,5 @@
         {
             return $"{Id} \n{Name} \n{Cost}";
         }
-        public string ToStringFullInfo()
-        {
-            if (IsPromo)
-                return $"{Id} \n{Name} \n{Cost} \n{Description} \n{Genre} \n{PaintingTechnique} \n{Size} \n{Year} \nАкция на товар!";
-
-            return $"{Id} \n{Name} \n{Cost} \n{Description} \n{Genre} \n{PaintingTechnique} \n{Size} \n{Year}";
-        }
     }
 }

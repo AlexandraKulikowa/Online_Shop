@@ -1,0 +1,29 @@
+﻿@model Product
+    
+<div class="col-8 card shadow">
+    <div class="card-body">
+                <img src="https://imageup.ru/img274/4264626/zolotaia_osen_fbpap.jpg" alt="Фото картины">
+                <br>
+                    <h3><b>@Model.Name</b><br></h3>
+
+                        @if (Model.IsPromo)
+                    {
+                        <b><s>@Convert.ToInt32(Model.Cost + 2000)</s>    @Model.Cost рублей</b><br>
+                    }
+                    else
+                    {
+                        <b>@Model.Cost рублей</b><br>
+                    }
+                    <b>@Model.Description</b><br>
+                    <b>@Model.Genre</b><br>
+                    <b>@Model.PaintingTechnique</b><br>
+                    <b>@Model.Size</b><br>
+                    @if (Model.IsPromo)
+                    {
+                        <h5>Акция на товар!</h5>
+                    }
+                    <br>
+            <a class=" btn btn-outline-primary btn-lg" href="/home/index/" role="button">Продолжить покупки</a>
+            <a class=" btn btn-success btn-lg" href="#" role="button">Добавить в корзину</a>
+     </div>
+</div>

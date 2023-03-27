@@ -10,14 +10,9 @@ namespace OnlineShopWebApp.Controllers
         {
             products = new ProductRepository();
         }
-        public string Index(int id)
+        public IActionResult Index(int id)
         {
-            var product = products.TryGetById(id);
-            if (product == null)
-            {
-                return $"Сожалеем. Картина с идентификатором {id} отсутствует.";
-            }
-            return product.ToStringFullInfo();
+            return View(products.TryGetById(id));
         }
     }
 }
