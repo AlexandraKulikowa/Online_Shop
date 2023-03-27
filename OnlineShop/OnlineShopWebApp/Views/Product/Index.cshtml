@@ -2,19 +2,18 @@
     
 <div class="col-8 card shadow">
     <div class="card-body">
-                <img src="https://imageup.ru/img274/4264626/zolotaia_osen_fbpap.jpg" width="410" height="288">
+                <img src="https://imageup.ru/img274/4264626/zolotaia_osen_fbpap.jpg" alt="Фото картины">
                 <br>
                     <h3><b>@Model.Name</b><br></h3>
 
                         @if (Model.IsPromo)
                     {
-                        <b><s>@Convert.ToInt32(Model.Cost + 2000)</s>    Model.Cost рублей</b><br>
+                        <b><s>@Convert.ToInt32(Model.Cost + 2000)</s>    @Model.Cost рублей</b><br>
                     }
                     else
                     {
                         <b>@Model.Cost рублей</b><br>
                     }
-
                     <b>@Model.Description</b><br>
                     <b>@Model.Genre</b><br>
                     <b>@Model.PaintingTechnique</b><br>
