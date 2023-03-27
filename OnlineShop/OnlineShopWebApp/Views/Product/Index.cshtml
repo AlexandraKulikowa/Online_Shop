@@ -1,12 +1,20 @@
 ﻿@model Product
     
-<p class="aligncenter">
-<div class="col-5 card shadow">
+<div class="col-8 card shadow">
     <div class="card-body">
                 <img src="https://imageup.ru/img274/4264626/zolotaia_osen_fbpap.jpg" width="410" height="288">
                 <br>
-                    <b>@Model.Name</b><br>
-                    <b>@Model.Cost рублей</b><br>
+                    <h3><b>@Model.Name</b><br></h3>
+
+                        @if (Model.IsPromo)
+                    {
+                        <b><s>@Convert.ToInt32(Model.Cost + 2000)</s>    Model.Cost рублей</b><br>
+                    }
+                    else
+                    {
+                        <b>@Model.Cost рублей</b><br>
+                    }
+
                     <b>@Model.Description</b><br>
                     <b>@Model.Genre</b><br>
                     <b>@Model.PaintingTechnique</b><br>
@@ -20,4 +28,3 @@
             <a class=" btn btn-success btn-lg" href="#" role="button">Добавить в корзину</a>
      </div>
 </div>
-</p>
