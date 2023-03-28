@@ -72,21 +72,4 @@ body {
 .card-body {
     text-align:center;
 }
-a.basket {
-    color: aliceblue;
-    user-select: none;
-    text-decoration: double;
-    outline: none;
-    background-color: darkslategrey;
-    padding: 1em 2em;
-    text-align: right;
-}
-
-a.basket:active {
-    background-color:darkcyan;
-}
-
-a.nubex:hover {
-    background-color:darkcyan;
-}
 
