@@ -12,6 +12,7 @@
         public Size Size { get; }
         public int Year { get; }
         public bool IsPromo { get; }
+        public Product() {}
         public Product(string name, decimal cost, string description, GenreEnum genre, string paintingTechnique, Size size, int year, bool ispromo)
         {
             Id = counter;
