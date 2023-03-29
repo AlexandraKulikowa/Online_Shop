@@ -1,30 +1,36 @@
 ﻿@model List<SumProducts>
-
-@if (Model.Count == 0)
+<body style="background-color:wheat">
 {
     <h1><b>Ваша корзина пуста!</b></h1>
 }
-<table>
-    <thead>Ваша корзина</thead>
-    <tr>
-        <th>Названия</th>
-        <th>Количество товара</th>
-        <th>Стоимость</th>
-    </tr>
+@if (Model.Count != 0)
+{
+<b><p class="heading" valign="middle">Ваша корзина</p></b>
+    <table>
     @{
         decimal totalcost = 0;
     }
     @foreach (SumProducts item in Model)
     {
-        <tr>
-            <td>@item.Name</td>
-            <td>@item.NumberOfProducts</td>
-            <td>@item.Cost</td>
-        </tr>
+            <tbody class="tab-content">
+                <tr><th>@item.Name</th></tr>
+                <tr>
+                    <td>Жанр: @item.Genre</td>
+                    <td align="right">@item.NumberOfProducts</td>
+                    <td align="right">@item.Cost</td>
+                </tr>
+                <tr><td>Написана в @item.Year году</td> </tr>
+            </tbody>
         totalcost += item.Cost;
     }
-    <tr>
-        <th colspan="3">Итоговая сумма заказа @totalcost</th>
-    </tr>
 </table>
-<a class="btn btn-success col-md-3 btn-lg" href="#" role="button">Оформить заказ</a>
+<br />
+    <b><p class="tab-total" rowspan="5">Итоговая сумма заказа @totalcost рублей</p></b>
+<p>
+        <div align="center">
+            <a class="btn btn-success col-md-5 btn-lg btn-options" href="#" role="button">Оформить заказ</a>
+        </div>
+</p>
+
+}
+</body>

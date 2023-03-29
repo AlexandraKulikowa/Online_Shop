@@ -59,7 +59,6 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
 .footer {
@@ -70,7 +69,8 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 .card-body {
-    text-align:center;
+    text-align: center;
+    border-radius: 50px;
 }
 a.basket {
     color: aliceblue;
@@ -78,15 +78,51 @@ a.basket {
     text-decoration: double;
     outline: none;
     background-color: darkslategrey;
-    padding: 1em 2em;
+    padding: 1em 1em;
+    text-align: center;
+    width: 100px;
+    height: 60px;
+    border-radius: 22px;
+    box-shadow: 3px 3px 3px;
+}
+
+a.basket:hover {
+    background-color: darkcyan;
+}
+
+.heading{
+    font-size: 34px;
+    color:darkslategray;
+    text-align: center;
+}
+
+.tab-content {
+    font-size: 20px;
+    color: teal;
+    width:80%;
+}
+.btn-options {
+    width: 700px;
+    height: 60px;
+    border-radius: 22px;
+    text-align: center;
+    padding-left: 0;
+    padding-right:initial;
+    font-size: 28px;
+    box-shadow: 1px 2px 4px;
+}
+    .btn-options:hover {
+        background-color: darkgreen;
+    }
+
+.tab-total {
     text-align: right;
+    font-size: 25px;
+    color:darkslategrey;
+    width: 100%;
 }
-
-a.basket:active {
-    background-color:darkcyan;
-}
-
-a.nubex:hover {
-    background-color:darkcyan;
+table {
+    width: 85%;
+    margin:4px 5px 2px 150px;
 }
 

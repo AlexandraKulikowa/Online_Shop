@@ -18,11 +18,11 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index(int id)
         {
-            if(id != 0)
+            if (id != 0)
             {
                 Product = products.TryGetById(id);
-                int number = 1; // потом реализую это через кнопку плюс и минус
-                SumProducts NumberOfProducts = new SumProducts(Product.Name, Product.Cost, Product.Description, Product.Genre, Product.PaintingTechnique, Product.Size, Product.Year, Product.IsPromo, number);
+                var number = 1; // потом реализую это через кнопку плюс и минус
+                var NumberOfProducts = new SumProducts(Product.Name, Product.Cost, Product.Description, Product.Genre, Product.PaintingTechnique, Product.Size, Product.Year, Product.IsPromo, number);
                 productsInBasket.Add(NumberOfProducts);
                 return View(productsInBasket);
             }

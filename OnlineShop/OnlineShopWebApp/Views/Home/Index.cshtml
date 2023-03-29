@@ -1,9 +1,9 @@
 ﻿@model List<Product>
-
+<body style="background-color:darkgrey">
 <div class="row">
     @foreach (var product in Model)
     {
-        <div class="col-3 card shadow">         
+        <div class="col-3 card shadow border-success">
             <div class="card-body">
                     <img class="card-img-top" src="https://imageup.ru/img274/4264626/zolotaia_osen_fbpap.jpg" width="200" height="140" alt="Фото картины">
                         <a href="/product/index/@product.Id">
@@ -14,9 +14,10 @@
                 </a>
                 <br>
                 <div class="d-grid gap-2">
-                <a class=" btn btn-success btn-lg" href="/basket/index/@product.Id" role="button">Добавить в корзину</a>
+                <a class="btn btn-success btn-lg" href="/basket/index/@product.Id" role="button">Добавить в корзину</a>
                 </div>
             </div>
         </div>
     }
 </div>
+</body>
