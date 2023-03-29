@@ -8,12 +8,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private static ProductRepository products;
         public Product Product { get; set; }
+        private Basket basket = new Basket();
 
-        private static List<SumProducts> productsInBasket;
+        private List<SumProducts> productsInBasket;
         public BasketController()
         {
             products = new ProductRepository();
-            productsInBasket = new List<SumProducts>();
+            productsInBasket = basket.GetProducts();
         }
         public IActionResult Index(int id)
         {
