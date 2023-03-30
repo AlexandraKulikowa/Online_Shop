@@ -7,25 +7,26 @@ namespace OnlineShopWebApp.Controllers
     public class BasketController : Controller
     {
         private static ProductRepository products;
-        public Product Product { get; set; }
-        private Basket basket = new Basket();
+        private static Basket basket;
 
-        private List<SumProducts> productsInBasket;
+        private List<ProductWithQuantity> productsInBasket;
         public BasketController()
         {
             products = new ProductRepository();
+            basket = new Basket();
             productsInBasket = basket.GetProducts();
         }
         public IActionResult Index(int id)
         {
             if (id != 0)
             {
-                Product = products.TryGetById(id);
-                var number = 1; // потом реализую это через кнопку плюс и минус
-                var NumberOfProducts = new SumProducts(Product.Name, Product.Cost, Product.Description, Product.Genre, Product.PaintingTechnique, Product.Size, Product.Year, Product.IsPromo, number);
-                productsInBasket.Add(NumberOfProducts);
+                var Product = products.TryGetById(id);
+                var count = 1; // потом реализую это через кнопку плюс и минус
+                var BasketItem = new ProductWithQuantity(Product.Name, Product.Cost, Product.Description, Product.Genre, Product.PaintingTechnique, Product.Size, Product.Year, Product.IsPromo, count);
+                basket.AddProduct(BasketItem);
                 return View(productsInBasket);
             }
+            ViewBag.TotalCost = basket.TotalCost();
             return View(productsInBasket);
         }
     }

@@ -1,16 +1,14 @@
-﻿@model List<SumProducts>
-<body style="background-color:wheat">
+﻿@model List<ProductWithQuantity>
+
+@if (Model.Count == 0)
 {
     <h1><b>Ваша корзина пуста!</b></h1>
 }
-@if (Model.Count != 0)
+@if(Model.Count != 0)
 {
 <b><p class="heading" valign="middle">Ваша корзина</p></b>
     <table>
-    @{
-        decimal totalcost = 0;
-    }
-    @foreach (SumProducts item in Model)
+    @foreach (ProductWithQuantity item in Model)
     {
             <tbody class="tab-content">
                 <tr><th>@item.Name</th></tr>
@@ -21,11 +19,10 @@
                 </tr>
                 <tr><td>Написана в @item.Year году</td> </tr>
             </tbody>
-        totalcost += item.Cost;
     }
 </table>
 <br />
-    <b><p class="tab-total" rowspan="5">Итоговая сумма заказа @totalcost рублей</p></b>
+    <b><p class="tab-total" rowspan="5">Итоговая сумма заказа @ViewBag.TotalCost рублей</p></b>
 <p>
         <div align="center">
             <a class="btn btn-success col-md-5 btn-lg btn-options" href="#" role="button">Оформить заказ</a>
@@ -33,4 +30,3 @@
 </p>
 
 }
-</body>
