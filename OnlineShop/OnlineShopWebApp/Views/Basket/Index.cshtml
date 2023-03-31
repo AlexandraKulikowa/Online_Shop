@@ -1,32 +1,33 @@
-﻿@model List<ProductWithQuantity>
+﻿@model Basket
 
-@if (Model.Count == 0)
+@if(Model.ProductsInBasket == null)
 {
-    <h1><b>Ваша корзина пуста!</b></h1>
+    <h2><b>Ваша корзина пуста!</b></h2>
 }
-@if(Model.Count != 0)
+else
 {
+<div class="col-11 card shadow">
 <b><p class="heading" valign="middle">Ваша корзина</p></b>
     <table>
-    @foreach (ProductWithQuantity item in Model)
+    @foreach (BasketItem item in Model.ProductsInBasket)
     {
             <tbody class="tab-content">
-                <tr><th>@item.Name</th></tr>
+                <tr><th>@item.Product.Name</th></tr>
                 <tr>
-                    <td>Жанр: @item.Genre</td>
-                    <td align="right">@item.NumberOfProducts</td>
-                    <td align="right">@item.Cost</td>
+                    <td>Жанр: @item.Product.Genre</td>
+                    <td align="right">@item.Amount</td>
+                    <td align="right">@item.Product.Cost рублей</td>
                 </tr>
-                <tr><td>Написана в @item.Year году</td> </tr>
+                <tr><td>Написана в @item.Product.Year году</td> </tr>
             </tbody>
     }
 </table>
 <br />
-    <b><p class="tab-total" rowspan="5">Итоговая сумма заказа @ViewBag.TotalCost рублей</p></b>
+    <b><p class="tab-total" rowspan="5">Итоговая сумма заказа "@Model.TotalCost()" рублей</p></b>
 <p>
         <div align="center">
             <a class="btn btn-success col-md-5 btn-lg btn-options" href="#" role="button">Оформить заказ</a>
         </div>
 </p>
-
+</div>
 }
