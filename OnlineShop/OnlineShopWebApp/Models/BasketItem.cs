@@ -15,6 +15,8 @@ namespace OnlineShopWebApp
                 return Product.Cost * Amount;
             }
         }
+        public BasketItem()
+        { }
         public BasketItem(Product product, int amount)
         {
             Product = product;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp;
 
 namespace OnlineShopWebApp.Repositories
 {

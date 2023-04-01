@@ -16,14 +16,14 @@ else
                 <tr>
                     <td>Жанр: @item.Product.Genre</td>
                     <td align="right">@item.Amount</td>
-                    <td align="right">@item.Product.Cost рублей</td>
+                    <td align="right">@(item.Product.Cost * @item.Amount) рублей</td>
                 </tr>
                 <tr><td>Написана в @item.Product.Year году</td> </tr>
             </tbody>
     }
 </table>
 <br />
-    <b><p class="tab-total" rowspan="5">Итоговая сумма заказа "@Model.TotalCost()" рублей</p></b>
+    <b><p class="tab-total" rowspan="5">Итоговая сумма заказа @Model.TotalCost() рублей</p></b>
 <p>
         <div align="center">
             <a class="btn btn-success col-md-5 btn-lg btn-options" href="#" role="button">Оформить заказ</a>
