@@ -1,0 +1,33 @@
+﻿@model Basket
+
+@if(Model == null)
+{
+    <h2><b>Ваша корзина пуста!</b></h2>
+}
+else
+{
+<div class="col-11 card shadow">
+        <p class="heading" valign="middle"><b>Ваша корзина</b></p>
+    <table>
+    @foreach (BasketItem item in Model.ProductsInBasket)
+    {
+            <tbody class="tab-content">
+                <tr><th>@item.Product.Name</th></tr>
+                <tr>
+                    <td>Жанр: @item.Product.Genre</td>
+                    <td align="right">@item.Amount</td>
+                    <td align="right">@(item.Product.Cost * @item.Amount) рублей</td>
+                </tr>
+                <tr><td>Написана в @item.Product.Year году</td> </tr>
+            </tbody>
+    }
+</table>
+<br />
+        <p class="tab-total" rowspan="5"><b>Итоговая сумма заказа @Model.TotalCost() рублей</b></p>
+<p>
+        <div align="center">
+            <a class="btn btn-success col-md-5 btn-lg btn-options" href="#" role="button">Оформить заказ</a>
+        </div>
+</p>
+</div>
+}
