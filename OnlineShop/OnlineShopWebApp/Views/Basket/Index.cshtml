@@ -1,13 +1,13 @@
 ﻿@model Basket
 
-@if(Model.ProductsInBasket == null)
+@if(Model == null)
 {
     <h2><b>Ваша корзина пуста!</b></h2>
 }
 else
 {
 <div class="col-11 card shadow">
-<b><p class="heading" valign="middle">Ваша корзина</p></b>
+        <p class="heading" valign="middle"><b>Ваша корзина</b></p>
     <table>
     @foreach (BasketItem item in Model.ProductsInBasket)
     {
@@ -23,7 +23,7 @@ else
     }
 </table>
 <br />
-    <b><p class="tab-total" rowspan="5">Итоговая сумма заказа @Model.TotalCost() рублей</p></b>
+        <p class="tab-total" rowspan="5"><b>Итоговая сумма заказа @Model.TotalCost() рублей</b></p>
 <p>
         <div align="center">
             <a class="btn btn-success col-md-5 btn-lg btn-options" href="#" role="button">Оформить заказ</a>
