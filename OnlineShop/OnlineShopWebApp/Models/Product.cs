@@ -12,7 +12,8 @@
         public Size Size { get; }
         public int Year { get; }
         public bool IsPromo { get; }
-        public Product(string name, decimal cost, string description, GenreEnum genre, string paintingTechnique, Size size, int year, bool ispromo)
+        public string ImagePath { get; set; }
+        public Product(string name, decimal cost, string description, GenreEnum genre, string paintingTechnique, Size size, int year, bool ispromo, string imagePath)
         {
             Id = counter;
             Name = name;
@@ -23,6 +24,7 @@
             Size = size;
             Year = year;
             IsPromo = ispromo;
+            ImagePath = imagePath;
             counter++;
         }
         public override string ToString()

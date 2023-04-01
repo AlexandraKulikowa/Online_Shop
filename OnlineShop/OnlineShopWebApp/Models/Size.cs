@@ -13,7 +13,7 @@
         }
         public override string ToString()
         {
-            if(IsFrame)
+            if (IsFrame)
                 return $"{Width} * {Height}, с рамкой";
 
             return $"{Width} * {Height}, без рамки";

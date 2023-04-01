@@ -1,13 +1,10 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
+﻿
 a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
 }
@@ -24,8 +21,6 @@ a {
   border-color: #1861ac;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
 html {
   font-size: 14px;
 }
@@ -51,15 +46,12 @@ button.accept-policy {
   line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
 .footer {
@@ -67,9 +59,62 @@ body {
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;
 }
 .card-body {
-    text-align:center;
+    text-align: center;
+    border-radius: 50px;
+}
+a.basket {
+    color: aliceblue;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    background-color: darkslategrey;
+    padding: 1em 1em;
+    text-align: center;
+    width: 100px;
+    height: 60px;
+    border-radius: 22px;
+    box-shadow: 3px 3px 3px;
 }
 
+a.basket:hover {
+    background-color: darkcyan;
+}
+
+.heading{
+    font-size: 34px;
+    color:darkslategray;
+    text-align: center;
+}
+
+.tab-content {
+    font-size: 20px;
+    color: teal;
+    width:80%;
+}
+.btn-options {
+    width: 700px;
+    height: 60px;
+    border-radius: 22px;
+    text-align: center;
+    padding-left: 0;
+    padding-right:initial;
+    font-size: 28px;
+    box-shadow: 1px 2px 4px;
+}
+.btn-options:hover {
+    background-color: darkgreen;
+}
+
+.tab-total {
+    text-align: right;
+    font-size: 25px;
+    color:darkslategrey;
+    width: 100%;
+}
+table {
+    width: 85%;
+    margin:4px 5px 2px 150px;
+}

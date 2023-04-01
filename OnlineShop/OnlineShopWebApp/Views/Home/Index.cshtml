@@ -1,11 +1,12 @@
 ﻿@model List<Product>
-
+<body style="background-color:darkgrey">
 <div class="row">
     @foreach (var product in Model)
     {
-        <div class="col-3 card shadow">         
-            <div class="card-body">
-                    <img class="card-img-top" src="https://imageup.ru/img274/4264626/zolotaia_osen_fbpap.jpg" width="200" height="140" alt="Фото картины">
+        <div class="col-3 card shadow border-success">
+                <div class="card-body align-text-bottom">
+                        <img class="card-img-top" align-items:stretch src=@product.ImagePath alt="Фото картины">
+                    <div class="text-body align-bottom">
                         <a href="/product/index/@product.Id">
                          <b>@product.Name</b><br>
                      </a>
@@ -14,20 +15,11 @@
                 </a>
                 <br>
                 <div class="d-grid gap-2">
-                <a class=" btn btn-success btn-lg" href="#" role="button">Добавить в корзину</a>
+                            <a class="btn btn-success btn-lg align-bottom" href="/basket/add?productId=@product.Id" role="button">Добавить в корзину</a>
                 </div>
+                    </div>
+                    </div>
             </div>
-        </div>
     }
 </div>
-
-
-
-
-
-
-
-
-
-
-
+</body>
