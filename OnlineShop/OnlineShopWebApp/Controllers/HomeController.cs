@@ -1,20 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Repositories;
+using OnlineShopWebApp.Interfaces;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private static ProductsRepository products;
+        private readonly IProductsRepository products;
 
-        public HomeController()
+        public HomeController(IProductsRepository products)
         {
-            products = new ProductsRepository();
+            this.products = products;
         }
-
         public IActionResult Index()
         {
-            return View(products.GetAll());
+            return View(products.ListProducts);
         }
     }
 }

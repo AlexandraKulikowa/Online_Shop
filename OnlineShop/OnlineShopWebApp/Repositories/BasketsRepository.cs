@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Repositories
 {
-    public static class BasketsRepository
+    public class BasketsRepository : IBasketRepository
     {
-        private static List<Basket> baskets = new List<Basket>();
-        public static Basket TryGetByUserId(string userId)
+        static List<Basket> baskets;
+        public BasketsRepository()
+        {
+            baskets = new List<Basket>();
+        }
+        public List<Basket> Baskets
+        {
+            get
+            {
+                return baskets;
+            }
+        }
+        public Basket TryGetByUserId(string userId)
         {
             return baskets.FirstOrDefault(x => x.UserId == userId);
         }
-        public static void Add(Product product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingBasket = TryGetByUserId(userId);
             if (existingBasket == null)
