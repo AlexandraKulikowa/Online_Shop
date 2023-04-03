@@ -18,8 +18,8 @@ namespace OnlineShopWebApp
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IBasketRepository, BasketsRepository>();
-            services.AddSingleton<IProductsRepository, ProductsRepository>();
+            services.AddSingleton<IBasketRepository, InMemoryBasketsRepository>();
+            services.AddSingleton<IProductsRepository, InProductsProductsRepository>();
             services.AddControllersWithViews();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

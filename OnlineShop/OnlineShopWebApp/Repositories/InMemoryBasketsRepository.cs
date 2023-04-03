@@ -6,10 +6,10 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Repositories
 {
-    public class BasketsRepository : IBasketRepository
+    public class InMemoryBasketsRepository : IBasketRepository
     {
         static List<Basket> baskets;
-        public BasketsRepository()
+        public InMemoryBasketsRepository()
         {
             baskets = new List<Basket>();
         }
