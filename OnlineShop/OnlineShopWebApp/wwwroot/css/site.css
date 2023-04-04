@@ -52,7 +52,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 .footer {
   position: absolute;
@@ -91,7 +91,7 @@ a.basket:hover {
 
 .tab-content {
     font-size: 20px;
-    color: teal;
+    color:teal;
     width:80%;
 }
 .btn-options {
@@ -119,15 +119,12 @@ table {
     margin:4px 5px 2px 150px;
 }
 
-span {
-    display: inline-block;
-    padding: 1px 1px;
-    box-sizing: border-box;
-    width: 25px;
-    height: 25px;
-    border-radius: 45px;
-    text-align: center;
-    font-size: 15px;
-    background-color:aquamarine;
+.btn-sm{
+    text-align:center;
+    color:aliceblue;
+    background-color:silver;
+    font-size:18px;
+    width:80px;
+    height:37px;
+    border-radius:22px;
 }
-

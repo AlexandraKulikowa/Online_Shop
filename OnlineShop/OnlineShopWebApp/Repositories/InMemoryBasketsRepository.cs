@@ -8,11 +8,7 @@ namespace OnlineShopWebApp.Repositories
 {
     public class InMemoryBasketsRepository : IBasketRepository
     {
-        static List<Basket> baskets;
-        public InMemoryBasketsRepository()
-        {
-            baskets = new List<Basket>();
-        }
+        private List<Basket> baskets = new List<Basket>();
         public List<Basket> Baskets
         {
             get
@@ -23,6 +19,15 @@ namespace OnlineShopWebApp.Repositories
         public Basket TryGetByUserId(string userId)
         {
             return baskets.FirstOrDefault(x => x.UserId == userId);
+        }
+        public Basket TryGetByBasketId(Guid basketId)
+        {
+            return baskets.FirstOrDefault(x => x.Id == basketId);
+        }
+        public void ClearBasket(Guid basketId)
+        {
+            var basket = TryGetByBasketId(basketId);
+            basket.ProductsInBasket.Clear();
         }
         public void Add(Product product, string userId)
         {

@@ -1,6 +1,6 @@
 ﻿@model Basket
 
-@if(Model == null)
+@if(Model == null || Model.ProductsInBasket == null)
 {
     <h2><b>Ваша корзина пуста!</b></h2>
 }
@@ -14,16 +14,11 @@ else
             <tbody class="tab-content">
                 <tr><th>@item.Product.Name</th></tr>
                 <tr>
-                    <td>Жанр: @item.Product.Genre</td>
-                        <td>
-                            <span><a class="basket" asp-area="" asp-controller="Basket" asp-action="ChangeAmount" asp-route-sign="false">-</a></span>
-                        </td>
-                    <td >@item.Amount</td>
-                        <td>
-                        <td>
-                            <span><a class="basket" asp-area="" asp-controller="Basket" asp-action="ChangeAmount" asp-route-sign="true" asp-route-item=@item>+</a></span>
-                        </td>
-                    <td align="right">@(item.Product.Cost * @item.Amount) рублей</td>
+                        <td>Жанр: @item.Product.Genre</td>
+                        <td class="btn-sm"><a href="/basket/changeamount?id=@item.Product.Id&basketid=@Model.Id&sign=false">-</a></td>
+                        <td class="btn-sm">@item.Amount</td>
+                        <td class="btn-sm"><a href="/basket/changeamount?id=@item.Product.Id&basketid=@Model.Id&sign=true">+</a></td>
+                        <td align="right">@(item.Product.Cost * item.Amount) рублей</td>
                 </tr>
                 <tr><td>Написана в @item.Product.Year году</td> </tr>
             </tbody>
@@ -33,8 +28,9 @@ else
         <p class="tab-total" rowspan="5"><b>Итоговая сумма заказа @Model.TotalCost() рублей</b></p>
 <p>
         <div align="center">
-            <a class="btn btn-outline-secondary col-md-5 btn-lg btn-options" href="/home/index/" role="button">Продолжить покупки</a>
-            <a class="btn btn-outline-success col-md-5 btn-lg btn-options" href="#" role="button">Оформить заказ</a>
+            <a class="btn btn-outline-primary col-md-3 btn-lg btn-options" href="/basket/clear?basketid=@Model.Id" role="button">Очистить корзину</a>
+                <a class="btn btn-outline-secondary col-md-4 btn-lg btn-options" href="/home/index/" role="button">Продолжить покупки</a>
+            <a class="btn btn-success col-md-3 btn-lg btn-options" href="#" role="button">Оформить заказ</a>
         </div>
 </p>
 </div>
