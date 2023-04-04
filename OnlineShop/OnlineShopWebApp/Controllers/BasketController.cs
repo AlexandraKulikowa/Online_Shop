@@ -34,7 +34,14 @@ namespace OnlineShopWebApp.Controllers
                 if (item.Product.Id == id)
                     ProductForChange = item;
             }
-            ProductForChange.ChangeAmount(sign);
+            if(sign == false && ProductForChange.Amount == 1)
+            {
+                baskets.ClearBasketItem(basketid, id);
+            }
+            else
+            {
+                ProductForChange.ChangeAmount(sign);
+            }
             return RedirectToAction("Index");
         }
         public IActionResult Clear(Guid basketid)

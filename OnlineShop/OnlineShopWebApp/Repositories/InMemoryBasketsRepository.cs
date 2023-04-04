@@ -24,11 +24,6 @@ namespace OnlineShopWebApp.Repositories
         {
             return baskets.FirstOrDefault(x => x.Id == basketId);
         }
-        public void ClearBasket(Guid basketId)
-        {
-            var basket = TryGetByBasketId(basketId);
-            basket.ProductsInBasket.Clear();
-        }
         public void Add(Product product, string userId)
         {
             var existingBasket = TryGetByUserId(userId);
@@ -67,6 +62,17 @@ namespace OnlineShopWebApp.Repositories
                     });
                 }
             }
+        }
+        public void ClearBasketItem(Guid basketId, int id)
+        {
+            var basket = TryGetByBasketId(basketId);
+            var basketitem = basket.ProductsInBasket.FirstOrDefault(x => x.Product.Id == id);
+            basket.ProductsInBasket.Remove(basketitem);
+        }
+        public void ClearBasket(Guid basketId)
+        {
+            var basket = TryGetByBasketId(basketId);
+            basket.ProductsInBasket.Clear();
         }
     }
 }
