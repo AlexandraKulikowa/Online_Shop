@@ -8,11 +8,7 @@ namespace OnlineShopWebApp.Repositories
 {
     public class InMemoryBasketsRepository : IBasketRepository
     {
-        static List<Basket> baskets;
-        public InMemoryBasketsRepository()
-        {
-            baskets = new List<Basket>();
-        }
+        private List<Basket> baskets = new List<Basket>();
         public List<Basket> Baskets
         {
             get
