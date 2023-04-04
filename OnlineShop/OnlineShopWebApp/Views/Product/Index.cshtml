@@ -7,13 +7,12 @@
         <h3><b>@Model.Name</b><br></h3>
         @if (Model.IsPromo)
         {
-            <b><s>@Convert.ToInt32(Model.Cost + 2000)</s>    @Model.Cost рублей</b>
+            <b><s>@Convert.ToInt32(Model.Cost + 2000)</s>@Model.Cost рублей</b>
             <br>
         }
         else
         {
             <b>@Model.Cost рублей</b>
-
             <br>
         }
         <b>@Model.Description</b><br>
