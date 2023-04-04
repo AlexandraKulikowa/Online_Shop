@@ -15,7 +15,14 @@ else
                 <tr><th>@item.Product.Name</th></tr>
                 <tr>
                     <td>Жанр: @item.Product.Genre</td>
-                    <td align="right">@item.Amount</td>
+                        <td>
+                            <span><a class="basket" asp-area="" asp-controller="Basket" asp-action="ChangeAmount" asp-route-sign="false">-</a></span>
+                        </td>
+                    <td >@item.Amount</td>
+                        <td>
+                        <td>
+                            <span><a class="basket" asp-area="" asp-controller="Basket" asp-action="ChangeAmount" asp-route-sign="true" asp-route-item=@item>+</a></span>
+                        </td>
                     <td align="right">@(item.Product.Cost * @item.Amount) рублей</td>
                 </tr>
                 <tr><td>Написана в @item.Product.Year году</td> </tr>
