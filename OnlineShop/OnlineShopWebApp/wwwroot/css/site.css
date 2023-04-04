@@ -53,6 +53,7 @@ html {
 
 body {
     margin-bottom: 60px;
+    background-image: url(../images/back.jpg);
 }
 .footer {
   position: absolute;
