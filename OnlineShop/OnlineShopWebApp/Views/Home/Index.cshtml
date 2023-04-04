@@ -4,22 +4,20 @@
     @foreach (var product in Model)
     {
         <div class="col-3 card shadow border-success">
-                <div class="card-body align-text-bottom">
-                        <img class="card-img-top" align-items:stretch src=@product.ImagePath alt="Фото картины">
-                    <div class="text-body align-bottom">
+                <div class="card-body" style="display:flex; flex-direction:column;">
+                        <img src=@product.ImagePath alt="Фото картины">
+                       <div class="mt-auto" style="display:-ms-inline-flexbox; flex-direction: column;">
                         <a href="/product/index/@product.Id">
                          <b>@product.Name</b><br>
                      </a>
                     <a style="color:saddlebrown">
                 <b>@product.Cost рублей</b><br>
                 </a>
-                <br>
-                <div class="d-grid gap-2">
-                            <a class="btn btn-success btn-lg align-bottom" href="/basket/add?productId=@product.Id" role="button">Добавить в корзину</a>
                 </div>
-                    </div>
-                    </div>
-            </div>
+                <br>
+                    <a class="btn btn-success btn-lg mt-auto" href="/basket/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                </div>
+        </div>
     }
 </div>
 </body>

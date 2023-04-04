@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private static ProductsRepository products;
-        public ProductController()
+        private readonly IProductsRepository products;
+        public ProductController(IProductsRepository products)
         {
-            products = new ProductsRepository();
+            this.products = products;
         }
         public IActionResult Index(int id)
         {
