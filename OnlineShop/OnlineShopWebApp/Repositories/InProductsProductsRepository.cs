@@ -5,10 +5,10 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Repositories
 {
-    public class InMemoryProductsRepository : IProductsRepository
+    public class InProductsProductsRepository : IProductsRepository
     {
         private List<Product> listProducts;
-        public InMemoryProductsRepository()
+        public InProductsProductsRepository()
         {
             listProducts = new List<Product>()
             {
