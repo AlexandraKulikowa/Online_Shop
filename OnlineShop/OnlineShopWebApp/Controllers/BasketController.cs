@@ -25,23 +25,9 @@ namespace OnlineShopWebApp.Controllers
             baskets.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
-        public IActionResult ChangeAmount(int id, Guid basketid,bool sign)
+        public IActionResult ChangeAmount(int id, Guid basketid, bool sign)
         {
-            var basket = baskets.TryGetByBasketId(basketid);
-            var ProductForChange = new BasketItem();
-            foreach(BasketItem item in basket.ProductsInBasket)
-            {
-                if (item.Product.Id == id)
-                    ProductForChange = item;
-            }
-            if(sign == false && ProductForChange.Amount == 1)
-            {
-                baskets.ClearBasketItem(basketid, id);
-            }
-            else
-            {
-                ProductForChange.ChangeAmount(sign);
-            }
+            baskets.ChangeAmount(id, basketid, sign);
             return RedirectToAction("Index");
         }
         public IActionResult Clear(Guid basketid)

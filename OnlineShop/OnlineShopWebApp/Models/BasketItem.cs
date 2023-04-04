@@ -25,20 +25,9 @@ namespace OnlineShopWebApp
         public void ChangeAmount(bool sign)
         {
             if (sign)
-            {
                 Amount++;
-            }                
             else
-            {
-                if (Amount > 1)
-                {
-                    Amount--;
-                }
-                else
-                {
-
-                }
-            }
+                Amount--;
         }
     }
 }

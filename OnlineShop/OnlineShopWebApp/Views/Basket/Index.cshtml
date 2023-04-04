@@ -1,6 +1,6 @@
 ﻿@model Basket
 
-@if(Model == null || Model.ProductsInBasket == null)
+@if (Model == null || Model.ProductsInBasket.Count() == 0)
 {
     <h2><b>Ваша корзина пуста!</b></h2>
 }

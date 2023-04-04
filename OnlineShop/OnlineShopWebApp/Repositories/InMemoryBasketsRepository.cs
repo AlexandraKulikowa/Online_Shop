@@ -63,6 +63,26 @@ namespace OnlineShopWebApp.Repositories
                 }
             }
         }
+        public void ChangeAmount(int id, Guid basketid, bool sign)
+        {
+            var basket = TryGetByBasketId(basketid); // впоследствии все basketid заменю на userid
+            var ProductForChange = new BasketItem();
+
+            foreach (BasketItem item in basket.ProductsInBasket)
+            {
+                if (item.Product.Id == id)
+                    ProductForChange = item;
+            }
+
+            if (sign == false && ProductForChange.Amount == 1)
+            {
+                ClearBasketItem(basketid, id);
+            }
+            else
+            {
+                ProductForChange.ChangeAmount(sign);
+            }
+        }
         public void ClearBasketItem(Guid basketId, int id)
         {
             var basket = TryGetByBasketId(basketId);
