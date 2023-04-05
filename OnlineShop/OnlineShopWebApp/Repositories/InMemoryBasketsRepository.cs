@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Repositories
         }
         public Basket TryGetByUserId(string userId)
         {
-            return baskets.FirstOrDefault(x => x.UserId == userId);
+            return Baskets.FirstOrDefault(x => x.UserId == userId);
         }
         public Basket TryGetByBasketId(Guid basketId)
         {
@@ -43,7 +43,7 @@ namespace OnlineShopWebApp.Repositories
                         }
                     }
                 };
-                baskets.Add(newBasket);
+                Baskets.Add(newBasket);
             }
             else
             {
