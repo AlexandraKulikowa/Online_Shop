@@ -1,5 +1,6 @@
 ﻿@model List<Product>
-<body style="background-color:darkgrey">
+
+    <body>
 <div class="row">
     @foreach (var product in Model)
     {
@@ -8,7 +9,8 @@
                         <img src=@product.ImagePath alt="Фото картины">
                        <div class="mt-auto" style="display:-ms-inline-flexbox; flex-direction: column;">
                         <a href="/product/index/@product.Id">
-                         <b>@product.Name</b><br>
+                            <h5><b>@product.Name</b></h5>
+                         <br>
                      </a>
                     <a style="color:saddlebrown">
                 <b>@product.Cost рублей</b><br>

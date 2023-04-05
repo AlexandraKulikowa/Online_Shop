@@ -1,4 +1,5 @@
 ﻿using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Interfaces
@@ -7,6 +8,10 @@ namespace OnlineShopWebApp.Interfaces
     {
         List<Basket> Baskets { get; }
         Basket TryGetByUserId(string userId);
+        Basket TryGetByBasketId(Guid basketId);
         void Add(Product product, string userId);
+        void ChangeAmount(int id, Guid basketid, bool sign);
+        void ClearItem(Guid basketId, int id);
+        void Clear(Guid basketId);
     }
 }

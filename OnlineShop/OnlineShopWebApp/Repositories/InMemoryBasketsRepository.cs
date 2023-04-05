@@ -20,6 +20,10 @@ namespace OnlineShopWebApp.Repositories
         {
             return Baskets.FirstOrDefault(x => x.UserId == userId);
         }
+        public Basket TryGetByBasketId(Guid basketId)
+        {
+            return baskets.FirstOrDefault(x => x.Id == basketId);
+        }
         public void Add(Product product, string userId)
         {
             var existingBasket = TryGetByUserId(userId);
@@ -58,6 +62,37 @@ namespace OnlineShopWebApp.Repositories
                     });
                 }
             }
+        }
+        public void ChangeAmount(int id, Guid basketid, bool sign)
+        {
+            var basket = TryGetByBasketId(basketid); // впоследствии все basketid заменю на userid
+            var ProductForChange = new BasketItem();
+
+            foreach (BasketItem item in basket.ProductsInBasket)
+            {
+                if (item.Product.Id == id)
+                    ProductForChange = item;
+            }
+
+            if (!sign && ProductForChange.Amount == 1)
+            {
+                ClearItem(basketid, id);
+            }
+            else
+            {
+                ProductForChange.ChangeAmount(sign);
+            }
+        }
+        public void ClearItem(Guid basketId, int id)
+        {
+            var basket = TryGetByBasketId(basketId);
+            var basketitem = basket.ProductsInBasket.FirstOrDefault(x => x.Product.Id == id);
+            basket.ProductsInBasket.Remove(basketitem);
+        }
+        public void Clear(Guid basketId)
+        {
+            var basket = TryGetByBasketId(basketId);
+            basket.ProductsInBasket.Clear();
         }
     }
 }

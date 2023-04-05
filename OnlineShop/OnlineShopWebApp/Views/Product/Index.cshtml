@@ -1,5 +1,6 @@
 ﻿@model Product
 
+<body>
 <div class="col-8 card shadow">
     <div class="card-body">
         <img src=@Model.ImagePath alt="Фото картины">
@@ -30,3 +31,4 @@
         <a class=" btn btn-success btn-lg" href="/basket/add?productId=@Model.Id" role="button">Добавить в корзину</a>
     </div>
 </div>
+</body>

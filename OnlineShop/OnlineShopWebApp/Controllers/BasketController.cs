@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -22,6 +23,16 @@ namespace OnlineShopWebApp.Controllers
         {
             var product = products.TryGetById(ProductId);
             baskets.Add(product, Constants.UserId);
+            return RedirectToAction("Index");
+        }
+        public IActionResult ChangeAmount(int id, Guid basketid, bool sign)
+        {
+            baskets.ChangeAmount(id, basketid, sign);
+            return RedirectToAction("Index");
+        }
+        public IActionResult Clear(Guid basketId)
+        {
+            baskets.Clear(basketId);
             return RedirectToAction("Index");
         }
     }

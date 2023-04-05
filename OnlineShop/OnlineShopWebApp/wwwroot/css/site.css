@@ -52,7 +52,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: url(../images/back.jpg);
 }
 .footer {
   position: absolute;
@@ -90,9 +91,10 @@ a.basket:hover {
 }
 
 .tab-content {
-    font-size: 20px;
-    color: teal;
-    width:80%;
+    font-size: 25px;
+    color:teal;
+    width:100%;
+    text-align:center;
 }
 .btn-options {
     width: 700px;
@@ -117,4 +119,33 @@ a.basket:hover {
 table {
     width: 85%;
     margin:4px 5px 2px 150px;
+}
+
+btn-sm {
+    --bs-btn-font-weight: 300;
+    text-align: center;
+    color: darkslategrey;
+    background-color: cadetblue;
+    font-size: 14px;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.btn-sm:hover {
+    text-decoration: none;
+}
+.emptybasket {
+    color: brown;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    text-align: center;
+    font-size: large;
+    transition: 2s;
+}
+
+.emptybasket:hover {
+    transform: scale(1.5);
 }
