@@ -6,16 +6,10 @@ a.navbar-brand {
 }
 
 a {
-  color: #0366d6;
+    color: dimgray;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
@@ -91,7 +85,7 @@ a.basket:hover {
 }
 
 .tab-content {
-    font-size: 25px;
+    font-size: 18px;
     color:teal;
     width:100%;
     text-align:center;
@@ -148,4 +142,73 @@ table {
 .order:hover {
     transform: scale(1.1);
     color:indigo;
+}
+
+.input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="radio"],
+input[type="checkbox"],
+input[type="date"],
+textarea {
+    text-align: justify-all;
+    font-size: 14px;
+    color: darkslategrey;
+    font-style: italic;
+    font-weight: 300;
+    background-color:antiquewhite;
+    padding: 7px;
+    margin: 10px 0;
+    box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
+    border-radius:35px;
+    border: 0;
+}
+
+.form {
+    box-sizing: border-box;
+}
+
+.button-order {
+    margin: auto;
+    color: aliceblue;
+    user-select: none;
+    outline: none;
+    background-color: darkslategrey;
+    padding: 1em 1em;
+    text-align: center;
+    width: 400px;
+    height: 80px;
+    border-radius: 22px;
+    font-size: 20px;
+    box-shadow: 6px 6px 6px;
+}
+.button-order:hover {
+    background-color:teal;
+    box-shadow:none;
+}
+.button-clear {
+    margin: auto;
+    color: dimgray;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    background-color: beige;
+    padding: 1em 1em;
+    text-align: center;
+    width: 400px;
+    height: 80px;
+    border-radius: 22px;
+    font-size: 20px;
+    box-shadow: inset 0 0 6px;
+}
+
+.button-clear:hover {
+    background-color:burlywood;
+}
+
+label{
+    font-size:14px;
+    color:black;
+    font-weight:600;
+    font-style:italic;
 }
