@@ -91,9 +91,10 @@ a.basket:hover {
 }
 
 .tab-content {
-    font-size: 20px;
+    font-size: 25px;
     color:teal;
-    width:80%;
+    width:100%;
+    text-align:center;
 }
 .btn-options {
     width: 700px;
@@ -120,15 +121,16 @@ table {
     margin:4px 5px 2px 150px;
 }
 
-.btn-sm {
+btn-sm {
+    --bs-btn-font-weight: 300;
     text-align: center;
-    color: aliceblue;
-    background-color: silver;
-    font-size: 18px;
-    width: 80px;
-    height: 37px;
-    border-radius: 22px;
-    border: 2px solid;
+    color: darkslategrey;
+    background-color: cadetblue;
+    font-size: 14px;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    border: 1px solid;
 }
 
 .btn-sm:hover {

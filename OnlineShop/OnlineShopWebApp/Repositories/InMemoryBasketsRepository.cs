@@ -74,22 +74,22 @@ namespace OnlineShopWebApp.Repositories
                     ProductForChange = item;
             }
 
-            if (sign == false && ProductForChange.Amount == 1)
+            if (!sign && ProductForChange.Amount == 1)
             {
-                ClearBasketItem(basketid, id);
+                ClearItem(basketid, id);
             }
             else
             {
                 ProductForChange.ChangeAmount(sign);
             }
         }
-        public void ClearBasketItem(Guid basketId, int id)
+        public void ClearItem(Guid basketId, int id)
         {
             var basket = TryGetByBasketId(basketId);
             var basketitem = basket.ProductsInBasket.FirstOrDefault(x => x.Product.Id == id);
             basket.ProductsInBasket.Remove(basketitem);
         }
-        public void ClearBasket(Guid basketId)
+        public void Clear(Guid basketId)
         {
             var basket = TryGetByBasketId(basketId);
             basket.ProductsInBasket.Clear();

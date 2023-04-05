@@ -1,6 +1,6 @@
 ﻿@model Basket
 
-@if (Model == null || Model.ProductsInBasket.Count() == 0)
+@if (Model == null || Model.ProductsInBasket.Any(s => s.Product != null) == false)
 {
     <br/>
     <center>
@@ -19,9 +19,9 @@ else
                 <tr><th>@item.Product.Name</th></tr>
                 <tr>
                         <td>Жанр: @item.Product.Genre</td>
-                        <td class="btn-sm"><a href="/basket/changeamount?id=@item.Product.Id&basketid=@Model.Id&sign=false">-</a></td>
-                        <td class="btn-sm">@item.Amount</td>
-                        <td class="btn-sm"><a href="/basket/changeamount?id=@item.Product.Id&basketid=@Model.Id&sign=true">+</a></td>
+                        <td><a class="btn btn-sm btn-outline-success btn-lg" href="/basket/changeamount?id=@item.Product.Id&basketid=@Model.Id&sign=false" role="button">-</a></td>
+                        <td align="center">@item.Amount</td>
+                        <td><a class="btn btn-sm btn-outline-success btn-lg" href="/basket/changeamount?id=@item.Product.Id&basketid=@Model.Id&sign=true" role="button">+</a></td>
                         <td align="right">@(item.Product.Cost * item.Amount) рублей</td>
                 </tr>
                 <tr><td>Написана в @item.Product.Year году</td> </tr>

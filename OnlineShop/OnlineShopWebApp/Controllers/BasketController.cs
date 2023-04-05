@@ -30,9 +30,9 @@ namespace OnlineShopWebApp.Controllers
             baskets.ChangeAmount(id, basketid, sign);
             return RedirectToAction("Index");
         }
-        public IActionResult Clear(Guid basketid)
+        public IActionResult Clear(Guid basketId)
         {
-            baskets.ClearBasket(basketid);
+            baskets.Clear(basketId);
             return RedirectToAction("Index");
         }
     }
