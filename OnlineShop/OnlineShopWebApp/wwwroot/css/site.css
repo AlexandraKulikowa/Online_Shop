@@ -120,12 +120,30 @@ table {
     margin:4px 5px 2px 150px;
 }
 
-.btn-sm{
-    text-align:center;
-    color:aliceblue;
-    background-color:silver;
-    font-size:18px;
-    width:80px;
-    height:37px;
-    border-radius:22px;
+.btn-sm {
+    text-align: center;
+    color: aliceblue;
+    background-color: silver;
+    font-size: 18px;
+    width: 80px;
+    height: 37px;
+    border-radius: 22px;
+    border: 2px solid;
+}
+
+.btn-sm:hover {
+    text-decoration: none;
+}
+.emptybasket {
+    color: brown;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    text-align: center;
+    font-size: large;
+    transition: 2s;
+}
+
+.emptybasket:hover {
+    transform: scale(1.5);
 }
