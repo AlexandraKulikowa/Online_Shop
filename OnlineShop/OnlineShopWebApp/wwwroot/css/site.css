@@ -121,21 +121,6 @@ table {
     margin:4px 5px 2px 150px;
 }
 
-btn-sm {
-    --bs-btn-font-weight: 300;
-    text-align: center;
-    color: darkslategrey;
-    background-color: cadetblue;
-    font-size: 14px;
-    width: 100px;
-    height: 100px;
-    border-radius: 5px;
-    border: 1px solid;
-}
-
-.btn-sm:hover {
-    text-decoration: none;
-}
 .emptybasket {
     color: brown;
     user-select: none;
@@ -148,4 +133,19 @@ btn-sm {
 
 .emptybasket:hover {
     transform: scale(1.5);
+}
+
+.order {
+    color:darkslateblue;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    text-align: center;
+    font-size: large;
+    transition: 1s;
+}
+
+.order:hover {
+    transform: scale(1.1);
+    color:indigo;
 }
