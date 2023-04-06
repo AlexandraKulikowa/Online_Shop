@@ -12,6 +12,10 @@ namespace OnlineShopWebApp.Repositories
             {
                 return orders;
             }
+            set 
+            {
+                orders = value; 
+            }
         }
         public void Add(Basket basket)
         {

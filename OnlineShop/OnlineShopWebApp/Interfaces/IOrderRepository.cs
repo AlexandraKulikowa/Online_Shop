@@ -4,7 +4,7 @@ namespace OnlineShopWebApp.Interfaces
 {
     public interface IOrderRepository
     {
-        List<Basket> Orders { get; }
+        List<Basket> Orders { get; set; }
         void Add(Basket basket);
     }
 }

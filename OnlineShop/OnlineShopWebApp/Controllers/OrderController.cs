@@ -15,13 +15,13 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index(Guid basketId)
         {
-            var basketById = baskets.TryGetByBasketId(basketId);
+            var basketById = baskets.TryGetById(basketId);
             return View(basketById);
         }
         public IActionResult ToCheckOut(Guid basketId)
         {
-            var basketById = baskets.TryGetByBasketId(basketId);
-            orders.Add(basketById);
+            var basket = baskets.TryGetById(basketId);
+            orders.Add(basket);
             baskets.Clear(basketId);
             return RedirectToAction("Index");
         }
