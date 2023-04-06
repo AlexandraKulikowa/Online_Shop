@@ -2,40 +2,40 @@
 
 @if (Model == null || Model.ProductsInBasket.Any(s => s.Product != null) == false)
 {
-    <br/>
+    <br />
     <center>
-    <img src="~/images/PennywiseBig.jpg" alt="Упс!">
+        <img src="~/images/PennywiseBig.jpg" alt="Упс!">
     </center>
     <div class="emptybasket"><h2><b>Ха! Ваша корзина пуста!</b></h2></div>
 }
 else
 {
-<div class="col-11 card shadow">
+    <div class="col-11 card shadow">
         <p class="heading" valign="middle"><b>Ваша корзина</b></p>
-    <table>
-    @foreach (BasketItem item in Model.ProductsInBasket)
-    {
-            <tbody class="tab-content">
-                <tr><th>@item.Product.Name</th></tr>
-                <tr>
+        <table>
+            @foreach (BasketItem item in Model.ProductsInBasket)
+            {
+                <tbody class="tab-content">
+                    <tr><th>@item.Product.Name</th></tr>
+                    <tr>
                         <td>Жанр: @item.Product.Genre</td>
-                        <td><a class="btn btn-sm btn-outline-success btn-lg" href="/basket/changeamount?id=@item.Product.Id&basketid=@Model.Id&sign=false" role="button">-</a></td>
+                        <td><a class="btn btn-outline-success btn-lg" href="/basket/changeamount?id=@item.Product.Id&basketid=@Model.Id&sign=false" role="button">-</a></td>
                         <td align="center">@item.Amount</td>
-                        <td><a class="btn btn-sm btn-outline-success btn-lg" href="/basket/changeamount?id=@item.Product.Id&basketid=@Model.Id&sign=true" role="button">+</a></td>
+                        <td><a class="btn btn-outline-success btn-lg" href="/basket/changeamount?id=@item.Product.Id&basketid=@Model.Id&sign=true" role="button">+</a></td>
                         <td align="right">@(item.Product.Cost * item.Amount) рублей</td>
-                </tr>
-                <tr><td>Написана в @item.Product.Year году</td> </tr>
-            </tbody>
-    }
-</table>
-<br />
+                    </tr>
+                    <tr><td>Написана в @item.Product.Year году</td> </tr>
+                </tbody>
+            }
+        </table>
+        <br />
         <p class="tab-total" rowspan="5"><b>Итоговая сумма заказа @Model.TotalCost() рублей</b></p>
-<p>
-        <div align="center">
-            <a class="btn btn-outline-primary col-md-3 btn-lg btn-options" href="/basket/clear?basketid=@Model.Id" role="button">Очистить корзину</a>
+        <p>
+            <div align="center">
+                <a class="btn btn-outline-primary col-md-3 btn-lg btn-options" href="/basket/clear?basketid=@Model.Id" role="button">Очистить корзину</a>
                 <a class="btn btn-outline-secondary col-md-4 btn-lg btn-options" href="/home/index/" role="button">Продолжить покупки</a>
-            <a class="btn btn-success col-md-3 btn-lg btn-options" href="#" role="button">Оформить заказ</a>
-        </div>
-</p>
-</div>
+                <a class="btn btn-success col-md-4 btn-lg btn-options" href="/order/index?basketid=@Model.Id" role="button">Оформить заказ</a>
+            </div>
+        </p>
+    </div>
 }

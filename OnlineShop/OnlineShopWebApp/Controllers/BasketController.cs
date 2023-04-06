@@ -25,9 +25,9 @@ namespace OnlineShopWebApp.Controllers
             baskets.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
-        public IActionResult ChangeAmount(int id, Guid basketid, bool sign)
+        public IActionResult ChangeAmount(int id, Guid basketId, bool sign)
         {
-            baskets.ChangeAmount(id, basketid, sign);
+            baskets.ChangeAmount(id, basketId, sign);
             return RedirectToAction("Index");
         }
         public IActionResult Clear(Guid basketId)

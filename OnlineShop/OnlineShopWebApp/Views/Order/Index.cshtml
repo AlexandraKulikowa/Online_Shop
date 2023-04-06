@@ -1,0 +1,71 @@
+﻿@model Basket
+
+@if (Model == null)
+{
+    <br />
+    <center>
+        <img src="~/images/Thanks.jpg" alt="Упс!">
+    </center>
+    <div class="order"><h2><b>Спасибо за ваш заказ! Приходите еще!</b></h2></div>
+}
+else
+{
+    <div class="col-10 card shadow border-success">
+        <form class="form" action="#" autocomplete="on">
+            <fieldset>
+                <legend>Оставьте свои контактные данные</legend>
+                <label for="address">Введите ваш адрес</label>
+                <br>
+                <textarea id="address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" required autofocus></textarea>
+                <br>
+                <label for="text">Ваш индекс</label>
+                <input type="text" pattern="[0-9]{6}" placeholder="123456" minlength="6" maxlength="6" required>
+                <br>
+                <label for="tel">Введите ваш телефон</label>
+                <input type="tel" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" required>
+                <br>
+                <label for="text">Удобное время для звонка</label>
+                <input type="text" maxlength="7" placeholder="C 9">
+                <input type="text" maxlength="7" placeholder="До 18">
+                <br>
+                <label for="email">Введите дополнительный e-mail</label>
+                <input type="email">
+                <br>
+                <label for="post">Выберите способ доставки</label>
+                <br>
+                <input id="post1" type="radio" name="mail" required>
+                <label for="post1">Почта России</label>
+                <br>
+                <input id="post2" type="radio" name="mail" required>
+                <label for="post2">СДЭК</label>
+                <br>
+                <input id="post3" type="radio" name="mail" required>
+                <label for="post3">Boxberry</label>
+                <br>
+                <label for="date">Введите дату желаемой доставки</label>
+                <input type="date">
+                <br>
+                <label for="area">Напишите комментарий к заказу</label>
+                <br>
+                <textarea cols="80" rows="5"></textarea>
+                <br>
+                <label for="list">Упаковка товара</label>
+                <select>
+                    <option value="">Стандартная</option>
+                    <option value="" selected>Оптимальная</option>
+                    <option value="">VIP</option>
+                </select>
+                <br>
+                <label for="accept">Даю согласие на обработку персональных данных</label>
+                <input id="accept" type="checkbox" required>
+                <br>
+                <button class="button-clear" btn-lg col="5" type="reset">Сбросить заполнение формы</button>
+                <a class="btn button-order" btn-lg col="6" type="button" href="../order/tocheckout?basketid=@Model.Id" role="button">Заказать</a>
+                <br>
+                <br>
+            </fieldset>
+        </form>
+    </div>
+}
+
+
