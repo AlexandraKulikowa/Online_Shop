@@ -5,11 +5,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CompareController : Controller
     {
-        private readonly IProductsRepository products;
         private readonly ICompareRepository productsForCompare;
-        public CompareController(IProductsRepository products, ICompareRepository productsForCompare)
+        public CompareController(ICompareRepository productsForCompare)
         {
-            this.products = products;
             this.productsForCompare = productsForCompare;
         }
         public IActionResult Index()
