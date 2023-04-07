@@ -1,6 +1,6 @@
-﻿@model List<Product>
+﻿@model Comparison
 
-@if (Model == null || Model.Any(s => s.Id != 0) == false)
+@if (Model == null || Model.Products.Any(s => s.Id != 0) == false)
 {
     <br />
     <div class="order"><h2><b>Вы пока не добавили товары для сравнения! Вернитесь на главную страницу...</b></h2></div>
@@ -8,7 +8,7 @@
 else
 {
     <div class="row">
-        @foreach (var product in Model)
+        @foreach (var product in Model.Products)
         {
             <div class="col-4 card-shadow border-success comparelist table-responsive">
                 <br>
@@ -45,5 +45,5 @@ else
     <br>
     <br>
     <br>
-    <a class="btn btn-lg col-12 btn-outline-dark" href="/compare/clear" role="button">Очистить страницу</a>
+    <a class="btn btn-lg col-12 btn-outline-dark" href="/compare/clear?userId=@Model.UserId" role="button">Очистить страницу</a>
 }

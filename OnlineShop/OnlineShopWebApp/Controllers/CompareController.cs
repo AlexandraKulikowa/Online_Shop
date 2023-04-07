@@ -5,24 +5,24 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CompareController : Controller
     {
-        private readonly ICompareRepository productsForCompare;
-        public CompareController(ICompareRepository productsForCompare)
+        private readonly ICompareRepository compareList;
+        public CompareController(ICompareRepository compareList)
         {
-            this.productsForCompare = productsForCompare;
+            this.compareList = compareList;
         }
         public IActionResult Index()
         {
-            return View(productsForCompare.ProductsForCompare);
+            var list = compareList.TryGetByUserId(Repositories.Constants.UserId);
+            return View(list);
         }
-
         public IActionResult Delete(int id)
         {
-            productsForCompare.DeleteProduct(id);
+            compareList.DeleteProduct(Repositories.Constants.UserId, id);
             return RedirectToAction("Index");
         }
         public IActionResult Clear()
         {
-            productsForCompare.Clear();
+            compareList.Clear(Repositories.Constants.UserId);
             return RedirectToAction("Index");
         }
     }

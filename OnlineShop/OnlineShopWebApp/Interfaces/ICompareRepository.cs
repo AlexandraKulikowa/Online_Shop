@@ -5,10 +5,10 @@ namespace OnlineShopWebApp.Interfaces
 {
     public interface ICompareRepository
     {
-        List<Product> ProductsForCompare { get; }
-        Product TryGetById(int id);
-        void Add(Product product);
-        void DeleteProduct(int id);
-        void Clear();
+        List<Comparison> CompareList { get; }
+        Comparison TryGetByUserId(string userId);
+        void Add(Product product, string userId);
+        void DeleteProduct(string userId, int id);
+        void Clear(string userId);
     }
 }

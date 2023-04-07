@@ -7,33 +7,49 @@ namespace OnlineShopWebApp.Repositories
 {
     public class InMemoryCompareRepository : ICompareRepository
     {
-        private List<Product> productsForCompare = new List<Product>();
-        public List<Product> ProductsForCompare
+        private List<Comparison> compareList = new List<Comparison>();
+        public List<Comparison> CompareList
+        { 
+            get 
+            { 
+                return compareList; 
+            } 
+        }
+        public Comparison TryGetByUserId(string userId)
         {
-            get
+            return compareList.FirstOrDefault(x => x.UserId == userId);
+        }
+        public void Add(Product product,string userId)
+        {
+            var existingList = TryGetByUserId(userId);
+            if (existingList == null)
             {
-                return productsForCompare;
+                var newList = new Comparison
+                {
+                    UserId = userId,
+                    Products = new List<Product> { product }
+                };
+                compareList.Add(newList);
+            }
+            else
+            {
+                var existingProduct = existingList.Products.FirstOrDefault(x => x.Id == product.Id);
+                if (existingProduct == null)
+                {
+                    existingList.Products.Add(product);
+                }
             }
         }
-        public Product TryGetById(int id)
+        public void DeleteProduct(string userId,int id)
         {
-            return productsForCompare.FirstOrDefault(product => product.Id == id);
+            var list = TryGetByUserId(userId);
+            var product = list.Products.FirstOrDefault(x => x.Id == id);
+            list.Products.Remove(product);
         }
-        public void Add(Product product)
+        public void Clear(string userId)
         {
-            var existingProduct = TryGetById(product.Id);
-            if (existingProduct == null)
-            {
-                productsForCompare.Add(product);
-            }
-        }
-        public void DeleteProduct(int id)
-        {
-            productsForCompare.Remove(TryGetById(id));
-        }
-        public void Clear()
-        {
-            productsForCompare.Clear();
+            var list = TryGetByUserId(userId);
+            list.Products.Clear();
         }
     }
 }
