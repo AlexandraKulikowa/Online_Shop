@@ -3,23 +3,28 @@ using OnlineShopWebApp.Interfaces;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class HomeController : Controller
+    public class CompareController : Controller
     {
         private readonly IProductsRepository products;
         private readonly ICompareRepository productsForCompare;
-        public HomeController(IProductsRepository products, ICompareRepository productsForCompare)
-        { 
+        public CompareController(IProductsRepository products, ICompareRepository productsForCompare)
+        {
             this.products = products;
             this.productsForCompare = productsForCompare;
         }
         public IActionResult Index()
         {
-            return View(products.ListProducts);
+            return View(productsForCompare.ProductsForCompare);
         }
-        public IActionResult Compare(int productId)
+
+        public IActionResult Delete(int id)
         {
-            var product = products.TryGetById(productId);
-            productsForCompare.Add(product);
+            productsForCompare.DeleteProduct(id);
+            return RedirectToAction("Index");
+        }
+        public IActionResult Clear()
+        {
+            productsForCompare.Clear();
             return RedirectToAction("Index");
         }
     }
