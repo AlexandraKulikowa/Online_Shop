@@ -15,10 +15,9 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index(int id)
         {
-            ViewBag.UserId = Constants.UserId;
             return View(products.TryGetById(id));
         }
-        public IActionResult Compare(int productId, string userId)
+        public IActionResult Compare(int productId)
         {
             compareList.Add(products.TryGetById(productId), Constants.UserId);
             return Redirect("~/Compare/Index/");

@@ -20,13 +20,6 @@ namespace OnlineShopWebApp.Repositories
                 new Product ("Картина \"Девушка и ветер\"", 4000, "Картина в подарок подруге", GenreEnum.Портрет, "масло", new Size(20, 25, false),2021,false, "/images/GirlAndWindBig.jpg"),
             };
         }
-        public List<Product> ListProducts
-        {
-            get
-            {
-                return listProducts;
-            }
-        }
         public List<Product> GetAll()
         {
             return listProducts;

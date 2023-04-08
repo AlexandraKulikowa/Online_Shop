@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Interfaces
 {
     public interface IProductsRepository
     {
-        List<Product> ListProducts { get; }
+        List<Product> GetAll();
         Product TryGetById(int id);
     }
 }

@@ -59,6 +59,7 @@ else
                 <label for="accept">Даю согласие на обработку персональных данных</label>
                 <input id="accept" type="checkbox" required>
                 <br>
+                <h4>Итоговая стоимость вашего заказа: @Model.TotalCost() рублей.</h4>
                 <button class="button-clear" btn-lg col="5" type="reset">Сбросить заполнение формы</button>
                 <a class="btn button-order" btn-lg col="6" type="button" href="../order/tocheckout?basketid=@Model.Id" role="button">Заказать</a>
                 <br>

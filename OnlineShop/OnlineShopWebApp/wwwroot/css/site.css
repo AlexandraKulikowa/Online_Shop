@@ -110,9 +110,9 @@ a.main {
     box-shadow: 2px 2px 2px;
 }
 
-    a.main:hover {
-        background-color:tan;
-    }
+a.main:hover {
+    background-color:tan;
+}
 
 .heading{
     font-size: 34px;
@@ -261,4 +261,9 @@ label{
     font-size:16px;
     background-color:antiquewhite;
     border: solid 1px green;
+    margin-bottom: 20px;
+}
+
+.comparecard {
+    margin-bottom: 10%;
 }

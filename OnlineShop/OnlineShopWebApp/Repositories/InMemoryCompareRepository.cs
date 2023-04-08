@@ -8,13 +8,7 @@ namespace OnlineShopWebApp.Repositories
     public class InMemoryCompareRepository : ICompareRepository
     {
         private List<Comparison> compareList = new List<Comparison>();
-        public List<Comparison> CompareList
-        { 
-            get 
-            { 
-                return compareList; 
-            } 
-        }
+        public List<Comparison> CompareList => compareList;
         public Comparison TryGetByUserId(string userId)
         {
             return compareList.FirstOrDefault(x => x.UserId == userId);

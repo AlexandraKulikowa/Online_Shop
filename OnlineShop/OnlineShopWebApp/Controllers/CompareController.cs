@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -12,17 +13,17 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var list = compareList.TryGetByUserId(Repositories.Constants.UserId);
+            var list = compareList.TryGetByUserId(Constants.UserId);
             return View(list);
         }
         public IActionResult Delete(int id)
         {
-            compareList.DeleteProduct(Repositories.Constants.UserId, id);
+            compareList.DeleteProduct(Constants.UserId, id);
             return RedirectToAction("Index");
         }
         public IActionResult Clear()
         {
-            compareList.Clear(Repositories.Constants.UserId);
+            compareList.Clear(Constants.UserId);
             return RedirectToAction("Index");
         }
     }
