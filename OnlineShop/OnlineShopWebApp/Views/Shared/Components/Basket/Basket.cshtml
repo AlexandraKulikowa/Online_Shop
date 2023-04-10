@@ -1,0 +1,10 @@
+﻿@model decimal
+
+@if(Model == 0)
+{
+    <a class="basket" asp-area="" asp-controller="Basket" asp-action="Index">Корзина</a>
+}
+else
+{
+    <a class="basket" asp-area="" asp-controller="Basket" asp-action="Index">Корзина <span class="circleforbasket">@Model</span></a>
+}

@@ -15,7 +15,6 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            ViewBag.UserId = Constants.UserId;
             return View(products.GetAll());
         }
         public IActionResult Compare(int productId)
