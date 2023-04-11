@@ -61,6 +61,24 @@ body {
     text-align: center;
     border-radius: 50px;
 }
+.enter {
+    color:darkslategray;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    background-color:lightsteelblue;
+    padding: 1em 1em;
+    text-align: center;
+    width: 110px;
+    height: 60px;
+    border-radius: 22px;
+    box-shadow: 2px 2px 2px;
+}
+
+.enter:hover {
+    background-color:lightslategrey;
+}
+
 .compare {
     color:black;
     user-select: none;
@@ -80,7 +98,7 @@ body {
     }
 
 a.basket {
-    color: aliceblue;
+    color:antiquewhite;
     user-select: none;
     text-decoration: double;
     outline: none;
@@ -90,10 +108,10 @@ a.basket {
     width: 130px;
     height: 60px;
     border-radius: 22px;
-    box-shadow: 4px 4px 4px;
+    box-shadow: 2px 2px 2px;
 }
 a.basket-bg {
-    color: aliceblue;
+    color:antiquewhite;
     user-select: none;
     text-decoration: double;
     outline: none;
@@ -103,15 +121,15 @@ a.basket-bg {
     width: 145px;
     height: 60px;
     border-radius: 22px;
-    box-shadow: 4px 4px 4px;
+    box-shadow: 2px 2px 2px;
 }
 
 a.basket:hover {
-    background-color:darkgreen;
+    background-color:dimgrey;
 }
 
 a.basket-bg:hover {
-    background-color:darkgreen;
+    background-color:dimgrey;
 }
 a.main {
     color:chocolate;
