@@ -26,10 +26,14 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult ToCheckOut(Order order)
         {
             var basket = baskets.TryGetByUserId(Constants.UserId);
-            order.Basket = basket;
+            order.Products.AddRange(basket.ProductsInBasket.ToArray());
             orders.Add(order);
             baskets.Clear(Constants.UserId);
-            return RedirectToAction("Index");
+            return RedirectToAction("Result", order);
+        }
+        public IActionResult Result(Order order)
+        {
+            return View(order);
         }
     }
 }
