@@ -11,7 +11,11 @@ namespace OnlineShopWebApp
         public List<BasketItem> ProductsInBasket { get; set; }
         public decimal TotalCost()
         {
-            return ProductsInBasket.Sum(x => x.Cost);
+            return ProductsInBasket?.Sum(x => x.Cost) ?? 0;
+        }
+        public decimal Amount()
+        {
+            return ProductsInBasket?.Sum(x => x.Amount) ?? 0;
         }
     }
 }

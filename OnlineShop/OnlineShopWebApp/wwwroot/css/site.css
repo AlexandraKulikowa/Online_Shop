@@ -87,14 +87,31 @@ a.basket {
     background-color: darkslategrey;
     padding: 1em 1em;
     text-align: center;
-    width: 110px;
+    width: 130px;
+    height: 60px;
+    border-radius: 22px;
+    box-shadow: 4px 4px 4px;
+}
+a.basket-bg {
+    color: aliceblue;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    background-color:darkslategrey;
+    padding: 1em 1em;
+    text-align: center;
+    width: 145px;
     height: 60px;
     border-radius: 22px;
     box-shadow: 4px 4px 4px;
 }
 
 a.basket:hover {
-    background-color: darkcyan;
+    background-color:darkgreen;
+}
+
+a.basket-bg:hover {
+    background-color:darkgreen;
 }
 a.main {
     color:chocolate;
@@ -118,6 +135,7 @@ a.main:hover {
     font-size: 34px;
     color:darkslategray;
     text-align: center;
+    background-color:antiquewhite;
 }
 
 .tab-content {
@@ -266,4 +284,13 @@ label{
 
 .comparecard {
     margin-bottom: 10%;
+}
+
+.circleforbasket {
+    border-radius: 50%;
+    border: 3px solid #fff;
+    background-color: aliceblue;
+    color: darkslategrey;
+    display: inline;
+    padding:0px 7px 0px 7px;
 }
