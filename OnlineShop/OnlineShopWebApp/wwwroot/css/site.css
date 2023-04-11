@@ -3,6 +3,7 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  color:burlywood;
 }
 
 a {
@@ -32,7 +33,7 @@ html {
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .10);
 }
 
 button.accept-policy {
@@ -60,6 +61,24 @@ body {
     text-align: center;
     border-radius: 50px;
 }
+.compare {
+    color:black;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    background-color:goldenrod;
+    padding: 1em 1em;
+    text-align: center;
+    width: 110px;
+    height: 60px;
+    border-radius: 22px;
+    box-shadow: 2px 2px 2px;
+}
+
+.compare:hover {
+    background-color:darkgoldenrod;
+    }
+
 a.basket {
     color: aliceblue;
     user-select: none;
@@ -68,14 +87,31 @@ a.basket {
     background-color: darkslategrey;
     padding: 1em 1em;
     text-align: center;
-    width: 100px;
+    width: 110px;
     height: 60px;
     border-radius: 22px;
-    box-shadow: 3px 3px 3px;
+    box-shadow: 4px 4px 4px;
 }
 
 a.basket:hover {
     background-color: darkcyan;
+}
+a.main {
+    color:chocolate;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    background-color:wheat;
+    padding: 1em 1em;
+    text-align: center;
+    width: 110px;
+    height: 60px;
+    border-radius: 22px;
+    box-shadow: 2px 2px 2px;
+}
+
+a.main:hover {
+    background-color:tan;
 }
 
 .heading{
@@ -112,7 +148,15 @@ a.basket:hover {
 }
 table {
     width: 85%;
-    margin:4px 5px 2px 150px;
+    margin: 4px 5px 2px 150px;
+}
+
+.table-compare {
+    text-align: justify;
+    font-size: 24px;
+    color: darkslategray;
+    table-layout: fixed;
+    width: 100%;
 }
 
 .emptybasket {
@@ -211,4 +255,15 @@ label{
     color:black;
     font-weight:600;
     font-style:italic;
+}
+
+.comparelist{
+    font-size:16px;
+    background-color:antiquewhite;
+    border: solid 1px green;
+    margin-bottom: 20px;
+}
+
+.comparecard {
+    margin-bottom: 10%;
 }

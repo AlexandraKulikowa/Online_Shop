@@ -9,13 +9,7 @@ namespace OnlineShopWebApp.Repositories
     public class InMemoryBasketsRepository : IBasketRepository
     {
         private List<Basket> baskets = new List<Basket>();
-        public List<Basket> Baskets
-        {
-            get
-            {
-                return baskets;
-            }
-        }
+        public List<Basket> Baskets => baskets;
         public Basket TryGetByUserId(string userId)
         {
             return baskets.FirstOrDefault(x => x.UserId == userId);
@@ -63,9 +57,13 @@ namespace OnlineShopWebApp.Repositories
                 }
             }
         }
-        public void ChangeAmount(int id, Guid basketid, bool sign)
+        public void ChangeAmount(int id, Guid basketid, bool sign, string userId)
         {
-            var basket = TryGetById(basketid); // впоследствии все basketid заменю на userid
+            var existingBasket = TryGetByUserId(userId);
+            if (existingBasket == null)
+            { return; }
+
+            var basket = TryGetById(basketid);
             var ProductForChange = new BasketItem();
 
             foreach (BasketItem item in basket.ProductsInBasket)

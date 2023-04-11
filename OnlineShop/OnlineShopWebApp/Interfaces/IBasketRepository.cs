@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Interfaces
         Basket TryGetByUserId(string userId);
         Basket TryGetById(Guid basketId);
         void Add(Product product, string userId);
-        void ChangeAmount(int id, Guid basketid, bool sign);
+        void ChangeAmount(int id, Guid basketid, bool sign, string userId);
         void ClearItem(Guid basketId, int id);
         void Clear(Guid basketId);
     }
