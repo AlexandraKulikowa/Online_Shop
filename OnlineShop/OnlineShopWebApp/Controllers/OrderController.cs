@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using System;
+using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Repositories;
+using System.Reflection.Metadata;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,16 +17,20 @@ namespace OnlineShopWebApp.Controllers
             this.baskets = baskets;
             this.orders = orders;
         }
-        public IActionResult Index(Guid basketId)
+        public IActionResult Index()
         {
-            var basketById = baskets.TryGetById(basketId);
+            var basketById = baskets.TryGetByUserId(Constants.UserId);
             return View(basketById);
         }
-        public IActionResult ToCheckOut(Guid basketId)
+
+        [HttpPost]
+        [DataType(DataType.Date)]
+        public IActionResult ToCheckOut(Order order)
         {
-            var basket = baskets.TryGetById(basketId);
-            orders.Add(basket);
-            baskets.Clear(basketId);
+            var basket = baskets.TryGetByUserId(Constants.UserId);
+            order.Basket = basket;
+            orders.Add(order);
+            baskets.Clear(Constants.UserId);
             return RedirectToAction("Index");
         }
     }

@@ -13,7 +13,7 @@ namespace OnlineShopWebApp.Repositories
         {
             return compareList.FirstOrDefault(x => x.UserId == userId);
         }
-        public void Add(Product product,string userId)
+        public void Add(Product product, string userId)
         {
             var existingList = TryGetByUserId(userId);
             if (existingList == null)
@@ -34,7 +34,7 @@ namespace OnlineShopWebApp.Repositories
                 }
             }
         }
-        public void DeleteProduct(string userId,int id)
+        public void DeleteProduct(string userId, int id)
         {
             var list = TryGetByUserId(userId);
             var product = list.Products.FirstOrDefault(x => x.Id == id);
