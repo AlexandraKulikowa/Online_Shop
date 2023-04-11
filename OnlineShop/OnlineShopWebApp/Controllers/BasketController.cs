@@ -25,14 +25,14 @@ namespace OnlineShopWebApp.Controllers
             baskets.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
-        public IActionResult ChangeAmount(int id, Guid basketId, bool sign)
+        public IActionResult ChangeAmount(int id, bool sign)
         {
-            baskets.ChangeAmount(id, basketId, sign, Constants.UserId);
+            baskets.ChangeAmount(id, sign, Constants.UserId);
             return RedirectToAction("Index");
         }
-        public IActionResult Clear(Guid basketId)
+        public IActionResult Clear()
         {
-            baskets.Clear(basketId);
+            baskets.Clear(Constants.UserId);
             return RedirectToAction("Index");
         }
     }

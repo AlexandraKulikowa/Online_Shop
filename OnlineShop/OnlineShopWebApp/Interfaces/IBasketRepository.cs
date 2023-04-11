@@ -8,10 +8,9 @@ namespace OnlineShopWebApp.Interfaces
     {
         List<Basket> Baskets { get; }
         Basket TryGetByUserId(string userId);
-        Basket TryGetById(Guid basketId);
         void Add(Product product, string userId);
-        void ChangeAmount(int id, Guid basketid, bool sign, string userId);
-        void ClearItem(Guid basketId, int id);
-        void Clear(Guid basketId);
+        void ChangeAmount(int id, bool sign, string userId);
+        void ClearItem(string userId, int id);
+        void Clear(string userId);
     }
 }
