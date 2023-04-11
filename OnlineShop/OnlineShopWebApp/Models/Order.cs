@@ -5,6 +5,7 @@ namespace OnlineShopWebApp.Models
 {
     public class Order
     {
+        public int Id { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
-using System;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Repositories;
-using System.Reflection.Metadata;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Controllers
