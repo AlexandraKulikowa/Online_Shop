@@ -108,7 +108,7 @@ a.basket {
     width: 130px;
     height: 60px;
     border-radius: 22px;
-    box-shadow: 2px 2px 2px;
+    box-shadow: 1px 1px 1px;
 }
 a.basket-bg {
     color:antiquewhite;
@@ -121,7 +121,7 @@ a.basket-bg {
     width: 145px;
     height: 60px;
     border-radius: 22px;
-    box-shadow: 2px 2px 2px;
+    box-shadow: 1px 1px 1px;
 }
 
 a.basket:hover {
@@ -282,20 +282,20 @@ textarea {
     box-shadow: inset 0 0 6px;
 }
 
-.button-clear:hover {
-    background-color:burlywood;
+    .button-clear:hover {
+        background-color: burlywood;
+    }
+
+label {
+    font-size: 14px;
+    color: black;
+    font-weight: 600;
+    font-style: italic;
 }
 
-label{
-    font-size:14px;
-    color:black;
-    font-weight:600;
-    font-style:italic;
-}
-
-.comparelist{
-    font-size:16px;
-    background-color:antiquewhite;
+.comparelist {
+    font-size: 16px;
+    background-color: antiquewhite;
     border: solid 1px green;
     margin-bottom: 20px;
 }
@@ -310,7 +310,7 @@ label{
     background-color: aliceblue;
     color: darkslategrey;
     display: inline;
-    padding:0px 7px 0px 7px;
+    padding: 0px 7px 0px 7px;
 }
 
 .details {
@@ -322,4 +322,68 @@ label{
     box-shadow: 4px 4px 4px;
     text-align: center;
     width: 100%;
+}
+
+.login {
+    width: 35%;
+    height: 35%;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    padding: 27px 2px 20px 4px;
+    background-color: antiquewhite;
+    border-radius: 22px;
+    border-color: darkslategray;
+    box-shadow: 4px 4px 4px;
+    font-size: 20px;
+    font-style: oblique;
+}
+
+.button-login {
+    color: aliceblue;
+    user-select: none;
+    outline: none;
+    background-color: darkslategrey;
+    padding: 0px 2px 5px 2px;
+    text-align: center;
+    width: 230px;
+    height: 50px;
+    border-radius: 22px;
+    font-size: 22px;
+    box-shadow: 1px 1px 1px;
+    margin: 1px 1px 4px 1px;
+}
+
+    .button-login:hover {
+        background-color: teal;
+    }
+
+.button-registration {
+    color: aliceblue;
+    user-select: none;
+    outline: none;
+    background-color: tan;
+    color: sienna;
+    padding: 1em 1em;
+    text-align: center;
+    width: 230px;
+    height: 50px;
+    border-radius: 22px;
+    font-size: 12px;
+    box-shadow: 1px 1px 1px;
+}
+
+    .button-registration:hover {
+        background-color: burlywood;
+    }
+
+.form-ctrl {
+    border-radius: 22px;
+    width: 230px;
+    height: 50px;
+    margin: 1px 1px 4px 1px;
 }

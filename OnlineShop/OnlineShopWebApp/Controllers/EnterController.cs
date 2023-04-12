@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -7,6 +8,12 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Enter(Authorization authorization)
+        {
+            return Redirect("~/Home/Index/");
         }
     }
 }
