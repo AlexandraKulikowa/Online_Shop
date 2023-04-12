@@ -1,7 +1,8 @@
 ﻿<div class="card shadow login">
     <form class="form" action="#" autocomplete="on" method="post">
         <div class="gy-1">
-            <h4>Авторизируйтесь</h4><br />
+            <fieldset>
+                <legend>Авторизируйтесь</legend>
             <input class="form-ctrl" type="text" name="login" size="25" minlength="4" maxlength="12" placeholder="Логин" required>
             <br>
             <input class="form-ctrl" type="password" name="password" size="25" minlength="6" maxlength="12" placeholder="Пароль" required>
@@ -9,10 +10,10 @@
             <input name="isremember" type="checkbox" value="true">
             <input name="isremember" type="hidden" value="false">
             <label for="isremember">Запомнить меня?</label>
-            <br>
+            </fieldset>
         </div>
         <button type="submit" class="btn button-login" asp-area="" asp-controller="enter" asp-action="enter" role="button">Войти</button>
         <br />
-        <button type="#" class="btn button-registration" asp-area="" asp-controller="#" asp-action="#" role="button">Регистрация нового пользователя</button>
+        <button class="btn button-registration" asp-area="" asp-controller="enter" asp-action="registration" role="button">Регистрация нового пользователя</button>
     </form>
 </div>

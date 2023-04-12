@@ -287,7 +287,7 @@ textarea {
     }
 
 label {
-    font-size: 14px;
+    font-size: 15px;
     color: black;
     font-weight: 600;
     font-style: italic;
@@ -339,7 +339,7 @@ label {
     border-radius: 22px;
     border-color: darkslategray;
     box-shadow: 4px 4px 4px;
-    font-size: 20px;
+    font-size: 12px;
     font-style: oblique;
 }
 
