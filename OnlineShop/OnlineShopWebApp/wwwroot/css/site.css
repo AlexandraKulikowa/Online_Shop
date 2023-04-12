@@ -102,7 +102,7 @@ a.basket {
     user-select: none;
     text-decoration: double;
     outline: none;
-    background-color: darkslategrey;
+    background-color:darkgreen;
     padding: 1em 1em;
     text-align: center;
     width: 130px;
@@ -111,11 +111,11 @@ a.basket {
     box-shadow: 1px 1px 1px;
 }
 a.basket-bg {
-    color:antiquewhite;
+    color: antiquewhite;
     user-select: none;
     text-decoration: double;
     outline: none;
-    background-color:darkslategrey;
+    background-color: darkgreen;
     padding: 1em 1em;
     text-align: center;
     width: 145px;
@@ -125,12 +125,31 @@ a.basket-bg {
 }
 
 a.basket:hover {
-    background-color:dimgrey;
+    background-color: darkslategrey;
 }
 
 a.basket-bg:hover {
-    background-color:dimgrey;
+    background-color: darkslategrey;
 }
+
+.admin {
+    color:black;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    background-color:slategray;
+    padding: 1em 1em;
+    text-align: center;
+    width: 140px;
+    height: 60px;
+    border-radius: 22px;
+    box-shadow: 2px 2px 2px;
+}
+
+    .admin:hover {
+        background-color:dimgray;
+        color:aliceblue;
+    }
 a.main {
     color:chocolate;
     user-select: none;

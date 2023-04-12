@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
-using System.Threading;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -26,6 +25,5 @@ namespace OnlineShopWebApp.Controllers
         {
             return Redirect("~/Home/Index/");
         }
-
     }
 }
