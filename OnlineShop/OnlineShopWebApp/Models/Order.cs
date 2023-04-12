@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
     public class Order
     {
+        public string UserId { get; set; }
+        public int Id { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]
@@ -23,7 +27,11 @@ namespace OnlineShopWebApp.Models
         public string Comment { get; set; }
         public string Packaging { get; set; }
         public bool Accept { get; set; }
-        public Basket Basket { get; set; }
+        public List<BasketItem> Products { get; set; } = new List<BasketItem>();
+        public decimal TotalCost()
+        {
+            return Products?.Sum(x => x.Cost) ?? 0;
+        }
 
     }
 }

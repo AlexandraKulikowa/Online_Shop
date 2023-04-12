@@ -1,12 +1,15 @@
 ﻿@model Basket
 
-@if (Model == null)
+@if (Model == null || !Model.ProductsInBasket.Any())
 {
     <br />
     <center>
         <img src="~/images/Thanks.jpg" alt="Упс!">
     </center>
     <div class="order"><h2><b>Спасибо за ваш заказ! Приходите еще!</b></h2></div>
+    <center>
+        <a type="button" class="btn btn-outline-secondary" btn-lg col="10" href="/orderdetails/index?id=@ViewBag.OrderId" role="button">Детали вашего заказа</a>
+    </center>
 }
 else
 {
@@ -60,6 +63,7 @@ else
                 <input name="accept" type="checkbox" value="true">
                 <input name="accept" type="hidden" value="false">
                 <br>
+                <input name="id" type="hidden" value="0">
                 <h4>Итоговая стоимость вашего заказа: @Model.TotalCost() рублей.</h4>
                 <button class="button-clear" btn-lg col="5" type="reset">Сбросить заполнение формы</button>
                 <button type="submit" class="btn button-order" btn-lg col="6" asp-area="" asp-controller="Order" asp-action="Tocheckout" role="button">Заказать</button>

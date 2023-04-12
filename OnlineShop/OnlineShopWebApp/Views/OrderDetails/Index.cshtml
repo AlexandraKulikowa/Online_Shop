@@ -1,0 +1,56 @@
+﻿@model Order
+
+
+<div class="details">
+    @foreach (var products in Model.Products)
+    {
+        <table>
+            <tr><th>Название товара</th><th>Жанр</th><th>Цена</th><th>Описание</th><th>Техника</th><th>Размер</th><th>Год создания</th></tr>
+            <tr><td>@products.Product.Name</td><td>@products.Product.Genre</td><td>@products.Product.Cost</td><td>@products.Product.Description</td><td>@products.Product.PaintingTechnique</td><td>@products.Product.Size</td><td>@products.Product.Year</td></tr>
+        </table>
+    }
+    <br />
+
+    <h3><b>Общая сумма вашего заказа составляет @Model.TotalCost() рублей.</b></h3>
+    <div>Ваш адрес доставки: @Model.Index @Model.Address </div>
+    <div>Ваш телефон: @Model.Telephone, удобное время для звонка: @Model.Timefrom - @Model.Timeto</div>
+    <div>Ваш дополнительный e-mail: @Model.Email</div>
+    <div>
+        Способ доставки:
+        @if (Model.Mailto == "russianpost")
+        {
+            <div>Почта России</div>
+        }
+        else if (Model.Mailto == "sdek")
+        {
+            <div>СДЭК</div>
+        }
+        else
+        {
+            <div>Boxberry</div>
+        }
+    </div>
+    <div>Дата желаемой доставки: @Model.Dateofdelivery</div>
+    <div>
+        Упаковка товара:
+        @if (Model.Packaging == "standart")
+        {
+            <div>Стандартная</div>
+        }
+        else if (Model.Packaging == "optimal")
+        {
+            <div>Оптимальная</div>
+        }
+        else
+        {
+            <div>VIP</div>
+        }
+    </div>
+    <div>Ваши дополнения к заказу: @Model.Comment</div>
+    @if (Model.Accept)
+    {
+        <div>Вы согласны на обработку первональных данных</div>
+    }
+    <br />
+    <h2>Поздравляем с удачной покупкой!</h2>
+</div>
