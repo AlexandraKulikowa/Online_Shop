@@ -19,13 +19,13 @@ else
                 <legend>Оставьте свои контактные данные</legend>
                 <label for="address">Введите ваш адрес</label>
                 <br>
-                <textarea name="address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" required autofocus></textarea>
+                <textarea name="contacts.address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" required autofocus></textarea>
                 <br>
                 <label for="index">Ваш индекс</label>
-                <input type="text" name="index" pattern="[0-9]{6}" placeholder="123456" minlength="6" maxlength="6" required>
+                <input type="text" name="contacts.index" pattern="[0-9]{6}" placeholder="123456" minlength="6" maxlength="6" required>
                 <br>
                 <label for="telephone">Введите ваш телефон</label>
-                <input type="tel" name="telephone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" minlength="11" required>
+                <input type="tel" name="contacts.telephone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" minlength="11" required>
                 <br>
                 <label for="timefrom">Удобное время для звонка</label>
                 <input type="text" name="timefrom" maxlength="7" placeholder="C 9">
@@ -53,15 +53,11 @@ else
                 <textarea cols="80" rows="5" name="comment"></textarea>
                 <br>
                 <label for="list">Упаковка товара</label>
-                <select name="packaging">
-                    <option value="standart">Стандартная</option>
-                    <option value="optimal" selected>Оптимальная</option>
-                    <option value="vip">VIP</option>
-                </select>
+                @Html.DropDownList("enumList", new SelectList(ViewBag.enums))
                 <br>
                 <label for="accept">Даю согласие на обработку персональных данных</label>
-                <input name="accept" type="checkbox" value="true">
-                <input name="accept" type="hidden" value="false">
+                <input name="isaccept" type="checkbox" value="true">
+                <input name="isaccept" type="hidden" value="false">
                 <br>
                 <input name="id" type="hidden" value="0">
                 <h4>Итоговая стоимость вашего заказа: @Model.TotalCost() рублей.</h4>

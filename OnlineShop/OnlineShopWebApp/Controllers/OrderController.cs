@@ -2,7 +2,7 @@
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Repositories;
-using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -18,11 +18,11 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var basketById = baskets.TryGetByUserId(Constants.UserId);
+            ViewBag.enums = Enum.GetValues(typeof(PackagingEnum));
             return View(basketById);
         }
 
         [HttpPost]
-        [DataType(DataType.Date)]
         public IActionResult ToCheckOut(Order order)
         {
             var basket = baskets.TryGetByUserId(Constants.UserId);
