@@ -3,7 +3,7 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class EnterController : Controller
+    public class LoginController : Controller
     {
         public IActionResult Index()
         {

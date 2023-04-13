@@ -8,12 +8,11 @@
             <input class="form-ctrl" type="password" name="password" size="25" minlength="6" maxlength="12" placeholder="Пароль" required>
             <br>
             <input name="isremember" type="checkbox" value="true">
-            <input name="isremember" type="hidden" value="false">
             <label for="isremember">Запомнить меня?</label>
             </fieldset>
         </div>
-        <button type="submit" class="btn button-login" asp-area="" asp-controller="enter" asp-action="enter" role="button">Войти</button>
+        <button type="submit" class="btn button-login" asp-area="" asp-controller="login" asp-action="enter" role="button">Войти</button>
         <br />
-        <button class="btn button-registration" asp-area="" asp-controller="enter" asp-action="registration" role="button">Регистрация нового пользователя</button>
+        <button class="btn button-registration" asp-area="" asp-controller="login" asp-action="registration" role="button">Регистрация нового пользователя</button>
     </form>
 </div>
