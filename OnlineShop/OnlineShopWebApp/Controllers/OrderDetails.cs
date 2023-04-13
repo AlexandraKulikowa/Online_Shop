@@ -10,7 +10,6 @@ namespace OnlineShopWebApp.Controllers
         {
             this.orders = orders;
         }
-
         public IActionResult Index(int id)
         {
             var order = orders.GetOrder(id);
