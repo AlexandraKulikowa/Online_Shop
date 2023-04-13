@@ -1,7 +1,7 @@
 ﻿<header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent border-bottom box-shadow mb-3">
             <div class="container">
-            <a class="navbar-brand" style="color:aliceblue" asp-area="" asp-controller="Home" asp-action="Index"><b>Галерея и онлайн-магазин художника Софии Куликовой</b></a>
+            <a class="navbar-brand" style="color:aliceblue" asp-area="" asp-controller="Home" asp-action="Index"><b>Галерея и онлайн-магазин <br />художника Софии Куликовой</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -15,6 +15,7 @@
                     <a class="btn enter" asp-area="" asp-controller="Login" asp-action="Index">Вход</a>
                     <a class="btn compare" asp-area="" asp-controller="Compare" asp-action="Index">Сравнение</a>
                     @await Component.InvokeAsync("Basket")
+                <a class="btn admin" asp-area="" asp-controller="Admin" asp-action="Index">Администратор</a>
                 </div>
             </div>
         </nav>

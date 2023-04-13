@@ -1,0 +1,37 @@
+﻿<div class="card shadow login">
+    <form class="form" action="#" autocomplete="on" method="post">
+        <fieldset>
+            <center>
+                <legend>Приветствуем вас! Зарегистрируйтесь</legend>
+                <label for="surname">Фамилия</label>
+                <br>
+                <input class="form-ctrl" type="text" name="surname" minlength="4" maxlength="12" placeholder="Иванов" required autofocus><br>
+                <label for="name">Имя</label><br>
+                <input class="form-ctrl" type="text" name="name" minlength="4" maxlength="12" placeholder="Иван" required>
+                <br>
+                <label for="fathername">Отчество</label><br>
+                <input class="form-ctrl" type="text" name="fathername" minlength="4" maxlength="12" placeholder="Иванович">
+                <br>
+                <label for="login">Логин</label><br>
+                <input class="form-ctrl" type="text" name="login" minlength="4" maxlength="12" required>
+                <br>
+                <label for="password">Пароль</label><br>
+                <input class="form-ctrl" type="password" name="password" minlength="6" maxlength="12" required>
+                <br>
+                <label for="passwordconfirm">Подтвердите пароль</label><br>
+                <input class="form-ctrl" type="password" name="passwordconfirm"  minlength="6" maxlength="12" required>
+            <br>
+                <label for="email">Е-mail</label><br>
+                <input class="form-ctrl" type="email" name="email" placeholder="anna@yandex.ru" required>
+                <br>
+                <label for="phone">Телефон</label>
+                <br>
+                <input type="tel" name="phone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" minlength="11" size="30">
+                <br>
+                <input name="promo" type="checkbox" value="true">
+                <label for="promo">Присылать мне уведомления о новинках</label>
+                </center>
+            </fieldset>
+        <center><button type="submit" class="btn button-login" asp-area="" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
+    </form>
+</div>
