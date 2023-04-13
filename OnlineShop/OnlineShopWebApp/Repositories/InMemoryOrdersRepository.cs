@@ -1,25 +1,37 @@
 ﻿using OnlineShopWebApp.Interfaces;
 using System.Collections.Generic;
+using OnlineShopWebApp.Models;
+using System.Linq;
 
 namespace OnlineShopWebApp.Repositories
 {
     public class InMemoryOrdersRepository : IOrderRepository
     {
-        private List<Basket> orders = new List<Basket>();
-        public List<Basket> Orders
+        private List<Order> orders = new List<Order>();
+        private static int counter = 1;
+        public List<Order> Orders
         {
             get
             {
                 return orders;
             }
-            set 
+            set
             {
-                orders = value; 
+                orders = value;
             }
         }
-        public void Add(Basket basket)
+        public void Add(Order order)
         {
-            orders.Add(basket);
+            order.UserId = Constants.UserId;
+            order.Id = counter;
+            counter++;
+            orders.Add(order);
+        }
+
+        public Order GetOrder(int id)
+        {
+            var order = orders.FirstOrDefault(x => x.Id == id);
+            return order;
         }
     }
 }

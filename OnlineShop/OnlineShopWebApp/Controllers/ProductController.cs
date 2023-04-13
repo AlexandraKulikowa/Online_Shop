@@ -19,7 +19,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Compare(int productId)
         {
-            compareList.Add(products.TryGetById(productId), Constants.UserId);
+            var product = products.TryGetById(productId);
+            compareList.Add(product, Constants.UserId);
             return Redirect("~/Compare/Index/");
         }
     }

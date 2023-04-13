@@ -1,72 +1,71 @@
 ﻿@model Basket
 
-@if (Model == null)
+@if (Model == null || !Model.ProductsInBasket.Any())
 {
     <br />
     <center>
         <img src="~/images/Thanks.jpg" alt="Упс!">
     </center>
     <div class="order"><h2><b>Спасибо за ваш заказ! Приходите еще!</b></h2></div>
+    <center>
+        <a type="button" class="btn btn-outline-secondary" btn-lg col="10" href="/orderdetails/index?id=@ViewBag.OrderId" role="button">Детали вашего заказа</a>
+    </center>
 }
 else
 {
     <div class="col-10 card shadow border-success">
-        <form class="form" action="#" autocomplete="on">
+        <form class="form" action="#" autocomplete="on" method="post">
             <fieldset>
                 <legend>Оставьте свои контактные данные</legend>
                 <label for="address">Введите ваш адрес</label>
                 <br>
-                <textarea id="address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" required autofocus></textarea>
+                <textarea name="contacts.address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" required autofocus></textarea>
                 <br>
-                <label for="text">Ваш индекс</label>
-                <input type="text" pattern="[0-9]{6}" placeholder="123456" minlength="6" maxlength="6" required>
+                <label for="index">Ваш индекс</label>
+                <input type="text" name="contacts.index" pattern="[0-9]{6}" placeholder="123456" minlength="6" maxlength="6" required>
                 <br>
-                <label for="tel">Введите ваш телефон</label>
-                <input type="tel" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" required>
+                <label for="telephone">Введите ваш телефон</label>
+                <input type="tel" name="contacts.telephone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" minlength="11" required>
                 <br>
-                <label for="text">Удобное время для звонка</label>
-                <input type="text" maxlength="7" placeholder="C 9">
-                <input type="text" maxlength="7" placeholder="До 18">
+                <label for="timefrom">Удобное время для звонка</label>
+                <input type="text" name="timefrom" maxlength="7" placeholder="C 9">
+                <input type="text" name="timeto" maxlength="7" placeholder="До 18">
                 <br>
                 <label for="email">Введите дополнительный e-mail</label>
-                <input type="email">
+                <input type="email" name="email">
                 <br>
                 <label for="post">Выберите способ доставки</label>
                 <br>
-                <input id="post1" type="radio" name="mail" required>
+                <input id="post1" type="radio" name="mailto" value="russianpost" checked required>
                 <label for="post1">Почта России</label>
                 <br>
-                <input id="post2" type="radio" name="mail" required>
+                <input id="post2" type="radio" name="mailto" value="sdek" required>
                 <label for="post2">СДЭК</label>
                 <br>
-                <input id="post3" type="radio" name="mail" required>
+                <input id="post3" type="radio" name="mailto" value="boxberry" required>
                 <label for="post3">Boxberry</label>
                 <br>
                 <label for="date">Введите дату желаемой доставки</label>
-                <input type="date">
+                <input type="date" name="dateofdelivery">
                 <br>
                 <label for="area">Напишите комментарий к заказу</label>
                 <br>
-                <textarea cols="80" rows="5"></textarea>
+                <textarea cols="80" rows="5" name="comment"></textarea>
                 <br>
                 <label for="list">Упаковка товара</label>
-                <select>
-                    <option value="">Стандартная</option>
-                    <option value="" selected>Оптимальная</option>
-                    <option value="">VIP</option>
-                </select>
+                @Html.DropDownList("enumList", new SelectList(ViewBag.enums))
                 <br>
                 <label for="accept">Даю согласие на обработку персональных данных</label>
-                <input id="accept" type="checkbox" required>
+                <input name="isaccept" type="checkbox" value="true">
+                <input name="isaccept" type="hidden" value="false">
                 <br>
+                <input name="id" type="hidden" value="0">
                 <h4>Итоговая стоимость вашего заказа: @Model.TotalCost() рублей.</h4>
                 <button class="button-clear" btn-lg col="5" type="reset">Сбросить заполнение формы</button>
-                <a class="btn button-order" btn-lg col="6" type="button" href="../order/tocheckout?basketid=@Model.Id" role="button">Заказать</a>
+                <button type="submit" class="btn button-order" btn-lg col="6" asp-area="" asp-controller="Order" asp-action="Tocheckout" role="button">Заказать</button>
                 <br>
                 <br>
             </fieldset>
         </form>
     </div>
 }
-
-

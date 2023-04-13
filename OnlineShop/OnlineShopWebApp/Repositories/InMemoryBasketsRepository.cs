@@ -14,10 +14,6 @@ namespace OnlineShopWebApp.Repositories
         {
             return baskets.FirstOrDefault(x => x.UserId == userId);
         }
-        public Basket TryGetById(Guid basketId)
-        {
-            return baskets.FirstOrDefault(x => x.Id == basketId);
-        }
         public void Add(Product product, string userId)
         {
             var existingBasket = TryGetByUserId(userId);
@@ -25,7 +21,6 @@ namespace OnlineShopWebApp.Repositories
             {
                 var newBasket = new Basket
                 {
-                    Id = Guid.NewGuid(),
                     UserId = userId,
                     ProductsInBasket = new List<BasketItem>
                     {
@@ -57,16 +52,15 @@ namespace OnlineShopWebApp.Repositories
                 }
             }
         }
-        public void ChangeAmount(int id, Guid basketid, bool sign, string userId)
+        public void ChangeAmount(int id, bool sign, string userId)
         {
             var existingBasket = TryGetByUserId(userId);
             if (existingBasket == null)
             { return; }
 
-            var basket = TryGetById(basketid);
             var ProductForChange = new BasketItem();
 
-            foreach (BasketItem item in basket.ProductsInBasket)
+            foreach (BasketItem item in existingBasket.ProductsInBasket)
             {
                 if (item.Product.Id == id)
                     ProductForChange = item;
@@ -74,22 +68,22 @@ namespace OnlineShopWebApp.Repositories
 
             if (!sign && ProductForChange.Amount == 1)
             {
-                ClearItem(basketid, id);
+                ClearItem(userId, id);
             }
             else
             {
                 ProductForChange.ChangeAmount(sign);
             }
         }
-        public void ClearItem(Guid basketId, int id)
+        public void ClearItem(string userId, int id)
         {
-            var basket = TryGetById(basketId);
+            var basket = TryGetByUserId(userId);
             var basketitem = basket.ProductsInBasket.FirstOrDefault(x => x.Product.Id == id);
             basket.ProductsInBasket.Remove(basketitem);
         }
-        public void Clear(Guid basketId)
+        public void Clear(string userId)
         {
-            var basket = TryGetById(basketId);
+            var basket = TryGetByUserId(userId);
             basket.ProductsInBasket.Clear();
         }
     }

@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Interfaces
 {
     public interface IOrderRepository
     {
-        List<Basket> Orders { get; set; }
-        void Add(Basket basket);
+        List<Order> Orders { get; set; }
+        void Add(Order order);
+        Order GetOrder(int id);
     }
 }
