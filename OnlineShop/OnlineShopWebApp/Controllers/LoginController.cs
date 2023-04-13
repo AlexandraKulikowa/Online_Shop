@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
-using System.Threading;
 
 namespace OnlineShopWebApp.Controllers
 {
