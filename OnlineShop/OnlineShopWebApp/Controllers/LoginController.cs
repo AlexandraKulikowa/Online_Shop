@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class EnterController : Controller
+    public class LoginController : Controller
     {
         public IActionResult Index()
         {
