@@ -3,16 +3,21 @@
     public class Product
     {
         private static int counter = 1;
-        public int Id { get; }
-        public string Name { get; }
-        public decimal Cost { get; }
-        public string Description { get; }
-        public GenreEnum Genre { get; }
-        public string PaintingTechnique { get; }
-        public Size Size { get; }
-        public int Year { get; }
-        public bool IsPromo { get; }
-        public string ImagePath { get; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Cost { get; set; }
+        public string Description { get; set; }
+        public GenreEnum Genre { get; set; }
+        public string PaintingTechnique { get; set; }
+        public Size Size { get; set; }
+        public int Year { get; set; }
+        public bool IsPromo { get; set; }
+        public string ImagePath { get; set; }
+        public Product() 
+        {
+            Id = counter;
+            counter++;
+        }
         public Product(string name, decimal cost, string description, GenreEnum genre, string paintingTechnique, Size size, int year, bool ispromo, string imagePath)
         {
             Id = counter;

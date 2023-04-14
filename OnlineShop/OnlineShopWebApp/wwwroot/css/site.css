@@ -406,3 +406,61 @@ label {
     height: 50px;
     margin: 1px 1px 4px 1px;
 }
+
+.adminproducts {
+    width: 70%;
+    height: 70%;
+    overflow: auto;
+    margin-left:auto;
+    margin-right: auto;
+    margin-top: auto;
+    padding: 27px 2px 20px 4px;
+    background-color: antiquewhite;
+    border-radius: 22px;
+    border-color: darkslategray;
+    box-shadow: 4px 4px 4px;
+    font-size: 18px;
+    position: absolute;
+}
+.leftblock {
+    left: 3%;
+    position: fixed;
+}
+
+.button-addproduct {
+    color: aliceblue;
+    user-select: none;
+    outline: none;
+    background-color: tan;
+    color: sienna;
+    padding: 1em 1em;
+    text-align: center;
+    width: 180px;
+    height: 40px;
+    border-radius: 22px;
+    font-size: 12px;
+    box-shadow: 1px 1px 1px;
+    margin-left: auto;
+    margin-right: 5%;
+}
+
+    .button-addproduct:hover {
+        background-color:peru;
+    }
+
+.addproducts {
+    width: 35%;
+    height: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    padding: 10px 2px 8px 4px;
+    background-color: antiquewhite;
+    border-radius: 22px;
+    border-color: darkslategray;
+    box-shadow: 4px 4px 4px;
+    font-size: 12px;
+    position: absolute;
+    left:30%;
+    font-style:normal;
+}
