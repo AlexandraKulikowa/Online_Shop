@@ -18,7 +18,6 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var basketById = baskets.TryGetByUserId(Constants.UserId);
-            ViewBag.enums = Enum.GetValues(typeof(PackagingEnum));
             return View(basketById);
         }
 

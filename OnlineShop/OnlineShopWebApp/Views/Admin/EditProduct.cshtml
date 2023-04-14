@@ -1,18 +1,19 @@
 ﻿@model Product
 
 @await Html.PartialAsync("AdminPanel")
-<div class="card shadow addproducts">
-    <form class="form" action="#" autocomplete="off" method="post">
+<div class="card shadow editproducts">
+    <form class="form" autocomplete="off" method="post">
         <fieldset>
             <center><legend>Изменение информации о продукте</legend></center>
+            <input type="hidden" name="id" value="@Model.Id">
             <label for="name">Название картины</label>
             <input type="text" name="name" value="@Model.Name">
             <br />
             <label for="cost">Цена</label>
             <input type="number" name="cost" value="@Model.Cost">
             <br />
-            <label for="GenreEnum">Жанр</label>
-            @Html.DropDownList("GenreEnum", new SelectList(ViewBag.enumes))
+            <label for="GenreEnum">Жанр </label>
+            @Html.DropDownListFor(m => m.Genre,Html.GetEnumSelectList(typeof(GenreEnum)), new {selected = Model.Genre})
             <br />
             <label for="paintingTechnique">Техника</label>
             <input type="text" name="paintingTechnique" value="@Model.PaintingTechnique">
@@ -20,11 +21,11 @@
             <label for="size.width">Ширина картины</label>
             <input type="number" name="size.width" value="@Model.Size.Width">
             <br />
-            <label for="size.heigth">Высота картины</label>
-            <input type="number" name="size.heigth" value="@Model.Size.Height">
+            <label for="size.height">Высота картины</label>
+            <input type="number" name="size.height" value="@Model.Size.Height">
             <br />
             <label for="description">Описание</label>
-            <textarea name="description" rows="2" cols="20" value="@Model.Description"></textarea>
+            <input name="description" rows="2" cols="20" value="@Model.Description"></input>
             <br />
             <label for="year">Год создания</label>
             <input type="number" name="year" value="@Model.Year">
@@ -33,10 +34,9 @@
             <input type="text" name="imagepath" value="@Model.ImagePath" />
             <br />
             <label for="size.isframe">Наличие рамки   </label>
-            <input name="size.isframe" type="checkbox" value="@Model.Size.IsFrame">
-
+            @Html.CheckBoxFor(m =>m.Size.IsFrame)
             <label for="ispromo">Акция на товар   </label>
-            <input name="ispromo" type="checkbox" value="@Model.IsPromo">
+            @Html.CheckBoxFor(m =>m.IsPromo)
             <div class="btn-group" role="group">
                 <button class="btn-outline-secondary btn-lg" type="reset">Сбросить заполнение формы</button>
                 <button type="submit" class="btn-success btn-lg" asp-area="" asp-controller="Admin" asp-action="Update" role="button">Изменить продукт</button>

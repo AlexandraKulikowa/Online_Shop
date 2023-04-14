@@ -53,11 +53,10 @@ else
                 <textarea cols="80" rows="5" name="comment"></textarea>
                 <br>
                 <label for="list">Упаковка товара</label>
-                @Html.DropDownList("enumList", new SelectList(ViewBag.enums))
+                @Html.DropDownList("enumList", Html.GetEnumSelectList(typeof(PackagingEnum)))
                 <br>
                 <label for="isaccept">Даю согласие на обработку персональных данных</label>
                 <input name="isaccept" type="checkbox" value="true">
-                <input name="isaccept" type="hidden" value="false">
                 <br>
                 <input name="id" type="hidden" value="0">
                 <h4>Итоговая стоимость вашего заказа: @Model.TotalCost() рублей.</h4>

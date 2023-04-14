@@ -47,6 +47,7 @@ namespace OnlineShopWebApp.Repositories
         public void Edit(Product product)
         {
             var existingProduct = TryGetById(product.Id);
+
             existingProduct.Name = product.Name;
             existingProduct.Cost = product.Cost;
             existingProduct.Description = product.Description;

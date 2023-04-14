@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
-using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -35,16 +34,14 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult AddProduct()
         {
-            ViewBag.enumes = Enum.GetValues(typeof(GenreEnum));
             return View();
         }
         public IActionResult EditProduct(int id)
         {
-            ViewBag.enumes = Enum.GetValues(typeof(GenreEnum));
             var product = products.TryGetById(id);
             return View(product);
         }
-
+        [HttpPost]
         public IActionResult Update(Product product)
         {
             products.Edit(product);

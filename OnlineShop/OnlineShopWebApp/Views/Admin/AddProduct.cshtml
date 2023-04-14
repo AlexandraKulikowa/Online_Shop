@@ -3,41 +3,41 @@
     <form class="form" action="#" autocomplete="off" method="post">
         <fieldset>
             <center><legend>Добавление продукта</legend></center>
-                        <label for="name">Название картины</label>
-                        <input type="text" name="name" required>
-                        <br />
-                        <label for="cost">Цена</label>
-                        <input type="number" name="cost" required>
-                <br />
-                <label for="GenreEnum">Жанр</label>
-                        @Html.DropDownList("GenreEnum", new SelectList(ViewBag.enumes))
-                <br />
-                        <label for="paintingTechnique">Техника</label>
-                        <input type="text" name="paintingTechnique">
-                <br />
-                        <label for="size.width">Ширина картины</label>
-                        <input type="number" name="size.width">
-                <br />
-                        <label for="size.heigth">Высота картины</label>
-                        <input type="number" name="size.heigth">
-                <br />
-                        <label for="description">Описание</label>
-                        <textarea name="description" rows="2" cols="20"></textarea>
-                <br />
-                        <label for="year">Год создания</label>
-                        <input type="number" name="year">
-                <br />
-                        <label for="imagepath">Ссылка на изображение</label>
+            <label for="name">Название картины</label>
+            <input type="text" name="name" required>
+            <br />
+            <label for="cost">Цена</label>
+            <input type="number" name="cost" required>
+            <br />
+            <label for="GenreEnum">Жанр</label>
+            @Html.DropDownList("GenreEnum", Html.GetEnumSelectList(typeof(GenreEnum)))
+            <br />
+            <label for="paintingTechnique">Техника</label>
+            <input type="text" name="paintingTechnique">
+            <br />
+            <label for="size.width">Ширина картины</label>
+            <input type="number" name="size.width">
+            <br />
+            <label for="size.height">Высота картины</label>
+            <input type="number" name="size.height">
+            <br />
+            <label for="description">Описание</label>
+            <textarea name="description" rows="2" cols="40"></textarea>
+            <br />
+            <label for="year">Год создания</label>
+            <input type="number" name="year">
+            <br />
+            <label for="imagepath">Ссылка на изображение</label>
             <input type="text" name="imagepath" value="~/images/Thanks.jpg" />
-                <br />
-                    <label for="size.isframe">Наличие рамки   </label>
-                    <input name="size.isframe" type="checkbox" value="true">
-                
-                    <label for="ispromo">Акция на товар   </label>
-                    <input name="ispromo" type="checkbox" value="true">
+            <br />
+            <label for="size.isframe">Наличие рамки   </label>
+            <input name="size.isframe" type="checkbox" value="true">
+
+            <label for="ispromo">Акция на товар   </label>
+            <input name="ispromo" type="checkbox" value="true">
             <div class="btn-group" role="group">
-            <button class="btn-outline-secondary btn-lg" type="reset">Сбросить заполнение формы</button>
-            <button type="submit" class="btn-success btn-lg" asp-area="" asp-controller="Admin" asp-action="Add" role="button">Добавить продукт</button>
+                <button class="btn-outline-secondary btn-lg" type="reset">Сбросить заполнение формы</button>
+                <button type="submit" class="btn-success btn-lg" asp-area="" asp-controller="Admin" asp-action="Add" role="button">Добавить продукт</button>
             </div>
         </fieldset>
     </form>
