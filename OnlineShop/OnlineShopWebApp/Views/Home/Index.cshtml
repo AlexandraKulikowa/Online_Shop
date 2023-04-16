@@ -1,6 +1,7 @@
 ﻿@model List<Product>
 
 <body>
+    @await Component.InvokeAsync("Search")
     <div class="row">
         @foreach (var product in Model)
         {

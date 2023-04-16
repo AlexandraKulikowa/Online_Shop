@@ -28,6 +28,10 @@ namespace OnlineShopWebApp.Repositories
         {
             return listProducts.FirstOrDefault(product => product.Id == id);
         }
+        public Product Search(string name)
+        {
+            return listProducts.FirstOrDefault(product => product.Name == name);
+        }
         public void Add(Product product)
         {
             var existingProduct = TryGetById(product.Id);

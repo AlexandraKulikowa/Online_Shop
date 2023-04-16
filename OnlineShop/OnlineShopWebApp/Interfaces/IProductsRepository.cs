@@ -7,6 +7,7 @@ namespace OnlineShopWebApp.Interfaces
     {
         List<Product> GetAll();
         Product TryGetById(int id);
+        Product Search(string name);
         void Add(Product product);
         void Edit(Product product);
         void Delete(Product product);
