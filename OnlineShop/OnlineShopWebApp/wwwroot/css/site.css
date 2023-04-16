@@ -421,6 +421,7 @@ label {
     box-shadow: 4px 4px 4px;
     font-size: 18px;
     position: absolute;
+    padding:10px 10px 10px 10px;
 }
 .leftblock {
     left: 3%;

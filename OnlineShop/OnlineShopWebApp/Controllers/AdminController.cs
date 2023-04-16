@@ -15,18 +15,22 @@ namespace OnlineShopWebApp.Controllers
         {
             return View();
         }
+
         public IActionResult Orders()
         {
             return View();
         }
+
         public IActionResult Users()
         {
             return View();
         }
+
         public IActionResult Roles()
         {
             return View();
         }
+
         public IActionResult Products()
         {
             return View(products.GetAll());
@@ -36,23 +40,27 @@ namespace OnlineShopWebApp.Controllers
         {
             return View();
         }
+
         public IActionResult EditProduct(int id)
         {
             var product = products.TryGetById(id);
             return View(product);
         }
+
         [HttpPost]
         public IActionResult Update(Product product)
         {
             products.Edit(product);
             return RedirectToAction("Products");
         }
+
         [HttpPost]
         public IActionResult Add(Product product)
         {
             products.Add(product);
             return RedirectToAction("Products");
         }
+
         public IActionResult Delete(int id)
         {
             var product = products.TryGetById(id);
