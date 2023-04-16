@@ -17,14 +17,14 @@ else
         <form class="form" action="#" autocomplete="on" method="post">
             <fieldset>
                 <legend>Оставьте свои контактные данные</legend>
-                <label for="address">Введите ваш адрес</label>
+                <label for="contacts.address">Введите ваш адрес</label>
                 <br>
                 <textarea name="contacts.address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" required autofocus></textarea>
                 <br>
-                <label for="index">Ваш индекс</label>
+                <label for="contacts.index">Ваш индекс</label>
                 <input type="text" name="contacts.index" pattern="[0-9]{6}" placeholder="123456" minlength="6" maxlength="6" required>
                 <br>
-                <label for="telephone">Введите ваш телефон</label>
+                <label for="contacts.telephone">Введите ваш телефон</label>
                 <input type="tel" name="contacts.telephone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" minlength="11" required>
                 <br>
                 <label for="timefrom">Удобное время для звонка</label>
@@ -53,11 +53,10 @@ else
                 <textarea cols="80" rows="5" name="comment"></textarea>
                 <br>
                 <label for="list">Упаковка товара</label>
-                @Html.DropDownList("enumList", new SelectList(ViewBag.enums))
+                @Html.DropDownList("enumList", Html.GetEnumSelectList(typeof(PackagingEnum)))
                 <br>
-                <label for="accept">Даю согласие на обработку персональных данных</label>
+                <label for="isaccept">Даю согласие на обработку персональных данных</label>
                 <input name="isaccept" type="checkbox" value="true">
-                <input name="isaccept" type="hidden" value="false">
                 <br>
                 <input name="id" type="hidden" value="0">
                 <h4>Итоговая стоимость вашего заказа: @Model.TotalCost() рублей.</h4>

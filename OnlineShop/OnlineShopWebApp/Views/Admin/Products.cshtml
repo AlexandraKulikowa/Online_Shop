@@ -1,2 +1,31 @@
-﻿@await Html.PartialAsync("AdminPanel")
-<center><h2>Список продуктов</h2></center>
+﻿@model List<Product>
+
+@await Html.PartialAsync("AdminPanel")
+
+@if (Model == null || !Model.Any())
+{
+    <div class="card shadow adminproducts">
+        <center><h2>Список продуктов</h2></center>
+        <a class="btn button-addproduct" asp-controller="Admin" asp-action="addproduct" role="button">Добавить новый продукт</a>
+        <div class="text-dark">Товары отсутствуют.</div>
+    </div>
+}
+else
+{
+    <div class="card shadow adminproducts">
+        <center><h2>Список продуктов</h2></center>
+        <a class="btn button-addproduct" asp-controller="Admin" asp-action="addproduct" role="button">Добавить новый продукт</a>
+        <table>
+            <thead>
+                <tr><th>№</th><th>Название товара</th><th>Цена</th></tr>
+            </thead>
+            @foreach (var product in Model)
+            {
+                <tbody>
+                    <tr><td>@product.Id</td><td><a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">@product.Name</a></td><td>@product.Cost</td><td><a asp-area="" asp-controller="admin" asp-action="editproduct" asp-route-id="@product.Id">Редактировать</a></td><td><a asp-area="" asp-controller="Admin" asp-action="Delete" asp-route-id="@product.Id">Удалить</a></td></tr>
+                </tbody>
+            }
+        </table>
+    </div>
+}
+=

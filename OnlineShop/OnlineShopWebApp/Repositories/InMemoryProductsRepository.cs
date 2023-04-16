@@ -28,5 +28,35 @@ namespace OnlineShopWebApp.Repositories
         {
             return listProducts.FirstOrDefault(product => product.Id == id);
         }
+        public void Add(Product product)
+        {
+            var existingProduct = TryGetById(product.Id);
+            if (existingProduct == null)
+            {
+                listProducts.Add(product);
+            }
+        }
+        public void Delete(Product product)
+        {
+            var existingProduct = TryGetById(product.Id);
+            if (existingProduct != null)
+            {
+                listProducts.Remove(product);
+            }
+        }
+        public void Edit(Product product)
+        {
+            var existingProduct = TryGetById(product.Id);
+
+            existingProduct.Name = product.Name;
+            existingProduct.Cost = product.Cost;
+            existingProduct.Description = product.Description;
+            existingProduct.Genre = product.Genre;
+            existingProduct.PaintingTechnique = product.PaintingTechnique;
+            existingProduct.Size = product.Size;
+            existingProduct.Year = product.Year;
+            existingProduct.IsPromo = product.IsPromo;
+            existingProduct.ImagePath = product.ImagePath;
+        }
     }
 }
