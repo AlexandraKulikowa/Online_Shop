@@ -6,21 +6,21 @@
         @foreach (var product in Model)
         {
             <div class="col-3 card shadow border-success card-body">
-                    <img src=@product.ImagePath alt="Фото картины">
-                    <div class="mt-auto" style="display:-ms-inline-flexbox; flex-direction: column;">
-                        <a href="/product/index/@product.Id">
-                            <h5><b>@product.Name</b></h5>
-                        </a>
-                        <a style="color:saddlebrown">
-                            <b>@product.Cost рублей</b><br>
-                        </a>
-                    </div>
-                    <br>
-                    <div class="btn-group-vertical">
+                <img src=@product.ImagePath alt="Фото картины">
+                <div class="mt-auto" style="display:-ms-inline-flexbox; flex-direction: column;">
+                    <a href="/product/index/@product.Id">
+                        <h5><b>@product.Name</b></h5>
+                    </a>
+                    <a style="color:saddlebrown">
+                        <b>@product.Cost рублей</b><br>
+                    </a>
+                </div>
+                <br>
+                <div class="btn-group-vertical">
                     <a class="btn btn-dark btn-lg mt-auto" href="/home/compare?productId=@product.Id" role="button">Сравнить</a>
                     <a class="btn btn-success btn-lg mt-auto" href="/basket/add?productId=@product.Id" role="button">Добавить в корзину</a>
-                    </div>
                 </div>
+            </div>
         }
     </div>
 </body>
