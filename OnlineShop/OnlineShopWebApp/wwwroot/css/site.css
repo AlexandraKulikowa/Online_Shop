@@ -59,7 +59,24 @@ body {
 }
 .card-body {
     text-align: center;
-    border-radius: 50px;
+    border-radius: 22px;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    border-width: 1px;
+    border-color:darkslategray;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+}
+.card-body-product {
+    text-align: center;
+    border-radius: 22px;
+    background-color: antiquewhite;
+    padding: 10px 7px 10px 4px;
+    border-width: 1px;
+    border-color:darkslategray;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
 }
 .enter {
     color:darkslategray;
@@ -313,10 +330,11 @@ label {
 }
 
 .comparelist {
-    font-size: 16px;
+    font-size: 13px;
     background-color: antiquewhite;
     border: solid 1px green;
     margin-bottom: 20px;
+    border-radius:22px;
 }
 
 .comparecard {
@@ -407,6 +425,14 @@ label {
     margin: 1px 1px 4px 1px;
 }
 
+.form-search {
+    border-radius: 22px;
+    width: 400px;
+    height: 50px;
+    margin:4px 10px 2px 65%;
+    border:outset;
+    padding:1px 9px 1px 9px;
+}
 .adminproducts {
     width: 70%;
     height: 70%;

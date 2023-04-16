@@ -1,12 +1,11 @@
 ﻿@model List<Product>
 
 <body>
-    @await Component.InvokeAsync("Search")
+    @await Html.PartialAsync("Search")
     <div class="row">
         @foreach (var product in Model)
         {
-            <div class="col-3 card shadow border-success">
-                <div class="card-body" style="display:flex; flex-direction:column;">
+            <div class="col-3 card shadow border-success card-body">
                     <img src=@product.ImagePath alt="Фото картины">
                     <div class="mt-auto" style="display:-ms-inline-flexbox; flex-direction: column;">
                         <a href="/product/index/@product.Id">
@@ -17,10 +16,11 @@
                         </a>
                     </div>
                     <br>
+                    <div class="btn-group-vertical">
                     <a class="btn btn-dark btn-lg mt-auto" href="/home/compare?productId=@product.Id" role="button">Сравнить</a>
                     <a class="btn btn-success btn-lg mt-auto" href="/basket/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                    </div>
                 </div>
-            </div>
         }
     </div>
 </body>

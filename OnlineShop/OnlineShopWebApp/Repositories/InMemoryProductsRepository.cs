@@ -20,6 +20,7 @@ namespace OnlineShopWebApp.Repositories
                 new Product ("Картина \"Девушка и ветер\"", 4000, "Картина в подарок подруге", GenreEnum.Портрет, "масло", new Size(20, 25, false),2021,false, "/images/GirlAndWindBig.jpg"),
             };
         }
+
         public List<Product> GetAll()
         {
             return listProducts;
@@ -28,10 +29,16 @@ namespace OnlineShopWebApp.Repositories
         {
             return listProducts.FirstOrDefault(product => product.Id == id);
         }
+
         public Product Search(string name)
         {
-            return listProducts.FirstOrDefault(product => product.Name == name);
+            var result = listProducts.FirstOrDefault(product => product.Name == name);
+            if (result == null)
+                name = $"Картина \"{name}\"";
+            result = listProducts.FirstOrDefault(product => product.Name == name);
+            return result;
         }
+
         public void Add(Product product)
         {
             var existingProduct = TryGetById(product.Id);
@@ -40,6 +47,7 @@ namespace OnlineShopWebApp.Repositories
                 listProducts.Add(product);
             }
         }
+
         public void Delete(Product product)
         {
             var existingProduct = TryGetById(product.Id);
@@ -48,6 +56,7 @@ namespace OnlineShopWebApp.Repositories
                 listProducts.Remove(product);
             }
         }
+
         public void Edit(Product product)
         {
             var existingProduct = TryGetById(product.Id);
