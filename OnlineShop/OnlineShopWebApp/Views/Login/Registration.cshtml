@@ -1,37 +1,52 @@
-﻿<div class="card shadow login">
-    <form class="form" action="#" autocomplete="on" method="post">
+﻿@model Registration
+
+<div class="card shadow login">
+    <form class="form" autocomplete="on" method="post">
         <fieldset>
             <center>
                 <legend>Приветствуем вас! Зарегистрируйтесь</legend>
-                <label for="surname">Фамилия</label>
+                <label asp-for="Surname">Фамилия</label>
+                <input class="form-ctrl" type="text" asp-for="Surname" placeholder="Иванов" autofocus><br>
+                <span asp-validation-for="Surname"></span>
+                <br />
+                <label asp-for="Name">Имя</label>
+                <input class="form-ctrl" type="text" asp-for="Name" placeholder="Иван"><br />
+                <span asp-validation-for="Name"></span>
                 <br>
-                <input class="form-ctrl" type="text" name="surname" minlength="4" maxlength="12" placeholder="Иванов" required autofocus><br>
-                <label for="name">Имя</label><br>
-                <input class="form-ctrl" type="text" name="name" minlength="4" maxlength="12" placeholder="Иван" required>
+
+                <label asp-for="Fathername">Отчество</label>
+                <input class="form-ctrl" type="text" asp-for="Fathername" placeholder="Иванович"><br />
+                <span asp-validation-for="Fathername"></span>
                 <br>
-                <label for="fathername">Отчество</label><br>
-                <input class="form-ctrl" type="text" name="fathername" minlength="4" maxlength="12" placeholder="Иванович">
+
+                <label asp-for="Login">Логин</label>
+                <input class="form-ctrl" type="text" placeholder="Логин" asp-for="Login"><br />
+                <span asp-validation-for="Login"></span>
+
+                <label asp-for="Password">Пароль</label>
+                <input class="form-ctrl" type="password" asp-for="Password"><br />
+                <span asp-validation-for="Password"></span>
                 <br>
-                <label for="login">Логин</label><br>
-                <input class="form-ctrl" type="text" name="login" minlength="4" maxlength="12" required>
+
+                <label asp-for="ConfirmPassword">Подтвердите пароль</label>
+                <input class="form-ctrl" type="password" asp-for="ConfirmPassword"><br />
+                <span asp-validation-for="ConfirmPassword"></span>
                 <br>
-                <label for="password">Пароль</label><br>
-                <input class="form-ctrl" type="password" name="password" minlength="6" maxlength="12" required>
+                
+                <label asp-for="Email">Е-mail</label>
+                <input class="form-ctrl" type="email" asp-for="Email" placeholder="anna@yandex.ru"><br />
+                <span asp-validation-for="Email"></span>
                 <br>
-                <label for="passwordconfirm">Подтвердите пароль</label><br>
-                <input class="form-ctrl" type="password" name="passwordconfirm" minlength="6" maxlength="12" required>
+
+                <label asp-for="Phone">Телефон</label>
+                <input type="tel" asp-for="Phone" size="30"><br />
+                <span asp-validation-for="Phone"></span>
                 <br>
-                <label for="email">Е-mail</label><br>
-                <input class="form-ctrl" type="email" name="email" placeholder="anna@yandex.ru" required>
-                <br>
-                <label for="phone">Телефон</label>
-                <br>
-                <input type="tel" name="phone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" minlength="11" size="30">
-                <br>
-                <input name="promo" type="checkbox" value="true">
-                <label for="promo">Присылать мне уведомления о новинках</label>
+
+                <input asp-for="Promo" type="checkbox" value="true">
+                <label asp-for="Promo">Присылать мне уведомления о новинках</label>
             </center>
         </fieldset>
-        <center><button type="submit" class="btn button-login" asp-area="" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
+        <center><button type="submit" class="btn button-login" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
     </form>
 </div>

@@ -371,7 +371,7 @@ label {
     margin-left: auto;
     margin-right: auto;
     margin-top: auto;
-    padding: 27px 2px 20px 4px;
+    padding: 27px 0px 20px 4px;
     background-color: antiquewhite;
     border-radius: 22px;
     border-color: darkslategray;
@@ -387,7 +387,7 @@ label {
     background-color: darkslategrey;
     padding: 0px 2px 5px 2px;
     text-align: center;
-    width: 230px;
+    width: 290px;
     height: 50px;
     border-radius: 22px;
     font-size: 22px;
@@ -407,7 +407,7 @@ label {
     color: sienna;
     padding: 1em 1em;
     text-align: center;
-    width: 230px;
+    width: 290px;
     height: 50px;
     border-radius: 22px;
     font-size: 12px;
