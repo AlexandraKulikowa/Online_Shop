@@ -1,6 +1,6 @@
-﻿@model Basket
+﻿@model Order
 
-@if (Model == null || !Model.ProductsInBasket.Any())
+@if (!ViewBag.Basket)
 {
     <br />
     <center>
@@ -8,60 +8,87 @@
     </center>
     <div class="order"><h2><b>Спасибо за ваш заказ! Приходите еще!</b></h2></div>
     <center>
-        <a type="button" class="btn btn-outline-secondary" btn-lg col="10" href="/orderdetails/index?id=@ViewBag.OrderId" role="button">Детали вашего заказа</a>
+        <a type="button" class="btn btn-outline-secondary" btn-lg col="10" href="/orderdetails/index?id=@Model.Id" role="button">Детали вашего заказа</a>
     </center>
 }
 else
 {
     <div class="col-10 card shadow border-success">
-        <form class="form" action="#" autocomplete="on" method="post">
+        <form class="form" autocomplete="on" method="post">
             <fieldset>
                 <legend>Оставьте свои контактные данные</legend>
-                <label for="contacts.address">Введите ваш адрес</label>
+
+                <label asp-for="Contacts.Address">Введите ваш адрес</label>
                 <br>
-                <textarea name="contacts.address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" required autofocus></textarea>
+                <textarea asp-for="Contacts.Address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" autofocus></textarea>
+                <span asp-validation-for="Contacts.Address"></span>
                 <br>
-                <label for="contacts.index">Ваш индекс</label>
-                <input type="text" name="contacts.index" pattern="[0-9]{6}" placeholder="123456" minlength="6" maxlength="6" required>
+
+
+                <label asp-for="Contacts.Index">Ваш индекс</label>
+                <input type="number" asp-for="Contacts.Index" placeholder="123456">
+                <span asp-validation-for="Contacts.Index"></span>
                 <br>
-                <label for="contacts.telephone">Введите ваш телефон</label>
-                <input type="tel" name="contacts.telephone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" minlength="11" required>
+
+
+                <label asp-for="Contacts.Telephone">Введите ваш телефон</label>
+                <input type="tel" asp-for="Contacts.Telephone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999">
+                <span asp-validation-for="Contacts.Telephone"></span>
                 <br>
-                <label for="timefrom">Удобное время для звонка</label>
-                <input type="text" name="timefrom" maxlength="7" placeholder="C 9">
-                <input type="text" name="timeto" maxlength="7" placeholder="До 18">
+
+                <label asp-for="Timefrom">Удобное время для звонка</label>
+                <input type="number" asp-for="Timefrom" placeholder="C 9">
+                <span asp-validation-for="Timefrom"></span>
+
+                <label asp-for="Timeto">до</label>
+                <input type="number" asp-for="Timeto" placeholder="До 18">
+                <span asp-validation-for="Timeto"></span>
                 <br>
-                <label for="email">Введите дополнительный e-mail</label>
-                <input type="email" name="email">
+
+                <label asp-for="Email">Введите дополнительный e-mail</label>
+                <input type="email" asp-for="Email">
+                <span asp-validation-for="Email"></span>
                 <br>
-                <label for="post">Выберите способ доставки</label>
+
+                <label asp-for="Mailto">Выберите способ доставки</label>
                 <br>
-                <input id="post1" type="radio" name="mailto" value="russianpost" checked required>
+                <input id="post1" type="radio" asp-for="Mailto" value="russianpost" checked>
                 <label for="post1">Почта России</label>
                 <br>
-                <input id="post2" type="radio" name="mailto" value="sdek" required>
+                <input id="post2" type="radio" asp-for="Mailto" value="sdek">
                 <label for="post2">СДЭК</label>
                 <br>
-                <input id="post3" type="radio" name="mailto" value="boxberry" required>
+                <input id="post3" type="radio" asp-for="Mailto" value="boxberry">
                 <label for="post3">Boxberry</label>
+                <span asp-validation-for="Mailto"></span>
                 <br>
-                <label for="date">Введите дату желаемой доставки</label>
-                <input type="date" name="dateofdelivery">
+
+                <label asp-for="DateofDelivery">Введите дату желаемой доставки</label>
+                <input type="date" asp-for="DateofDelivery">
+                <span asp-validation-for="DateofDelivery"></span>
                 <br>
-                <label for="area">Напишите комментарий к заказу</label>
+
+                <label asp-for="Comment">Напишите комментарий к заказу</label>
                 <br>
-                <textarea cols="80" rows="5" name="comment"></textarea>
+                <textarea cols="80" rows="5" asp-for="Comment"></textarea>
+                <span asp-validation-for="Comment"></span>
                 <br>
-                <label for="list">Упаковка товара</label>
+
+                <label asp-for="Packaging">Упаковка товара</label>
                 @Html.DropDownList("enumList", Html.GetEnumSelectList(typeof(PackagingEnum)))
+                <span asp-validation-for="Packaging"></span>
                 <br>
-                <label for="isaccept">Даю согласие на обработку персональных данных</label>
-                <input name="isaccept" type="checkbox" value="true">
+
+                <label asp-for="isAccept">Даю согласие на обработку персональных данных</label>
+                <input type="checkbox" asp-for="isAccept" value ="true">
+                <span asp-validation-for="isAccept"></span>
                 <br>
-                <input name="id" type="hidden" value="0">
-                <h4>Итоговая стоимость вашего заказа: @Model.TotalCost() рублей.</h4>
+
+                <input asp-for="Id" type="hidden" value="0">
+
+                <h4>Итоговая стоимость вашего заказа: рублей.</h4>
                 <button class="button-clear" btn-lg col="5" type="reset">Сбросить заполнение формы</button>
-                <button type="submit" class="btn button-order" btn-lg col="6" asp-area="" asp-controller="Order" asp-action="Tocheckout" role="button">Заказать</button>
+                <button type="submit" class="btn button-order" asp-controller="Order" asp-action="Tocheckout" role="button">Заказать</button>
                 <br>
                 <br>
             </fieldset>
