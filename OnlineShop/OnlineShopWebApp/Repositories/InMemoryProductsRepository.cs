@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 
@@ -33,7 +34,8 @@ namespace OnlineShopWebApp.Repositories
         public List<Product> Search(string name)
         {
             name = name.ToLower();
-            return (from item in listProducts let title = item.Name.ToLower() where title.Contains(name) select item).ToList();
+            var result = listProducts.Where(x => x.Name.ToLower().Contains(name)).ToList();
+            return result;
         }
 
         public void Add(Product product)
