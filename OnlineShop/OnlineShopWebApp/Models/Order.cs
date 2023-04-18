@@ -1,17 +1,14 @@
-﻿
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web.Mvc;
 
 namespace OnlineShopWebApp.Models
 {
     public class Order
     {
         public string UserId { get; set; }
-
-
 
         public int Id { get; set; }
 
@@ -32,8 +29,8 @@ namespace OnlineShopWebApp.Models
         public string Mailto { get; set; }
 
 
-        [Remote(action: "CheckDate", controller: "Order", HttpMethod = "POST", ErrorMessage = "Это дата из прошлого, а в прошлое вернуться нельзя!")]
-        public string DateofDelivery { get; set; }
+        [Remote(action: "CheckDate", controller: "Order", HttpMethod ="POST", ErrorMessage = "Это дата из прошлого, а в прошлое вернуться нельзя!")]
+        public DateTime DateofDelivery { get; set; }
 
         public string Comment { get; set; }
 

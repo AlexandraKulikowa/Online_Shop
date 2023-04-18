@@ -2,6 +2,8 @@
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Repositories;
+using System;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -40,11 +42,10 @@ namespace OnlineShopWebApp.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult CheckDate(string value)
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult CheckDate(DateTime DateofDelivery)
         {
-            var date = Convert.ToDateTime(value);
-            TimeSpan diff = date.Subtract(DateTime.Now);
+            TimeSpan diff = DateofDelivery.Subtract(DateTime.Now);
             if(diff.TotalDays > 0)
                 return Json(true);
             return Json(false);
