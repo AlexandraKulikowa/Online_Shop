@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
@@ -34,16 +33,7 @@ namespace OnlineShopWebApp.Repositories
         public List<Product> Search(string name)
         {
             name = name.ToLower();
-            var result = new List<Product>();
-            foreach (var item in listProducts)
-            {
-                string[] title = (item.Name.ToLower().Split(' ', '\"'));
-                if (title.Contains(name))
-                {
-                    result.Add(item);
-                }
-            }
-            return result;
+            return (from item in listProducts let title = item.Name.ToLower() where title.Contains(name) select item).ToList();
         }
 
         public void Add(Product product)

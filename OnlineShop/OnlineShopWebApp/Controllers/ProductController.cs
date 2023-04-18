@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Search(string search)
+        public IActionResult SearchResult(string search)
         {
             var searchresult = products.Search(search);
             return View(searchresult);
