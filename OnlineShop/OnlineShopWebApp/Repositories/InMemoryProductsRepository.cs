@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
@@ -30,12 +31,18 @@ namespace OnlineShopWebApp.Repositories
             return listProducts.FirstOrDefault(product => product.Id == id);
         }
 
-        public Product Search(string name)
+        public List<Product> Search(string name)
         {
-            var result = listProducts.FirstOrDefault(product => product.Name == name);
-            if (result == null)
-                name = $"Картина \"{name}\"";
-            result = listProducts.FirstOrDefault(product => product.Name == name);
+            name = name.ToLower();
+            var result = new List<Product>();
+            foreach (var item in listProducts)
+            {
+                string[] title = (item.Name.ToLower().Split(' ', '\"'));
+                if (title.Contains(name))
+                {
+                    result.Add(item);
+                }
+            }
             return result;
         }
 
