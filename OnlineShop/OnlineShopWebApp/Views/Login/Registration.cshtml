@@ -1,51 +1,57 @@
 ﻿@model Registration
 
-<div class="card shadow login">
-    <form class="form" autocomplete="on" method="post">
+<div class="card shadow register">
+    <form method="post">
         <fieldset>
-            <center>
-                <legend>Приветствуем вас! Зарегистрируйтесь</legend>
-                <label asp-for="Surname">Фамилия</label>
-                <input class="form-ctrl" type="text" asp-for="Surname" placeholder="Иванов" autofocus><br>
-                <span asp-validation-for="Surname"></span>
-                <br />
-                <label asp-for="Name">Имя</label>
-                <input class="form-ctrl" type="text" asp-for="Name" placeholder="Иван"><br />
-                <span asp-validation-for="Name"></span>
-                <br>
+            <legend>Приветствуем вас! Зарегистрируйтесь</legend>
+            <label asp-for="Surname">Фамилия</label>
+            <input class="form-ctrl" type="text" asp-for="Surname" placeholder="Иванов" autofocus>
+            <br>
+            <span asp-validation-for="Surname"></span>
+            <br />
+            <label asp-for="Name">Имя</label>
+            <input class="form-ctrl" type="text" asp-for="Name" placeholder="Иван">
+            <br />
+            <span asp-validation-for="Name"></span>
+            <br>
 
-                <label asp-for="Fathername">Отчество</label>
-                <input class="form-ctrl" type="text" asp-for="Fathername" placeholder="Иванович"><br />
-                <span asp-validation-for="Fathername"></span>
-                <br>
+            <label asp-for="Fathername">Отчество</label>
+            <input class="form-ctrl" type="text" asp-for="Fathername" placeholder="Иванович">
+            <br />
+            <span asp-validation-for="Fathername"></span>
+            <br>
 
-                <label asp-for="Login">Логин</label>
-                <input class="form-ctrl" type="text" placeholder="Логин" asp-for="Login"><br />
-                <span asp-validation-for="Login"></span>
+            <label asp-for="Login">Логин</label>
+            <input class="form-ctrl" type="text" placeholder="Логин" asp-for="Login">
+            <br />
+            <span asp-validation-for="Login"></span>
 
-                <label asp-for="Password">Пароль</label>
-                <input class="form-ctrl" type="password" asp-for="Password"><br />
-                <span asp-validation-for="Password"></span>
-                <br>
+            <label asp-for="Password">Пароль</label>
+            <input class="form-ctrl" type="password" asp-for="Password">
+            <br />
+            <span asp-validation-for="Password"></span>
+            <br>
 
-                <label asp-for="ConfirmPassword">Подтвердите пароль</label>
-                <input class="form-ctrl" type="password" asp-for="ConfirmPassword"><br />
-                <span asp-validation-for="ConfirmPassword"></span>
-                <br>
-                
-                <label asp-for="Email">Е-mail</label>
-                <input class="form-ctrl" type="email" asp-for="Email" placeholder="anna@yandex.ru"><br />
-                <span asp-validation-for="Email"></span>
-                <br>
+            <label asp-for="ConfirmPassword">Подтвердите пароль</label>
+            <input class="form-ctrl" type="password" asp-for="ConfirmPassword">
+            <br />
+            <span asp-validation-for="ConfirmPassword"></span>
+            <br>
 
-                <label asp-for="Phone">Телефон</label>
-                <input type="tel" asp-for="Phone" size="30"><br />
-                <span asp-validation-for="Phone"></span>
-                <br>
+            <label asp-for="Email">Е-mail</label>
+            <input class="form-ctrl" type="email" asp-for="Email" placeholder="anna@yandex.ru">
+            <br />
+            <span asp-validation-for="Email"></span>
+            <br>
 
-                <input asp-for="Promo" type="checkbox" value="true">
-                <label asp-for="Promo">Присылать мне уведомления о новинках</label>
-            </center>
+            <label asp-for="Phone">Телефон</label>
+            <input class="form-ctrl" type="tel" asp-for="Phone" size="30" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999">
+            <br />
+            <span asp-validation-for="Phone"></span>
+            <br>
+
+            <input asp-for="Promo" type="checkbox" value="true">
+            <label asp-for="Promo">Присылать мне уведомления о новинках</label>
         </fieldset>
         <center><button type="submit" class="btn button-login" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
     </form>

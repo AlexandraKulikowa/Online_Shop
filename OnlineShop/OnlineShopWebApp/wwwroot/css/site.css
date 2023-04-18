@@ -149,6 +149,26 @@ a.basket-bg:hover {
     background-color: darkslategrey;
 }
 
+.search {
+    color:black;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    background-color:forestgreen;
+    padding: 2px 5px 2px 2px;
+    text-align: center;
+    width: 90px;
+    height: 40px;
+    border-radius: 22px;
+    box-shadow: 2px 2px 2px;
+    margin-right:0%;
+}
+
+.compare:hover {
+    background-color:darkgreen;
+    color: aliceblue;
+}
+
 .admin {
     color:black;
     user-select: none;
@@ -380,6 +400,24 @@ label {
     font-style: oblique;
 }
 
+.register {
+    width: 35%;
+    height: 35%;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    padding: 27px 30px 20px 30px;
+    background-color: antiquewhite;
+    border-radius: 22px;
+    border-color: darkslategray;
+    box-shadow: 4px 4px 4px;
+    font-size: 12px;
+}
+
 .button-login {
     color: aliceblue;
     user-select: none;
@@ -427,9 +465,9 @@ label {
 
 .form-search {
     border-radius: 22px;
-    width: 400px;
+    width: 350px;
     height: 50px;
-    margin:4px 10px 2px 55%;
+    margin:4px 10px 2px 57%;
     border:outset;
     padding:1px 9px 1px 9px;
 }

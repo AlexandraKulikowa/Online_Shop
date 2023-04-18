@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Models
     public class Registration
     {
         [Required(ErrorMessage = "Укажите вашу фамилию")]
-        [StringLength(25, MinimumLength = 1, ErrorMessage = "Ваша фамилия должна быть длиной от 1 до 25 символов")]
+        [StringLength(26, MinimumLength = 2, ErrorMessage = "Ваша фамилия должна быть длиной от 2 до 26 символов")]
         public string Surname { get; set; }
 
         [Required(ErrorMessage = "Укажите ваше имя")]

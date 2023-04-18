@@ -1,9 +1,9 @@
 ﻿@model Authorization
 
 <div class="card shadow login">
-    <form class="form" autocomplete="on" method="post">
+    <form class="col-lg-auto" method="post">
         <fieldset>
-            <legend><center>Авторизируйтесь</center></legend>
+            <legend>Авторизируйтесь</legend>
 
             <label asp-for="Login">Логин</label>
             <input class="form-ctrl" type="text" placeholder="Логин" asp-for="Login">
@@ -19,6 +19,7 @@
 
             <input name="isremember" type="checkbox" value="true">
             <label for="isremember">Запомнить меня?</label>
+
         </fieldset>
         <button type="submit" class="btn button-login" asp-controller="login" asp-action="enter" role="button">Войти</button>
         <br />
