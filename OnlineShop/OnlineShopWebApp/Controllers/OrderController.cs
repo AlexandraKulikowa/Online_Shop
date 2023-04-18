@@ -2,7 +2,6 @@
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Repositories;
-using System;
 
 namespace OnlineShopWebApp.Controllers
 {

@@ -23,5 +23,12 @@ namespace OnlineShopWebApp.Controllers
             compareList.Add(product, Constants.UserId);
             return Redirect("~/Compare/Index/");
         }
+
+        [HttpPost]
+        public IActionResult Search(string search)
+        {
+            var searchresult = products.Search(search);
+            return View(searchresult);
+        }
     }
 }
