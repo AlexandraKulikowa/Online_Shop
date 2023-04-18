@@ -13,7 +13,12 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Enter(Authorization authorization)
         {
-            if(ModelState.IsValid)
+            if (authorization.Login == authorization.Password)
+            {
+                ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
+            }
+
+            if (ModelState.IsValid)
             {
                 return Redirect("~/Home/Index/");
             }
@@ -28,6 +33,11 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Register(Registration registration)
         {
+            if (registration.Login == registration.Password)
+            {
+                ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
+            }
+
             if (ModelState.IsValid)
             {
                 return Redirect("~/Home/Index/");
