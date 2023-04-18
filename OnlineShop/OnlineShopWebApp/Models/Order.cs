@@ -14,13 +14,7 @@ namespace OnlineShopWebApp.Models
 
         public Contacts Contacts { get; set; }
 
-        [Required(ErrorMessage = "Вы не ввели удобное время для звонка")]
-        [Range(0, 24, ErrorMessage = "Значение должно быть от 0 до 24 часов")]
-        public int Timefrom { get; set; }
-
-        [Required(ErrorMessage = "Вы не ввели удобное время для звонка")]
-        [Range(0, 24, ErrorMessage = "Значение должно быть от 0 до 24 часов")]
-        public int Timeto { get; set; }
+        public string TimeFromTo { get; set; }
 
         [Required(ErrorMessage ="Вы не ввели e-mail")]
         [EmailAddress(ErrorMessage = "Некорректный e-mail!")]
@@ -28,7 +22,7 @@ namespace OnlineShopWebApp.Models
 
         public string Mailto { get; set; }
 
-
+        [Required(ErrorMessage = "Вы не ввели удобную вам дату доставки!")]
         [Remote(action: "CheckDate", controller: "Order", HttpMethod ="POST", ErrorMessage = "Это дата из прошлого, а в прошлое вернуться нельзя!")]
         public DateTime DateofDelivery { get; set; }
 

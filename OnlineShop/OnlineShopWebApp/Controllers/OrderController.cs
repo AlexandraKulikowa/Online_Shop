@@ -20,6 +20,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var basketById = baskets.TryGetByUserId(Constants.UserId);
             ViewBag.Basket = basketById.ProductsInBasket.Any();
+            ViewBag.TotalCost = basketById.TotalCost();
             return View();
         }
 

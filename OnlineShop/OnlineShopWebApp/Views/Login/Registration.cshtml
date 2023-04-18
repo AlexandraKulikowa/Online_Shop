@@ -1,5 +1,6 @@
 ﻿@model Registration
 
+<div class="validation" asp-validation-summary="All">
 <div class="card shadow register">
     <form method="post">
         <fieldset>
@@ -55,4 +56,5 @@
         </fieldset>
         <center><button type="submit" class="btn button-login" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
     </form>
+</div>
 </div>
