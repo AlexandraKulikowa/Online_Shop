@@ -1,5 +1,10 @@
 ﻿@model Order
 
+@if (Model == null)
+{
+    <div class="order"><h2><b>Ваша корзина пуста, поэтому вы не можете оформить заказ... Сначала наполните корзину!</b></h2></div>
+}
+
 @if (!ViewBag.Basket)
 {
     <br />
