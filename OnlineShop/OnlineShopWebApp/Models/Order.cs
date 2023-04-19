@@ -16,7 +16,9 @@ namespace OnlineShopWebApp.Models
 
         public string TimeFromTo { get; set; }
 
-        [Required(ErrorMessage ="Вы не ввели e-mail")]
+        [Required(ErrorMessage = "Укажите ваш e-mail")]
+        [StringLength(28, MinimumLength = 6, ErrorMessage = "Это подозрительно длинный e-mail, проверьте правильность написания!")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Некорректный адрес")]
         [EmailAddress(ErrorMessage = "Некорректный e-mail!")]
         public string Email { get; set; }
 

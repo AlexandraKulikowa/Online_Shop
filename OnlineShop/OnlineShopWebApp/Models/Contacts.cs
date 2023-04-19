@@ -13,9 +13,9 @@ namespace OnlineShopWebApp.Models
         [RegularExpression(@"^\d{6}$", ErrorMessage = "Введите индекс в верном формате")]
         public int Index { get; set; }
 
-        [Required(ErrorMessage = "Вы не ввели телефон")]
-        [Phone(ErrorMessage ="Введите телефон в верном формате")]
-        [RegularExpression(@"^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{10}$", ErrorMessage = "Укажите верный номер телефона")]
+        [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessage = "Укажите ваш номер телефона")]
+        [RegularExpression(@"^((\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{10}$", ErrorMessage = "Укажите верный номер телефона")]
         public string Telephone { get; set; }
     }
 }
