@@ -394,16 +394,15 @@ label {
     padding: 27px 0px 20px 4px;
     background-color: antiquewhite;
     border-radius: 22px;
-    border-color: darkslategray;
     box-shadow: 4px 4px 4px;
     font-size: 12px;
     font-style: oblique;
 }
 
 .register {
-    width: 35%;
-    height: 35%;
-    align-items: center;
+    width: 90%;
+    height: 40%;
+    align-items:stretch;
     align-content: center;
     justify-content: center;
     overflow: auto;
@@ -418,6 +417,25 @@ label {
     font-size: 12px;
 }
 
+.button-register {
+    color: aliceblue;
+    user-select: none;
+    outline: none;
+    background-color: darkslategrey;
+    padding: 0px 2px 5px 2px;
+    text-align: center;
+    width: 930px;
+    height: 50px;
+    border-radius: 22px;
+    font-size: 22px;
+    box-shadow: 1px 1px 1px;
+    margin: 5px 1px 4px 1px;
+}
+
+    .button-register:hover {
+        background-color: teal;
+    }
+
 .button-login {
     color: aliceblue;
     user-select: none;
@@ -430,7 +448,7 @@ label {
     border-radius: 22px;
     font-size: 22px;
     box-shadow: 1px 1px 1px;
-    margin: 1px 1px 4px 1px;
+    margin: 5px 1px 4px 1px;
 }
 
     .button-login:hover {
@@ -458,18 +476,18 @@ label {
 
 .form-ctrl {
     border-radius: 22px;
-    width: 230px;
+    width: 210px;
     height: 50px;
-    margin: 1px 1px 4px 1px;
+    margin: 5px 5px 5px 5px;
 }
 
 .form-search {
     border-radius: 22px;
     width: 350px;
     height: 50px;
-    margin:4px 10px 2px 57%;
-    border:outset;
-    padding:1px 9px 1px 9px;
+    margin: 4px 10px 2px 57%;
+    border: outset;
+    padding: 1px 9px 1px 9px;
 }
 .adminproducts {
     width: 70%;
