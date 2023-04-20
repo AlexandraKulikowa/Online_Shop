@@ -25,7 +25,7 @@ namespace OnlineShopWebApp.Models
         public string Mailto { get; set; }
 
         [Required(ErrorMessage = "Вы не ввели удобную вам дату доставки!")]
-        [Remote(action: "CheckDate", controller: "Order", HttpMethod ="POST", ErrorMessage = "Это дата из прошлого, а в прошлое вернуться нельзя!")]
+        [Remote(action: "CheckDate", controller: "Order", HttpMethod = "POST", ErrorMessage = "Это дата из прошлого, а в прошлое вернуться нельзя!")]
         public DateTime DateofDelivery { get; set; }
 
         public string Comment { get; set; }
