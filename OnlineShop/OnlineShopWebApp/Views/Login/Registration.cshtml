@@ -1,37 +1,59 @@
-﻿<div class="card shadow login">
-    <form class="form" action="#" autocomplete="on" method="post">
+﻿@model Registration
+
+<div class="validation" asp-validation-summary="All">
+<div class="card shadow register">
+    <form method="post">
         <fieldset>
-            <center>
-                <legend>Приветствуем вас! Зарегистрируйтесь</legend>
-                <label for="surname">Фамилия</label>
+            <legend>Приветствуем вас! Зарегистрируйтесь</legend>
+            <p>
+                <label asp-for="Surname">Фамилия</label>
+                <input class="form-ctrl text-lg-center" type="text" asp-for="Surname" placeholder="Иванов" autofocus>
+                <label asp-for="Name">Имя</label>
+                <input class="form-ctrl text-lg-center" type="text" asp-for="Name" placeholder="Иван">
+                <label asp-for="Fathername">Отчество</label>
+                <input class="form-ctrl text-lg-center" type="text" asp-for="Fathername" placeholder="Иванович">
+            </p>
+            <p>
+                <b><span style="color:brown" asp-validation-for="Surname"></span></b>
+                <b><span style="color:brown" asp-validation-for="Name"></span></b>
+                <b><span style="color:brown" asp-validation-for="Fathername"></span></b>
+            </p>
+            <p>
+                <label asp-for="Login">Логин</label>
+                <input class="form-ctrl text-lg-center" type="text" placeholder="Логин" asp-for="Login">
+                <label asp-for="Password">Пароль</label>
+                <input class="form-ctrl text-lg-center" type="password" asp-for="Password">
+                <label asp-for="ConfirmPassword">Подтвердите пароль</label>
+                <input class="form-ctrl text-lg-center" type="password" asp-for="ConfirmPassword">
+            </p>
+            <p>
+                <b><span style="color:brown" asp-validation-for="Login"></span></b>
+                <b><span style="color:brown" asp-validation-for="Password"></span></b>
+                <b><span style="color:brown" asp-validation-for="ConfirmPassword"></span></b>
+            </p>
+            <p>
+                <label asp-for="Email">Е-mail</label>
+                <input class="form-ctrl text-lg-center" type="email" style="background-color:white" asp-for="Email" placeholder="anna@yandex.ru">
+                <label asp-for="Phone">Телефон</label>
+                <input class="form-ctrl text-lg-center" id="phone" style="background-color:white" type="tel" asp-for="Phone" pattern="\+7\([0-9]{3}\)-[0-9]{3}\-[0-9]{2}\-[0-9]{2}" placeholder="+7(999)-999-99-99">
                 <br>
-                <input class="form-ctrl" type="text" name="surname" minlength="4" maxlength="12" placeholder="Иванов" required autofocus><br>
-                <label for="name">Имя</label><br>
-                <input class="form-ctrl" type="text" name="name" minlength="4" maxlength="12" placeholder="Иван" required>
-                <br>
-                <label for="fathername">Отчество</label><br>
-                <input class="form-ctrl" type="text" name="fathername" minlength="4" maxlength="12" placeholder="Иванович">
-                <br>
-                <label for="login">Логин</label><br>
-                <input class="form-ctrl" type="text" name="login" minlength="4" maxlength="12" required>
-                <br>
-                <label for="password">Пароль</label><br>
-                <input class="form-ctrl" type="password" name="password" minlength="6" maxlength="12" required>
-                <br>
-                <label for="passwordconfirm">Подтвердите пароль</label><br>
-                <input class="form-ctrl" type="password" name="passwordconfirm" minlength="6" maxlength="12" required>
-                <br>
-                <label for="email">Е-mail</label><br>
-                <input class="form-ctrl" type="email" name="email" placeholder="anna@yandex.ru" required>
-                <br>
-                <label for="phone">Телефон</label>
-                <br>
-                <input type="tel" name="phone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" minlength="11" size="30">
-                <br>
-                <input name="promo" type="checkbox" value="true">
-                <label for="promo">Присылать мне уведомления о новинках</label>
-            </center>
+            </p>
+            <p>
+                <b><span style="color:brown" asp-validation-for="Email"></span></b>
+                <b><span style="color:brown" asp-validation-for="Phone"></span></b>
+            </p>
+            <input asp-for="Promo" type="checkbox" value="true">
+            <label asp-for="Promo">Присылать мне уведомления о новинках</label>
         </fieldset>
-        <center><button type="submit" class="btn button-login" asp-area="" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
+        <center><button type="submit" class="btn button-register" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
     </form>
 </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#phone").mask("+7(999) 999-99-99");
+        });
+    </script>
+    }

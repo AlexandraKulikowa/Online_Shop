@@ -1,18 +1,30 @@
-﻿<div class="card shadow login">
-    <form class="form" action="#" autocomplete="on" method="post">
-        <div class="gy-1">
-            <fieldset>
-                <legend>Авторизируйтесь</legend>
-                <input class="form-ctrl" type="text" name="login" size="25" minlength="4" maxlength="12" placeholder="Логин" required>
-                <br>
-                <input class="form-ctrl" type="password" name="password" size="25" minlength="6" maxlength="12" placeholder="Пароль" required>
-                <br>
-                <input name="isremember" type="checkbox" value="true">
-                <label for="isremember">Запомнить меня?</label>
-            </fieldset>
-        </div>
-        <button type="submit" class="btn button-login" asp-area="" asp-controller="login" asp-action="enter" role="button">Войти</button>
+﻿@model Authorization
+
+<div class="validation" asp-validation-summary="All">
+<div class="card shadow login">
+    <form class="col-lg-auto" method="post">
+        <fieldset>
+            <legend>Авторизируйтесь</legend>
+
+            <label asp-for="Login">Логин</label>
+            <input class="form-ctrl" type="text" placeholder="Логин" asp-for="Login">
+            <br />
+            <span asp-validation-for="Login"></span>
+            <br>
+
+            <label asp-for="Password">Пароль</label>
+            <input class="form-ctrl" type="password" placeholder="Пароль" asp-for="Password">
+            <br />
+            <span asp-validation-for="Password"></span>
+            <br>
+
+            <input name="isremember" type="checkbox" value="true">
+            <label for="isremember">Запомнить меня?</label>
+
+        </fieldset>
+        <button type="submit" class="btn button-login" asp-controller="login" asp-action="enter" role="button">Войти</button>
         <br />
-        <button class="btn button-registration" asp-area="" asp-controller="login" asp-action="registration" role="button">Регистрация нового пользователя</button>
     </form>
+    <a class="btn button-registration" asp-controller="login" asp-action="registration" role="button">Регистрация нового пользователя</a>
+</div>
 </div>

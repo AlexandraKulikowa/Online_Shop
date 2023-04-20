@@ -2,6 +2,8 @@
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Repositories;
+using System;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -17,21 +19,37 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var basketById = baskets.TryGetByUserId(Constants.UserId);
-            return View(basketById);
+            ViewBag.Basket = basketById.ProductsInBasket.Any();
+            ViewBag.TotalCost = basketById.TotalCost();
+            return View();
         }
 
         [HttpPost]
         public IActionResult ToCheckOut(Order order)
         {
-            var basket = baskets.TryGetByUserId(Constants.UserId);
-            order.Products.AddRange(basket.ProductsInBasket.ToArray());
-            orders.Add(order);
-            baskets.Clear(Constants.UserId);
-            return RedirectToAction("Result", order);
+            if(ModelState.IsValid)
+            {
+                var basket = baskets.TryGetByUserId(Constants.UserId);
+                order.Products.AddRange(basket.ProductsInBasket.ToArray());
+                orders.Add(order);
+                baskets.Clear(Constants.UserId);
+                return RedirectToAction("Result", order);
+            }
+            return View(order);
         }
         public IActionResult Result(Order order)
         {
             return View(order);
+        }
+
+
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult CheckDate(DateTime DateofDelivery)
+        {
+            TimeSpan diff = DateofDelivery.Subtract(DateTime.Now);
+            if(diff.TotalDays > 0)
+                return Json(true);
+            return Json(false);
         }
     }
 }

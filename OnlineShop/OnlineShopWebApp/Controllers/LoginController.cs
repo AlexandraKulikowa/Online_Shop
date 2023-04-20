@@ -13,8 +13,18 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Enter(Authorization authorization)
         {
-            return Redirect("~/Home/Index/");
+            if (authorization.Login == authorization.Password)
+            {
+                ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                return Redirect("~/Home/Index/");
+            }
+            return View(authorization);
         }
+
         public IActionResult Registration()
         {
             return View();
@@ -23,7 +33,16 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Register(Registration registration)
         {
-            return Redirect("~/Home/Index/");
+            if (registration.Login == registration.Password)
+            {
+                ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                return Redirect("~/Home/Index/");
+            }
+            return View(registration);
         }
     }
 }

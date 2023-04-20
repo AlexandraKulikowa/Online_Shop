@@ -1,70 +1,93 @@
-﻿@model Basket
+﻿@model Order
 
-@if (Model == null || !Model.ProductsInBasket.Any())
+@if (!ViewBag.Basket)
 {
-    <br />
-    <center>
-        <img src="~/images/Thanks.jpg" alt="Упс!">
-    </center>
-    <div class="order"><h2><b>Спасибо за ваш заказ! Приходите еще!</b></h2></div>
-    <center>
-        <a type="button" class="btn btn-outline-secondary" btn-lg col="10" href="/orderdetails/index?id=@ViewBag.OrderId" role="button">Детали вашего заказа</a>
-    </center>
+    <div class="order"><h2><b>В вашей корзине ничего нет.. Невозможно оформить пустой заказ. Перейдите на главную страницу!</b></h2></div>
 }
 else
 {
-    <div class="col-10 card shadow border-success">
-        <form class="form" action="#" autocomplete="on" method="post">
-            <fieldset>
-                <legend>Оставьте свои контактные данные</legend>
-                <label for="contacts.address">Введите ваш адрес</label>
-                <br>
-                <textarea name="contacts.address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" required autofocus></textarea>
-                <br>
-                <label for="contacts.index">Ваш индекс</label>
-                <input type="text" name="contacts.index" pattern="[0-9]{6}" placeholder="123456" minlength="6" maxlength="6" required>
-                <br>
-                <label for="contacts.telephone">Введите ваш телефон</label>
-                <input type="tel" name="contacts.telephone" pattern="+7-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="+7 999 999 9999" minlength="11" required>
-                <br>
-                <label for="timefrom">Удобное время для звонка</label>
-                <input type="text" name="timefrom" maxlength="7" placeholder="C 9">
-                <input type="text" name="timeto" maxlength="7" placeholder="До 18">
-                <br>
-                <label for="email">Введите дополнительный e-mail</label>
-                <input type="email" name="email">
-                <br>
-                <label for="post">Выберите способ доставки</label>
-                <br>
-                <input id="post1" type="radio" name="mailto" value="russianpost" checked required>
-                <label for="post1">Почта России</label>
-                <br>
-                <input id="post2" type="radio" name="mailto" value="sdek" required>
-                <label for="post2">СДЭК</label>
-                <br>
-                <input id="post3" type="radio" name="mailto" value="boxberry" required>
-                <label for="post3">Boxberry</label>
-                <br>
-                <label for="date">Введите дату желаемой доставки</label>
-                <input type="date" name="dateofdelivery">
-                <br>
-                <label for="area">Напишите комментарий к заказу</label>
-                <br>
-                <textarea cols="80" rows="5" name="comment"></textarea>
-                <br>
-                <label for="list">Упаковка товара</label>
-                @Html.DropDownList("enumList", Html.GetEnumSelectList(typeof(PackagingEnum)))
-                <br>
-                <label for="isaccept">Даю согласие на обработку персональных данных</label>
-                <input name="isaccept" type="checkbox" value="true">
-                <br>
-                <input name="id" type="hidden" value="0">
-                <h4>Итоговая стоимость вашего заказа: @Model.TotalCost() рублей.</h4>
-                <button class="button-clear" btn-lg col="5" type="reset">Сбросить заполнение формы</button>
-                <button type="submit" class="btn button-order" btn-lg col="6" asp-area="" asp-controller="Order" asp-action="Tocheckout" role="button">Заказать</button>
-                <br>
-                <br>
-            </fieldset>
-        </form>
+    <div class="validation" asp-validation-summary="All">
+        <div class="col-10 card shadow border-success">
+            <form class="form" autocomplete="on" method="post">
+                <fieldset>
+                    <legend>Оставьте свои контактные данные</legend>
+
+                    <label asp-for="Contacts.Address">Введите ваш адрес</label>
+                    <br>
+                    <textarea asp-for="Contacts.Address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" autofocus></textarea>
+                    <span asp-validation-for="Contacts.Address"></span>
+                    <br>
+
+                    <label asp-for="Contacts.Index">Ваш индекс</label>
+                    <input type="number" asp-for="Contacts.Index" placeholder="123456">
+                    <span asp-validation-for="Contacts.Index"></span>
+                    <br>
+
+                    <label asp-for="Contacts.Telephone">Введите ваш телефон</label>
+                    <input type="tel" id="phone" asp-for="Contacts.Telephone" pattern="\+7\([0-9]{3}\)-[0-9]{3}\-[0-9]{2}\-[0-9]{2}" placeholder="+7(999)-999-99-99">
+                    <span asp-validation-for="Contacts.Telephone"></span>
+                    <br>
+
+                    <label asp-for="TimeFromTo">Удобное время для звонка</label>
+                    <input type="text" asp-for="TimeFromTo" placeholder="C 9 до 18">
+                    <span asp-validation-for="TimeFromTo"></span>
+
+                    <label asp-for="Email">Введите дополнительный e-mail</label>
+                    <input type="email" asp-for="Email">
+                    <span asp-validation-for="Email"></span>
+                    <br>
+
+                    <label asp-for="Mailto">Выберите способ доставки</label>
+                    <br>
+                    <input id="post1" type="radio" asp-for="Mailto" value="russianpost" checked>
+                    <label for="post1">Почта России</label>
+                    <br>
+                    <input id="post2" type="radio" asp-for="Mailto" value="sdek">
+                    <label for="post2">СДЭК</label>
+                    <br>
+                    <input id="post3" type="radio" asp-for="Mailto" value="boxberry">
+                    <label for="post3">Boxberry</label>
+                    <span asp-validation-for="Mailto"></span>
+                    <br>
+
+                    <label asp-for="DateofDelivery">Введите дату желаемой доставки</label>
+                    <input type="date" asp-for="DateofDelivery">
+                    <span asp-validation-for="DateofDelivery"></span>
+                    <br>
+
+                    <label asp-for="Comment">Напишите комментарий к заказу</label>
+                    <br>
+                    <textarea cols="80" rows="5" asp-for="Comment"></textarea>
+                    <span asp-validation-for="Comment"></span>
+                    <br>
+
+                    <label asp-for="Packaging">Упаковка товара</label>
+                    @Html.DropDownList("enumList", Html.GetEnumSelectList(typeof(PackagingEnum)))
+                    <span asp-validation-for="Packaging"></span>
+                    <br>
+
+                    <label asp-for="isAccept">Даю согласие на обработку персональных данных</label>
+                    <input type="checkbox" asp-for="isAccept" value="true">
+                    <span asp-validation-for="isAccept"></span>
+                    <br>
+
+                    <input asp-for="Id" type="hidden" value="0">
+
+                    <h4>Итоговая стоимость вашего заказа: @ViewBag.TotalCost рублей.</h4>
+                    <button class="button-clear" btn-lg col="5" type="reset">Сбросить заполнение формы</button>
+                    <button type="submit" class="btn button-order" asp-controller="Order" asp-action="Tocheckout" role="button">Заказать</button>
+                    <br>
+                    <br>
+                </fieldset>
+            </form>
+        </div>
     </div>
 }
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#phone").mask("+7(999) 999-99-99");
+        });
+    </script>
+    }
