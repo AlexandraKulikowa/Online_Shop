@@ -1,46 +1,71 @@
 ﻿@model Product
 
 @await Html.PartialAsync("AdminPanel")
+<div class="validation validation-message" asp-validation-summary="All"></div>
 <div class="card shadow editproducts">
     <form class="form" autocomplete="off" method="post">
         <fieldset>
             <center><legend>Изменение информации о продукте</legend></center>
+
             <input type="hidden" name="id" value="@Model.Id">
-            <label for="name">Название картины</label>
-            <input type="text" name="name" value="@Model.Name">
+
+            <label for="Name">Название картины</label>
+            <input type="text" asp-for="Name" value="@Model.Name" size="40">
             <br />
-            <label for="cost">Цена</label>
-            <input type="number" name="cost" value="@Model.Cost">
+            <span asp-validation-for="Name"></span>
             <br />
+
+            <label asp-for="Cost">Цена</label>
+            <input type="number" asp-for="Cost" value="@Model.Cost" onKeyUp="if(this.value>5000000){this.value='5000000';}">
+            <span asp-validation-for="Cost"></span>
+            <br />
+
             <label for="GenreEnum">Жанр </label>
             @Html.DropDownListFor(m => m.Genre,Html.GetEnumSelectList(typeof(GenreEnum)), new {selected = Model.Genre})
             <br />
-            <label for="paintingTechnique">Техника</label>
-            <input type="text" name="paintingTechnique" value="@Model.PaintingTechnique">
+
+            <label asp-for="PaintingTechnique">Техника</label>
+            <input type="text" asp-for="PaintingTechnique" value="@Model.PaintingTechnique">
+            <span asp-validation-for="PaintingTechnique"></span>
             <br />
-            <label for="size.width">Ширина картины</label>
-            <input type="number" name="size.width" value="@Model.Size.Width">
+
+
+            <label asp-for="Size.Width">Ширина картины</label>
+            <input type="number" asp-for="Size.Width" value="@Model.Size.Width" onKeyUp="if(this.value>200){this.value='200';}">
+            <span asp-validation-for="Size.Width"></span>
             <br />
-            <label for="size.height">Высота картины</label>
-            <input type="number" name="size.height" value="@Model.Size.Height">
+
+            <label asp-for="Size.Height">Высота картины</label>
+            <input type="number" asp-for="Size.Height" value="@Model.Size.Height" onKeyUp="if(this.value>200){this.value='200';}">
+            <span asp-validation-for="Size.Height"></span>
             <br />
-            <label for="description">Описание</label>
-            <input name="description" rows="2" cols="20" value="@Model.Description"></input>
+
+            <label for="Description">Описание</label>
+            <textarea asp-for="Description" rows="2" cols="70" value="@Model.Description"></textarea>
+            <span asp-validation-for="Description"></span>
             <br />
-            <label for="year">Год создания</label>
-            <input type="number" name="year" value="@Model.Year">
+
+            <label asp-for="Year">Год создания</label>
+            <input type="number" asp-for="Year" value="@Model.Year" onKeyUp="if(this.value>2023){this.value='2023';}else if(this.value<2015){this.value ='2015';}">
+            <span asp-validation-for="Year"></span>
             <br />
-            <label for="imagepath">Ссылка на изображение</label>
-            <input type="text" name="imagepath" value="@Model.ImagePath" />
+
+            <label asp-for="ImagePath">Ссылка на изображение</label>
+            <input type="text" asp-for="ImagePath" value="@Model.ImagePath" size="35" />
+            <span asp-validation-for="ImagePath"></span>
             <br />
-            <label for="size.isframe">Наличие рамки</label>
+
+            <label asp-for="Size.IsFrame">Наличие рамки</label>
             @Html.CheckBoxFor(m =>m.Size.IsFrame)
+
             <label for="ispromo">Акция на товар</label>
             @Html.CheckBoxFor(m =>m.IsPromo)
+
             <div class="btn-group" role="group">
                 <button class="btn-outline-secondary btn-lg" type="reset">Сбросить заполнение формы</button>
                 <button type="submit" class="btn-success btn-lg" asp-area="" asp-controller="Admin" asp-action="Update" role="button">Изменить продукт</button>
             </div>
+
         </fieldset>
     </form>
 </div>

@@ -13,10 +13,7 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Enter(Authorization authorization)
         {
-            if (authorization.Login == authorization.Password)
-            {
-                ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
-            }
+
 
             if (ModelState.IsValid)
             {

@@ -50,15 +50,34 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Update(Product product)
         {
-            products.Edit(product);
-            return RedirectToAction("Products");
+            if (product.Name == product.Description)
+            {
+                ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                products.Edit(product);
+                return RedirectToAction("Products");
+            }
+
+            return View("EditProduct", product);
         }
 
         [HttpPost]
         public IActionResult Add(Product product)
         {
-            products.Add(product);
-            return RedirectToAction("Products");
+            if (product.Name == product.Description)
+            {
+                ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                products.Add(product);
+                return RedirectToAction("Products");
+            }
+            return View("AddProduct", product);
         }
 
         public IActionResult Delete(int id)
