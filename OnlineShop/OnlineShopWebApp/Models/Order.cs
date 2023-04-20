@@ -34,7 +34,9 @@ namespace OnlineShopWebApp.Models
 
         public bool isAccept { get; set; }
 
-        public StatusEnum Status { get; set; } = StatusEnum.Open;
+        public StatusEnum Status { get; set; } = StatusEnum.Открыт;
+
+        public DateTime DateofOrder { get; set; } = DateTime.Now;
 
         public List<BasketItem> Products { get; set; } = new List<BasketItem>();
 

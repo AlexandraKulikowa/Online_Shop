@@ -29,7 +29,6 @@
             <span asp-validation-for="PaintingTechnique"></span>
             <br />
 
-
             <label asp-for="Size.Width">Ширина картины</label>
             <input type="number" asp-for="Size.Width" value="@Model.Size.Width" onKeyUp="if(this.value>200){this.value='200';}">
             <span asp-validation-for="Size.Width"></span>

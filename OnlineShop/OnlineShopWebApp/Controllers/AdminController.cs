@@ -7,9 +7,11 @@ namespace OnlineShopWebApp.Controllers
     public class AdminController : Controller
     {
         private readonly IProductsRepository products;
-        public AdminController(IProductsRepository products)
+        private readonly IOrderRepository orders;
+        public AdminController(IProductsRepository products, IOrderRepository orders)
         {
             this.products = products;
+            this.orders = orders;
         }
         public IActionResult Index()
         {
@@ -18,7 +20,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Orders()
         {
-            return View();
+            var listOrders = orders.Orders;
+            return View(listOrders);
         }
 
         public IActionResult Users()
@@ -85,6 +88,23 @@ namespace OnlineShopWebApp.Controllers
             var product = products.TryGetById(id);
             products.Delete(product);
             return RedirectToAction("Products");
+        }
+        public IActionResult Details(int id)
+        {
+            var order = orders.GetOrder(id);
+            return View(order);
+        }
+
+        [HttpPost]
+        public IActionResult EditStatus(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                orders.ChangeStatus(order);
+                return RedirectToAction("Orders");
+            }
+
+            return View("Details", order);
         }
     }
 }

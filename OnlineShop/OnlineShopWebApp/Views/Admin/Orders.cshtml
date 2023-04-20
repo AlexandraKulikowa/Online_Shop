@@ -1,2 +1,28 @@
-﻿@await Html.PartialAsync("AdminPanel")
-<center><h2>Список заказов</h2></center>
+﻿@model List<Order>
+
+@await Html.PartialAsync("AdminPanel")
+
+@if (Model == null || !Model.Any())
+{
+    <div class="card shadow adminproducts">
+        <center><h2>Список заказов</h2></center>
+        <div class="text-dark">Заказы отсутствуют.</div>
+    </div>
+}
+else
+{
+    <div class="card shadow adminproducts">
+        <center><h2>Список заказов</h2></center>
+        <table>
+            <thead>
+                <tr><th>№</th><th>ID пользователя</th><th>Сумма заказа</th><th>Статус</th><th>Дата</th><th>Время</th><th>Детали</th></tr>
+            </thead>
+            @foreach (var order in Model)
+            {
+                <tbody>
+                    <tr><td>@order.Id</td><td>@order.UserId</td><td>@order.TotalCost()</td><td>@order.Status</td><td>@order.DateofOrder.ToShortDateString()</td><td>@order.DateofOrder.ToShortTimeString()</td><td><a asp-controller="admin" asp-action="details" asp-route-id="@order.Id">Подробнее</a></td></tr>
+                </tbody>
+            }
+        </table>
+    </div>
+}
