@@ -34,11 +34,10 @@ namespace OnlineShopWebApp.Repositories
             return order;
         }
 
-        public void ChangeStatus(Order order)
+        public void ChangeStatus(int id, StatusEnum status)
         {
-            var existingOrder = GetOrder(order.Id);
-
-            existingOrder.Status = order.Status;
+            var existingOrder = GetOrder(id);
+            existingOrder.Status = status;
         }
     }
 }

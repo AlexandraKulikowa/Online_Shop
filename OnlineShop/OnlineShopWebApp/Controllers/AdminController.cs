@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Calabonga.Xml.Exports;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 
@@ -96,15 +97,10 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditStatus(Order order)
+        public IActionResult EditStatus(int id, StatusEnum status)
         {
-            if (ModelState.IsValid)
-            {
-                orders.ChangeStatus(order);
-                return RedirectToAction("Orders");
-            }
-
-            return View("Details", order);
+            orders.ChangeStatus(id, status);
+            return RedirectToAction("Orders");
         }
     }
 }
