@@ -1,5 +1,4 @@
-﻿using Calabonga.Xml.Exports;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 
@@ -9,10 +8,12 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductsRepository products;
         private readonly IOrderRepository orders;
-        public AdminController(IProductsRepository products, IOrderRepository orders)
+        private readonly IRolesRepository roles;
+        public AdminController(IProductsRepository products, IOrderRepository orders, IRolesRepository roles)
         {
             this.products = products;
             this.orders = orders;
+            this.roles = roles;
         }
         public IActionResult Index()
         {
@@ -32,7 +33,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
-            return View();
+            var allRoles = roles.GetAll();
+            return View(allRoles);
         }
 
         public IActionResult Products()
@@ -117,6 +119,14 @@ namespace OnlineShopWebApp.Controllers
                 ModelState.AddModelError("", "Наименование роли не может совпадать с описанием её функций!");
             }
 
+            var roleslist = roles.GetAll();
+            foreach(var item in roleslist)
+            {
+                if(item.Name == role.Name)
+                {
+                    ModelState.AddModelError("", "Такая роль уже есть!");
+                }
+            }
             if (ModelState.IsValid)
             {
                 roles.Add(role);
