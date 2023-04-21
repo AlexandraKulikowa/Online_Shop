@@ -3,60 +3,48 @@
 @await Html.PartialAsync("AdminPanel")
 <div class="details-admin">
     <center><h4>Заказ № @Model.Id</h4></center>
-    <form class="form" method="post">
+    <form method="post">
         <table>
             <tbody>
                 <tr>
                     <td>Пользователь:</td>
                     <td>@Model.UserId</td>
-                    @Html.HiddenFor(m => m.UserId)
-                    @Html.HiddenFor(m => m.Id)
                 </tr>
                 <tr>
                     <td>Дата и время оформления:</td>
                     <td>@Model.DateofOrder.ToShortDateString() в @Model.DateofOrder.ToShortTimeString()</td>
-                    @Html.HiddenFor(m => m.DateofOrder)
                 </tr>
                 <tr>
                     <td>Адрес доставки:</td>
                     <td>@Model.Contacts.Index @Model.Contacts.Address</td>
-                    @Html.HiddenFor(m => m.Contacts.Index)
-                    @Html.HiddenFor(m => m.Contacts.Address)
                 </tr>
                 <tr>
                     <td>Телефон:</td>
                     <td>@Model.Contacts.Telephone</td>
-                    @Html.HiddenFor(m => m.Contacts.Telephone)
                 </tr>
                 <tr>
                     <td>Удобное время для звонка:</td>
                     <td>@Model.TimeFromTo</td>
-                    @Html.HiddenFor(m => m.TimeFromTo)
                 </tr>
                 <tr>
                     <td>E-mail:</td>
                     <td>@Model.Email</td>
-                    @Html.HiddenFor(m => m.Email)
                 </tr>
                 <tr>
                     <td>Способ доставки:</td>
                     <td>@Model.Mailto</td>
-                    @Html.HiddenFor(m => m.Mailto)
                 </tr>
                 <tr>
                     <td>Желаемая дата доставки:</td>
                     <td>@Model.DateofDelivery.ToShortDateString()</td>
-                    @Html.HiddenFor(m => m.DateofDelivery)
                 </tr>
                 <tr>
                     <td>Упаковка товара:</td>
                     <td>@Model.Packaging</td>
-                    @Html.HiddenFor(m => m.Packaging)
                 </tr>
                 <tr>
                     <td>Комментарий к заказу:</td>
                     <td>@Model.Comment</td>
-                    @Html.HiddenFor(m => m.Comment)
                 </tr>
                 <tr>
                     <td>Товары к покупке:</td>
@@ -67,7 +55,6 @@
                                 <div>@item.Product.Name</div>
                             </div>
                         }
-                        @Html.HiddenFor(m => m.Products)
                     </td>
                 </tr>
                 <tr>
@@ -81,7 +68,6 @@
                         {
                             <div>не получено</div>
                         }
-                        @Html.HiddenFor(m => m.isAccept)
                     </td>
                 </tr>
                 <tr>
@@ -91,8 +77,11 @@
                 <tr>
                     <td>Статус заказа:</td>
                     <td>
-                        @Html.DropDownListFor(m => m.Status,Html.GetEnumSelectList(typeof(StatusEnum)), new {selected = Model.Status})
-                        <button type="submit" class="btn-outline-secondary" asp-controller="admin" asp-action="editstatus" role="button">Изменить статус</button>
+                        <select asp-for="@Model.Status"
+                                asp-items="@Html.GetEnumSelectList<StatusEnum>()"
+                                class="form-control-sm">
+                        </select>
+                        <button type="submit" class="btn-sm btn-outline-secondary" asp-controller="admin" asp-action="editstatus" asp-route-id="@Model.Id" role="button">Изменить статус</button>
                     </td>
                 </tr>
             </tbody>

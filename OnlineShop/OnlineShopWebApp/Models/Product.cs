@@ -44,8 +44,9 @@ namespace OnlineShopWebApp.Models
             Id = counter;
             counter++;
         }
-        public Product(string name, decimal cost, string description, GenreEnum genre, string paintingTechnique, Size size, int year, bool ispromo, string imagePath) : this()
+        public Product(string name, decimal cost, string description, GenreEnum genre, string paintingTechnique, Size size, int year, bool ispromo, string imagePath)
         {
+            Id = counter;
             Name = name;
             Cost = cost;
             Description = description;
@@ -55,6 +56,7 @@ namespace OnlineShopWebApp.Models
             Year = year;
             IsPromo = ispromo;
             ImagePath = imagePath;
+            counter++;
         }
         public override string ToString()
         {

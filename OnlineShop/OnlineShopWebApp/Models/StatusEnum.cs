@@ -1,5 +1,4 @@
-﻿
-namespace OnlineShopWebApp.Models
+﻿namespace OnlineShopWebApp.Models
 {
         public enum StatusEnum
         {

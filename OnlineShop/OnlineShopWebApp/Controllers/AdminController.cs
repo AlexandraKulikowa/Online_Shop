@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Calabonga.Xml.Exports;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 
@@ -8,12 +9,10 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductsRepository products;
         private readonly IOrderRepository orders;
-        private readonly IRolesRepository roles;
-        public AdminController(IProductsRepository products, IOrderRepository orders, IRolesRepository roles)
+        public AdminController(IProductsRepository products, IOrderRepository orders)
         {
             this.products = products;
             this.orders = orders;
-            this.roles = roles;
         }
         public IActionResult Index()
         {
@@ -33,7 +32,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
-            return View(roles.GetAll());
+            return View();
         }
 
         public IActionResult Products()
@@ -98,15 +97,10 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditStatus(Order order)
+        public IActionResult EditStatus(int id, StatusEnum status)
         {
-            if (ModelState.IsValid)
-            {
-                orders.ChangeStatus(order);
-                return RedirectToAction("Orders");
-            }
-
-            return View("Details", order);
+            orders.ChangeStatus(id, status);
+            return RedirectToAction("Orders");
         }
 
         public IActionResult AddRole()
