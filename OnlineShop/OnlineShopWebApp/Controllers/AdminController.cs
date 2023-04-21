@@ -108,5 +108,34 @@ namespace OnlineShopWebApp.Controllers
 
             return View("Details", order);
         }
+
+        public IActionResult AddRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(Role role)
+        {
+
+            if (role.Name == role.Options)
+            {
+                ModelState.AddModelError("", "Наименование роли не может совпадать с описанием её функций!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                roles.Add(role);
+                return RedirectToAction("Roles");
+            }
+            return View(role);
+        }
+
+        public IActionResult DeleteRole(int id)
+        {
+            var role = roles.TryGetById(id);
+            roles.Delete(role);
+            return RedirectToAction("Roles");
+        }
     }
 }

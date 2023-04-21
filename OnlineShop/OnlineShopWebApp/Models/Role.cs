@@ -8,11 +8,11 @@ namespace OnlineShopWebApp.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Не задано название роли")]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "Напишите корректное название")]
+        [StringLength(20, MinimumLength = 4, ErrorMessage = "Напишите корректное название")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Не описаны функции роли")]
-        [StringLength(50, MinimumLength = 10, ErrorMessage = "Напишите функции роли")]
+        [StringLength(70, MinimumLength = 10, ErrorMessage = "Напишите функции роли")]
         public string Options { get; set; }
 
         public Role()

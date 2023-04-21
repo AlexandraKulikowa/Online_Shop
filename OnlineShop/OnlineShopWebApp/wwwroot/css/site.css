@@ -294,7 +294,7 @@ textarea {
     font-weight: 300;
     background-color:antiquewhite;
     padding: 7px;
-    margin: 10px 0;
+    margin: 3px 0 3px 8px;
     box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
     border-radius:35px;
     border: 0;
@@ -486,6 +486,25 @@ label {
         background-color: burlywood;
     }
 
+.button-role {
+    color: aliceblue;
+    user-select: none;
+    outline: none;
+    background-color: darkslategrey;
+    padding: 0px 2px 5px 2px;
+    text-align: center;
+    width: 400px;
+    height: 50px;
+    border-radius: 22px;
+    font-size: 17px;
+    box-shadow: 1px 1px 1px;
+    margin: 5px 1px 4px 1px;
+}
+
+    .button-role:hover {
+        background-color: teal;
+    }
+
 .form-ctrl {
     border-radius: 22px;
     width: 210px;
@@ -543,6 +562,23 @@ label {
         background-color:peru;
     }
 
+.button-addrole {
+    user-select: none;
+    outline: none;
+    background-color:cadetblue;
+    color:aliceblue;
+    padding: 2px 2px 1em 2px;
+    text-align: center;
+    vertical-align:central;
+    width: 180px;
+    height: 40px;
+    font-size: 19px;
+    box-shadow: 1px 1px 1px;
+    margin: 10px 3px;
+    margin-left:auto;
+
+}
+
 .addproducts {
     width: 35%;
     height: 75%;
@@ -558,6 +594,23 @@ label {
     position: absolute;
     left:30%;
     font-style:normal;
+}
+
+.addrole {
+    width: 30%;
+    height: 45%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    padding: 14px 2px 2px 24px;
+    background-color: antiquewhite;
+    border-radius: 22px;
+    border-color: darkslategray;
+    box-shadow: 4px 4px 4px;
+    font-size: 15px;
+    position: absolute;
+    left: 30%;
+    font-style: normal;
 }
 
 .editproducts {

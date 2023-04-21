@@ -1,0 +1,24 @@
+﻿@model Role
+
+@await Html.PartialAsync("AdminPanel")
+<div class="validation validation-message" asp-validation-summary="All"></div>
+<div class="card shadow addrole">
+    <form method="post">
+        <fieldset>
+            <center><legend>Добавление роли</legend></center>
+            <label asp-for="Name">Наименование</label>
+            <textarea type="text" asp-for="Name" rows="1" cols="40"><</textarea>
+            <br />
+            <span asp-validation-for="Name"></span>
+            <br />
+
+            <label asp-for="Options">Функции роли</label>
+            <textarea type="text" asp-for="Options" rows="3" cols="40"></textarea>
+            <br />
+            <span asp-validation-for="Options"></span>
+            <br />
+
+                <button type="submit" class="button-role" asp-controller="admin" asp-action="addrole" role="button">Добавить роль</button>
+        </fieldset>
+    </form>
+</div>

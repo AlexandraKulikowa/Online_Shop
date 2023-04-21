@@ -4,26 +4,26 @@
 
 @if (Model == null || !Model.Any())
 {
-        <div class="card shadow adminproducts">
-            <center><h2>Список ролей</h2></center>
-            <div class="text-dark">Роли отсутствуют.</div>
-        </div>
+    <div class="card shadow adminproducts">
+        <center><h2>Список ролей</h2></center>
+        <div class="text-dark">Роли отсутствуют.</div>
+    </div>
 }
 else
 {
-        <div class="card shadow adminproducts">
-            <center><h2>Список ролей</h2></center>
-            <table>
-                <thead>
-                    <tr><th>№</th><th>Название</th><th>Опции</th><th>Удалить</th></tr>
-                </thead>
+    <div class="card shadow adminproducts">
+        <center><h2>Список ролей</h2></center>
+        <table>
+            <thead>
+                <tr><th>№</th><th>Название</th><th>Опции</th></tr>
+            </thead>
             @foreach (var role in Model)
             {
-                        <tbody>
-                            <tr><td>@role.Id</td><td>@role.Name</td><td>@role.Options</td><td><a class="btn btn-sm btn-outline-dark" asp-controller="admin" asp-action="deleterole" asp-route-id="@role.Id">Удалить</a></td></tr>
-                        </tbody>
+                <tbody>
+                    <tr><td>@role.Id</td><td>@role.Name</td><td>@role.Options</td><td><a class="btn btn-sm btn-outline-dark" asp-controller="admin" asp-action="deleterole" asp-route-id="@role.Id">Удалить</a></td></tr>
+                </tbody>
             }
-            </table>
-        <a class="btn btn-sm btn-success" asp-controller="admin" asp-action="addrole">Добавить роль</a>
-        </div>
+        </table>
+        <a class="btn button-addrole" asp-controller="admin" asp-action="addrole" role="button">Добавить роль</a>
+    </div>
 }
