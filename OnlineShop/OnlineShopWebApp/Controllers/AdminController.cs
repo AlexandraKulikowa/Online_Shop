@@ -8,10 +8,12 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductsRepository products;
         private readonly IOrderRepository orders;
-        public AdminController(IProductsRepository products, IOrderRepository orders)
+        private readonly IRolesRepository roles;
+        public AdminController(IProductsRepository products, IOrderRepository orders, IRolesRepository roles)
         {
             this.products = products;
             this.orders = orders;
+            this.roles = roles;
         }
         public IActionResult Index()
         {
@@ -31,7 +33,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
-            return View();
+            return View(roles.GetAll());
         }
 
         public IActionResult Products()
