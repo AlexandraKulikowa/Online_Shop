@@ -78,7 +78,7 @@
                     <td>Статус заказа:</td>
                     <td>
                         <select asp-for="@Model.Status"
-                                asp-items="@Html.GetEnumSelectList<StatusEnum>()"
+                                asp-items="@Html.GetEnumSelectList<Status>()"
                                 class="form-control-sm">
                         </select>
                         <button type="submit" class="btn-sm btn-outline-secondary" asp-controller="admin" asp-action="editstatus" asp-route-id="@Model.Id" role="button">Изменить статус</button>

@@ -99,7 +99,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditStatus(int id, StatusEnum status)
+        public IActionResult EditStatus(int id, Status status)
         {
             orders.ChangeStatus(id, status);
             return RedirectToAction("Orders");
