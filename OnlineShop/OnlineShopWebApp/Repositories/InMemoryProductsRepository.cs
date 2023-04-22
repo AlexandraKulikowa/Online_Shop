@@ -69,5 +69,12 @@ namespace OnlineShopWebApp.Repositories
             existingProduct.IsPromo = product.IsPromo;
             existingProduct.ImagePath = product.ImagePath;
         }
+
+        public bool CheckNewProduct(Product product)
+        {
+            if (product.Name == product.Description)
+                return false;
+            return true;
+        }
     }
 }

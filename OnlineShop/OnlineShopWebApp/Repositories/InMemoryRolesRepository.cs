@@ -2,6 +2,7 @@
 using OnlineShopWebApp.Models;
 using System.Linq;
 using OnlineShopWebApp.Interfaces;
+using System.Web.WebPages.Html;
 
 namespace OnlineShopWebApp.Repositories
 {
@@ -26,6 +27,7 @@ namespace OnlineShopWebApp.Repositories
         {
             return roles.FirstOrDefault(role => role.Id == id);
         }
+
         public void Add(Role role)
         {
             var existingRole = TryGetById(role.Id);
@@ -34,13 +36,29 @@ namespace OnlineShopWebApp.Repositories
                 roles.Add(role);
             }
         }
-        public void Delete(Role role)
+
+        public void Delete(int id)
         {
-            var existingRole = TryGetById(role.Id);
+            var existingRole = TryGetById(id);
             if (existingRole != null)
             {
-                roles.Remove(role);
+                roles.Remove(existingRole);
             }
+        }
+
+        public bool CheckRole(Role role)
+        {
+            var roleslist = GetAll();
+
+
+            foreach (var item in roleslist)
+            {
+                if (item.Name == role.Name)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

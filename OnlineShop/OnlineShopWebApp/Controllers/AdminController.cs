@@ -33,8 +33,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
-            var allRoles = roles.GetAll();
-            return View(allRoles);
+            var rolesList = roles.GetAll();
+            return View(rolesList);
         }
 
         public IActionResult Products()
@@ -56,10 +56,8 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Update(Product product)
         {
-            if (product.Name == product.Description)
-            {
+            if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
-            }
 
             if (ModelState.IsValid)
             {
@@ -73,10 +71,8 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Add(Product product)
         {
-            if (product.Name == product.Description)
-            {
+            if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
-            }
 
             if (ModelState.IsValid)
             {
@@ -119,14 +115,9 @@ namespace OnlineShopWebApp.Controllers
                 ModelState.AddModelError("", "Наименование роли не может совпадать с описанием её функций!");
             }
 
-            var roleslist = roles.GetAll();
-            foreach(var item in roleslist)
-            {
-                if(item.Name == role.Name)
-                {
-                    ModelState.AddModelError("", "Такая роль уже есть!");
-                }
-            }
+            if(!roles.CheckRole(role))
+                ModelState.AddModelError("", "Такая роль уже есть!");
+
             if (ModelState.IsValid)
             {
                 roles.Add(role);
@@ -137,8 +128,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult DeleteRole(int id)
         {
-            var role = roles.TryGetById(id);
-            roles.Delete(role);
+            roles.Delete(id);
             return RedirectToAction("Roles");
         }
     }

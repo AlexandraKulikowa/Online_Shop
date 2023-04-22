@@ -11,5 +11,6 @@ namespace OnlineShopWebApp.Interfaces
         void Add(Product product);
         void Edit(Product product);
         void Delete(Product product);
+        bool CheckNewProduct(Product product);
     }
 }

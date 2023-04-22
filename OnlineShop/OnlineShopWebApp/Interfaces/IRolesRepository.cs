@@ -8,6 +8,7 @@ namespace OnlineShopWebApp.Interfaces
         List<Role> GetAll();
         Role TryGetById(int id);
         void Add(Role role);
-        void Delete(Role role);
+        void Delete(int id);
+        bool CheckRole(Role role);
     }
 }
