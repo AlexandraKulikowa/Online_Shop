@@ -11,7 +11,6 @@ namespace OnlineShopWebApp.Models
 
         [Required(ErrorMessage = "Вы не ввели индекс доставки")]
         [RegularExpression(@"^\d{6}$", ErrorMessage = "Введите индекс в верном формате")]
-        [MaxLength(6)]
         public int Index { get; set; }
 
         [DataType(DataType.PhoneNumber)]

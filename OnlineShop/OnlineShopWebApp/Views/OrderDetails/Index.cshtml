@@ -17,21 +17,7 @@
     <div>Ваш адрес доставки: @Model.Contacts.Index @Model.Contacts.Address </div>
     <div>Ваш телефон: @Model.Contacts.Telephone, удобное время для звонка: @Model.TimeFromTo</div>
     <div>Ваш e-mail: @Model.Email</div>
-    <div>
-        Способ доставки:
-        @if (Model.Mailto == "russianpost")
-        {
-            <div>Почта России</div>
-        }
-        else if (Model.Mailto == "sdek")
-        {
-            <div>СДЭК</div>
-        }
-        else
-        {
-            <div>Boxberry</div>
-        }
-    </div>
+    <div>Способ доставки: @Model.Mailto</div>
     <div>Дата желаемой доставки: @Model.DateofDelivery</div>
     <div> Упаковка товара: @Model.Packaging </div>
     <div>Ваши дополнения к заказу: @Model.Comment</div>

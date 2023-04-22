@@ -1,0 +1,90 @@
+﻿@model Order
+
+@await Html.PartialAsync("AdminPanel")
+<div class="details-admin">
+    <center><h4>Заказ № @Model.Id</h4></center>
+    <form method="post">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Пользователь:</td>
+                    <td>@Model.UserId</td>
+                </tr>
+                <tr>
+                    <td>Дата и время оформления:</td>
+                    <td>@Model.DateofOrder.ToShortDateString() в @Model.DateofOrder.ToShortTimeString()</td>
+                </tr>
+                <tr>
+                    <td>Адрес доставки:</td>
+                    <td>@Model.Contacts.Index @Model.Contacts.Address</td>
+                </tr>
+                <tr>
+                    <td>Телефон:</td>
+                    <td>@Model.Contacts.Telephone</td>
+                </tr>
+                <tr>
+                    <td>Удобное время для звонка:</td>
+                    <td>@Model.TimeFromTo</td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <td>Способ доставки:</td>
+                    <td>@Model.Mailto</td>
+                </tr>
+                <tr>
+                    <td>Желаемая дата доставки:</td>
+                    <td>@Model.DateofDelivery.ToShortDateString()</td>
+                </tr>
+                <tr>
+                    <td>Упаковка товара:</td>
+                    <td>@Model.Packaging</td>
+                </tr>
+                <tr>
+                    <td>Комментарий к заказу:</td>
+                    <td>@Model.Comment</td>
+                </tr>
+                <tr>
+                    <td>Товары к покупке:</td>
+                    <td>
+                        @foreach (BasketItem item in Model.Products)
+                        {
+                            <div class="col">
+                                <div>@item.Product.Name</div>
+                            </div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Согласие на обработку персональных данных:</td>
+                    <td>
+                        @if (Model.isAccept)
+                        {
+                            <div>получено</div>
+                        }
+                        else
+                        {
+                            <div>не получено</div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Цена заказа:</td>
+                    <td>@Model.TotalCost() рублей</td>
+                </tr>
+                <tr>
+                    <td>Статус заказа:</td>
+                    <td>
+                        <select asp-for="@Model.Status"
+                                asp-items="@Html.GetEnumSelectList<Status>()"
+                                class="form-control-sm">
+                        </select>
+                        <button type="submit" class="btn-sm btn-outline-secondary" asp-controller="admin" asp-action="editstatus" asp-route-id="@Model.Id" role="button">Изменить статус</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

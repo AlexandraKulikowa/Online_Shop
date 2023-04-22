@@ -39,13 +39,13 @@ else
 
                     <label asp-for="Mailto">Выберите способ доставки</label>
                     <br>
-                    <input id="post1" type="radio" asp-for="Mailto" value="russianpost" checked>
+                    <input id="post1" type="radio" asp-for="Mailto" value="Почта России" checked>
                     <label for="post1">Почта России</label>
                     <br>
-                    <input id="post2" type="radio" asp-for="Mailto" value="sdek">
+                    <input id="post2" type="radio" asp-for="Mailto" value="СДЭК">
                     <label for="post2">СДЭК</label>
                     <br>
-                    <input id="post3" type="radio" asp-for="Mailto" value="boxberry">
+                    <input id="post3" type="radio" asp-for="Mailto" value="Boxberry">
                     <label for="post3">Boxberry</label>
                     <span asp-validation-for="Mailto"></span>
                     <br>
@@ -62,7 +62,7 @@ else
                     <br>
 
                     <label asp-for="Packaging">Упаковка товара</label>
-                    @Html.DropDownList("enumList", Html.GetEnumSelectList(typeof(PackagingEnum)))
+                    @Html.DropDownList("enumList", Html.GetEnumSelectList(typeof(Packaging)))
                     <span asp-validation-for="Packaging"></span>
                     <br>
 

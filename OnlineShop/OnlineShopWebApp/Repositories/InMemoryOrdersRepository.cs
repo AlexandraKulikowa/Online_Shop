@@ -33,5 +33,11 @@ namespace OnlineShopWebApp.Repositories
             var order = orders.FirstOrDefault(x => x.Id == id);
             return order;
         }
+
+        public void ChangeStatus(int id, Status status)
+        {
+            var existingOrder = GetOrder(id);
+            existingOrder.Status = status;
+        }
     }
 }

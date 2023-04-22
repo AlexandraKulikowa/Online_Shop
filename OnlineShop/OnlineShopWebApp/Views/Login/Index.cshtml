@@ -1,30 +1,30 @@
 ﻿@model Authorization
 
 <div class="validation" asp-validation-summary="All">
-<div class="card shadow login">
-    <form class="col-lg-auto" method="post">
-        <fieldset>
-            <legend>Авторизируйтесь</legend>
+    <div class="card shadow login">
+        <form class="col-lg-auto" method="post">
+            <fieldset>
+                <legend>Авторизируйтесь</legend>
 
-            <label asp-for="Login">Логин</label>
-            <input class="form-ctrl" type="text" placeholder="Логин" asp-for="Login">
+                <label asp-for="Login">Логин</label>
+                <input class="form-ctrl" type="text" placeholder="Логин" asp-for="Login">
+                <br />
+                <span asp-validation-for="Login"></span>
+                <br>
+
+                <label asp-for="Password">Пароль</label>
+                <input class="form-ctrl" type="password" placeholder="Пароль" asp-for="Password">
+                <br />
+                <span asp-validation-for="Password"></span>
+                <br>
+
+                <input name="isremember" type="checkbox" value="true">
+                <label for="isremember">Запомнить меня?</label>
+
+            </fieldset>
+            <button type="submit" class="btn button-login" asp-controller="login" asp-action="enter" role="button">Войти</button>
             <br />
-            <span asp-validation-for="Login"></span>
-            <br>
-
-            <label asp-for="Password">Пароль</label>
-            <input class="form-ctrl" type="password" placeholder="Пароль" asp-for="Password">
-            <br />
-            <span asp-validation-for="Password"></span>
-            <br>
-
-            <input name="isremember" type="checkbox" value="true">
-            <label for="isremember">Запомнить меня?</label>
-
-        </fieldset>
-        <button type="submit" class="btn button-login" asp-controller="login" asp-action="enter" role="button">Войти</button>
-        <br />
-    </form>
-    <a class="btn button-registration" asp-controller="login" asp-action="registration" role="button">Регистрация нового пользователя</a>
-</div>
+        </form>
+        <a class="btn button-registration" asp-controller="login" asp-action="registration" role="button">Регистрация нового пользователя</a>
+    </div>
 </div>

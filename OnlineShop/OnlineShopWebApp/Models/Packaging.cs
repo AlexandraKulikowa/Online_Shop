@@ -1,6 +1,6 @@
 ﻿namespace OnlineShopWebApp.Models
 {
-        public enum PackagingEnum
+        public enum Packaging
         {
             Стандартная,
             Оптимальная,

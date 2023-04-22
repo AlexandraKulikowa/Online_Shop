@@ -21,14 +21,13 @@
             <br />
 
             <label for="GenreEnum">Жанр </label>
-            @Html.DropDownListFor(m => m.Genre,Html.GetEnumSelectList(typeof(GenreEnum)), new {selected = Model.Genre})
+            @Html.DropDownListFor(m => m.Genre,Html.GetEnumSelectList(typeof(Genre)), new {selected = Model.Genre})
             <br />
 
             <label asp-for="PaintingTechnique">Техника</label>
             <input type="text" asp-for="PaintingTechnique" value="@Model.PaintingTechnique">
             <span asp-validation-for="PaintingTechnique"></span>
             <br />
-
 
             <label asp-for="Size.Width">Ширина картины</label>
             <input type="number" asp-for="Size.Width" value="@Model.Size.Width" onKeyUp="if(this.value>200){this.value='200';}">

@@ -8,5 +8,6 @@ namespace OnlineShopWebApp.Interfaces
         List<Order> Orders { get; set; }
         void Add(Order order);
         Order GetOrder(int id);
+        void ChangeStatus(int id, Status status);
     }
 }

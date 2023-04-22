@@ -1,6 +1,6 @@
 ﻿namespace OnlineShopWebApp.Models
 {
-    public enum GenreEnum
+    public enum Genre
     {
         Пейзаж,
         Портрет,

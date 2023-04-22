@@ -30,11 +30,13 @@ namespace OnlineShopWebApp.Models
 
         public string Comment { get; set; }
 
-        public PackagingEnum Packaging { get; set; }
+        public Packaging Packaging { get; set; }
 
         public bool isAccept { get; set; }
 
-        public StatusEnum Status { get; set; } = StatusEnum.Open;
+        public Status Status { get; set; } = Status.Открыт;
+
+        public DateTime DateofOrder { get; set; } = DateTime.Now;
 
         public List<BasketItem> Products { get; set; } = new List<BasketItem>();
 
