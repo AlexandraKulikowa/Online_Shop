@@ -34,7 +34,7 @@ namespace OnlineShopWebApp.Repositories
             return order;
         }
 
-        public void ChangeStatus(int id, StatusEnum status)
+        public void ChangeStatus(int id, Status status)
         {
             var existingOrder = GetOrder(id);
             existingOrder.Status = status;

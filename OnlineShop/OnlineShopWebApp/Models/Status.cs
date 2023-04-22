@@ -1,6 +1,6 @@
 ﻿namespace OnlineShopWebApp.Models
 {
-        public enum StatusEnum
+        public enum Status
         {
 
         Открыт,

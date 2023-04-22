@@ -2,7 +2,7 @@
 
 @await Html.PartialAsync("AdminPanel")
 
-@if (Model == null || !Model.Any())
+@if (!(bool)Model?.Any())
 {
     <div class="card shadow adminproducts">
         <center><h2>Список продуктов</h2></center>

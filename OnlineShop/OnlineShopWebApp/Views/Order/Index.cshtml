@@ -62,7 +62,7 @@ else
                     <br>
 
                     <label asp-for="Packaging">Упаковка товара</label>
-                    @Html.DropDownList("enumList", Html.GetEnumSelectList(typeof(PackagingEnum)))
+                    @Html.DropDownList("enumList", Html.GetEnumSelectList(typeof(Packaging)))
                     <span asp-validation-for="Packaging"></span>
                     <br>
 

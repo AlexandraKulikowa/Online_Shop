@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Models
         [StringLength(100, MinimumLength = 6, ErrorMessage = "Введите описание товара")]
         public string Description { get; set; }
 
-        public GenreEnum Genre { get; set; }
+        public Genre Genre { get; set; }
 
         [RegularExpression(@"^[А-Яа-я]+$", ErrorMessage = "Неверное значение")]
         [Required(ErrorMessage = "Вы не ввели технику написания картины")]
@@ -44,7 +44,7 @@ namespace OnlineShopWebApp.Models
             Id = counter;
             counter++;
         }
-        public Product(string name, decimal cost, string description, GenreEnum genre, string paintingTechnique, Size size, int year, bool ispromo, string imagePath)
+        public Product(string name, decimal cost, string description, Genre genre, string paintingTechnique, Size size, int year, bool ispromo, string imagePath)
         {
             Id = counter;
             Name = name;
