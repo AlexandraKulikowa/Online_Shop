@@ -8,10 +8,12 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductsRepository products;
         private readonly IOrderRepository orders;
-        public AdminController(IProductsRepository products, IOrderRepository orders)
+        private readonly IRolesRepository roles;
+        public AdminController(IProductsRepository products, IOrderRepository orders, IRolesRepository roles)
         {
             this.products = products;
             this.orders = orders;
+            this.roles = roles;
         }
         public IActionResult Index()
         {
@@ -31,7 +33,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Roles()
         {
-            return View();
+            var rolesList = roles.GetAll();
+            return View(rolesList);
         }
 
         public IActionResult Products()
@@ -53,10 +56,8 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Update(Product product)
         {
-            if (product.Name == product.Description)
-            {
+            if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
-            }
 
             if (ModelState.IsValid)
             {
@@ -70,10 +71,8 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Add(Product product)
         {
-            if (product.Name == product.Description)
-            {
+            if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
-            }
 
             if (ModelState.IsValid)
             {
@@ -100,6 +99,37 @@ namespace OnlineShopWebApp.Controllers
         {
             orders.ChangeStatus(id, status);
             return RedirectToAction("Orders");
+        }
+
+        public IActionResult AddRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddRole(Role role)
+        {
+
+            if (role.Name == role.Options)
+            {
+                ModelState.AddModelError("", "Наименование роли не может совпадать с описанием её функций!");
+            }
+
+            if(!roles.CheckRole(role))
+                ModelState.AddModelError("", "Такая роль уже есть!");
+
+            if (ModelState.IsValid)
+            {
+                roles.Add(role);
+                return RedirectToAction("Roles");
+            }
+            return View(role);
+        }
+
+        public IActionResult DeleteRole(int id)
+        {
+            roles.Delete(id);
+            return RedirectToAction("Roles");
         }
     }
 }

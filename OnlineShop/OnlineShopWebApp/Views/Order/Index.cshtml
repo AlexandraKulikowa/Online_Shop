@@ -74,7 +74,7 @@ else
                     <input asp-for="Id" type="hidden" value="0">
 
                     <h4>Итоговая стоимость вашего заказа: @ViewBag.TotalCost рублей.</h4>
-                    <button class="button-clear" btn-lg col="5" type="reset">Сбросить заполнение формы</button>
+                    <button class="button-clear" type="reset">Сбросить заполнение формы</button>
                     <button type="submit" class="btn button-order" asp-controller="Order" asp-action="Tocheckout" role="button">Заказать</button>
                     <br>
                     <br>
