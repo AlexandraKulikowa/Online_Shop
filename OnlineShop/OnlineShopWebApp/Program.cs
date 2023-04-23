@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace OnlineShopWebApp
 {
@@ -12,6 +13,13 @@ namespace OnlineShopWebApp
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+            .UseSerilog((hostingContent,loggerConfiguration) =>
+        {
+            loggerConfiguration
+            .ReadFrom.Configuration(hostingContent.Configuration)
+            .Enrich.FromLogContext()
+            .Enrich.WithProperty("ApplicationName", "Online Shop");
+        })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
+using Serilog;
 
 namespace OnlineShopWebApp
 {
@@ -36,6 +37,8 @@ namespace OnlineShopWebApp
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseSerilogRequestLogging();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
