@@ -1,7 +1,6 @@
 ﻿@model User
-
+<center><b><div class="validation" asp-validation-summary="All" style="color:aliceblue"></div></b></center>
 <div class="card shadow register">
-    <div class="validation" asp-validation-summary="All">
     <form method="post">
         <fieldset>
             <legend>Приветствуем вас! Зарегистрируйтесь</legend>
@@ -47,7 +46,6 @@
         </fieldset>
         <center><button type="submit" class="btn button-register" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
     </form>
-</div>
 </div>
 
 @section Scripts{

@@ -8,7 +8,6 @@ namespace OnlineShopWebApp.Repositories
     public class InMemoryUsersRepository : IUsersRepository
     {
         private List<User> users = new List<User>();
-        public List<User> Users => users;
         public List<User> GetAll()
         {
             return users;
