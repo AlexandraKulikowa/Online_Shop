@@ -19,6 +19,7 @@ namespace OnlineShopWebApp
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
             services.AddSingleton<ICompareRepository, InMemoryCompareRepository>();
             services.AddSingleton<IFavouriteRepository, InMemoryFavouriveRepository>();

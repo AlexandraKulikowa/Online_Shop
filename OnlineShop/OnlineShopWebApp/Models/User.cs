@@ -2,8 +2,11 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class Registration
+    public class User
     {
+        private static int counter = 1;
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Укажите вашу фамилию")]
         [StringLength(26, MinimumLength = 2, ErrorMessage = "Ваша фамилия должна быть длиной от 2 до 26 символов")]
         public string Surname { get; set; }
@@ -41,5 +44,10 @@ namespace OnlineShopWebApp.Models
         public string Phone { get; set; }
 
         public bool Promo { get; set; }
+        public User()
+        {
+            Id = counter;
+            counter++;
+        }
     }
 }

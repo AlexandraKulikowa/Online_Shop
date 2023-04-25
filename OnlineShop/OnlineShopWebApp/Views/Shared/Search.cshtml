@@ -1,4 +1,8 @@
-﻿<form class="form" method="post">
-    <input class="form-search" type="search" name="search" placeholder="Найти...">
-    <button type="submit" class="btn search" asp-controller="product" asp-action="search" >Поиск</button>
+﻿<div class="form-search">
+<form class="form" method="post">
+    <div class="btn-group" role="group">
+    <input class="search-left" type="search" name="search" placeholder="Найти...">
+    <button type="submit" class="btn search-right" asp-controller="product" asp-action="search" >Поиск</button>
+        </div>
 </form>
+</div>
