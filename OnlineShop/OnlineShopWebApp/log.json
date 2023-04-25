@@ -1,0 +1,1353 @@
+{
+
+} {
+  "Timestamp": "2023-04-23T15:39:03.5147091+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/",
+    "StatusCode": 200,
+    "Elapsed": 384.5852,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:00000001",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 4,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "384.5852"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:03.6835494+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/css/site.css",
+    "StatusCode": 200,
+    "Elapsed": 11.19,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:00000003",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 4,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "11.1900"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:03.7054044+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/lib/jquery-validation/jquery.maskedinput.js",
+    "StatusCode": 304,
+    "Elapsed": 3.254,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:00000007",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 7,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "3.2540"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:03.7067463+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/lib/jquery-validation/jquery.maskedinput.min.js",
+    "StatusCode": 304,
+    "Elapsed": 1.1986,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:00000009",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 4,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "1.1986"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:03.7063938+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/images/AutumnBig.jpg",
+    "StatusCode": 304,
+    "Elapsed": 0.5917,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:0000000B",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 8,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.5917"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:03.7064306+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/images/PennywiseBig.jpg",
+    "StatusCode": 304,
+    "Elapsed": 0.3767,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:0000000D",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 9,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.3767"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:03.7152841+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/images/LaraCroftBig.jpg",
+    "StatusCode": 304,
+    "Elapsed": 7.8891,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:00000013",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 11,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "7.8891"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:03.7070977+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/images/DinoBig.jpg",
+    "StatusCode": 304,
+    "Elapsed": 0.3475,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:00000011",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 12,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.3475"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:03.7066022+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/images/WineBig.jpg",
+    "StatusCode": 304,
+    "Elapsed": 0.408,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:0000000F",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 13,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.4080"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:03.7157678+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/images/GirlAndWindBig.jpg",
+    "StatusCode": 304,
+    "Elapsed": 0.4093,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:00000015",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 17,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.4093"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:03.7658248+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/images/back.jpg",
+    "StatusCode": 304,
+    "Elapsed": 0.4412,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPN:00000019",
+    "ConnectionId": "0HMQ3UURT3EPN",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 13,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.4412"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:09.2773755+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/basket/add",
+    "StatusCode": 302,
+    "Elapsed": 37.9233,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPO:00000001",
+    "ConnectionId": "0HMQ3UURT3EPO",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 4,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "37.9233"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:09.3255939+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Basket",
+    "StatusCode": 200,
+    "Elapsed": 20.9496,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPO:00000003",
+    "ConnectionId": "0HMQ3UURT3EPO",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 15,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "20.9496"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:10.9340765+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/order/index",
+    "StatusCode": 200,
+    "Elapsed": 260.0293,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPO:00000009",
+    "ConnectionId": "0HMQ3UURT3EPO",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "260.0293"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:22.8505731+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "POST",
+    "RequestPath": "/Order/CheckDate",
+    "StatusCode": 200,
+    "Elapsed": 46.9096,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPP:00000001",
+    "ConnectionId": "0HMQ3UURT3EPP",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 7,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "46.9096"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:26.2918519+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "POST",
+    "RequestPath": "/Order/CheckDate",
+    "StatusCode": 200,
+    "Elapsed": 1.0293,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPP:00000003",
+    "ConnectionId": "0HMQ3UURT3EPP",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 9,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "1.0293"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:30.6360465+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "POST",
+    "RequestPath": "/Order/Tocheckout",
+    "StatusCode": 302,
+    "Elapsed": 40.8382,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPQ:00000001",
+    "ConnectionId": "0HMQ3UURT3EPQ",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 4,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "40.8382"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:30.6675715+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Order/Result/1",
+    "StatusCode": 200,
+    "Elapsed": 9.9107,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPQ:00000003",
+    "ConnectionId": "0HMQ3UURT3EPQ",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 14,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "9.9107"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:32.9045343+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Admin",
+    "StatusCode": 200,
+    "Elapsed": 20.0758,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPQ:00000009",
+    "ConnectionId": "0HMQ3UURT3EPQ",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "20.0758"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:34.7147953+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/admin/orders",
+    "StatusCode": 200,
+    "Elapsed": 10.4447,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPQ:0000000F",
+    "ConnectionId": "0HMQ3UURT3EPQ",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "10.4447"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:37.3201315+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/admin/details/1",
+    "StatusCode": 200,
+    "Elapsed": 24.6861,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPQ:00000015",
+    "ConnectionId": "0HMQ3UURT3EPQ",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "24.6861"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:40.7659783+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "POST",
+    "RequestPath": "/admin/editstatus/1",
+    "StatusCode": 302,
+    "Elapsed": 2.8028,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPR:00000001",
+    "ConnectionId": "0HMQ3UURT3EPR",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 4,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "2.8028"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T15:39:40.7909080+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Admin/Orders",
+    "StatusCode": 200,
+    "Elapsed": 3.3506,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3UURT3EPR:00000003",
+    "ConnectionId": "0HMQ3UURT3EPR",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 52984,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "3.3506"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:18.6473165+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/",
+    "StatusCode": 200,
+    "Elapsed": 384.8611,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000001",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "384.8611"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:20.8891610+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/basket/add",
+    "StatusCode": 302,
+    "Elapsed": 36.3897,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000007",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 8,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "36.3897"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:20.9304269+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Basket",
+    "StatusCode": 200,
+    "Elapsed": 18.2507,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000009",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 4,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "18.2507"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:22.4089248+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/order/index",
+    "StatusCode": 200,
+    "Elapsed": 206.3,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:0000000F",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 14,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "206.3000"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:24.8101105+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Basket",
+    "StatusCode": 200,
+    "Elapsed": 5.8667,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000015",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 14,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "5.8667"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:26.0760243+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/basket/changeamount",
+    "StatusCode": 302,
+    "Elapsed": 4.0973,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:0000001B",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 8,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "4.0973"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:26.0994420+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Basket",
+    "StatusCode": 200,
+    "Elapsed": 3.5543,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:0000001D",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 14,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "3.5543"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:26.4007769+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/basket/changeamount",
+    "StatusCode": 302,
+    "Elapsed": 0.2647,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000023",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 10,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.2647"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:26.4255070+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Basket",
+    "StatusCode": 200,
+    "Elapsed": 4.6176,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000025",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 15,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "4.6176"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:26.6916034+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/basket/changeamount",
+    "StatusCode": 302,
+    "Elapsed": 0.6747,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:0000002B",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 9,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.6747"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:26.7152218+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Basket",
+    "StatusCode": 200,
+    "Elapsed": 2.7978,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:0000002D",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "2.7978"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:27.0309486+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/basket/changeamount",
+    "StatusCode": 302,
+    "Elapsed": 0.2776,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000033",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 10,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.2776"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:27.0542856+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Basket",
+    "StatusCode": 200,
+    "Elapsed": 3.082,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000035",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "3.0820"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:27.9106416+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/home/index/",
+    "StatusCode": 200,
+    "Elapsed": 8.0137,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:0000003B",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 15,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "8.0137"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:29.0892290+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/basket/add",
+    "StatusCode": 302,
+    "Elapsed": 0.4841,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000041",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 4,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.4841"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:29.1142427+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Basket",
+    "StatusCode": 200,
+    "Elapsed": 4.3063,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000043",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "4.3063"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:31.0234261+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/home/index/",
+    "StatusCode": 200,
+    "Elapsed": 6.3264,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000049",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "6.3264"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:31.9828121+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/home/compare",
+    "StatusCode": 302,
+    "Elapsed": 4.1469,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:0000004F",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 8,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "4.1469"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:32.0067499+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/",
+    "StatusCode": 200,
+    "Elapsed": 5.0952,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000051",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 14,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "5.0952"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:32.6424334+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/home/compare",
+    "StatusCode": 302,
+    "Elapsed": 0.5474,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000057",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 8,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.5474"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:32.6681537+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/",
+    "StatusCode": 200,
+    "Elapsed": 6.9527,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000059",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "6.9527"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:33.2643874+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/home/compare",
+    "StatusCode": 302,
+    "Elapsed": 0.6022,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:0000005F",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 8,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.6022"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:33.2911163+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/",
+    "StatusCode": 200,
+    "Elapsed": 3.4206,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000061",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "3.4206"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:33.8632986+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/home/compare",
+    "StatusCode": 302,
+    "Elapsed": 0.2915,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000067",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 10,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "0.2915"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:33.8915890+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/",
+    "StatusCode": 200,
+    "Elapsed": 3.5384,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000069",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "3.5384"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:35.6483497+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Compare",
+    "StatusCode": 200,
+    "Elapsed": 10.0102,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:0000006F",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "10.0102"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:39.9915217+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/compare/delete",
+    "StatusCode": 302,
+    "Elapsed": 3.4372,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000075",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 10,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "3.4372"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:40.0139142+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Compare",
+    "StatusCode": 200,
+    "Elapsed": 3.0429,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000077",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 5,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "3.0429"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:42.6730749+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Basket",
+    "StatusCode": 200,
+    "Elapsed": 3.5746,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:0000007D",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 14,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "3.5746"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:47.1291956+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/basket/clear/",
+    "StatusCode": 302,
+    "Elapsed": 1.1339,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000083",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 9,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "1.1339"
+      }
+    ]
+  }
+} {
+  "Timestamp": "2023-04-23T16:01:47.1664171+03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/Basket",
+    "StatusCode": 200,
+    "Elapsed": 4.4699,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "RequestId": "0HMQ3VB9RH9KF:00000085",
+    "ConnectionId": "0HMQ3VB9RH9KF",
+    "MachineName": "WIN-U236UDB805G",
+    "ProcessId": 36768,
+    "ThreadId": 14,
+    "ApplicationName": "Online Shop"
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "4.4699"
+      }
+    ]
+  }
+}
