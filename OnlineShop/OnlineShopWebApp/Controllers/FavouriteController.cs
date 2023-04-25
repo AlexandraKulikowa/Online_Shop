@@ -8,9 +8,9 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IFavouriteRepository favourites;
         private readonly IProductsRepository products;
-        public FavouriteController(IFavouriteRepository favouriteList, IProductsRepository products)
+        public FavouriteController(IFavouriteRepository favourites, IProductsRepository products)
         {
-            this.favourites = favouriteList;
+            this.favourites = favourites;
             this.products = products;
         }
         public IActionResult Index()
@@ -27,7 +27,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Delete(int id)
         {
-            favourites.DeleteProduct(Constants.UserId, id);
+            favourites.DeleteFavourite(Constants.UserId, id);
             return RedirectToAction("Index");
         }
         public IActionResult Clear()
