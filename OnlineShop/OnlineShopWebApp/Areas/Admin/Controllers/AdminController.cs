@@ -2,8 +2,9 @@
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 
-namespace OnlineShopWebApp.Controllers
+namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class AdminController : Controller
     {
         private readonly IProductsRepository products;
@@ -115,7 +116,7 @@ namespace OnlineShopWebApp.Controllers
                 ModelState.AddModelError("", "Наименование роли не может совпадать с описанием её функций!");
             }
 
-            if(!roles.CheckRole(role))
+            if (!roles.CheckRole(role))
                 ModelState.AddModelError("", "Такая роль уже есть!");
 
             if (ModelState.IsValid)
