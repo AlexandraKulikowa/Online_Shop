@@ -36,8 +36,9 @@ else
                     <tr><td>@product.Cost рублей</td></tr>
                 </table>
                 <div class="btn-group" role="group">
-                    <a class="btn btn-outline-secondary btn-lg" href="/compare/delete?id=@product.Id" role="button">Удалить из сравнения</a>
-                    <a class="btn btn-success btn-lg" href="/basket/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                    <a class="btn btn-outline-secondary mt-auto" href="/compare/delete?id=@product.Id" role="button">Удалить из сравнения</a>
+                    <a class="btn btn-danger mt-auto" href="/favourite/add?id=@product.Id" role="button">В избранное</a>
+                    <a class="btn btn-success mt-auto" href="/basket/add?productId=@product.Id" role="button">Добавить в корзину</a>
                 </div>
             </div>
         }

@@ -1,0 +1,48 @@
+﻿@model Favourites
+
+@if (!(bool)Model?.Products?.Any())
+{
+    <br />
+    @await Html.PartialAsync("Search")
+    <div class="order"><h2><b>Вы пока не добавили товары в избранное! Вернитесь на главную страницу...</b></h2></div>
+}
+else
+{
+    <center>
+        <h2 style="color:aliceblue"><b>Избранное</b></h2>
+    </center>
+    <div class="row comparecard">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-2 card-shadow border-success favourlist">
+                <br>
+                <center><img src=@product.ImagePath alt="Фото картины" height="100"></center>
+                <br>
+                <div class="mt-auto" style="display:-ms-inline-flexbox; flex-direction: column;">
+                    <table class="table-favour">
+                        <tr>
+                            <th class="bg-success">@product.Name</th>
+                        </tr>
+                        <tr><td>@product.Description</td></tr>
+                        <tr><td>Жанр: @product.Genre</td></tr>
+                        <tr><td>Техника: @product.PaintingTechnique</td></tr>
+                        <tr><td>Размер: @product.Size</td></tr>
+                        <tr><td>@product.Year год</td></tr>
+                        @if (product.IsPromo == true)
+                        {
+                            <tr class="table-warning"><td>Акция на товар!</td></tr>
+                        }
+                        <tr><td>@product.Cost рублей</td></tr>
+                    </table>
+                </div>
+                <div class="btn-group-vertical" style="margin-top:auto" role="group">
+                    <a class="btn btn-outline-secondary btn-sm mt-auto" href="/favourite/delete?id=@product.Id" role="button">Удалить</a>
+                    <a class="btn btn-warning btn-sm mt-auto" href="/home/compare?productId=@product.Id" role="button">Сравнить</a>
+                    <a class="btn btn-success btn-sm mt-auto" href="/basket/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                    <br>
+                </div>
+            </div>
+        }
+    </div>
+    <a class="btn btn-lg col-12 btn-outline-dark" href="/favourite/clear?userId=@Model.UserId" role="button">Очистить страницу</a>
+}
