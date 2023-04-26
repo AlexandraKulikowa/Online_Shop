@@ -9,6 +9,6 @@ namespace OnlineShopWebApp.Interfaces
         User TryGetById(int id);
         void Add(User user);
         void Delete(int id);
-        bool CheckUser(string login);
+        bool CheckUser(string login, string password);
     }
 }

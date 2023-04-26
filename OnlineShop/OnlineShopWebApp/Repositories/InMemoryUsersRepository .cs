@@ -14,35 +14,32 @@ namespace OnlineShopWebApp.Repositories
         }
         public User TryGetById(int id)
         {
-            if(users.Any())
-            {
-                return users.FirstOrDefault(user => user.Id == id); 
-            }
-            return null;
+            return users.FirstOrDefault(user => user.Id == id);
         }
 
-        public void Add(User user)
+        public void Add(User checkUser)
         {
-            var existingUser = TryGetById(user.Id);
-            if (existingUser == null)
+            var user = TryGetById(checkUser.Id);
+            if (user == null)
             {
-                users.Add(user);
+                users.Add(checkUser);
             }
         }
 
         public void Delete(int id)
         {
-            var existingUser = TryGetById(id);
-            if (existingUser != null)
+            var user = TryGetById(id);
+            if (user != null)
             {
-                users.Remove(existingUser);
+                users.Remove(user);
             }
         }
 
-        public bool CheckUser(string login)
+        public bool CheckUser(string login, string password)
         {
-            var check = users.FirstOrDefault(x => x.Login ==login);
-            if(check == null)
+            var checkLogin = users.FirstOrDefault(x => x.Login ==login);
+            var checkPassword = users.FirstOrDefault(x => x.Password == password);
+            if (checkLogin == null || checkPassword == null)
                 return true;
             return false;
         }
