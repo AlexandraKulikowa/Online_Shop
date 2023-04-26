@@ -19,8 +19,8 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Enter(Authorization authorization)
         {
-            var check = users.CheckUser(authorization.Login, authorization.Password);
-            if (check)           
+            var containsUser = users.CheckUser(authorization.Login, authorization.Password);
+            if (containsUser)           
                 ModelState.AddModelError("", "Данные введены неверно! Проверьте правильность набора логина и пароля");
 
             if (ModelState.IsValid)
@@ -40,8 +40,8 @@ namespace OnlineShopWebApp.Controllers
             if (registration.Login == registration.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
 
-            var check = users.CheckUser(registration.Login, registration.Password);
-            if (!check)
+            var containsUser = users.CheckUser(registration.Login, registration.Password);
+            if (!containsUser)
                 ModelState.AddModelError("", "Пользователь уже зарегистрирован! Введите другие данные");
 
             if (ModelState.IsValid)
