@@ -86,13 +86,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View("AddProduct", product);
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult DeleteProduct(int id)
         {
             var product = products.TryGetById(id);
             products.Delete(product);
             return RedirectToAction("Products");
         }
-        public IActionResult Details(int id)
+
+        public IActionResult OrderDetails(int id)
         {
             var order = orders.GetOrder(id);
             return View(order);
@@ -134,6 +135,24 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             roles.Delete(id);
             return RedirectToAction("Roles");
+        }
+
+        public IActionResult UserDetails(int id)
+        {
+            var user = users.TryGetById(id);
+            return View(user);
+        }
+        
+        public IActionResult DeleteUser(int id)
+        {
+            users.Delete(id);
+            return RedirectToAction("Users");
+        }
+
+        [HttpPost]
+        public IActionResult ChangePassword(int id, string password)
+        {
+
         }
     }
 }

@@ -41,8 +41,8 @@
                 <b><span style="color:brown" asp-validation-for="Email"></span></b>
                 <b><span style="color:brown" asp-validation-for="Phone"></span></b>
             </p>
-            <input asp-for="Promo" type="checkbox" value="true">
-            <label asp-for="Promo">Присылать мне уведомления о новинках</label>
+            <input asp-for="isPromo" type="checkbox" value="true">
+            <label asp-for="isPromo">Присылать мне уведомления о новинках</label>
         </fieldset>
         <center><button type="submit" class="btn button-register" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
     </form>

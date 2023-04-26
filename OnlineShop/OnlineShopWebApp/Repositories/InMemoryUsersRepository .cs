@@ -43,5 +43,13 @@ namespace OnlineShopWebApp.Repositories
                 return true;
             return false;
         }
+
+        public void ChangePassword(int id, string password)
+        {
+            var user = TryGetById(id);
+
+           user.Name = product.Name;
+            existingProduct.Cost = product.Cost;
+        }
     }
 }

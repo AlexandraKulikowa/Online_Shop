@@ -4,8 +4,8 @@ namespace OnlineShopWebApp.Models
 {
     public class Size
     {
-        [Required (ErrorMessage ="Введите ширину товара")]
-        [Range(6,200,ErrorMessage ="Введите корректное значение")]
+        [Required(ErrorMessage = "Введите ширину товара")]
+        [Range(6, 200, ErrorMessage = "Введите корректное значение")]
         public int Width { get; set; }
 
         [Required(ErrorMessage = "Введите высоту товара")]

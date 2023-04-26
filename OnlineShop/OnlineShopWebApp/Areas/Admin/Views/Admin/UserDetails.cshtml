@@ -1,0 +1,65 @@
+﻿@model User
+
+@await Html.PartialAsync("AdminPanel")
+<div class="details-user">
+    <center><h4>Пользователь @Model.Login</h4></center>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="col-2">ID пользователя</td>
+                    <td>@Model.Id</td>
+                </tr>
+                <tr>
+                    <td>ФИО:</td>
+                    <td>@Model.Surname @Model.Name @Model.Fathername</td>
+                </tr>
+                <tr>
+                    <td>Логин:</td>
+                    <td>@Model.Login</td>
+                </tr>
+                <tr>
+                    <td>Пароль:</td>
+                    <td>@Model.Password</td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <td>Телефон:</td>
+                    <td>@Model.Phone</td>
+                </tr>
+                <tr>
+                    <td>Согласие на получение новинок:</td>
+                    <td>
+                        @if (Model.isPromo)
+                        {
+                            <div>получено</div>
+                        }
+                        else
+                        {
+                            <div>не получено</div>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>Роль:</td>
+                    <td>@Model.Role</td>
+                </tr>
+                <tr>
+        </tbody>
+    </table>
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" type="button" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+            Действия
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Смена пароля</a></li>
+            <li><a class="dropdown-item" href="#">Редактирование данных</a></li>
+            <li><a class="dropdown-item" href="#">Права доступа</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" asp-area="admin" asp-controller="admin" asp-action="deleteuser" asp-route-id="@Model.Id">Удалить пользователя</a></li>
+        </ul>
+    </div>
+</div>
