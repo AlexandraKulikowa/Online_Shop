@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using System.Data;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -149,10 +150,25 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Users");
         }
 
-        [HttpPost]
-        public IActionResult ChangePassword(int id, string password)
+        public IActionResult EditPassword(int id)
         {
+            var user = users.TryGetById(id);
+            return View(user);
+        }
 
+        [HttpPost]
+        public IActionResult EditPassword(int id, string password, string confirmpassword)
+        {
+            if (users.arePasswordsEqual(id, password))
+                ModelState.AddModelError("", "Новый пароль не должен быть идентичен старому!");
+
+            var user = users.TryGetById(id);
+            if (ModelState.IsValid)
+            {
+                users.ChangePassword(id, password, confirmpassword);
+                return RedirectToAction("UserDetails", user);
+            }
+            return View("EditPassword", user);
         }
     }
 }

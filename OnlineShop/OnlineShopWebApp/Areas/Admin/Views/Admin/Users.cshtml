@@ -12,18 +12,34 @@
 else
 {
     <div class="card shadow adminproducts">
-        <center><h2>Список пользователей</h2></center>    <table>
+        <center><h2>Список пользователей</h2></center>    
+        <table>
             <thead>
-                <tr><th>№</th><th>Имя</th><th>Фамилия</th><th>Логин</th><th>Телефон</th></tr>
+                <tr>
+                    <th>№</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Логин</th>
+                    <th>Телефон</th>
+                </tr>
             </thead>
             @foreach (var user in Model)
             {
                 <tbody>
-                    <tr><td>@user.Id</td><td>@user.Name</td><td>@user.Surname</td><td>@user.Login</td><td>@user.Phone</td></tr>
-                    <a class="btn btn-primary" asp-area="admin" asp-controller="admin" asp-action="userdetails" asp-route-id="@user.Id" role="button">Детали</a>
+                    <tr>
+                        <td>@user.Id</td>
+                        <td>@user.Name</td>
+                        <td>@user.Surname</td>
+                        <td>@user.Login</td>
+                        <td>@user.Phone</td>
+                        <td><a class="btn btn-dark" asp-area="admin" asp-controller="admin" asp-action="userdetails" asp-route-id="@user.Id" role="button">Детали</a></td>
+                    </tr>
                 </tbody>
             }
         </table>
-       
+        <br>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-dark btn-lg" asp-area="admin" asp-controller="admin" asp-action="adduser" role="button">Добавить пользователя</a>
+        </div>
     </div>
 }

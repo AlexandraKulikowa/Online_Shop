@@ -489,6 +489,23 @@ label {
     font-style: oblique;
 }
 
+.changepassword {
+    width: 35%;
+    height: 35%;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    padding: 20px 0px 20px 10px;
+    background-color: antiquewhite;
+    border-radius: 22px;
+    box-shadow: 4px 4px 4px;
+    font-size: 18px;
+}
+
 .register {
     width: 90%;
     height: 40%;
@@ -612,8 +629,9 @@ label {
     box-shadow: 4px 4px 4px;
     font-size: 18px;
     position: absolute;
-    padding:10px 10px 10px 10px;
+    padding:10px 20px 10px 10px;
 }
+
 .leftblock {
     left: 3%;
     position: fixed;

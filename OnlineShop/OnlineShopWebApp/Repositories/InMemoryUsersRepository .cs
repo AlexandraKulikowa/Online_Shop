@@ -44,12 +44,19 @@ namespace OnlineShopWebApp.Repositories
             return false;
         }
 
-        public void ChangePassword(int id, string password)
+        public bool arePasswordsEqual(int id, string password)
         {
             var user = TryGetById(id);
+            if(user.Password == password)
+                return true;
+            return false;
+        }
 
-           user.Name = product.Name;
-            existingProduct.Cost = product.Cost;
+        public void ChangePassword(int id, string password, string confirmpassword)
+        {
+            var user = TryGetById(id);
+            user.Password = password;
+            user.ConfirmPassword = confirmpassword;
         }
     }
 }
