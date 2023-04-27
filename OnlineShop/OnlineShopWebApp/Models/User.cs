@@ -43,7 +43,7 @@ namespace OnlineShopWebApp.Models
         [RegularExpression(@"^((\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{10}$", ErrorMessage = "Укажите верный номер телефона")]
         public string Phone { get; set; }
 
-        public bool Promo { get; set; }
+        public bool isDistribution { get; set; }
         public User()
         {
             Id = counter;

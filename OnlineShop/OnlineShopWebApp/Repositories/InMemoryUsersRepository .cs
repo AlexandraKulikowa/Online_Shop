@@ -37,9 +37,8 @@ namespace OnlineShopWebApp.Repositories
 
         public bool CheckUser(string login, string password)
         {
-            var checkLogin = users.FirstOrDefault(x => x.Login ==login);
-            var checkPassword = users.FirstOrDefault(x => x.Password == password);
-            if (checkLogin == null || checkPassword == null)
+            var check = users.FirstOrDefault(x => x.Login ==login && x.Password == password);
+            if (check == null)
                 return true;
             return false;
         }
