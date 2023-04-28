@@ -1,6 +1,6 @@
 ﻿@model Favourites
 
-@if (Model == null || !Model.Products.Any())
+@if (!(bool)Model?.Products?.Any())
 {
     <br />
     @await Html.PartialAsync("Search")
