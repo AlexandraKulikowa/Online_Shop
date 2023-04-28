@@ -1,6 +1,5 @@
-﻿@model Registration
-
-<div class="validation" asp-validation-summary="All">
+﻿@model User
+<center><b><div class="validation" asp-validation-summary="All" style="color:aliceblue"></div></b></center>
 <div class="card shadow register">
     <form method="post">
         <fieldset>
@@ -42,12 +41,11 @@
                 <b><span style="color:brown" asp-validation-for="Email"></span></b>
                 <b><span style="color:brown" asp-validation-for="Phone"></span></b>
             </p>
-            <input asp-for="Promo" type="checkbox" value="true">
-            <label asp-for="Promo">Присылать мне уведомления о новинках</label>
+            <input asp-for="isDistribution" type="checkbox" value="true">
+            <label asp-for="isDistribution">Присылать мне уведомления о новинках</label>
         </fieldset>
         <center><button type="submit" class="btn button-register" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
     </form>
-</div>
 </div>
 
 @section Scripts{
