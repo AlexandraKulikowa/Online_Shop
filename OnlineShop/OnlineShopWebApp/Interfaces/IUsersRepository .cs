@@ -12,5 +12,6 @@ namespace OnlineShopWebApp.Interfaces
         bool CheckUser(string login, string password);
         void ChangePassword(int id, string password, string confirmpassword);
         bool arePasswordsEqual(int id, string password);
+        void ChangeUser(User user);
     }
 }

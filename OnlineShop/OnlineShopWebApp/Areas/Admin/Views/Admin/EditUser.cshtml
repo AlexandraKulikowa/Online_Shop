@@ -1,0 +1,63 @@
+﻿@model User
+
+@await Html.PartialAsync("AdminPanel")
+<center><b><div class="validation" asp-validation-summary="All" style="color:aliceblue"></div></b></center>
+<div class="details-user">
+
+    <center><h4>Пользователь @Model.Login</h4></center>
+    <table>
+                <form method="post">
+        <tbody>
+            <tr>
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+                <label asp-for="Surname">Фамилия</label>
+                <input type="text" asp-for="Surname" placeholder="Иванов" autofocus>
+
+                <label asp-for="Name">Имя</label>
+                <input type="text" asp-for="Name" placeholder="Иван">
+
+                <label asp-for="Fathername">Отчество</label>
+                <input type="text" asp-for="Fathername" placeholder="Иванович">
+                <br />
+
+                <span style="color:brown" asp-validation-for="Surname"></span>
+                <span style="color:brown" asp-validation-for="Name"></span>
+                <span style="color:brown" asp-validation-for="Fathername"></span>
+
+                <label asp-for="Login">Логин </label>
+                <input type="text" placeholder="Логин" asp-for="Login">
+                <span style="color:brown" asp-validation-for="Login"></span>
+
+                    <input type="hidden" asp-for="Password" value="@Model.Password" />
+                    <input type="hidden" asp-for="ConfirmPassword" value="@Model.ConfirmPassword" />
+
+                <label asp-for="Email">Е-mail</label>
+                <input type="email" style="background-color:white" asp-for="Email" placeholder="anna@yandex.ru">
+
+                <label asp-for="Phone">Телефон</label>
+                <input id="phone" style="background-color:white" type="tel" asp-for="Phone" pattern="\+7\([0-9]{3}\)-[0-9]{3}\-[0-9]{2}\-[0-9]{2}" placeholder="+7(999)-999-99-99">
+                    <br />
+                <b><span style="color:brown" asp-validation-for="Email"></span></b>
+                <b><span style="color:brown" asp-validation-for="Phone"></span></b>
+
+                <br />
+                <input asp-for="isDistribution" type="checkbox" value="true">
+                <label asp-for="isDistribution">Присылать мне уведомления о новинках</label>
+                <br />
+                    <input type="hidden" asp-for="Role" value="@Model.Role" />
+
+                <button type="submit" class="btn btn-dark" asp-area="admin" asp-controller="admin" asp-action="changeuser" role="button">Изменить информацию о пользователе</button>
+                </form>
+            <tr>
+        </tbody>
+    </table>
+
+   </div>
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("#phone").mask("+7(999) 999-99-99");
+        });
+    </script>
+    }

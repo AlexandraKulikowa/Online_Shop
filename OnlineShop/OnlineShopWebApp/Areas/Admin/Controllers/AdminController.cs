@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
-using System.Data;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -170,5 +169,26 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
             return View("EditPassword", user);
         }
+
+        public IActionResult EditUser(int id)
+        {
+            var user = users.TryGetById(id);
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult ChangeUser(User user)
+        {
+            if (user.Login == user.Password)
+                ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
+
+            if (ModelState.IsValid)
+            {
+                users.ChangeUser(user);
+                return RedirectToAction("UserDetails", user);
+            }
+            return View("EditUser", user); 
+        }
+
     }
 }

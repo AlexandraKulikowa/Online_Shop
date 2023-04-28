@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Models
 {
@@ -45,11 +46,27 @@ namespace OnlineShopWebApp.Models
 
         public bool isDistribution { get; set; }
 
-        public string Role { get; set; } = "Пользователь";
+        public Role Role { get; set; } 
+
+        public User(int id, string surname, string name, string fathername, string login, string password, string confirmPassword, string email, string phone, bool isDistribution, string role)
+        {
+            Id = id;
+            Surname = surname;
+            Name = name;
+            Fathername = fathername;
+            Login = login;
+            Password = password;
+            ConfirmPassword = confirmPassword;
+            Email = email;
+            Phone = phone;
+            this.isDistribution = isDistribution;
+            Role = Constants.RoleUser;
+        }
         public User()
         {
             Id = counter;
             counter++;
+            Role = Constants.RoleUser;
         }
     }
 }
