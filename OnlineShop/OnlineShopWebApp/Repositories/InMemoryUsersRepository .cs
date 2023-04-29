@@ -42,5 +42,33 @@ namespace OnlineShopWebApp.Repositories
                 return true;
             return false;
         }
+
+        public bool arePasswordsEqual(int id, string password)
+        {
+            var user = TryGetById(id);
+            if(user.Password == password)
+                return true;
+            return false;
+        }
+
+        public void ChangePassword(int id, string password, string confirmpassword)
+        {
+            var user = TryGetById(id);
+            user.Password = password;
+            user.ConfirmPassword = confirmpassword;
+        }
+
+        public void ChangeUser(User user)
+        {
+            var currentUser = TryGetById(user.Id);
+
+            currentUser.Surname = user.Surname;
+            currentUser.Name = user.Name;
+            currentUser.Fathername = user.Fathername;
+            currentUser.Login = user.Login;
+            currentUser.Email = user.Email;
+            currentUser.Phone = user.Phone;
+            currentUser.isDistribution = user.isDistribution;
+        }
     }
 }

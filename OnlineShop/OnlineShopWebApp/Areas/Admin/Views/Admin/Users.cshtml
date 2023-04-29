@@ -12,7 +12,7 @@
 else
 {
     <div class="card shadow adminproducts">
-        <center><h2>Список пользователей</h2></center> @*//Это сделано для визуального отображения пользователей, которые зарегистрировались, чтобы удобно было проверять. В следующем задании дополню как надо по заданию*@
+        <center><h2>Список пользователей</h2></center>    
         <table>
             <thead>
                 <tr>
@@ -20,8 +20,6 @@ else
                     <th>Имя</th>
                     <th>Фамилия</th>
                     <th>Логин</th>
-                    <th>Пароль</th>
-                    <th>Email</th>
                     <th>Телефон</th>
                 </tr>
             </thead>
@@ -33,12 +31,15 @@ else
                         <td>@user.Name</td>
                         <td>@user.Surname</td>
                         <td>@user.Login</td>
-                        <td>@user.Password</td>
-                        <td>@user.Email</td>
                         <td>@user.Phone</td>
+                        <td><a class="btn btn-dark" asp-area="admin" asp-controller="admin" asp-action="userdetails" asp-route-id="@user.Id" role="button">Детали</a></td>
                     </tr>
                 </tbody>
             }
         </table>
+        <br>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-dark btn-lg" asp-area="" asp-controller="login" asp-action="registration" role="button">Добавить пользователя</a>
+        </div>
     </div>
 }

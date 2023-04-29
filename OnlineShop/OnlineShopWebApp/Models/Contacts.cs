@@ -4,8 +4,8 @@ namespace OnlineShopWebApp.Models
 {
     public class Contacts
     {
-        [Required(ErrorMessage ="Вы не ввели адрес доставки")]
-        [StringLength(190,MinimumLength = 10, ErrorMessage ="Введите верный адрес")]
+        [Required(ErrorMessage = "Вы не ввели адрес доставки")]
+        [StringLength(190, MinimumLength = 10, ErrorMessage = "Введите верный адрес")]
         [DataType(DataType.MultilineText)]
         public string Address { get; set; }
 

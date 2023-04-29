@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Models
 {
@@ -44,6 +45,9 @@ namespace OnlineShopWebApp.Models
         public string Phone { get; set; }
 
         public bool isDistribution { get; set; }
+
+        public Role Role { get; set; } 
+
         public User()
         {
             Id = counter;

@@ -1,9 +1,9 @@
 ﻿namespace OnlineShopWebApp.Models
 {
-        public enum Packaging
-        {
-            Стандартная,
-            Оптимальная,
-            VIP
-        }
+    public enum Packaging
+    {
+        Стандартная,
+        Оптимальная,
+        VIP
     }
+}
