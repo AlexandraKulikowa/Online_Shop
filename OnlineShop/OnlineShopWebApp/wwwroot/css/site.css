@@ -711,6 +711,30 @@ label {
     font-style: normal;
 }
 
+.modaldelete {
+    width: 50%;
+    height: 55%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    padding: 6px 24px 2px 24px;
+    background-color: antiquewhite;
+    border-radius: 22px;
+    border-color: darkslategray;
+    box-shadow: 4px 4px 4px;
+    font-size: 15px;
+    position: absolute;
+    left: 30%;
+    font-style: normal;
+}
+
+.modal-content,
+modal-header,
+modal-body,
+modal-footer{
+    border: none;
+}
+
 .editproducts {
     width: 40%;
     height: 70%;

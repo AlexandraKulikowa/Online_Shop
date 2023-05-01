@@ -22,7 +22,24 @@ else
             @foreach (var product in Model)
             {
                 <tbody>
-                    <tr><td>@product.Id</td><td><a asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">@product.Name</a></td><td>@product.Cost</td><td><a asp-area="" asp-controller="admin" asp-action="editproduct" asp-route-id="@product.Id">Редактировать</a></td><td><a asp-area="" asp-controller="Admin" asp-action="Delete" asp-route-id="@product.Id">Удалить</a></td></tr>
+                    <tr><td>@product.Id</td><td><a asp-area="admin" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">@product.Name</a></td><td>@product.Cost</td><td><a asp-area="admin" asp-controller="admin" asp-action="editproduct" asp-route-id="@product.Id">Редактировать</a></td><td><button data-toggle="modal" data-target="#deleteproduct" type="button">Удалить</button></td></tr>
+                    <div class="modal fade modaldelete" id="deleteproduct" tabindex="-1" aria-labelledby="deleteproduct" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header" style=" background-color:antiquewhite" >
+                                    <h4 class="modal-title fs-5" id="deleteproduct">Подтверждение удаления товара</h4>
+                                    <button type="button" class="btn-close btn-lg" data-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" style=" background-color:antiquewhite">
+                                    Вы уверены, что хотите удалить товар @product.Name?
+                                </div>
+                                <div class="modal-footer" style="  background-color:antiquewhite">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет, не хочу</button>
+                                    <a type="button" class="btn btn-success" asp-area="admin" asp-controller="admin" asp-action="deleteproduct" asp-route-id="@product.Id">Да, удалить товар</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </tbody>
             }
         </table>

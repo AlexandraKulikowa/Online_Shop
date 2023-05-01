@@ -85,7 +85,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
             return View("AddProduct", product);
         }
-
         public IActionResult DeleteProduct(int id)
         {
             var product = products.TryGetById(id);
