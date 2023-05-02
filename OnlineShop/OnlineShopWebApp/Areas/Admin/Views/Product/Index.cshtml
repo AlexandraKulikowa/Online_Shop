@@ -6,7 +6,7 @@
 {
     <div class="card shadow adminproducts">
         <center><h2>Список продуктов</h2></center>
-        <a class="btn button-addproduct" asp-controller="Admin" asp-action="addproduct" role="button">Добавить новый продукт</a>
+        <a class="btn button-addproduct" asp-area="admin" asp-controller="product" asp-action="add" role="button">Добавить новый продукт</a>
         <div class="text-dark">Товары отсутствуют.</div>
     </div>
 }
@@ -14,7 +14,7 @@ else
 {
     <div class="card shadow adminproducts">
         <center><h2>Список продуктов</h2></center>
-        <a class="btn button-addproduct" asp-controller="Admin" asp-action="addproduct" role="button">Добавить новый продукт</a>
+        <a class="btn button-addproduct" asp-area="admin" asp-controller="product" asp-action="add" role="button">Добавить новый продукт</a>
         <table>
             <thead>
                 <tr><th>№</th><th>Название товара</th><th>Цена</th></tr>
@@ -22,7 +22,8 @@ else
             @foreach (var product in Model)
             {
                 <tbody>
-                    <tr><td>@product.Id</td><td><a asp-area="admin" asp-controller="Product" asp-action="Index" asp-route-id="@product.Id">@product.Name</a></td><td>@product.Cost</td><td><a asp-area="admin" asp-controller="admin" asp-action="editproduct" asp-route-id="@product.Id">Редактировать</a></td><td><button data-toggle="modal" data-target="#deleteproduct" type="button">Удалить</button></td></tr>
+                    <tr><td>@product.Id</td><td><a asp-area="" asp-controller="product" asp-action="index" asp-route-id="@product.Id">@product.Name</a></td><td>@product.Cost</td><td><a asp-area="admin" asp-controller="product" asp-action="edit" asp-route-id="@product.Id">Редактировать</a></td><td><button data-toggle="modal" data-target="#deleteproduct" type="button">Удалить</button></td></tr>
+                    
                     <div class="modal fade modaldelete" id="deleteproduct" tabindex="-1" aria-labelledby="deleteproduct" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -35,7 +36,7 @@ else
                                 </div>
                                 <div class="modal-footer" style="  background-color:antiquewhite">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет, не хочу</button>
-                                    <a type="button" class="btn btn-success" asp-area="admin" asp-controller="admin" asp-action="deleteproduct" asp-route-id="@product.Id">Да, удалить товар</a>
+                                    <a type="button" class="btn btn-success" asp-area="admin" asp-controller="product" asp-action="delete" asp-route-id="@product.Id">Да, удалить товар</a>
                                 </div>
                             </div>
                         </div>

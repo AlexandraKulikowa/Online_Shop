@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Interfaces;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Repositories;
 using System;
 using System.Linq;

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Models
@@ -29,13 +30,13 @@ namespace OnlineShopWebApp.Models
 
         [Required(ErrorMessage = "Укажите пароль повторно")]
         [StringLength(12, MinimumLength = 6, ErrorMessage = "Ваш пароль должен быть длиной от 6 до 12 символов")]
-        [Compare("Password", ErrorMessage ="Пароль не совпадает с введенным ранее")]
+        [Compare("Password", ErrorMessage = "Пароль не совпадает с введенным ранее")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage ="Укажите ваш e-mail")]
+        [Required(ErrorMessage = "Укажите ваш e-mail")]
         [StringLength(28, MinimumLength = 6, ErrorMessage = "Это подозрительно длинный e-mail, проверьте правильность написания!")]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Некорректный адрес")]
-        [EmailAddress(ErrorMessage ="Некорректный e-mail!")]
+        [EmailAddress(ErrorMessage = "Некорректный e-mail!")]
         public string Email { get; set; }
 
 
@@ -46,7 +47,7 @@ namespace OnlineShopWebApp.Models
 
         public bool isDistribution { get; set; }
 
-        public Role Role { get; set; } 
+        public Role Role { get; set; }
 
         public User()
         {

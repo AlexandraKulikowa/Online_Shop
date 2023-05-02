@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using OnlineShopWebApp.Models;
 using System.Linq;
 using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Areas.Admin.Models;
 
 namespace OnlineShopWebApp.Repositories
 {

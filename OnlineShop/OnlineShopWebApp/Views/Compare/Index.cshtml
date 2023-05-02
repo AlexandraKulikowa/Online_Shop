@@ -36,12 +36,12 @@ else
                     <tr><td>@product.Cost рублей</td></tr>
                 </table>
                 <div class="btn-group" role="group">
-                    <a class="btn btn-outline-secondary mt-auto" href="/compare/delete?id=@product.Id" role="button">Удалить из сравнения</a>
-                    <a class="btn btn-danger mt-auto" href="/favourite/add?id=@product.Id" role="button">В избранное</a>
-                    <a class="btn btn-success mt-auto" href="/basket/add?productId=@product.Id" role="button">Добавить в корзину</a>
+                    <a class="btn btn-outline-secondary mt-auto" asp-controller="compare" asp-action="delete" asp-route-id=@product.Id role="button">Удалить из сравнения</a>
+                    <a class="btn btn-danger mt-auto" asp-controller="favourite" asp-action="add" asp-route-id=@product.Id role="button">В избранное</a>
+                    <a class="btn btn-success mt-auto" asp-controller="basket" asp-action="add" asp-route-id=@product.Id role="button">Добавить в корзину</a>
                 </div>
             </div>
         }
     </div>
-    <a class="btn btn-lg col-12 btn-outline-dark" href="/compare/clear?userId=@Model.UserId" role="button">Очистить страницу</a>
+    <a class="btn btn-lg col-12 btn-outline-dark" asp-controller="compare" asp-action="clear" asp-route-userId=@Model.UserId role="button">Очистить страницу</a>
 }

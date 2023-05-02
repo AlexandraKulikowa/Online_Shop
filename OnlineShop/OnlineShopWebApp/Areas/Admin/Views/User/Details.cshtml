@@ -56,11 +56,11 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" asp-area="admin" asp-controller="admin" asp-action="editpassword" asp-route-id="@Model.Id">Смена пароля</a></li>
-                <li><a class="dropdown-item" asp-area="admin" asp-controller="admin" asp-action="edituser" asp-route-id="@Model.Id">Редактирование данных</a></li>
+                <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="editpassword" asp-route-id="@Model.Id">Смена пароля</a></li>
+                <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="edit" asp-route-id="@Model.Id">Редактирование данных</a></li>
                 <li><a class="dropdown-item" href="#"> Права доступа</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" asp-area="admin" asp-controller="admin" asp-action="deleteuser" asp-route-id="@Model.Id">Удалить пользователя</a></li>
+                <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="delete" asp-route-id="@Model.Id">Удалить пользователя</a></li>
             </ul>
         </div>
     </div>

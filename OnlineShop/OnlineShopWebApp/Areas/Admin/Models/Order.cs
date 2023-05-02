@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Areas.Admin.Models
 {
     public class Order
     {

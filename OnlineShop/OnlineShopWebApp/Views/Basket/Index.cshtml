@@ -19,9 +19,9 @@ else
                     <tr><th>@item.Product.Name</th></tr>
                     <tr>
                         <td>Жанр: @item.Product.Genre</td>
-                        <td><a class="btn btn-outline-success btn-lg" href="/basket/changeamount?id=@item.Product.Id&sign=false&userId=@Model.UserId" role="button">-</a></td>
+                        <td><a class="btn btn-outline-success btn-lg" role="button" asp-controller="basket" asp-action="changeamount" asp-route-id=@item.Product.Id asp-route-sign="false" asp-route-userId=@Model.UserId>-</a></td>
                         <td align="center">@item.Amount</td>
-                        <td><a class="btn btn-outline-success btn-lg" href="/basket/changeamount?id=@item.Product.Id&sign=true&userId=@Model.UserId" role="button">+</a></td>
+                        <td><a class="btn btn-outline-success btn-lg" asp-controller="basket" asp-action="changeamount" asp-route-id=@item.Product.Id asp-route-sign="true" asp-route-userId=@Model.UserId role="button">+</a></td>
                         <td align="right">@(item.Product.Cost * item.Amount) рублей</td>
                     </tr>
                     <tr><td>Написана в @item.Product.Year году</td> </tr>
@@ -32,9 +32,9 @@ else
         <p class="tab-total" rowspan="5"><b>Итоговая сумма заказа @Model.TotalCost() рублей</b></p>
         <p>
             <div align="center">
-                <a class="btn btn-outline-primary col-md-3 btn-lg btn-options" href="/basket/clear/" role="button">Очистить корзину</a>
-                <a class="btn btn-outline-secondary col-md-4 btn-lg btn-options" href="/home/index/" role="button">Продолжить покупки</a>
-                <a class="btn btn-success col-md-4 btn-lg btn-options" href="/order/index" role="button">Оформить заказ</a>
+                <a class="btn btn-outline-primary col-md-3 btn-lg btn-options" asp-controller="basket" asp-action="clear" role="button">Очистить корзину</a>
+                <a class="btn btn-outline-secondary col-md-4 btn-lg btn-options" asp-controller="home" asp-action="index" role="button">Продолжить покупки</a>
+                <a class="btn btn-success col-md-4 btn-lg btn-options" asp-controller="order" asp-action="index" role="button">Оформить заказ</a>
             </div>
         </p>
     </div>

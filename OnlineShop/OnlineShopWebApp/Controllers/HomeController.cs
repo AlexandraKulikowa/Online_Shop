@@ -17,9 +17,9 @@ namespace OnlineShopWebApp.Controllers
         {
             return View(products.GetAll());
         }
-        public IActionResult Compare(int productId)
+        public IActionResult Compare(int id)
         {
-            var product = products.TryGetById(productId);
+            var product = products.TryGetById(id);
             compareList.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }

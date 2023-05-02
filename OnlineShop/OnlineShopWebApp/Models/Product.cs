@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
+
 {
     public class Product
     {

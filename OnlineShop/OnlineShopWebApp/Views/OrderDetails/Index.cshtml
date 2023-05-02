@@ -1,14 +1,31 @@
-﻿@model Order
+﻿@model OnlineShopWebApp.Areas.Admin.Models.Order
 
 <div class="details">
     <table>
         <thead>
-            <tr><th>Название товара</th><th>Жанр</th><th>Цена</th><th>Описание</th><th>Техника</th><th>Размер</th><th>Год создания</th><th>Количество</th></tr>
+            <tr>
+                <th>Название товара</th>
+                <th>Жанр</th>
+                <th>Цена</th>
+                <th>Описание</th>
+                <th>Техника</th>
+                <th>Размер</th>
+                <th>Год создания</th>
+                <th>Количество</th>
+            </tr>
         </thead>
         @foreach (var products in Model.Products)
         {
             <tbody>
-                <tr><td>@products.Product.Name</td><td>@products.Product.Genre</td><td>@products.Product.Cost</td><td>@products.Product.Description</td><td>@products.Product.PaintingTechnique</td><td>@products.Product.Size</td><td>@products.Product.Year</td><td>@products.Amount</td></tr>
+                <tr><td>@products.Product.Name</td>
+                    <td>@products.Product.Genre</td>
+                    <td>@products.Product.Cost</td>
+                    <td>@products.Product.Description</td>
+                    <td>@products.Product.PaintingTechnique</td>
+                    <td>@products.Product.Size</td>
+                    <td>@products.Product.Year</td>
+                    <td>@products.Amount</td>
+                </tr>
             </tbody>
         }
     </table>

@@ -1,4 +1,4 @@
-﻿namespace OnlineShopWebApp.Models
+﻿namespace OnlineShopWebApp.Areas.Admin.Models
 {
     public enum Packaging
     {

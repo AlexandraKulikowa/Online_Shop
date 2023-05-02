@@ -1,9 +1,9 @@
-﻿@model Order
+﻿@model OnlineShopWebApp.Areas.Admin.Models.Order
 <br />
 <center>
     <img src="~/images/Thanks.jpg" alt="Упс!">
 </center>
 <div class="order"><h2><b>Спасибо за ваш заказ! Приходите еще!</b></h2></div>
 <center>
-    <a type="button" class="btn btn-outline-secondary btn-lg col-9" href="/orderdetails/index?id=@Model.Id" role="button">Детали вашего заказа</a>
+    <a type="button" class="btn btn-outline-secondary btn-lg col-9" asp-controller="orderdetails" asp-route-id=@Model.Id role="button">Детали вашего заказа</a>
 </center>

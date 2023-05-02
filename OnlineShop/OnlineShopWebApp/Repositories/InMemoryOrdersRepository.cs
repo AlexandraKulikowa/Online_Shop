@@ -1,7 +1,7 @@
 ﻿using OnlineShopWebApp.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Areas.Admin.Models;
 
 namespace OnlineShopWebApp.Repositories
 {
@@ -9,16 +9,10 @@ namespace OnlineShopWebApp.Repositories
     {
         private List<Order> orders = new List<Order>();
         private static int counter = 1;
-        public List<Order> Orders
+
+        public List<Order> GetAll()
         {
-            get
-            {
-                return orders;
-            }
-            set
-            {
-                orders = value;
-            }
+            return orders;
         }
         public void Add(Order order)
         {

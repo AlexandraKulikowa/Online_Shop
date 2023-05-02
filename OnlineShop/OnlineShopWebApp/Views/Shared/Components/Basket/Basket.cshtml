@@ -2,13 +2,13 @@
 
 @if (Model == 0)
 {
-    <a class="basket" asp-area="" asp-controller="Basket" asp-action="Index">Корзина</a>
+    <a class="basket" asp-controller="basket" asp-action="index">Корзина</a>
 }
 else if(Model < 10)
 {
-    <a class="basket" asp-area="" asp-controller="Basket" asp-action="Index">Корзина <span class="basket circleforbasket">@Model</span></a>
+    <a class="basket" asp-controller="basket" asp-action="index">Корзина <span class="basket circleforbasket">@Model</span></a>
 }
 else
 {
-    <a class="basket-bg" asp-area="" asp-controller="Basket" asp-action="Index">Корзина <span class="basket-bg circleforbasket">@Model</span></a>
+    <a class="basket-bg" asp-controller="basket" asp-action="index">Корзина <span class="basket-bg circleforbasket">@Model</span></a>
 }

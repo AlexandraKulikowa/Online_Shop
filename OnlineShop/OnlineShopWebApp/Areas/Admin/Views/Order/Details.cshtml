@@ -1,4 +1,5 @@
-﻿@model Order
+﻿@using OnlineShopWebApp.Areas.Admin.Models;
+@model Order
 
 @await Html.PartialAsync("AdminPanel")
 <div class="details-admin">
@@ -81,7 +82,7 @@
                                 asp-items="@Html.GetEnumSelectList<Status>()"
                                 class="form-control-sm">
                         </select>
-                        <button type="submit" class="btn-sm btn-outline-secondary" asp-area="admin" asp-controller="admin" asp-action="editstatus" asp-route-id="@Model.Id" role="button">Изменить статус</button>
+                        <button type="submit" class="btn-sm btn-outline-secondary" asp-area="admin" asp-controller="order" asp-action="editstatus" asp-route-id="@Model.Id" role="button">Изменить статус</button>
                     </td>
                 </tr>
             </tbody>

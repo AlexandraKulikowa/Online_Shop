@@ -20,10 +20,10 @@ else
             @foreach (var role in Model)
             {
                 <tbody>
-                    <tr><td>@role.Id</td><td>@role.Name</td><td>@role.Options</td><td><a class="btn btn-sm btn-outline-dark" asp-controller="admin" asp-action="deleterole" asp-route-id="@role.Id">Удалить</a></td></tr>
+                    <tr><td>@role.Id</td><td>@role.Name</td><td>@role.Options</td><td><a class="btn btn-sm btn-outline-dark" asp-area="admin" asp-controller="role" asp-action="delete" asp-route-id="@role.Id">Удалить</a></td></tr>
                 </tbody>
             }
         </table>
-        <a class="btn button-addrole" asp-controller="admin" asp-action="addrole" role="button">Добавить роль</a>
+        <a class="btn button-addrole" asp-area="admin" asp-controller="role" asp-action="add" role="button">Добавить роль</a>
     </div>
 }

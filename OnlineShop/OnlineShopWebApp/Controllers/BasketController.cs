@@ -18,9 +18,9 @@ namespace OnlineShopWebApp.Controllers
             var basket = baskets.TryGetByUserId(Constants.UserId);
             return View(basket);
         }
-        public IActionResult Add(int ProductId)
+        public IActionResult Add(int id)
         {
-            var product = products.TryGetById(ProductId);
+            var product = products.TryGetById(id);
             baskets.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
