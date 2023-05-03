@@ -9,12 +9,12 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link main" asp-controller="home" asp-action="index">Главная</a>
+                        <a class="nav-link main" asp-area="" asp-controller="home" asp-action="index">Главная</a>
                     </li>
                 </ul>
-                <a class="btn enter" asp-controller="login" asp-action="index">Вход</a>
-                <a class="btn compare" asp-controller="compare" asp-action="index">Сравнение</a>
-                <a class="btn favourite" asp-controller="favourite" asp-action="index">Избранное</a>
+                <a class="btn enter" asp-area="" asp-controller="login" asp-action="index">Вход</a>
+                <a class="btn compare" asp-area="" asp-controller="compare" asp-action="index">Сравнение</a>
+                <a class="btn favourite" asp-area="" asp-controller="favourite" asp-action="index">Избранное</a>
                 @await Component.InvokeAsync("Basket")
                 <a class="btn admin" asp-area="admin" asp-controller="order" asp-action="index">Администратор</a>
             </div>
