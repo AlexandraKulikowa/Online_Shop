@@ -21,7 +21,14 @@ else
             @foreach (var order in Model)
             {
                 <tbody>
-                    <tr><td>@order.Id</td><td>@order.UserId</td><td>@order.TotalCost()</td><td>@order.Status</td><td>@order.DateofOrder.ToShortDateString()</td><td>@order.DateofOrder.ToShortTimeString()</td><td><a asp-area="admin" asp-controller="order" asp-action="details" asp-route-id="@order.Id">Подробнее</a></td></tr>
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.UserId</td>
+                        <td>@order.TotalCost()</td>
+                        <td>@order.Status</td>
+                        <td>@order.DateofOrder.ToShortDateString()</td>
+                        <td>@order.DateofOrder.ToShortTimeString()</td>
+                        <td><a asp-area="admin" asp-controller="order" asp-action="details" asp-route-id="@order.Id">Подробнее</a></td></tr>
                 </tbody>
             }
         </table>

@@ -8,37 +8,37 @@
 else
 {
     <div class="validation" asp-validation-summary="All">
-        <div class="col-10 card shadow border-success">
+        <div class="card orderbox">
             <form class="form" autocomplete="on" method="post">
                 <fieldset>
                     <legend>Оставьте свои контактные данные</legend>
 
-                    <label asp-for="Contacts.Address">Введите ваш адрес</label>
+                    <label asp-for="Contacts.Address">Aдрес</label>
                     <br>
                     <textarea asp-for="Contacts.Address" rows="4" cols="50" placeholder="Страна, город, улица, дом, квартира" autofocus></textarea>
                     <span asp-validation-for="Contacts.Address"></span>
                     <br>
 
                     <label asp-for="Contacts.Index">Ваш индекс</label>
-                    <input type="number" asp-for="Contacts.Index" placeholder="123456">
-                    <span asp-validation-for="Contacts.Index"></span>
-                    <br>
+                    <input type="number" asp-for="Contacts.Index" class="form-ctrl" placeholder="123456">
 
-                    <label asp-for="Contacts.Telephone">Введите ваш телефон</label>
-                    <input type="tel" id="phone" asp-for="Contacts.Telephone" pattern="\+7\([0-9]{3}\)-[0-9]{3}\-[0-9]{2}\-[0-9]{2}" placeholder="+7(999)-999-99-99">
+                    <label asp-for="Contacts.Telephone">Введите телефон</label>
+                    <input type="tel" id="phone" asp-for="Contacts.Telephone" class="form-ctrlplus" pattern="\+7\([0-9]{3}\)-[0-9]{3}\-[0-9]{2}\-[0-9]{2}" placeholder="+7(999)-999-99-99">
+
+                    <span asp-validation-for="Contacts.Index"></span>
                     <span asp-validation-for="Contacts.Telephone"></span>
                     <br>
 
                     <label asp-for="TimeFromTo">Удобное время для звонка</label>
-                    <input type="text" asp-for="TimeFromTo" placeholder="C 9 до 18">
+                    <input type="text" asp-for="TimeFromTo" class="form-ctrl" placeholder="C 9 до 18">
                     <span asp-validation-for="TimeFromTo"></span>
 
-                    <label asp-for="Email">Введите дополнительный e-mail</label>
-                    <input type="email" asp-for="Email">
+                    <label asp-for="Email">E-mail</label>
+                    <input type="email" class="form-ctrlplus" asp-for="Email">
                     <span asp-validation-for="Email"></span>
                     <br>
 
-                    <label asp-for="Mailto">Выберите способ доставки</label>
+                    <label asp-for="Mailto">Cпособ доставки</label>
                     <br>
                     <input id="post1" type="radio" asp-for="Mailto" value="Почта России" checked>
                     <label for="post1">Почта России</label>
@@ -74,9 +74,9 @@ else
 
                     <input asp-for="Id" type="hidden" value="0">
 
-                    <h4>Итоговая стоимость вашего заказа: @ViewBag.TotalCost рублей.</h4>
-                    <button class="button-clear" type="reset">Сбросить заполнение формы</button>
-                    <button type="submit" class="btn button-order" asp-controller="Order" asp-action="Tocheckout" role="button">Заказать</button>
+                    <h4>Итоговая стоимость вашего заказа: @ViewBag.TotalCost &#8381</h4>
+                    <button class="btn button-clear" type="reset">Сбросить заполнение формы</button>
+                    <button type="submit" class="btn button-order" asp-controller="order" asp-action="tocheckout" role="button">Заказать</button>
                     <br>
                     <br>
                 </fieldset>

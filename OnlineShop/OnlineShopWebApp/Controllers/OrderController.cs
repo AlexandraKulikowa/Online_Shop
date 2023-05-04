@@ -37,6 +37,7 @@ namespace OnlineShopWebApp.Controllers
             }
             return View(order);
         }
+
         public IActionResult Result(Order order)
         {
             return View(order);

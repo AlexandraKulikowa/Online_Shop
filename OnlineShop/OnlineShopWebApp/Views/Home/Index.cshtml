@@ -5,9 +5,9 @@
     <div class="row">
         @foreach (var product in Model)
         {
-            <div class="col-3 card shadow border-success card-body">
+            <div class="col-3 card shadow card-body">
                 <img src=@product.ImagePath alt="Фото картины">
-                <div class="mt-auto" style="display:-ms-inline-flexbox; flex-direction: column;">
+                <div class="mt-auto align-items-end">
                     <a asp-controller="product" asp-action="index" asp-route-id=@product.Id>
                         <h5><b>@product.Name</b></h5>
                     </a>
@@ -17,9 +17,9 @@
                 </div>
                 <br>
                 <div class="btn-group-vertical">
-                    <a class="btn btn-outline-warning btn-lg mt-auto" asp-controller="home" asp-action="compare" asp-route-id=@product.Id role="button">Сравнить</a>
-                    <a class="btn btn-outline-danger btn-lg mt-auto" asp-controller="favourite" asp-action="add" asp-route-id=@product.Id role="button">В избранное</a>
-                    <a class="btn btn-success btn-lg mt-auto" asp-controller="basket" asp-action="add" asp-route-id=@product.Id role="button">Добавить в корзину</a>
+                    <a class="btn button-tocompare mt-auto" asp-controller="home" asp-action="compare" asp-route-id=@product.Id role="button">Сравнить</a>
+                    <a class="btn button-tofavourite mt-auto" asp-controller="favourite" asp-action="add" asp-route-id=@product.Id role="button">В избранное</a>
+                    <a class="btn button-tobasket mt-auto" asp-controller="basket" asp-action="add" asp-route-id=@product.Id role="button">Добавить в корзину</a>
                 </div>
             </div>
         }

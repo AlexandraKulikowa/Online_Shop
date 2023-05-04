@@ -10,30 +10,31 @@
 }
 else
 {
-    <div class="col-11 card shadow" style="background-color:antiquewhite">
-        <p class="heading" valign="middle"><b>Ваша корзина</b></p>
-        <table>
+    <div class="card shadow basket-card">
+        <h2><b>Ваша корзина</b></h2>
+
             @foreach (BasketItem item in Model.ProductsInBasket)
             {
-                <tbody class="tab-content">
-                    <tr><th>@item.Product.Name</th></tr>
+            <table>
+                <tbody>
                     <tr>
-                        <td>Жанр: @item.Product.Genre</td>
+                        <td><img src=@item.Product.ImagePath height="110" object-fit="scale-down" alt="Фото картины"></td>
+                        <td>@item.Product.Name <br> Жанр: @item.Product.Genre <br /> Написана в @item.Product.Year году</td>
                         <td><a class="btn btn-outline-success btn-lg" role="button" asp-controller="basket" asp-action="changeamount" asp-route-id=@item.Product.Id asp-route-sign="false" asp-route-userId=@Model.UserId>-</a></td>
                         <td align="center">@item.Amount</td>
                         <td><a class="btn btn-outline-success btn-lg" asp-controller="basket" asp-action="changeamount" asp-route-id=@item.Product.Id asp-route-sign="true" asp-route-userId=@Model.UserId role="button">+</a></td>
-                        <td align="right">@(item.Product.Cost * item.Amount) рублей</td>
+                        <td>@(item.Product.Cost * item.Amount) &#8381</td>
                     </tr>
-                    <tr><td>Написана в @item.Product.Year году</td> </tr>
                 </tbody>
+            </table>
             }
-        </table>
+
         <br />
-        <p class="tab-total" rowspan="5"><b>Итоговая сумма заказа @Model.TotalCost() рублей</b></p>
+        <p class="tab-total" rowspan="5"><b>Итоговая сумма заказа @Model.TotalCost() &#8381</b></p>
         <p>
             <div align="center">
-                <a class="btn btn-outline-primary col-md-3 btn-lg btn-options" asp-controller="basket" asp-action="clear" role="button">Очистить корзину</a>
-                <a class="btn btn-outline-secondary col-md-4 btn-lg btn-options" asp-controller="home" asp-action="index" role="button">Продолжить покупки</a>
+                <a class="btn btn-outline-secondary col-md-3 btn-lg btn-options" asp-controller="basket" asp-action="clear" role="button">Очистить корзину</a>
+                <a class="btn btn-warning col-md-4 btn-lg btn-options" asp-controller="home" asp-action="index" role="button">Продолжить покупки</a>
                 <a class="btn btn-success col-md-4 btn-lg btn-options" asp-controller="order" asp-action="index" role="button">Оформить заказ</a>
             </div>
         </p>
