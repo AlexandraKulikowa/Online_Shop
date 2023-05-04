@@ -332,16 +332,17 @@ input[type="radio"],
 input[type="checkbox"],
 input[type="date"],
 textarea {
-    text-align: justify-all;
-    font-size: 11px;
+    font-size: 14px;
     color: darkslategrey;
     font-weight: 300;
-    background-color:antiquewhite;
-    padding: 7px;
+    background-color: antiquewhite;
     margin: 3px 0 3px 8px;
     box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
-    border-radius:22px;
+    border-radius: 22px;
     border: 0;
+    padding: 1em 1em 1em 1em;
+    justify-content:space-around;
+    align-items:baseline;
 }
 
 .form {
@@ -432,7 +433,7 @@ label {
 }
 
 .details {
-    color: midnightblue;
+    color:midnightblue;
     background-color: antiquewhite;
     border: 1px solid midnightblue;
     font-size: medium;
@@ -440,6 +441,7 @@ label {
     box-shadow: 4px 4px 4px;
     text-align: center;
     width: 100%;
+    border-radius: 22px;
 }
 
 .details-admin {
@@ -693,6 +695,7 @@ legend {
     box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
     background-color: antiquewhite;
     border: 0;
+    font-size:16px;
 }
 
 .form-ctrlplus {
@@ -743,6 +746,13 @@ legend {
     border-color: darkslategray;
     box-shadow: 4px 4px 4px;
     font-size: 18px;
+}
+
+input,
+textarea,
+date::placeholder {
+    font: 14px sans-serif;
+    padding: 17px 10px 10px 10px;
 }
 
 .leftblock {

@@ -9,7 +9,7 @@ else
 {
     <div class="validation" asp-validation-summary="All">
         <div class="card orderbox">
-            <form class="form" autocomplete="on" method="post">
+            <form autocomplete="on" method="post">
                 <fieldset>
                     <legend>Оставьте свои контактные данные</legend>
 
@@ -52,7 +52,7 @@ else
                     <br>
 
                     <label asp-for="DateofDelivery">Введите дату желаемой доставки</label>
-                    <input type="date" asp-for="DateofDelivery">
+                    <input type="date" class="form-ctrl" asp-for="DateofDelivery">
                     <span asp-validation-for="DateofDelivery"></span>
                     <br>
 
