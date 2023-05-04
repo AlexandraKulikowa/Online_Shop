@@ -1,6 +1,6 @@
 ﻿@model List<Product>
 
-@if (!Model.Any())
+@if (Model == null || !Model.Any())
 {
     <div class="order">
         <h2>Сожалеем, в нашем магазине нет такого товара. Вернитесь на главную страницу...</h2>
