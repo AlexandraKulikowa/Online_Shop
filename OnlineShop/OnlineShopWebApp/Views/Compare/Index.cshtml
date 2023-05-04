@@ -9,39 +9,41 @@
 else
 {
     @await Html.PartialAsync("Search")
-    <div class="row comparecard">
+    <div class="row">
         @foreach (var product in Model.Products)
         {
-            <div class="col-4 card-shadow border-success comparelist table-responsive">
-                <br>
-                <center><img src=@product.ImagePath alt="Фото картины" height="200"></center>
-                <br>
-                <table class="table-compare" style="margin-right:auto;margin-left:0px">
-                    <tr>
-                        <th class="bg-success" height="50px">@product.Name</th>
-                    </tr>
-                    <tr><td height="70px">@product.Description</td></tr>
-                    <tr><td>Жанр: @product.Genre</td></tr>
-                    <tr><td>Техника: @product.PaintingTechnique</td></tr>
-                    <tr><td>Размер: @product.Size</td></tr>
-                    <tr><td>@product.Year год</td></tr>
-                    @if (product.IsPromo == true)
-                    {
-                        <tr class="table-warning"><td height="45px">Акция на товар!</td></tr>
-                    }
-                    else
-                    {
-                        <tr><td height="45px"></td></tr>
-                    }
-                    <tr><td>@product.Cost рублей</td></tr>
-                </table>
-                <div class="btn-group" role="group">
-                    <a class="btn btn-outline-secondary mt-auto" asp-controller="compare" asp-action="delete" asp-route-id=@product.Id role="button">Удалить из сравнения</a>
-                    <a class="btn btn-danger mt-auto" asp-controller="favourite" asp-action="add" asp-route-id=@product.Id role="button">В избранное</a>
-                    <a class="btn btn-success mt-auto" asp-controller="basket" asp-action="add" asp-route-id=@product.Id role="button">Добавить в корзину</a>
+            <div class="col-3">
+                <div class="comparelist table-responsive">
+                    <br>
+                    <center><img src=@product.ImagePath alt="Фото картины" height="150"></center>
+                    <br>
+                    <table class="table-compare">
+                        <tr>
+                            <th class="bg-success" height="50px">@product.Name</th>
+                        </tr>
+                        <tr><td height="50px">@product.Description</td></tr>
+                        <tr><td>Жанр: @product.Genre</td></tr>
+                        <tr><td>Техника: @product.PaintingTechnique</td></tr>
+                        <tr><td>Размер: @product.Size</td></tr>
+                        <tr><td>@product.Year год</td></tr>
+                        @if (product.IsPromo == true)
+                        {
+                            <tr class="table-warning"><td height="30px">Акция на товар!</td></tr>
+                        }
+                        else
+                        {
+                            <tr><td height="30px"></td></tr>
+                        }
+                        <tr><td>@product.Cost рублей</td></tr>
+                    </table>
+                    <div class="btn-group" role="group">
+                        <a class="btn button-compare-clear mt-auto" asp-controller="compare" asp-action="delete" asp-route-id=@product.Id role="button">Удалить из сравнения</a>
+                        <a class="btn button-compare-favor mt-auto" asp-controller="favourite" asp-action="add" asp-route-id=@product.Id role="button">В избранное</a>
+                        <a class="btn button-compare-add mt-auto" asp-controller="basket" asp-action="add" asp-route-id=@product.Id role="button">Добавить в корзину</a>
+                    </div>
                 </div>
             </div>
         }
     </div>
-    <a class="btn btn-lg col-12 btn-outline-dark" asp-controller="compare" asp-action="clear" asp-route-userId=@Model.UserId role="button">Очистить страницу</a>
+    <a class="btn btn-lg col-12 btn-dark" asp-controller="compare" asp-action="clear" asp-route-userId=@Model.UserId role="button">Очистить страницу</a>
 }

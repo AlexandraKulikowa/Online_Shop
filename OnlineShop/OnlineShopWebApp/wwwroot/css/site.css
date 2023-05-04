@@ -276,11 +276,13 @@ table {
 }
 
 .table-compare {
-    text-align: justify;
-    font-size: 24px;
+    text-align: center;
     color: darkslategray;
     table-layout: fixed;
     width: 100%;
+    margin: 0 0 0 0;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .table-favour {
@@ -399,15 +401,6 @@ label {
     font-style: italic;
 }
 
-.comparelist {
-    font-size: 13px;
-    background-color: antiquewhite;
-    border: solid 1px green;
-    margin-bottom: 20px;
-    border-radius:22px;
-    padding-bottom:8px;
-}
-
 .favourlist {
     background-color: antiquewhite;
     border: solid 1px green;
@@ -416,11 +409,27 @@ label {
     padding-bottom: 3px;
     display: flex;
     flex-direction: column;
+}
 
+.comparelist {
+    background-color: antiquewhite;
+    border: solid 1px green;
+    margin-bottom: 20px;
+    border-radius: 22px;
+    display: inline-flex;
+    flex-direction: column;
 }
 
 .comparecard {
+    margin-top:5%;
     margin-bottom: 10%;
+    padding: 15px 15px 0px 15px;
+    height: 100%;
+    font-size: 16px;
+    font-weight:400;
+    background-color: antiquewhite;
+    border: solid 1px green;
+    border-radius: 22px;
 }
 
 .circleforbasket {
@@ -609,6 +618,62 @@ legend {
 
     .button-tocompare:hover {
         background-color:goldenrod;
+    }
+
+.button-compare-clear {
+    color: antiquewhite;
+    user-select: none;
+    outline: none;
+    background-color:darkgrey;
+    padding: 1px 1px 0px 1px;
+    text-align: center;
+    align-items: center;
+    width: 34px;
+    height: 40px;
+    border-bottom-left-radius: 18px;
+    font-size: 10px;
+    margin: 0px 0px 0px 0px;
+}
+
+    .button-compare-clear:hover {
+        background-color:slategray;
+    }
+.button-compare-favor {
+    color: antiquewhite;
+    user-select: none;
+    outline: none;
+    background-color:brown;
+    padding: 9px 1px 1px 1px;
+    text-align: center;
+    align-items: center;
+    width: 34px;
+    height: 40px;
+    font-size: 10px;
+    box-shadow: 0px 1px 1px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+    .button-compare-favor:hover {
+        background-color:darkred;
+    }
+.button-compare-add {
+    color: antiquewhite;
+    user-select: none;
+    outline: none;
+    background-color:green;
+    padding: 1px 1px 1px 1px;
+    text-align: center;
+    align-items: center;
+    width: 34px;
+    height: 40px;
+    border-bottom-right-radius: 18px;
+    font-size: 10px;
+    box-shadow: 0px 1px 1px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+    .button-compare-add:hover {
+        background-color: darkslategrey;
     }
 
 .button-register {

@@ -11,7 +11,7 @@ else
     <center>
         <h2 style="color:aliceblue"><b>Избранное</b></h2>
     </center>
-    <div class="row comparecard">
+    <div class="row">
         @foreach (var product in Model.Products)
         {
             <div class="col-2 card-shadow border-success favourlist">
@@ -44,5 +44,5 @@ else
             </div>
         }
     </div>
-    <a class="btn btn-lg col-12 btn-outline-dark" asp-controller="favourite" asp-action="clear" asp-route-userId=@Model.UserId role="button">Очистить страницу</a>
+    <a class="btn btn-lg col-12 btn-dark" asp-controller="favourite" asp-action="clear" asp-route-userId=@Model.UserId role="button">Очистить страницу</a>
 }
