@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 
@@ -7,9 +8,11 @@ namespace OnlineShopWebApp.Controllers
     public class LoginController : Controller
     {
         private readonly IUsersRepository users;
-        public LoginController(IUsersRepository users)
+        private readonly IRolesRepository roles;
+        public LoginController(IUsersRepository users, IRolesRepository roles)
         {
             this.users = users;
+            this.roles = roles;
         }
         public IActionResult Index()
         {
@@ -46,6 +49,8 @@ namespace OnlineShopWebApp.Controllers
 
             if (ModelState.IsValid)
             {
+                Role userRole = roles.TryGetById(2);
+                registration.Role = userRole;
                 users.Add(registration);
                 return Redirect("~/Home/Index/");
             }

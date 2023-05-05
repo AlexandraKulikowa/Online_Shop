@@ -1,5 +1,4 @@
-﻿using OnlineShopWebApp.Models;
-
+﻿
 namespace OnlineShopWebApp.Repositories
 {
     public static class Constants
