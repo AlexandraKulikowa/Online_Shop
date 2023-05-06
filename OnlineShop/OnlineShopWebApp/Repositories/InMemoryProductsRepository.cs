@@ -35,7 +35,7 @@ namespace OnlineShopWebApp.Repositories
 
         public List<Product> Search(string name)
         {
-            if (name == null)
+            if(name == null)
                 return null;
             name = name.ToLower();
             var result = listProducts.Where(x => x.Name.ToLower().Contains(name)).ToList();
