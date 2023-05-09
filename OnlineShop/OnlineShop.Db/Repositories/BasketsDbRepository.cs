@@ -1,19 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using OnlineShopWebApp.Interfaces;
-using OnlineShopWebApp.Models;
+using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db.Interfaces;
+using OnlineShop.Db.Models;
 
-namespace OnlineShopWebApp.Repositories
+namespace OnlineShop.Db.Repositories
 {
-    public class InMemoryBasketsRepository : IBasketRepository
+    public class BasketsDbRepository : IBasketsRepository
     {
-        private List<Basket> baskets = new List<Basket>();
-        public List<Basket> Baskets => baskets;
+        private readonly DatabaseContext databaseContext;
+
+        public BasketsDbRepository(DatabaseContext databaseContext)
+        {
+            this.databaseContext = databaseContext;
+        }
+
         public Basket TryGetByUserId(string userId)
         {
-            return baskets.FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Baskets.Include(x => x.BasketItems).FirstOrDefault(x => x.UserId == userId);
         }
+
         public void Add(Product product, string userId)
         {
             var existingBasket = TryGetByUserId(userId);
@@ -22,35 +28,35 @@ namespace OnlineShopWebApp.Repositories
                 var newBasket = new Basket
                 {
                     UserId = userId,
-                    ProductsInBasket = new List<BasketItem>
+                    BasketItems = new List<BasketItem>
                     {
                         new BasketItem
                         {
-                            Id = Guid.NewGuid(),
                             Product = product,
                             Amount = 1
                         }
                     }
                 };
-                Baskets.Add(newBasket);
+                databaseContext.Baskets.Add(newBasket);
+                databaseContext.SaveChanges();
             }
             else
             {
-                var existingBasketItem = existingBasket.ProductsInBasket.FirstOrDefault(x => x.Product.Id == product.Id);
+                var existingBasketItem = existingBasket.BasketItems.FirstOrDefault(x => x.Product.Id == product.Id);
                 if (existingBasketItem != null)
                 {
                     existingBasketItem.Amount += 1;
                 }
                 else
                 {
-                    existingBasket.ProductsInBasket.Add(new BasketItem
+                    existingBasket.BasketItems.Add(new BasketItem
                     {
-                        Id = Guid.NewGuid(),
                         Product = product,
                         Amount = 1
                     });
                 }
             }
+            databaseContext.SaveChanges();
         }
         public void ChangeAmount(int id, bool sign, string userId)
         {
@@ -60,7 +66,7 @@ namespace OnlineShopWebApp.Repositories
 
             var ProductForChange = new BasketItem();
 
-            foreach (BasketItem item in existingBasket.ProductsInBasket)
+            foreach (BasketItem item in existingBasket.BasketItems)
             {
                 if (item.Product.Id == id)
                     ProductForChange = item;
@@ -74,17 +80,21 @@ namespace OnlineShopWebApp.Repositories
             {
                 ProductForChange.ChangeAmount(sign);
             }
+            databaseContext.SaveChanges();
         }
         public void ClearItem(string userId, int id)
         {
             var basket = TryGetByUserId(userId);
-            var basketitem = basket.ProductsInBasket.FirstOrDefault(x => x.Product.Id == id);
-            basket.ProductsInBasket.Remove(basketitem);
+            var basketitem = basket.BasketItems.FirstOrDefault(x => x.Product.Id == id);
+            databaseContext.Remove(basketitem);
+            databaseContext.SaveChanges();
         }
+
         public void Clear(string userId)
         {
             var basket = TryGetByUserId(userId);
-            basket.ProductsInBasket.Clear();
+            basket.BasketItems.Clear();
+            databaseContext.SaveChanges();
         }
     }
 }

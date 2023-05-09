@@ -785,8 +785,7 @@ legend {
 .adminproducts {
     width: 70%;
     height: 70%;
-    overflow: auto;
-    margin-left:auto;
+    margin-left:2%;
     margin-right: auto;
     margin-top: auto;
     padding: 27px 2px 20px 12px;
@@ -887,11 +886,11 @@ date::placeholder {
 
 .addproducts {
     width: 35%;
-    height: 75%;
+    height: 92%;
     margin-left: auto;
     margin-right: auto;
     margin-top: auto;
-    padding: 10px 2px 8px 16px;
+    padding: 10px 15px 8px 15px;
     background-color: antiquewhite;
     border-radius: 22px;
     border-color: darkslategray;
@@ -945,7 +944,7 @@ modal-footer{
 
 .editproducts {
     width: 40%;
-    height: 70%;
+    height: 85%;
     margin-left: 14px;
     margin-right: auto;
     margin-top: auto;

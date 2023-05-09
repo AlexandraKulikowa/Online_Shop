@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using OnlineShopWebApp.Models;
+﻿using OnlineShop.Db.Models;
+using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Interfaces
+namespace OnlineShop.Db.Interfaces
 {
     public interface IProductsRepository
     {

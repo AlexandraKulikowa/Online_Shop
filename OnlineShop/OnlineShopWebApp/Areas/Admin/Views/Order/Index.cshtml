@@ -16,7 +16,15 @@ else
         <center><h2>Список заказов</h2></center>
         <table>
             <thead>
-                <tr><th>№</th><th>ID пользователя</th><th>Сумма заказа</th><th>Статус</th><th>Дата</th><th>Время</th><th>Детали</th></tr>
+                <tr>
+                    <th>№</th>
+                    <th>ID пользователя</th>
+                    <th>Сумма заказа</th>
+                    <th>Статус</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                    <th>Детали</th>
+                </tr>
             </thead>
             @foreach (var order in Model)
             {

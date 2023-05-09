@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class Size
+    public class SizeViewModel
     {
         [Required(ErrorMessage = "Введите ширину товара")]
         [Range(6, 200, ErrorMessage = "Введите корректное значение")]
@@ -13,8 +13,8 @@ namespace OnlineShopWebApp.Models
         public int Height { get; set; }
 
         public bool IsFrame { get; set; }
-        public Size() { }
-        public Size(int width, int height, bool isframe)
+        public SizeViewModel() { }
+        public SizeViewModel(int width, int height, bool isframe)
         {
             Width = width;
             Height = height;

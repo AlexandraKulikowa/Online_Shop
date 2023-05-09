@@ -39,7 +39,7 @@ namespace OnlineShopWebApp.Areas.Admin.Models
 
         public DateTime DateofOrder { get; set; } = DateTime.Now;
 
-        public List<BasketItem> Products { get; set; } = new List<BasketItem>();
+        public List<BasketItemViewModel> Products { get; set; } = new List<BasketItemViewModel>();
 
         public decimal TotalCost()
         {

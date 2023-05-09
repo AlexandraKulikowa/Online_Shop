@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
+using OnlineShop.Db.Interfaces;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Controllers
@@ -7,8 +8,8 @@ namespace OnlineShopWebApp.Controllers
     public class BasketController : Controller
     {
         private readonly IProductsRepository products;
-        private readonly IBasketRepository baskets;
-        public BasketController(IProductsRepository products, IBasketRepository baskets)
+        private readonly IBasketsRepository baskets;
+        public BasketController(IProductsRepository products, IBasketsRepository baskets)
         {
             this.products = products;
             this.baskets = baskets;
@@ -16,7 +17,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var basket = baskets.TryGetByUserId(Constants.UserId);
-            return View(basket);
+            var basketVM = Mapping.ToBasketViewModel(basket);
+            return View(basketVM);
         }
         public IActionResult Add(int id)
         {

@@ -1,12 +1,13 @@
 ﻿using System;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
-    public class BasketItem
+    public class BasketItemViewModel
     {
-        public Guid Id { get; set; }
-        public Product Product { get; set; }
+        public int Id { get; set; }
+        public ProductViewModel Product { get; set; }
         public int Amount { get; set; }
         public decimal Cost
         {
@@ -15,8 +16,8 @@ namespace OnlineShopWebApp
                 return Product.Cost * Amount;
             }
         }
-        public BasketItem() { }
-        public BasketItem(Product product, int amount)
+        public BasketItemViewModel() { }
+        public BasketItemViewModel(ProductViewModel product, int amount)
         {
             Product = product;
             Amount = amount;

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Interfaces;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
 
@@ -15,7 +17,9 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index(int id)
         {
-            return View(products.TryGetById(id));
+            var product = products.TryGetById(id);
+            var productVM = Mapping.ToProductViewModel(product);
+            return View(productVM);
         }
         public IActionResult Compare(int id)
         {
@@ -28,7 +32,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult SearchResult(string search)
         {
             var searchresult = products.Search(search);
-            return View(searchresult);
+            var searchresultVM = Mapping.ToProductViewModels(searchresult);
+            return View(searchresultVM);
         }
     }
 }

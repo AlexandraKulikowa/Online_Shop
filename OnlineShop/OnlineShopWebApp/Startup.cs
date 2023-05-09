@@ -1,11 +1,16 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShop.Db;
+using OnlineShop.Db.Interfaces;
+using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
 using Serilog;
+
 
 namespace OnlineShopWebApp
 {
@@ -19,13 +24,17 @@ namespace OnlineShopWebApp
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("OnlineShopKulikowa");
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
+
+
             services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
             services.AddSingleton<ICompareRepository, InMemoryCompareRepository>();
             services.AddSingleton<IFavouriteRepository, InMemoryFavouriveRepository>();
             services.AddSingleton<IOrderRepository, InMemoryOrdersRepository>();
-            services.AddSingleton<IBasketRepository, InMemoryBasketsRepository>();
-            services.AddSingleton<IProductsRepository, InMemoryProductsRepository>();
+            services.AddTransient<IBasketsRepository, BasketsDbRepository>();
+            services.AddTransient<IProductsRepository, ProductsDbRepository>();
             services.AddControllersWithViews();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

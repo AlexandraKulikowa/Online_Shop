@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OnlineShop.Db.Models;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Models
 {

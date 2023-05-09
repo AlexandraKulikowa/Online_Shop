@@ -1,11 +1,9 @@
-﻿using OnlineShopWebApp.Models;
-using System.Collections.Generic;
+﻿using OnlineShop.Db.Models;
 
-namespace OnlineShopWebApp.Interfaces
+namespace OnlineShop.Db.Interfaces
 {
-    public interface IBasketRepository
+    public interface IBasketsRepository
     {
-        List<Basket> Baskets { get; }
         Basket TryGetByUserId(string userId);
         void Add(Product product, string userId);
         void ChangeAmount(int id, bool sign, string userId);

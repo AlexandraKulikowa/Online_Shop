@@ -1,20 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
+using OnlineShop.Db.Interfaces;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Basket
 {
     public class BasketViewComponent : ViewComponent
     {
-        private readonly IBasketRepository basketRepository;
-        public BasketViewComponent(IBasketRepository basketRepository)
+        private readonly IBasketsRepository basketRepository;
+        public BasketViewComponent(IBasketsRepository basketRepository)
         {
             this.basketRepository = basketRepository;
         }
         public IViewComponentResult Invoke()
         {
             var basket = basketRepository.TryGetByUserId(Constants.UserId);
-            var productCounts = basket?.Amount() ?? 0;
+            var basketVM = Mapping.ToBasketViewModel(basket);
+            var productCounts = basketVM?.Amount() ?? 0;
             return View("Basket", productCounts);
         }
     }

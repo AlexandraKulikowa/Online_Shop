@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Interfaces;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
 
@@ -15,7 +17,9 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            return View(products.GetAll());
+            var productsDb = products.GetAll();
+            var productsViewModels = Mapping.ToProductViewModels(productsDb);
+            return View(productsViewModels);
         }
         public IActionResult Compare(int id)
         {

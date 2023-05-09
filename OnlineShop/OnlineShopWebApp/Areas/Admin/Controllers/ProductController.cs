@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
+using OnlineShop.Db.Interfaces;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -13,7 +14,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var productlist = products.GetAll();
-            return View(productlist);
+            var productsVM = Mapping.ToProductViewModels(productlist);
+            return View(productsVM);
         }
 
         public IActionResult Add()
@@ -24,12 +26,15 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             var product = products.TryGetById(id);
-            return View(product);
+            var productVM = Mapping.ToProductViewModel(product);
+            return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Update(Product product)
+        public IActionResult Update(ProductViewModel productVM)
         {
+            var product = Mapping.ToProduct(productVM);
+
             if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
 
@@ -39,12 +44,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View("Edit", product);
+            return View("Edit", productVM);
         }
 
         [HttpPost]
-        public IActionResult Add(Product product)
+        public IActionResult Add(ProductViewModel productVM)
         {
+            var product = Mapping.ToProduct(productVM);
+
             if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
 
@@ -53,7 +60,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 products.Add(product);
                 return RedirectToAction("Index");
             }
-            return View("Add", product);
+            return View("Add", productVM);
         }
         public IActionResult Delete(int id)
         {

@@ -3,10 +3,10 @@ using OnlineShopWebApp.Interfaces;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class OrderDetails : Controller
+    public class OrderDetailsController : Controller
     {
         private readonly IOrderRepository orders;
-        public OrderDetails(IOrderRepository orders)
+        public OrderDetailsController(IOrderRepository orders)
         {
             this.orders = orders;
         }

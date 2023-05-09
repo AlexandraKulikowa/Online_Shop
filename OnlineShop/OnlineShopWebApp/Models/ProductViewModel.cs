@@ -4,9 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace OnlineShopWebApp.Models
 
 {
-    public class Product
+    public class ProductViewModel
     {
-        private static int counter = 1;
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Вы не ввели название товара")]
@@ -28,7 +27,7 @@ namespace OnlineShopWebApp.Models
         [StringLength(15, MinimumLength = 5, ErrorMessage = "Введите верное значение")]
         public string PaintingTechnique { get; set; }
 
-        public Size Size { get; set; }
+        public SizeViewModel Size { get; set; }
 
         [Required(ErrorMessage = "Это неверный год создания!")]
         [Range(2015, 2023, ErrorMessage = "Введите корректное значение")]
@@ -37,31 +36,8 @@ namespace OnlineShopWebApp.Models
         public bool IsPromo { get; set; }
 
         [RegularExpression(@"^((~)?)(\/.*\/)(?!\.\.$|\.$)([^\/]+)$", ErrorMessage = "Неверное значение")]
-        [StringLength(35, MinimumLength = 8, ErrorMessage = "Введите верное значение")]
+        [StringLength(50, MinimumLength = 8, ErrorMessage = "Введите верное значение")]
         public string ImagePath { get; set; }
 
-        public Product()
-        {
-            Id = counter;
-            counter++;
-        }
-        public Product(string name, decimal cost, string description, Genre genre, string paintingTechnique, Size size, int year, bool ispromo, string imagePath)
-        {
-            Id = counter;
-            Name = name;
-            Cost = cost;
-            Description = description;
-            Genre = genre;
-            PaintingTechnique = paintingTechnique;
-            Size = size;
-            Year = year;
-            IsPromo = ispromo;
-            ImagePath = imagePath;
-            counter++;
-        }
-        public override string ToString()
-        {
-            return $"{Id} \n{Name} \n{Cost}";
-        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Areas.Admin.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
 using System;
@@ -9,9 +11,9 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IBasketRepository baskets;
+        private readonly IBasketsRepository baskets;
         private readonly IOrderRepository orders;
-        public OrderController(IBasketRepository baskets, IOrderRepository orders)
+        public OrderController(IBasketsRepository baskets, IOrderRepository orders)
         {
             this.baskets = baskets;
             this.orders = orders;
@@ -19,8 +21,9 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var basketById = baskets.TryGetByUserId(Constants.UserId);
-            ViewBag.Basket = basketById.ProductsInBasket.Any();
-            ViewBag.TotalCost = basketById.TotalCost();
+            var basketVM = Mapping.ToBasketViewModel(basketById);
+            ViewBag.Basket = basketVM.ProductsInBasket.Any();
+            ViewBag.TotalCost = basketVM.TotalCost();
             return View();
         }
 
@@ -30,7 +33,8 @@ namespace OnlineShopWebApp.Controllers
             if(ModelState.IsValid)
             {
                 var basket = baskets.TryGetByUserId(Constants.UserId);
-                order.Products.AddRange(basket.ProductsInBasket.ToArray());
+                var basketVM = Mapping.ToBasketViewModel(basket);
+                order.Products.AddRange(basketVM.ProductsInBasket.ToArray());
                 orders.Add(order);
                 baskets.Clear(Constants.UserId);
                 return RedirectToAction("Result", order);
