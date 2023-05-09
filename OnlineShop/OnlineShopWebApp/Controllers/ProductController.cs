@@ -24,7 +24,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Compare(int id)
         {
             var product = products.TryGetById(id);
-            compareList.Add(product, Constants.UserId);
+            var productVM = Mapping.ToProductViewModel(product);
+            compareList.Add(productVM, Constants.UserId);
             return Redirect("~/Compare/Index/");
         }
 

@@ -20,9 +20,9 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var basketById = baskets.TryGetByUserId(Constants.UserId);
-            var basketVM = Mapping.ToBasketViewModel(basketById);
-            ViewBag.Basket = basketVM.ProductsInBasket.Any();
+            var basket = baskets.TryGetByUserId(Constants.UserId);
+            var basketVM = Mapping.ToBasketViewModel(basket);
+            ViewBag.Basket = basketVM.BasketItems.Any();
             ViewBag.TotalCost = basketVM.TotalCost();
             return View();
         }
@@ -30,11 +30,11 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult ToCheckOut(Order order)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var basket = baskets.TryGetByUserId(Constants.UserId);
                 var basketVM = Mapping.ToBasketViewModel(basket);
-                order.Products.AddRange(basketVM.ProductsInBasket.ToArray());
+                order.Products.AddRange(basketVM.BasketItems.ToArray());
                 orders.Add(order);
                 baskets.Clear(Constants.UserId);
                 return RedirectToAction("Result", order);
@@ -52,7 +52,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult CheckDate(DateTime DateofDelivery)
         {
             TimeSpan diff = DateofDelivery.Subtract(DateTime.Now);
-            if(diff.TotalDays > 0)
+            if (diff.TotalDays > 0)
                 return Json(true);
             return Json(false);
         }

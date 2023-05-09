@@ -9,11 +9,13 @@ namespace OnlineShopWebApp.Repositories
     public class InMemoryFavouriveRepository : IFavouriteRepository
     {
         private List<Favourites> favouriteList = new List<Favourites>();
+
         public Favourites TryGetByUserId(string userId)
         {
             return favouriteList.FirstOrDefault(x => x.UserId == userId);
         }
-        public void Add(Product product, string userId)
+
+        public void Add(ProductViewModel product, string userId)
         {
             var existingList = TryGetByUserId(userId);
             if (existingList == null)
@@ -21,7 +23,7 @@ namespace OnlineShopWebApp.Repositories
                 var newList = new Favourites
                 {
                     UserId = userId,
-                    Products = new List<Product> { product }
+                    Products = new List<ProductViewModel> { product }
                 };
                 favouriteList.Add(newList);
             }
@@ -34,6 +36,7 @@ namespace OnlineShopWebApp.Repositories
                 }
             }
         }
+
         public void DeleteFavourite(string userId, int id)
         {
             var list = TryGetByUserId(userId);

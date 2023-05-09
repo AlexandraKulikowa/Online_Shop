@@ -1,6 +1,6 @@
 ﻿@model BasketViewModel
 
-@if (Model == null || !Model.ProductsInBasket.Any())
+@if (Model == null || !Model.BasketItems.Any())
 {
     <br />
     <center>
@@ -13,7 +13,7 @@ else
     <div class="card shadow basket-card">
         <h2><b>Ваша корзина</b></h2>
 
-            @foreach (BasketItemViewModel item in Model.ProductsInBasket)
+            @foreach (BasketItemViewModel item in Model.BasketItems)
             {
             <table>
                 <tbody>

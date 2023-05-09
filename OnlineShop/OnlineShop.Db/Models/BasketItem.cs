@@ -8,12 +8,6 @@ namespace OnlineShop.Db
         public Product Product { get; set; }
         public int Amount { get; set; }
         public Basket Basket { get; set; }
-        public void ChangeAmount(bool sign)
-        {
-            if (sign)
-                Amount++;
-            else
-                Amount--;
-        }
+
     }
 }

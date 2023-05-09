@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
 
@@ -23,7 +24,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Add(int id)
         {
             var product = products.TryGetById(id);
-            favourites.Add(product, Constants.UserId);
+            var productVM = Mapping.ToProductViewModel(product);
+            favourites.Add(productVM, Constants.UserId);
             return RedirectToAction("Index");
         }
         public IActionResult Delete(int id)

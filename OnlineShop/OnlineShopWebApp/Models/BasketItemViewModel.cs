@@ -1,6 +1,4 @@
-﻿using System;
-using OnlineShop.Db.Models;
-using OnlineShopWebApp.Models;
+﻿using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp
 {
@@ -21,13 +19,6 @@ namespace OnlineShopWebApp
         {
             Product = product;
             Amount = amount;
-        }
-        public void ChangeAmount(bool sign)
-        {
-            if (sign)
-                Amount++;
-            else
-                Amount--;
         }
     }
 }

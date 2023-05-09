@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using OnlineShop.Db;
+﻿using OnlineShop.Db;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
@@ -74,18 +73,26 @@ namespace OnlineShopWebApp.Helpers
 
         public static BasketViewModel ToBasketViewModel(Basket basket)
         {
-            var productsInBasketViewModels = new List<BasketItemViewModel>();
+            if (basket == null || basket.BasketItems == null)
+            {
+                basket = new Basket();
+                basket.BasketItems = new List<BasketItem>();
+            }
+
+            var basketItemsViewModels = new List<BasketItemViewModel>();
+
             foreach (var basketitem in basket.BasketItems)
             {
-                productsInBasketViewModels.Add(ToBasketItemViewModel(basketitem));
+                basketItemsViewModels.Add(ToBasketItemViewModel(basketitem));
             }
             return new BasketViewModel
             {
                 Id = basket.Id,
                 UserId = basket.UserId,
-                ProductsInBasket = productsInBasketViewModels
+                BasketItems = basketItemsViewModels
             };
         }
+
         public static BasketItemViewModel ToBasketItemViewModel(BasketItem basketItem)
         {
             return new BasketItemViewModel
@@ -97,5 +104,3 @@ namespace OnlineShopWebApp.Helpers
         }
     }
 }
-
-

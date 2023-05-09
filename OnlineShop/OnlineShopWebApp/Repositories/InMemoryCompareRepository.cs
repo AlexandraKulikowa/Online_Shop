@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using OnlineShopWebApp.Interfaces;
-using OnlineShop.Db.Models;
 
 namespace OnlineShopWebApp.Repositories
 {
@@ -14,7 +13,7 @@ namespace OnlineShopWebApp.Repositories
         {
             return compareList.FirstOrDefault(x => x.UserId == userId);
         }
-        public void Add(Product product, string userId)
+        public void Add(ProductViewModel product, string userId)
         {
             var existingList = TryGetByUserId(userId);
             if (existingList == null)
@@ -22,7 +21,7 @@ namespace OnlineShopWebApp.Repositories
                 var newList = new Comparison
                 {
                     UserId = userId,
-                    Products = new List<Product> { product }
+                    Products = new List<ProductViewModel> { product }
                 };
                 compareList.Add(newList);
             }

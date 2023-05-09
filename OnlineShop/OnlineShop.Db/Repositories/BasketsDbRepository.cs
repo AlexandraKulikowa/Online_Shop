@@ -17,7 +17,7 @@ namespace OnlineShop.Db.Repositories
 
         public Basket TryGetByUserId(string userId)
         {
-            return databaseContext.Baskets.Include(x => x.BasketItems).FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Baskets.Include(x => x.BasketItems).ThenInclude(x => x.Product).ThenInclude(x => x.Size).FirstOrDefault(x => x.UserId == userId);
         }
 
         public void Add(Product product, string userId)
@@ -27,18 +27,20 @@ namespace OnlineShop.Db.Repositories
             {
                 var newBasket = new Basket
                 {
-                    UserId = userId,
-                    BasketItems = new List<BasketItem>
+                    UserId = userId
+                };
+
+                newBasket.BasketItems = new List<BasketItem>
                     {
                         new BasketItem
                         {
                             Product = product,
-                            Amount = 1
+                            Amount = 1,
+                            Basket = newBasket
                         }
-                    }
-                };
+                    };
+
                 databaseContext.Baskets.Add(newBasket);
-                databaseContext.SaveChanges();
             }
             else
             {
@@ -52,12 +54,14 @@ namespace OnlineShop.Db.Repositories
                     existingBasket.BasketItems.Add(new BasketItem
                     {
                         Product = product,
-                        Amount = 1
+                        Amount = 1,
+                        Basket = existingBasket
                     });
                 }
             }
             databaseContext.SaveChanges();
         }
+
         public void ChangeAmount(int id, bool sign, string userId)
         {
             var existingBasket = TryGetByUserId(userId);
@@ -78,22 +82,31 @@ namespace OnlineShop.Db.Repositories
             }
             else
             {
-                ProductForChange.ChangeAmount(sign);
+                ChangeAmountInBasketItem(sign, ProductForChange);
             }
             databaseContext.SaveChanges();
         }
+
+        public void ChangeAmountInBasketItem(bool sign, BasketItem ProductForChange)
+        {
+            if (sign)
+                ProductForChange.Amount++;
+            else
+                ProductForChange.Amount--;
+        }
+
         public void ClearItem(string userId, int id)
         {
             var basket = TryGetByUserId(userId);
             var basketitem = basket.BasketItems.FirstOrDefault(x => x.Product.Id == id);
-            databaseContext.Remove(basketitem);
+            databaseContext.BasketItems.Remove(basketitem);
             databaseContext.SaveChanges();
         }
 
         public void Clear(string userId)
         {
             var basket = TryGetByUserId(userId);
-            basket.BasketItems.Clear();
+            databaseContext.Baskets.Remove(basket);
             databaseContext.SaveChanges();
         }
     }

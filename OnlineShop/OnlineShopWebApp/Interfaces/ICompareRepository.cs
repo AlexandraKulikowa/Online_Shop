@@ -1,5 +1,4 @@
-﻿using OnlineShop.Db.Models;
-using OnlineShopWebApp.Models;
+﻿using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Interfaces
@@ -8,7 +7,7 @@ namespace OnlineShopWebApp.Interfaces
     {
         List<Comparison> CompareList { get; }
         Comparison TryGetByUserId(string userId);
-        void Add(Product product, string userId);
+        void Add(ProductViewModel product, string userId);
         void DeleteProduct(string userId, int id);
         void Clear(string userId);
     }
