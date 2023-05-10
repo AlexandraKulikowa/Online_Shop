@@ -9,6 +9,8 @@ namespace OnlineShop.Db
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<Comparison> Comparisons { get; set; }
+        public DbSet<Favourites> Favorites { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext>options) : base(options)
         {

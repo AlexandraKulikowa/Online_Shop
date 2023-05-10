@@ -27,6 +27,10 @@ namespace OnlineShop.Db.Models
 
         public List<BasketItem> BasketItems { get; set; }
 
+        public Comparison Comparison { get; set; }
+
+        public Favourites Favourites { get; set; }
+
         public Product()
         {
            BasketItems = new List<BasketItem>();

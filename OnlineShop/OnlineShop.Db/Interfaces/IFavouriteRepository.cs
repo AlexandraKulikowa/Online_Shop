@@ -1,7 +1,7 @@
 ﻿using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 
-namespace OnlineShopWebApp.Interfaces
+namespace OnlineShop.Db.Interfaces
 {
     public interface IFavouriteRepository
     {

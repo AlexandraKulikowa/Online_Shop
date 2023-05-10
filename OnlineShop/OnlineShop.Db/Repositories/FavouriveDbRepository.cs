@@ -1,21 +1,25 @@
-﻿using OnlineShopWebApp.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using OnlineShopWebApp.Interfaces;
 using OnlineShop.Db.Models;
+using OnlineShop.Db.Interfaces;
 
-namespace OnlineShopWebApp.Repositories
+namespace OnlineShop.Db.Repositories
 {
-    public class InMemoryFavouriveRepository : IFavouriteRepository
+    public class FavouritesDbRepository : IFavouriteRepository
     {
-        private List<Favourites> favouriteList = new List<Favourites>();
+        private readonly DatabaseContext databaseContext;
+
+        public FavouritesDbRepository(DatabaseContext databaseContext)
+        {
+            this.databaseContext = databaseContext;
+        }
 
         public Favourites TryGetByUserId(string userId)
         {
             return favouriteList.FirstOrDefault(x => x.UserId == userId);
         }
 
-        public void Add(ProductViewModel product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingList = TryGetByUserId(userId);
             if (existingList == null)
@@ -23,7 +27,7 @@ namespace OnlineShopWebApp.Repositories
                 var newList = new Favourites
                 {
                     UserId = userId,
-                    Products = new List<ProductViewModel> { product }
+                    Products = new List<Product> { product }
                 };
                 favouriteList.Add(newList);
             }

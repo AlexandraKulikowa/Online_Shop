@@ -1,19 +1,24 @@
-﻿using OnlineShopWebApp.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using OnlineShopWebApp.Interfaces;
+using OnlineShop.Db.Interfaces;
+using OnlineShop.Db.Models;
 
-namespace OnlineShopWebApp.Repositories
+namespace OnlineShop.Db.Repositories
 {
-    public class InMemoryCompareRepository : ICompareRepository
+    public class ComparesDbRepository : ICompareRepository
     {
-        private List<Comparison> compareList = new List<Comparison>();
-        public List<Comparison> CompareList => compareList;
+        private readonly DatabaseContext databaseContext;
+
+        public ComparesDbRepository(DatabaseContext databaseContext)
+        {
+            this.databaseContext = databaseContext;
+        }
+
         public Comparison TryGetByUserId(string userId)
         {
-            return compareList.FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.FirstOrDefault(x => x.UserId == userId);
         }
-        public void Add(ProductViewModel product, string userId)
+        public void Add(Product product, string userId)
         {
             var existingList = TryGetByUserId(userId);
             if (existingList == null)
@@ -21,7 +26,7 @@ namespace OnlineShopWebApp.Repositories
                 var newList = new Comparison
                 {
                     UserId = userId,
-                    Products = new List<ProductViewModel> { product }
+                    Products = new List<Product> { product }
                 };
                 compareList.Add(newList);
             }

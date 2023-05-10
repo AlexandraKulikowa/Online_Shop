@@ -1,7 +1,7 @@
 ﻿using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Interfaces
+namespace OnlineShop.Db.Interfaces
 {
     public interface ICompareRepository
     {
