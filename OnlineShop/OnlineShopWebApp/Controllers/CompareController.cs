@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Controllers
@@ -14,7 +15,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var list = compareList.TryGetByUserId(Constants.UserId);
-            return View(list);
+            var listVM = Mapping.ToComparisonViewModels(list);
+            return View(listVM);
         }
         public IActionResult Delete(int id)
         {

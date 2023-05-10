@@ -16,27 +16,59 @@ namespace OnlineShop.Db.Repositories
 
         public Favourites TryGetByUserId(string userId)
         {
-            return favouriteList.FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Favorites.FirstOrDefault(x => x.UserId == userId);
         }
 
         public void Add(Product product, string userId)
         {
             var existingList = TryGetByUserId(userId);
+
             if (existingList == null)
             {
                 var newList = new Favourites
                 {
-                    UserId = userId,
-                    Products = new List<Product> { product }
+                    UserId = userId
                 };
-                favouriteList.Add(newList);
+
+                newList.Products = new List<Product>
+                    {
+                        new Product
+                        {
+                            Id = product.Id,
+                            Name = product.Name,
+                            Cost = product.Cost,
+                            Description = product.Description,
+                            Size = product.Size,
+                            PaintingTechnique = product.PaintingTechnique,
+                            Genre = product.Genre,
+                            Year = product.Year,
+                            ImagePath = product.ImagePath,
+                            IsPromo = product.IsPromo,
+                            Favourites = newList
+                        }
+                    };
+
+                databaseContext.Favorites.Add(newList);
             }
             else
             {
                 var existingProduct = existingList.Products.FirstOrDefault(x => x.Id == product.Id);
                 if (existingProduct == null)
                 {
-                    existingList.Products.Add(product);
+                    existingList.Products.Add(new Product
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Cost = product.Cost,
+                        Description = product.Description,
+                        Size = product.Size,
+                        PaintingTechnique = product.PaintingTechnique,
+                        Genre = product.Genre,
+                        Year = product.Year,
+                        ImagePath = product.ImagePath,
+                        IsPromo = product.IsPromo,
+                        Favourites = existingList
+                    });
                 }
             }
         }
@@ -46,11 +78,14 @@ namespace OnlineShop.Db.Repositories
             var list = TryGetByUserId(userId);
             var product = list.Products.FirstOrDefault(x => x.Id == id);
             list.Products.Remove(product);
+            databaseContext.SaveChanges();
         }
+
         public void Clear(string userId)
         {
             var list = TryGetByUserId(userId);
-            list.Products.Clear();
+            databaseContext.Favorites.Remove(list);
+            databaseContext.SaveChanges();
         }
     }
 }

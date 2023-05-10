@@ -102,5 +102,40 @@ namespace OnlineShopWebApp.Helpers
                 Amount = basketItem.Amount,
             };
         }
+
+        public static ComparisonViewModel ToComparisonViewModels(Comparison comparison)
+        {
+            var productsViewModels = new List<ProductViewModel>();
+            foreach (var product in comparison.Products)
+            {
+                productsViewModels.Add(ToProductViewModel(product));
+            }
+
+            var comparisonViewModel = new ComparisonViewModel
+            {
+                UserId = comparison.UserId,
+                Products = productsViewModels
+            };
+
+            return comparisonViewModel;
+        }
+
+        public static FavouritesViewModel ToFavouriteViewModels(Favourites favourites)
+        {
+            var productsViewModels = new List<ProductViewModel>();
+
+            foreach (var product in favourites.Products)
+            {
+                productsViewModels.Add(ToProductViewModel(product));
+            }
+
+            var favouritesViewModel = new FavouritesViewModel
+            {
+                UserId = favourites.UserId,
+                Products = productsViewModels
+            };
+
+            return favouritesViewModel;
+        }
     }
 }

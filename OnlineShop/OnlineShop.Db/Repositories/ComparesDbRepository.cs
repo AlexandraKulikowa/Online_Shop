@@ -16,39 +16,75 @@ namespace OnlineShop.Db.Repositories
 
         public Comparison TryGetByUserId(string userId)
         {
-            return databaseContext.FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Comparisons.FirstOrDefault(x => x.UserId == userId);
         }
         public void Add(Product product, string userId)
         {
             var existingList = TryGetByUserId(userId);
+
             if (existingList == null)
             {
                 var newList = new Comparison
                 {
-                    UserId = userId,
-                    Products = new List<Product> { product }
+                    UserId = userId
                 };
-                compareList.Add(newList);
+
+                newList.Products = new List<Product>
+                    {
+                        new Product
+                        {
+                            Id = product.Id,
+                            Name = product.Name,
+                            Cost = product.Cost,
+                            Description = product.Description,
+                            Size = product.Size,
+                            PaintingTechnique = product.PaintingTechnique,
+                            Genre = product.Genre,
+                            Year = product.Year,
+                            ImagePath = product.ImagePath,
+                            IsPromo = product.IsPromo,
+                            Comparison = newList
+                        }
+                    };
+
+                databaseContext.Comparisons.Add(newList);
             }
             else
             {
                 var existingProduct = existingList.Products.FirstOrDefault(x => x.Id == product.Id);
                 if (existingProduct == null)
                 {
-                    existingList.Products.Add(product);
+                    existingList.Products.Add(new Product
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Cost = product.Cost,
+                        Description = product.Description,
+                        Size = product.Size,
+                        PaintingTechnique = product.PaintingTechnique,
+                        Genre = product.Genre,
+                        Year = product.Year,
+                        ImagePath = product.ImagePath,
+                        IsPromo = product.IsPromo,
+                        Comparison = existingList
+                    });
                 }
             }
+            databaseContext.SaveChanges();
         }
+
         public void DeleteProduct(string userId, int id)
         {
             var list = TryGetByUserId(userId);
             var product = list.Products.FirstOrDefault(x => x.Id == id);
             list.Products.Remove(product);
+            databaseContext.SaveChanges();
         }
         public void Clear(string userId)
         {
             var list = TryGetByUserId(userId);
-            list.Products.Clear();
+            databaseContext.Comparisons.Remove(list);
+            databaseContext.SaveChanges();
         }
     }
 }

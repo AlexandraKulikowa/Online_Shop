@@ -17,14 +17,14 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var list = favourites.TryGetByUserId(Constants.UserId);
-            return View(list);
+            var listVM = Mapping.ToFavouriteViewModels(list);
+            return View(listVM);
         }
 
         public IActionResult Add(int id)
         {
             var product = products.TryGetById(id);
-            var productVM = Mapping.ToProductViewModel(product);
-            favourites.Add(productVM, Constants.UserId);
+            favourites.Add(product, Constants.UserId);
             return RedirectToAction("Index");
         }
         public IActionResult Delete(int id)

@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class Comparison
+    public class FavouritesViewModel
     {
         public string UserId { get; set; }
         public List<ProductViewModel> Products { get; set; }
