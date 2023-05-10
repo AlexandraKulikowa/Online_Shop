@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 
 namespace OnlineShop.Db.Models
 
@@ -18,6 +19,8 @@ namespace OnlineShop.Db.Models
         public string PaintingTechnique { get; set; }
 
         public Size Size { get; set; }
+
+        public int SizeId { get; set; }
 
         public int Year { get; set; }
 

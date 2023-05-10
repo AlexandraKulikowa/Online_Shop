@@ -12,5 +12,6 @@ namespace OnlineShop.Db.Models
         public bool IsFrame { get; set; }
 
         public List<Product> Products { get; set; }
+
     }
 }

@@ -57,17 +57,21 @@ namespace OnlineShop.Db.Repositories
         {
             var existingProduct = TryGetById(product.Id);
 
-            existingProduct.Name = product.Name;
-            existingProduct.Cost = product.Cost;
-            existingProduct.Description = product.Description;
-            existingProduct.Genre = product.Genre;
-            existingProduct.PaintingTechnique = product.PaintingTechnique;
-            existingProduct.Size = product.Size;
-            existingProduct.Year = product.Year;
-            existingProduct.IsPromo = product.IsPromo;
-            existingProduct.ImagePath = product.ImagePath;
-            existingProduct.BasketItems = product.BasketItems;
+            if (existingProduct != null)
+            {
 
+                existingProduct.Name = product.Name;
+                existingProduct.Cost = product.Cost;
+                existingProduct.Description = product.Description;
+                existingProduct.Genre = product.Genre;
+                existingProduct.PaintingTechnique = product.PaintingTechnique;
+                existingProduct.Size = product.Size;
+                existingProduct.SizeId = product.SizeId;
+                existingProduct.Year = product.Year;
+                existingProduct.IsPromo = product.IsPromo;
+                existingProduct.ImagePath = product.ImagePath;
+                existingProduct.BasketItems = product.BasketItems;
+            }
             databaseContext.SaveChanges();
         }
 
