@@ -68,21 +68,21 @@ namespace OnlineShop.Db.Repositories
             if (existingBasket == null)
             { return; }
 
-            var ProductForChange = new BasketItem();
+            var product = new BasketItem();
 
             foreach (BasketItem item in existingBasket.BasketItems)
             {
                 if (item.Product.Id == id)
-                    ProductForChange = item;
+                    product = item;
             }
 
-            if (!sign && ProductForChange.Amount == 1)
+            if (!sign && product.Amount == 1)
             {
                 ClearItem(userId, id);
             }
             else
             {
-                ChangeAmountInBasketItem(sign, ProductForChange);
+                ChangeAmountInBasketItem(sign, product);
             }
             databaseContext.SaveChanges();
         }
