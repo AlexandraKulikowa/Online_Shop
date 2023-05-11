@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 
 namespace OnlineShop.Db.Models
 
@@ -29,14 +28,10 @@ namespace OnlineShop.Db.Models
         public string ImagePath { get; set; }
 
         public List<BasketItem> BasketItems { get; set; }
-
-        public Comparison Comparison { get; set; }
-
-        public Favourites Favourites { get; set; }
-
+        
         public Product()
         {
-           BasketItems = new List<BasketItem>();
+            BasketItems = new List<BasketItem>();
         }
 
     }

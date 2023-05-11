@@ -16,8 +16,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var list = favourites.TryGetByUserId(Constants.UserId);
-            var listVM = Mapping.ToFavouriteViewModels(list);
+            var list = favourites.GetAll(Constants.UserId);
+            var listVM = Mapping.ToProductViewModels(list);
             return View(listVM);
         }
 

@@ -1,31 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
         private readonly IProductsRepository products;
-        private readonly ICompareRepository compareList;
-        public ProductController(IProductsRepository products, ICompareRepository compareList)
+        public ProductController(IProductsRepository products)
         {
             this.products = products;
-            this.compareList = compareList;
         }
         public IActionResult Index(int id)
         {
             var product = products.TryGetById(id);
             var productVM = Mapping.ToProductViewModel(product);
             return View(productVM);
-        }
-        public IActionResult Compare(int id)
-        {
-            var product = products.TryGetById(id);
-            var productVM = Mapping.ToProductViewModel(product);
-            compareList.Add(productVM, Constants.UserId);
-            return Redirect("~/Compare/Index/");
         }
 
         [HttpPost]

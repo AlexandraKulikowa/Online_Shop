@@ -7,25 +7,34 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CompareController : Controller
     {
-        private readonly ICompareRepository compareList;
-        public CompareController(ICompareRepository compareList)
+        private readonly ICompareRepository compareItem;
+        private readonly IProductsRepository products;
+        public CompareController(ICompareRepository compareItem, IProductsRepository products)
         {
-            this.compareList = compareList;
+            this.compareItem = compareItem;
+            this.products = products;
         }
         public IActionResult Index()
         {
-            var list = compareList.TryGetByUserId(Constants.UserId);
-            var listVM = Mapping.ToComparisonViewModels(list);
+            var list = compareItem.GetAll(Constants.UserId);
+            var listVM = Mapping.ToProductViewModels(list);
             return View(listVM);
         }
+        public IActionResult Add(int id)
+        {
+            var product = products.TryGetById(id);
+            compareItem.Add(product, Constants.UserId);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Delete(int id)
         {
-            compareList.DeleteProduct(Constants.UserId, id);
+            compareItem.DeleteProduct(Constants.UserId, id);
             return RedirectToAction("Index");
         }
         public IActionResult Clear()
         {
-            compareList.Clear(Constants.UserId);
+            compareItem.Clear(Constants.UserId);
             return RedirectToAction("Index");
         }
     }

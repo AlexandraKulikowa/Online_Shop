@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Models;
 
@@ -14,76 +15,52 @@ namespace OnlineShop.Db.Repositories
             this.databaseContext = databaseContext;
         }
 
-        public Comparison TryGetByUserId(string userId)
+        public Comparison TryGetById(string userId, int id)
         {
-            return databaseContext.Comparisons.FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Comparisons
+                .Include(x => x.Product)
+                .ThenInclude(x => x.Size)
+                .FirstOrDefault(x => x.UserId == userId & x.Product.Id == id);
         }
+
+        public List<Product> GetAll(string userId)
+        {
+            var list = databaseContext.Comparisons
+                .Include(x => x.Product)
+                .ThenInclude(x => x.Size)
+                .Where(x => x.UserId == userId)
+                .Select(x => x.Product)
+                .ToList();
+            return list;
+        }
+
         public void Add(Product product, string userId)
         {
-            var existingList = TryGetByUserId(userId);
+            var comparison = TryGetById(userId, product.Id);
 
-            if (existingList == null)
+            if (comparison == null)
             {
-                var newList = new Comparison
+                var newComparison = new Comparison
                 {
-                    UserId = userId
+                    UserId = userId,
+                    Product = product
                 };
-
-                newList.Products = new List<Product>
-                    {
-                        new Product
-                        {
-                            Id = product.Id,
-                            Name = product.Name,
-                            Cost = product.Cost,
-                            Description = product.Description,
-                            Size = product.Size,
-                            PaintingTechnique = product.PaintingTechnique,
-                            Genre = product.Genre,
-                            Year = product.Year,
-                            ImagePath = product.ImagePath,
-                            IsPromo = product.IsPromo,
-                            Comparison = newList
-                        }
-                    };
-
-                databaseContext.Comparisons.Add(newList);
+                databaseContext.Comparisons.Add(newComparison);
+                databaseContext.SaveChanges();
             }
-            else
-            {
-                var existingProduct = existingList.Products.FirstOrDefault(x => x.Id == product.Id);
-                if (existingProduct == null)
-                {
-                    existingList.Products.Add(new Product
-                    {
-                        Id = product.Id,
-                        Name = product.Name,
-                        Cost = product.Cost,
-                        Description = product.Description,
-                        Size = product.Size,
-                        PaintingTechnique = product.PaintingTechnique,
-                        Genre = product.Genre,
-                        Year = product.Year,
-                        ImagePath = product.ImagePath,
-                        IsPromo = product.IsPromo,
-                        Comparison = existingList
-                    });
-                }
-            }
-            databaseContext.SaveChanges();
         }
 
         public void DeleteProduct(string userId, int id)
         {
-            var list = TryGetByUserId(userId);
-            var product = list.Products.FirstOrDefault(x => x.Id == id);
-            list.Products.Remove(product);
+            var comparison = TryGetById(userId, id);
+            databaseContext.Comparisons.Remove(comparison);
             databaseContext.SaveChanges();
         }
+
         public void Clear(string userId)
         {
-            var list = TryGetByUserId(userId);
-            databaseContext.Comparisons.Remove(list);
+            var list = databaseContext.Comparisons.Where(x => x.UserId == userId).ToList();
+            databaseContext.Comparisons.RemoveRange(list);
             databaseContext.SaveChanges();
         }
     }

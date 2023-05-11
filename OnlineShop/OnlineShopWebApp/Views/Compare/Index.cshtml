@@ -1,6 +1,6 @@
-﻿@model ComparisonViewModel
+﻿@model List<ProductViewModel>
 
-@if (Model == null || !Model.Products.Any())
+@if (Model == null || !Model.Any())
 {
     <br />
     @await Html.PartialAsync("Search")
@@ -10,7 +10,7 @@ else
 {
     @await Html.PartialAsync("Search")
     <div class="row">
-        @foreach (var product in Model.Products)
+        @foreach (var product in Model)
         {
             <div class="col-3">
                 <div class="comparelist table-responsive">
@@ -45,5 +45,5 @@ else
             </div>
         }
     </div>
-    <a class="btn btn-lg col-12 btn-dark" asp-controller="compare" asp-action="clear" asp-route-userId=@Model.UserId role="button">Очистить страницу</a>
+    <a class="btn btn-lg col-12 btn-dark" asp-controller="compare" asp-action="clear" role="button">Очистить страницу</a>
 }

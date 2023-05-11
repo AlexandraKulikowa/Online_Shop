@@ -26,7 +26,7 @@
             }
             <br>
             <a class="btn btn-outline-primary btn-lg" asp-controller="home" asp-action="index" role="button">Продолжить покупки</a>
-            <a class="btn btn-outline-secondary btn-lg" asp-controller="product" asp-action="compare" asp-route-id=@Model.Id role="button">Сравнить</a>
+            <a class="btn btn-outline-secondary btn-lg" asp-controller="compare" asp-action="add" asp-route-id=@Model.Id role="button">Сравнить</a>
             <a class="btn btn-success btn-lg" asp-controller="basket" asp-action="add" asp-route-id=@Model.Id role="button">Добавить в корзину</a>
         </div>
     </div>

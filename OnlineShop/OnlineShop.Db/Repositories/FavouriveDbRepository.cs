@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using OnlineShop.Db.Models;
 using OnlineShop.Db.Interfaces;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace OnlineShop.Db.Repositories
 {
@@ -14,77 +15,53 @@ namespace OnlineShop.Db.Repositories
             this.databaseContext = databaseContext;
         }
 
-        public Favourites TryGetByUserId(string userId)
+        public Favourites TryGetById(string userId, int id)
         {
-            return databaseContext.Favorites.FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Favorites
+                .Include(x => x.Product)
+                .ThenInclude(x => x.Size)
+                .FirstOrDefault(x => x.UserId == userId & x.Product.Id == id);
+        }
+
+        public List<Product> GetAll(string userId)
+        {
+            var list = databaseContext.Favorites
+                .Include(x => x.Product)
+                .ThenInclude(x => x.Size)
+                .Where(x => x.UserId == userId)
+                .Select(x => x.Product)
+                .ToList();
+            return list;
         }
 
         public void Add(Product product, string userId)
         {
-            var existingList = TryGetByUserId(userId);
+            var existingFavourite = TryGetById(userId, product.Id);
 
-            if (existingList == null)
+            if (existingFavourite == null)
             {
                 var newList = new Favourites
                 {
-                    UserId = userId
+                    UserId = userId,
+                    Product = product
                 };
 
-                newList.Products = new List<Product>
-                    {
-                        new Product
-                        {
-                            Id = product.Id,
-                            Name = product.Name,
-                            Cost = product.Cost,
-                            Description = product.Description,
-                            Size = product.Size,
-                            PaintingTechnique = product.PaintingTechnique,
-                            Genre = product.Genre,
-                            Year = product.Year,
-                            ImagePath = product.ImagePath,
-                            IsPromo = product.IsPromo,
-                            Favourites = newList
-                        }
-                    };
-
                 databaseContext.Favorites.Add(newList);
-            }
-            else
-            {
-                var existingProduct = existingList.Products.FirstOrDefault(x => x.Id == product.Id);
-                if (existingProduct == null)
-                {
-                    existingList.Products.Add(new Product
-                    {
-                        Id = product.Id,
-                        Name = product.Name,
-                        Cost = product.Cost,
-                        Description = product.Description,
-                        Size = product.Size,
-                        PaintingTechnique = product.PaintingTechnique,
-                        Genre = product.Genre,
-                        Year = product.Year,
-                        ImagePath = product.ImagePath,
-                        IsPromo = product.IsPromo,
-                        Favourites = existingList
-                    });
-                }
+                databaseContext.SaveChanges();
             }
         }
 
         public void DeleteFavourite(string userId, int id)
         {
-            var list = TryGetByUserId(userId);
-            var product = list.Products.FirstOrDefault(x => x.Id == id);
-            list.Products.Remove(product);
+            var favourite = TryGetById(userId, id);
+            databaseContext.Favorites.Remove(favourite);
             databaseContext.SaveChanges();
         }
 
         public void Clear(string userId)
         {
-            var list = TryGetByUserId(userId);
-            databaseContext.Favorites.Remove(list);
+            var list = databaseContext.Favorites.Where(x => x.UserId == userId).ToList();
+            databaseContext.Favorites.RemoveRange(list);
             databaseContext.SaveChanges();
         }
     }
