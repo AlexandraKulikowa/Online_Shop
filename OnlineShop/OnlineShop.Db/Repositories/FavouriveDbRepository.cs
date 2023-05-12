@@ -25,13 +25,13 @@ namespace OnlineShop.Db.Repositories
 
         public List<Product> GetAll(string userId)
         {
-            var list = databaseContext.Favorites
+            var products = databaseContext.Favorites
                 .Include(x => x.Product)
                 .ThenInclude(x => x.Size)
                 .Where(x => x.UserId == userId)
                 .Select(x => x.Product)
                 .ToList();
-            return list;
+            return products;
         }
 
         public void Add(Product product, string userId)
