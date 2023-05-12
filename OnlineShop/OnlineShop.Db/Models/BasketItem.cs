@@ -9,5 +9,7 @@ namespace OnlineShop.Db
         public int Amount { get; set; }
         public Basket Basket { get; set; }
 
+        public Order? Order { get; set; }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
+using OnlineShop.Db.Interfaces;
+using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,7 +14,8 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index(int id)
         {
             var order = orders.GetOrder(id);
-            return View(order);
+            var orderVM = Mapping.ToOrderViewModel(order);
+            return View(orderVM);
         }
     }
 }

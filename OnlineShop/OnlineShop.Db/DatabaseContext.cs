@@ -11,9 +11,11 @@ namespace OnlineShop.Db
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<Comparison> Comparisons { get; set; }
         public DbSet<Favourites> Favorites { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

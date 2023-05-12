@@ -1,4 +1,4 @@
-﻿namespace OnlineShopWebApp.Areas.Admin.Models
+﻿namespace OnlineShop.Db.Models
 {
     public enum Status
     {

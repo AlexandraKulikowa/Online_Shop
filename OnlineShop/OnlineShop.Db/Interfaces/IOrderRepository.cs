@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using OnlineShopWebApp.Areas.Admin.Models;
+﻿using OnlineShop.Db.Models;
+using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Interfaces
+namespace OnlineShop.Db.Interfaces
 {
     public interface IOrderRepository
     {
         List<Order> GetAll();
-        void Add(Order order);
+        void Add(Order order, string userId);
         Order GetOrder(int id);
         void ChangeStatus(int id, Status status);
     }

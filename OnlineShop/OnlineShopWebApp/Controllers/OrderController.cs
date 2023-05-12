@@ -2,7 +2,6 @@
 using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
 using System;
 using System.Linq;
@@ -28,23 +27,24 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult ToCheckOut(Order order)
+        public IActionResult ToCheckOut(OrderViewModel orderVM)
         {
             if (ModelState.IsValid)
             {
                 var basket = baskets.TryGetByUserId(Constants.UserId);
                 var basketVM = Mapping.ToBasketViewModel(basket);
-                order.Products.AddRange(basketVM.BasketItems.ToArray());
-                orders.Add(order);
+                orderVM.Products.AddRange(basketVM.BasketItems.ToArray());
+                var order = Mapping.ToOrder(orderVM);
+                orders.Add(order, Constants.UserId);
                 baskets.Clear(Constants.UserId);
-                return RedirectToAction("Result", order);
+                return RedirectToAction("Result", orderVM);
             }
-            return View(order);
+            return View(orderVM);
         }
 
-        public IActionResult Result(Order order)
+        public IActionResult Result(OrderViewModel orderVM)
         {
-            return View(order);
+            return View(orderVM);
         }
 
 

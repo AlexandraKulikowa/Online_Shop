@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public class Contacts
+    public class ContactsViewModel
     {
         [Required(ErrorMessage = "Вы не ввели адрес доставки")]
         [StringLength(190, MinimumLength = 10, ErrorMessage = "Введите верный адрес")]
@@ -17,5 +17,6 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Укажите ваш номер телефона")]
         [RegularExpression(@"^((\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{10}$", ErrorMessage = "Укажите верный номер телефона")]
         public string Telephone { get; set; }
+        public int Id { get; internal set; }
     }
 }

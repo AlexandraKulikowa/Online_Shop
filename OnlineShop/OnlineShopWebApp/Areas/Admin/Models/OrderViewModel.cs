@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,13 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Models
 {
-    public class Order
+    public class OrderViewModel
     {
         public string UserId { get; set; }
 
         public int Id { get; set; }
 
-        public Contacts Contacts { get; set; }
+        public ContactsViewModel Contacts { get; set; }
 
         public string TimeFromTo { get; set; }
 
