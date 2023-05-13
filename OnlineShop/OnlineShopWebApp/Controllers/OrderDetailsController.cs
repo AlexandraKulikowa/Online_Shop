@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index(int id)
         {
             var order = orders.GetOrder(id);
-            var orderVM = Mapping.ToOrderViewModel(order);
+            var orderVM = order.ToOrderViewModel();
             return View(orderVM);
         }
     }

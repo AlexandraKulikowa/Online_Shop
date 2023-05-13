@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var productsDb = products.GetAll();
-            var productsViewModels = Mapping.ToProductViewModels(productsDb);
+            var productsViewModels = productsDb.ToProductViewModels();
             return View(productsViewModels);
         }
     }

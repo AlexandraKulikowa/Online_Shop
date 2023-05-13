@@ -68,6 +68,5 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             }
             return View("Edit", user); 
         }
-
     }
 }

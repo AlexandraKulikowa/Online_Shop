@@ -12,6 +12,8 @@ namespace OnlineShopWebApp.Areas.Admin.Models
     {
         public string UserId { get; set; }
 
+        private static int counter = 1;
+
         public int Id { get; set; }
 
         public ContactsViewModel Contacts { get; set; }
@@ -41,6 +43,12 @@ namespace OnlineShopWebApp.Areas.Admin.Models
         public DateTime DateofOrder { get; set; } = DateTime.Now;
 
         public List<BasketItemViewModel> Products { get; set; } = new List<BasketItemViewModel>();
+
+        public OrderViewModel()
+        {
+            Id = counter;
+            counter++;
+        }
 
         public decimal TotalCost()
         {

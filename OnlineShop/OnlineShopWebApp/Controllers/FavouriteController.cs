@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var list = favourites.GetAll(Constants.UserId);
-            var listVM = Mapping.ToProductViewModels(list);
+            var listVM = list.ToProductViewModels();
             return View(listVM);
         }
 

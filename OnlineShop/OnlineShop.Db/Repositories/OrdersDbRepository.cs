@@ -17,42 +17,27 @@ namespace OnlineShop.Db.Repositories
 
         public List<Order> GetAll()
         {
-            return databaseContext.Orders.ToList();
+            return databaseContext.Orders
+                .Include(x => x.Contacts)
+                .Include(x => x.OrderBasketItems)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.Size)
+                .ToList();
         }
 
-        public void Add(Order order, string userId)
+        public void Add(Order order)
         {
-            var existingOrder = GetOrder(order.Id);
-
-            if (existingOrder == null)
-            {
-                var newOrder = new Order
-                {
-                    UserId = userId,
-                    Contacts = order.Contacts,
-                    TimeFromTo = order.TimeFromTo,
-                    Email = order.Email,
-                    Mailto = order.Mailto,
-                    DateofDelivery = order.DateofDelivery,
-                    Comment = order.Comment,
-                    Packaging = order.Packaging,
-                    isAccept = order.isAccept,
-                    Status = order.Status,
-                    DateofOrder = order.DateofOrder
-                };
-
-                newOrder.Products = order.Products.ToList();
-                foreach (var product in newOrder.Products)
-                {
-                    product.Order = newOrder;
-                }
-                databaseContext.Orders.Add(newOrder);
+                databaseContext.Orders.Add(order);
                 databaseContext.SaveChanges();
-            }
         }
         public Order GetOrder(int id)
         {
-            var order = databaseContext.Orders.Include(x => x.Products).FirstOrDefault(x => x.Id == id);
+            var order = databaseContext.Orders
+                .Include(x => x.Contacts)
+                .Include(x => x.OrderBasketItems)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.Size)
+                .FirstOrDefault(x => x.Id == id);
             return order;
         }
 

@@ -6,7 +6,7 @@ namespace OnlineShop.Db.Interfaces
     public interface IOrderRepository
     {
         List<Order> GetAll();
-        void Add(Order order, string userId);
+        void Add(Order order);
         Order GetOrder(int id);
         void ChangeStatus(int id, Status status);
     }

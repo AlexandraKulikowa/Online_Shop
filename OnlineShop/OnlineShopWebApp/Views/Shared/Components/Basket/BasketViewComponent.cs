@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Basket
         public IViewComponentResult Invoke()
         {
             var basket = basketRepository.TryGetByUserId(Constants.UserId);
-            var basketVM = Mapping.ToBasketViewModel(basket);
+            var basketVM = basket.ToBasketViewModel();
             var productCounts = basketVM?.Amount() ?? 0;
             return View("Basket", productCounts);
         }

@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var basket = baskets.TryGetByUserId(Constants.UserId);
-            var basketVM = Mapping.ToBasketViewModel(basket);
+            var basketVM = basket.ToBasketViewModel();
             return View(basketVM);
         }
         public IActionResult Add(int id)

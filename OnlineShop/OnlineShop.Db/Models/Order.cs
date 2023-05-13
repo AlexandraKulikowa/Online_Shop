@@ -29,6 +29,11 @@ namespace OnlineShop.Db.Models
 
         public DateTime DateofOrder { get; set; } = DateTime.Now;
 
-        public List<BasketItem> Products { get; set; } = new List<BasketItem>();
+        public List<BasketItem> OrderBasketItems { get; set; } 
+
+        public Order()
+        {
+            OrderBasketItems = new List<BasketItem>();
+        }
     }
 }

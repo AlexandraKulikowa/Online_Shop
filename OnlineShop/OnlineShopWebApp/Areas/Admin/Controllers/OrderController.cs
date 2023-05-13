@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Models;
-using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Helpers;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -15,14 +14,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var listOrders = orders.GetAll();
-            var listOrdersVM = Mapping.ToOrderViewModels(listOrders);
+            var listOrdersVM = listOrders.ToOrderViewModels();
             return View(listOrdersVM);
         }
 
         public IActionResult Details(int id)
         {
             var order = orders.GetOrder(id);
-            var orderVM = Mapping.ToOrderViewModel(order);
+            var orderVM = order.ToOrderViewModel();
             return View(orderVM);
         }
 

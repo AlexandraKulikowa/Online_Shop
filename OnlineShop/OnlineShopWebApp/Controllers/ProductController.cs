@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index(int id)
         {
             var product = products.TryGetById(id);
-            var productVM = Mapping.ToProductViewModel(product);
+            var productVM = product.ToProductViewModel();
             return View(productVM);
         }
 
@@ -22,7 +22,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult SearchResult(string search)
         {
             var searchresult = products.Search(search);
-            var searchresultVM = Mapping.ToProductViewModels(searchresult);
+            var searchresultVM = searchresult.ToProductViewModels();
             return View(searchresultVM);
         }
     }

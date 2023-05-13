@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var productlist = products.GetAll();
-            var productsVM = Mapping.ToProductViewModels(productlist);
+            var productsVM = productlist.ToProductViewModels();
             return View(productsVM);
         }
 
@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(ProductViewModel productVM)
         {
-            var product = Mapping.ToProduct(productVM);
+            var product = productVM.ToProduct();
 
             if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
@@ -42,14 +42,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             var product = products.TryGetById(id);
-            var productVM = Mapping.ToProductViewModel(product);
+            var productVM = product.ToProductViewModel();
             return View(productVM);
         }
 
         [HttpPost]
         public IActionResult Edit(ProductViewModel productVM)
         {
-            var product = Mapping.ToProduct(productVM);
+            var product = productVM.ToProduct();
 
             if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");

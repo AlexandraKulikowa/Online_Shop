@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index()
         {
             var basket = baskets.TryGetByUserId(Constants.UserId);
-            var basketVM = Mapping.ToBasketViewModel(basket);
+            var basketVM = basket.ToBasketViewModel();
             ViewBag.Basket = basketVM.BasketItems.Any();
             ViewBag.TotalCost = basketVM.TotalCost();
             return View();
@@ -32,21 +32,20 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var basket = baskets.TryGetByUserId(Constants.UserId);
-                var basketVM = Mapping.ToBasketViewModel(basket);
-                orderVM.Products.AddRange(basketVM.BasketItems.ToArray());
-                var order = Mapping.ToOrder(orderVM);
-                orders.Add(order, Constants.UserId);
+                var order = orderVM.ToOrder();
+                order.OrderBasketItems.AddRange(basket.BasketItems.ToArray());
+                orders.Add(order);
                 baskets.Clear(Constants.UserId);
-                return RedirectToAction("Result", orderVM);
+                return RedirectToAction("Result");
             }
             return View(orderVM);
         }
 
-        public IActionResult Result(OrderViewModel orderVM)
+        public IActionResult Result(int id)
         {
-            return View(orderVM);
+            ViewBag.Id = orders.GetAll().Count;
+            return View();
         }
-
 
         [AcceptVerbs("GET", "POST")]
         public IActionResult CheckDate(DateTime DateofDelivery)
