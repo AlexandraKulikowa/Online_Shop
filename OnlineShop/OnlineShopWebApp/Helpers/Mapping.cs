@@ -3,6 +3,7 @@ using OnlineShop.Db.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -11,10 +12,8 @@ namespace OnlineShopWebApp.Helpers
         public static List<ProductViewModel> ToProductViewModels(this List<Product> products)
         {
             var productsViewModels = new List<ProductViewModel>();
-            foreach (var product in products)
-            {
-                productsViewModels.Add(product.ToProductViewModel());
-            }
+            productsViewModels = products.Select(x => x.ToProductViewModel()).ToList();
+
             return productsViewModels;
         }
 
@@ -80,12 +79,9 @@ namespace OnlineShopWebApp.Helpers
                 basket.BasketItems = new List<BasketItem>();
             }
 
-            var basketItemsViewModels = new List<BasketItemViewModel>();
+            var basketItemsViewModels = new List<BasketItemViewModel>();            
+            basketItemsViewModels = basket.BasketItems.Select(x => x.ToBasketItemViewModel()).ToList();
 
-            foreach (var basketitem in basket.BasketItems)
-            {
-                basketItemsViewModels.Add(basketitem.ToBasketItemViewModel());
-            }
             return new BasketViewModel
             {
                 Id = basket.Id,
@@ -117,10 +113,8 @@ namespace OnlineShopWebApp.Helpers
         public static OrderViewModel ToOrderViewModel(this Order order)
         {
             var productListVM = new List<BasketItemViewModel>();
-            foreach(var basketItem in order.OrderBasketItems)
-            {
-                productListVM.Add(basketItem.ToBasketItemViewModel());
-            }
+            productListVM = order.OrderBasketItems.Select(x => x.ToBasketItemViewModel()).ToList();
+
             return new OrderViewModel
             {
                 Id = order.Id,
@@ -132,7 +126,7 @@ namespace OnlineShopWebApp.Helpers
                 DateofDelivery = order.DateofDelivery,
                 Comment = order.Comment,
                 Packaging = order.Packaging,
-                isAccept = order.isAccept,
+                isAccept = order.IsAccept,
                 Status = order.Status,
                 DateofOrder = order.DateofOrder,
                 Products = productListVM
@@ -153,20 +147,15 @@ namespace OnlineShopWebApp.Helpers
         public static List<OrderViewModel> ToOrderViewModels(this List<Order> orders)
         {
             var orderViewModels = new List<OrderViewModel>();
-            foreach (var order in orders)
-            {
-                orderViewModels.Add(order.ToOrderViewModel());
-            }
+            orderViewModels = orders.Select(x => x.ToOrderViewModel()).ToList();
+
             return orderViewModels;
         }
 
         public static Order ToOrder(this OrderViewModel orderVM)
         {
             var productList = new List<BasketItem>();
-            foreach (var basketItemVM in orderVM.Products)
-            {
-                productList.Add(basketItemVM.ToBasketItem());
-            }
+            productList = orderVM.Products.Select(x => x.ToBasketItem()).ToList();
 
             return new Order
             {
@@ -178,7 +167,7 @@ namespace OnlineShopWebApp.Helpers
                 DateofDelivery = orderVM.DateofDelivery,
                 Comment = orderVM.Comment,
                 Packaging = orderVM.Packaging,
-                isAccept = orderVM.isAccept,
+                IsAccept = orderVM.isAccept,
                 Status = orderVM.Status,
                 DateofOrder = orderVM.DateofOrder,
                 OrderBasketItems = productList

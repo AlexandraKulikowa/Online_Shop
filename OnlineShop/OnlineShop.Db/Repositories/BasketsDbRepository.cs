@@ -17,7 +17,11 @@ namespace OnlineShop.Db.Repositories
 
         public Basket TryGetByUserId(string userId)
         {
-            return databaseContext.Baskets.Include(x => x.BasketItems).ThenInclude(x => x.Product).ThenInclude(x => x.Size).FirstOrDefault(x => x.UserId == userId);
+            return databaseContext.Baskets
+                .Include(x => x.BasketItems)
+                .ThenInclude(x => x.Product)
+                .ThenInclude(x => x.Size)
+                .FirstOrDefault(x => x.UserId == userId);
         }
 
         public void Add(Product product, string userId)

@@ -16,8 +16,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index()
         {
-            var list = compareItem.GetAll(Constants.UserId);
-            var listVM = list.ToProductViewModels();
+            var products = compareItem.GetAll(Constants.UserId);
+            var listVM = products.ToProductViewModels();
             return View(listVM);
         }
         public IActionResult Add(int id)

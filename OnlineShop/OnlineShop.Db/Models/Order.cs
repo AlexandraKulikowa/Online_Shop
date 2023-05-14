@@ -23,7 +23,7 @@ namespace OnlineShop.Db.Models
 
         public Packaging Packaging { get; set; }
 
-        public bool isAccept { get; set; }
+        public bool IsAccept { get; set; }
 
         public Status Status { get; set; } = Status.Открыт;
 

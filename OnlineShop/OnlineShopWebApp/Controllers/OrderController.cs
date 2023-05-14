@@ -41,7 +41,7 @@ namespace OnlineShopWebApp.Controllers
             return View(orderVM);
         }
 
-        public IActionResult Result(int id)
+        public IActionResult Result()
         {
             ViewBag.Id = orders.GetAll().Count;
             return View();
