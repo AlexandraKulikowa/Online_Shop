@@ -3,12 +3,10 @@
 @if (Model == null || !Model.Any())
 {
     <br />
-    @await Html.PartialAsync("Search")
     <div class="order"><h2><b>Вы пока не добавили товары для сравнения! Вернитесь на главную страницу...</b></h2></div>
 }
 else
 {
-    @await Html.PartialAsync("Search")
     <div class="row">
         @foreach (var product in Model)
         {

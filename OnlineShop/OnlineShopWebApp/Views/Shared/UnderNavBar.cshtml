@@ -1,0 +1,75 @@
+﻿
+<div class="undernavbar">
+    <div class="sortblock">
+        <div class="btn-group" role="group">
+            <h5 class="sort-start">Сортировка</h5>
+            <div class="dropdown">
+                <a class="btn button-sort dropdown-toggle" type="button" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                    по жанру
+                    <span class="caret"></span>
+                </a>
+                @if (ViewBag.SortOrder != null)
+                {
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-genre="@Genre.Пейзаж" asp-route-sortOrder="@ViewBag.SortOrder">>Пейзаж</a></li>
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-genre="@Genre.Натюрморт" asp-route-sortOrder="@ViewBag.SortOrder">>Натюрморт</a></li>
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-genre="@Genre.Анималистика" asp-route-sortOrder="@ViewBag.SortOrder">>Анималистика</a></li>
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-genre="@Genre.Портрет" asp-route-sortOrder="@ViewBag.SortOrder">>Портрет</a></li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-genre="@Genre.Пейзаж">Пейзаж</a></li>
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-genre="@Genre.Натюрморт">Натюрморт</a></li>
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-genre="@Genre.Анималистика">Анималистика</a></li>
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-genre="@Genre.Портрет">Портрет</a></li>
+                    </ul>
+                }
+            </div>
+
+            <div class="dropdown">
+                <a class="btn button-sort dropdown-toggle" type="button" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                    по цене
+                    <span class="caret"></span>
+                </a>
+                @if (ViewBag.Genre != null)
+                {
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-genre="@ViewBag.Genre" asp-route-sortOrder="cost_asc">По возрастанию</a></li>
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-genre="@ViewBag.Genre" asp-route-sortOrder="cost_desc">По убыванию</a></li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-sortOrder="cost_asc">По возрастанию</a></li>
+                        <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-sortOrder="cost_desc">По убыванию</a></li>
+                    </ul>
+                }
+            </div>
+
+            <div class="dropdown">
+                <a class="btn button-sort dropdown-toggle" type="button" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                    по новинкам
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-newProducts="@true">Сначала новые</a></li>
+                    <li><a class="dropdown-item button-sort-sm" asp-area="" asp-controller="home" asp-action="index" asp-route-newProducts="@false">Сначала старые</a></li>
+                </ul>
+            </div>
+
+            <a class="btn button-sort" asp-area="" asp-controller="home" asp-action="index" asp-route-promo="true" role="button">Акция!</a>
+            <a class="btn sort-end" asp-area="" asp-controller="home" asp-action="index" role="button">Сбросить</a>
+        </div>
+    </div>
+    <div class="form-search">
+        <form class="form" method="post">
+            <div class="btn-group" role="group">
+                <input class="search-left" type="search" name="search" placeholder="Найти...">
+                <button type="submit" class="btn search-right" asp-controller="product" asp-action="searchresult">Поиск</button>
+            </div>
+        </form>
+    </div>
+</div>

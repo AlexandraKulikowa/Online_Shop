@@ -68,8 +68,12 @@ body {
     border-bottom-width: 3px;
     margin-top: 20px;
     display: -ms-inline-flexbox;
-    flex-direction: column;
 }
+
+.clear {
+    clear: both;
+}
+
 .card-body-product {
     text-align: center;
     border-radius: 22px;
@@ -176,7 +180,7 @@ a.basket-bg:hover {
     user-select: none;
     text-decoration: double;
     outline: none;
-    background-color:tan;
+    background-color: tan;
     text-align: center;
     width: 86px;
     height: 47px;
@@ -187,17 +191,17 @@ a.basket-bg:hover {
 }
 
 .search-left {
-    padding:0px 0px 0px 12px;
+    padding: 0px 0px 0px 12px;
     user-select: none;
     text-decoration: double;
     outline: none;
     background-color: antiquewhite;
-    text-align:left;
+    text-align: left;
     width: 250px;
     height: 47px;
     border-bottom-left-radius: 22px;
-    border-top-left-radius:22px;
-    border:none;
+    border-top-left-radius: 22px;
+    border: none;
 }
 
 .compare:hover {
@@ -779,14 +783,24 @@ legend {
     width: 350px;
     height: 50px;
     margin: 4px 0px 2px 70%;
-    border:unset;
+    border: unset;
     padding: 1px 0px 1px 9px;
+}
+
+.undernavbar{
+    margin-top:auto;
+}
+
+.sortblock {
+    display: inline-block;
+    width: 700px;
+    float: left;
 }
 
 .adminproducts {
     width: 70%;
     height: 70%;
-    margin-left:2%;
+    margin-left: 2%;
     margin-right: auto;
     margin-top: auto;
     padding: 27px 2px 20px 12px;
@@ -796,7 +810,7 @@ legend {
     box-shadow: 4px 4px 4px;
     font-size: 18px;
     position: absolute;
-    padding:10px 20px 10px 10px;
+    padding: 10px 20px 10px 10px;
 }
 
 .orderbox {
@@ -847,7 +861,6 @@ date::placeholder {
     }
 
 .button-add {
-    color: aliceblue;
     user-select: none;
     outline: none;
     background-color: tan;
@@ -864,7 +877,7 @@ date::placeholder {
     margin-top:6px;
 }
 
-    .button-adduser:hover {
+    .button-add:hover {
         background-color: peru;
     }
 
@@ -966,4 +979,53 @@ modal-footer{
     font-optical-sizing:auto;
     font-weight:800;
     margin-top:0;
+}
+
+.sort-start {
+    color: sienna;
+    background-color: tan;
+    padding: 1em 1em;
+    text-align: center;
+    width: 100px;
+    height: 48px;
+    border-top-left-radius: 22px;
+    border-bottom-left-radius: 22px;
+    font-size: 14px;
+    font-weight: 700;
+    }
+
+.button-sort {
+    background-color: tan;
+    color: sienna;
+    padding: 1em 1em;
+    text-align: center;
+    width: 120px;
+    height: 48px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.button-sort-sm {
+    background-color: tan;
+    color: sienna;
+    padding: 1em 1em;
+    text-align: center;
+    width: 160px;
+    height: 50px;
+    font-size: 15px;
+    margin-inline:auto;
+    font-weight:700;
+}
+
+.sort-end {
+    background-color: tan;
+    color: sienna;
+    padding: 1em 1em;
+    text-align: center;
+    width: 180px;
+    height: 48px;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    font-size: 14px;
+    font-weight: 700;
 }
