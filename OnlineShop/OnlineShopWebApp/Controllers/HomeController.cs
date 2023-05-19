@@ -14,13 +14,13 @@ namespace OnlineShopWebApp.Controllers
         {
             this.products = products;
         }
-        public IActionResult Index(Models.Genre? genre, string? sortOrder, bool? promo, bool? newProducts)
+        public IActionResult Index(Genre? genre, string? sortOrder, bool? promo, bool? newProducts)
         {
             var productsViewModels = new List<ProductViewModel>();
 
             if (genre != null)
             {
-                var result = products.SortByGenre((OnlineShop.Db.Models.Genre)genre);
+                var result = products.GetAll().Where(x => x.Genre == (OnlineShop.Db.Models.Genre)genre).ToList();
 
                 if (sortOrder == "cost_desc")
                     result = result.OrderByDescending(x => x.Cost).ToList();
@@ -35,7 +35,13 @@ namespace OnlineShopWebApp.Controllers
 
             if (sortOrder != null)
             {
-                var result = products.SortByCost(sortOrder);
+                var result = products.GetAll();
+
+                if (sortOrder == "cost_desc")
+                    result = result.OrderByDescending(x => x.Cost).ToList();
+
+                if (sortOrder == "cost_asc")
+                    result = result.OrderBy(x => x.Cost).ToList();
 
                 if (genre != null)
                 {

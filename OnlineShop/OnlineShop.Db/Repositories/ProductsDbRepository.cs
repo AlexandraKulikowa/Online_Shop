@@ -81,21 +81,5 @@ namespace OnlineShop.Db.Repositories
                 return false;
             return true;
         }
-
-        public List<Product> SortByGenre(Genre genre)
-        {
-            var products = databaseContext.Products.Include(x => x.Size).Where(x => x.Genre == genre).ToList();
-            return products;
-        }
-
-        public List<Product> SortByCost(string sortOrder)
-        {
-            var result = new List<Product>();
-            if(sortOrder == "cost_asc")
-                result = databaseContext.Products.Include(x => x.Size).OrderBy(x => x.Cost).ToList();
-            else
-                result = databaseContext.Products.Include(x => x.Size).OrderByDescending(x => x.Cost).ToList();
-            return result;
-        }
     }
 }

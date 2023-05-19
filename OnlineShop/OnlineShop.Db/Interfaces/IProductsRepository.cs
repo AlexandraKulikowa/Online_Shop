@@ -12,7 +12,5 @@ namespace OnlineShop.Db.Interfaces
         void Edit(Product product);
         void Delete(Product product);
         bool CheckNewProduct(Product product);
-        List<Product> SortByGenre(Genre genre);
-        List<Product> SortByCost(string sortOrder);
     }
 }
