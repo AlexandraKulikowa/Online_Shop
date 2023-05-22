@@ -988,8 +988,8 @@ modal-footer{
     width: 160px;
     height: 50px;
     font-size: 18px;
-    font-weight: 700;
-    border-radius: 12px;
+    font-weight: 500;
+    border-radius: 16px;
     justify-content: center;
     user-select: none;
     outline: none;

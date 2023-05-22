@@ -14,70 +14,33 @@ namespace OnlineShopWebApp.Controllers
         {
             this.products = products;
         }
-        public IActionResult Index(Genre? genre, string? sortOrder, bool? promo, bool? newProducts)
+
+        public IActionResult Index(string? sortOrder)
         {
             var productsViewModels = new List<ProductViewModel>();
 
-            if (genre != null)
+            switch(sortOrder)
             {
-                var result = products.GetAll().Where(x => x.Genre == (OnlineShop.Db.Models.Genre)genre).ToList();
-
-                if (sortOrder == "cost_desc")
-                    result = result.OrderByDescending(x => x.Cost).ToList();
-
-                if (sortOrder == "cost_asc")
-                    result = result.OrderBy(x => x.Cost).ToList();
-
-                productsViewModels = result.ToProductViewModels();
-                ViewBag.Genre = genre;
+                case "genre_landscape": 
+                    productsViewModels = products.GetAll().Where(x => x.Genre == OnlineShop.Db.Models.Genre.Пейзаж).ToList().ToProductViewModels(); break;
+                case "genre_stilllife":
+                    productsViewModels = products.GetAll().Where(x => x.Genre == OnlineShop.Db.Models.Genre.Натюрморт).ToList().ToProductViewModels(); break;
+                case "genre_animalism":
+                    productsViewModels = products.GetAll().Where(x => x.Genre == OnlineShop.Db.Models.Genre.Анималистика).ToList().ToProductViewModels(); break;
+                case "genre_portrait":
+                    productsViewModels = products.GetAll().Where(x => x.Genre == OnlineShop.Db.Models.Genre.Портрет).ToList().ToProductViewModels(); break;
+                case "cost_desc":
+                    productsViewModels = products.GetAll().OrderByDescending(x => x.Cost).ToList().ToProductViewModels(); break;
+                case "cost_asc":
+                    productsViewModels = products.GetAll().OrderBy(x => x.Cost).ToList().ToProductViewModels(); break;
+                case "promo":
+                    productsViewModels = products.GetAll().Where(x => x.IsPromo == true).ToList().ToProductViewModels(); break;
+                case "newProducts":
+                    productsViewModels = products.GetAll().OrderByDescending(x => x.Id).ToList().ToProductViewModels(); break;
+                default:
+                    productsViewModels = products.GetAll().ToProductViewModels(); break;
+            }
                 return View(productsViewModels);
             }
-
-            if (sortOrder != null)
-            {
-                var result = products.GetAll();
-
-                if (sortOrder == "cost_desc")
-                    result = result.OrderByDescending(x => x.Cost).ToList();
-
-                if (sortOrder == "cost_asc")
-                    result = result.OrderBy(x => x.Cost).ToList();
-
-                if (genre != null)
-                {
-                    result = result.Where(x => x.Genre == (OnlineShop.Db.Models.Genre)genre).ToList();
-                }
-
-                productsViewModels = result.ToProductViewModels();
-                ViewBag.SortOrder = sortOrder;
-                return View(productsViewModels);
-            }
-
-            if (promo != null)
-            {
-                var result = products.GetAll().Where(x => x.IsPromo == true).ToList().ToProductViewModels();
-                return View(result);
-            }
-
-            if (newProducts != null)
-            {
-                if (newProducts == true)
-                {
-                    var result = products.GetAll().OrderByDescending(x => x.Id).ToList().ToProductViewModels();
-                    return View(result);
-                }
-
-                if (newProducts == false)
-                {
-                    var result = products.GetAll().OrderBy(x => x.Id).ToList().ToProductViewModels();
-                    return View(result);
-                }
-            }
-
-            var productsDb = products.GetAll();
-            productsViewModels = productsDb.ToProductViewModels();
-
-            return View(productsViewModels);
         }
     }
-}
