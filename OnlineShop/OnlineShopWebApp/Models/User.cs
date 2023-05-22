@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using OnlineShopWebApp.Areas.Admin.Models;
-using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Models
 {

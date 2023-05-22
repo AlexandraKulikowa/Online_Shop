@@ -1,22 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
         private readonly IUsersRepository users;
         private readonly IRolesRepository roles;
-        public LoginController(IUsersRepository users, IRolesRepository roles)
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
+
+        public AccountController(IUsersRepository users, IRolesRepository roles, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.users = users;
             this.roles = roles;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
-        public IActionResult Index()
+        public IActionResult Index(string returnUrl)
         {
-            return View();
+            return View( new Authorization() { ReturnUrl = returnUrl});
         }
 
         [HttpPost]
@@ -27,8 +33,13 @@ namespace OnlineShopWebApp.Controllers
                 ModelState.AddModelError("", "Данные введены неверно! Проверьте правильность набора логина и пароля. Или, может, вы не зарегистрированы?");
 
             if (ModelState.IsValid)
-                return Redirect("~/Home/Index/");
-
+            {
+                var result = signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false).Result;
+                if(result.Succeeded)
+                {
+                    return Redirect(authorization.ReturnUrl);
+                }
+            }
             return View("Index", authorization);
         }
 
