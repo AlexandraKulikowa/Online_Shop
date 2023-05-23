@@ -4,7 +4,6 @@ using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
 using System.Collections.Generic;
 using System.Linq;
-using Genre = OnlineShop.Db.Models.Genre;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -23,19 +22,17 @@ namespace OnlineShopWebApp.Controllers
 
             switch(sortOrder)
             {
-                case "genre_landscape": 
-                    result = productsDb
-                        .Where(x => x.Genre == Genre.Пейзаж).ToList();
+                case "genre_landscape":
+                    result = products.GetByGenre(Genre.Натюрморт);
                     break;
                 case "genre_still_life":
-                    result = productsDb
-                        .Where(x => x.Genre == Genre.Натюрморт).ToList();
+                    result = products.GetByGenre(Genre.Пейзаж);
                     break;
                 case "genre_animalism":
-                    result = productsDb.Where(x => x.Genre == Genre.Анималистика).ToList();
+                    result = products.GetByGenre(Genre.Анималистика);
                     break;
                 case "genre_portrait":
-                    result = productsDb.Where(x => x.Genre == Genre.Портрет).ToList();
+                    result = products.GetByGenre(Genre.Портрет);
                     break;
                 case "cost_desc":
                     result = productsDb.OrderByDescending(x => x.Cost).ToList();
@@ -53,7 +50,7 @@ namespace OnlineShopWebApp.Controllers
                     result = productsDb;
                     break;
             }
-                return View(productsDb.ToProductViewModels());
+                return View(result.ToProductViewModels());
             }
         }
     }
