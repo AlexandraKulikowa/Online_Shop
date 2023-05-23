@@ -6,14 +6,14 @@ using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class AccountController : Controller
+    public class LoginController : Controller
     {
         private readonly IUsersRepository users;
         private readonly IRolesRepository roles;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public AccountController(IUsersRepository users, IRolesRepository roles, UserManager<User> userManager, SignInManager<User> signInManager)
+        public LoginController(IUsersRepository users, IRolesRepository roles, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             this.users = users;
             this.roles = roles;
@@ -22,7 +22,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public IActionResult Index(string returnUrl)
         {
-            return View( new Authorization() { ReturnUrl = returnUrl});
+            return View(new Authorization() { ReturnUrl = returnUrl});
         }
 
         [HttpPost]
@@ -38,6 +38,10 @@ namespace OnlineShopWebApp.Controllers
                 if(result.Succeeded)
                 {
                     return Redirect(authorization.ReturnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Неправильный пароль");
                 }
             }
             return View("Index", authorization);
@@ -66,6 +70,13 @@ namespace OnlineShopWebApp.Controllers
                 return Redirect("~/Home/Index/");
             }
             return View("Registration", registration);
+        }
+
+        public IActionResult Logout()
+        {
+            signInManager.SignOutAsync().Wait();
+
+            return RedirectToAction("~/Home/Index/");
         }
     }
 }

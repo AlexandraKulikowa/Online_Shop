@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Repositories;
+using OnlineShop.Db.Repositories;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Basket
 {
