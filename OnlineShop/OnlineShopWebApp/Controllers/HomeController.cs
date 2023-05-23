@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Genre = OnlineShop.Db.Models.Genre;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -17,30 +18,42 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Index(string? sortOrder)
         {
-            var productsViewModels = new List<ProductViewModel>();
+            var productsDb = products.GetAll();
+            var result = new List<Product>();
 
             switch(sortOrder)
             {
                 case "genre_landscape": 
-                    productsViewModels = products.GetAll().Where(x => x.Genre == OnlineShop.Db.Models.Genre.Пейзаж).ToList().ToProductViewModels(); break;
-                case "genre_stilllife":
-                    productsViewModels = products.GetAll().Where(x => x.Genre == OnlineShop.Db.Models.Genre.Натюрморт).ToList().ToProductViewModels(); break;
+                    result = productsDb
+                        .Where(x => x.Genre == Genre.Пейзаж).ToList();
+                    break;
+                case "genre_still_life":
+                    result = productsDb
+                        .Where(x => x.Genre == Genre.Натюрморт).ToList();
+                    break;
                 case "genre_animalism":
-                    productsViewModels = products.GetAll().Where(x => x.Genre == OnlineShop.Db.Models.Genre.Анималистика).ToList().ToProductViewModels(); break;
+                    result = productsDb.Where(x => x.Genre == Genre.Анималистика).ToList();
+                    break;
                 case "genre_portrait":
-                    productsViewModels = products.GetAll().Where(x => x.Genre == OnlineShop.Db.Models.Genre.Портрет).ToList().ToProductViewModels(); break;
+                    result = productsDb.Where(x => x.Genre == Genre.Портрет).ToList();
+                    break;
                 case "cost_desc":
-                    productsViewModels = products.GetAll().OrderByDescending(x => x.Cost).ToList().ToProductViewModels(); break;
+                    result = productsDb.OrderByDescending(x => x.Cost).ToList();
+                    break;
                 case "cost_asc":
-                    productsViewModels = products.GetAll().OrderBy(x => x.Cost).ToList().ToProductViewModels(); break;
+                    result = productsDb.OrderBy(x => x.Cost).ToList();
+                    break;
                 case "promo":
-                    productsViewModels = products.GetAll().Where(x => x.IsPromo == true).ToList().ToProductViewModels(); break;
+                    result = productsDb.Where(x => x.IsPromo == true).ToList();
+                    break;
                 case "newProducts":
-                    productsViewModels = products.GetAll().OrderByDescending(x => x.Id).ToList().ToProductViewModels(); break;
+                    result = productsDb.OrderByDescending(x => x.Id).ToList();
+                    break;
                 default:
-                    productsViewModels = products.GetAll().ToProductViewModels(); break;
+                    result = productsDb;
+                    break;
             }
-                return View(productsViewModels);
+                return View(productsDb.ToProductViewModels());
             }
         }
     }
