@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
+using OnlineShop.Db.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 
@@ -28,10 +31,6 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Enter(Authorization authorization)
         {
-            var containsNoUser = users.CheckUser(authorization.Login, authorization.Password);
-            if (containsNoUser)           
-                ModelState.AddModelError("", "Данные введены неверно! Проверьте правильность набора логина и пароля. Или, может, вы не зарегистрированы?");
-
             if (ModelState.IsValid)
             {
                 var result = signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false).Result;
@@ -53,21 +52,20 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(User registration)
+        public IActionResult Register(UserViewModel registration)
         {
             if (registration.Login == registration.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
 
-            var containsNoUser = users.CheckUser(registration.Login, registration.Password);
-            if (!containsNoUser)
-                ModelState.AddModelError("", "Пользователь уже зарегистрирован! Введите другие данные");
-
             if (ModelState.IsValid)
             {
-                Role userRole = roles.TryGetById(2);
-                registration.Role = userRole;
-                users.Add(registration);
-                return Redirect("~/Home/Index/");
+                var user = registration.ToUser();
+                var result = userManager.CreateAsync(user, registration.Password).Result;
+                if (result.Succeeded)
+                {
+                    signInManager.SignInAsync(user, false).Wait();
+                    return RedirectToAction("Index", "Home");
+                }
             }
             return View("Registration", registration);
         }

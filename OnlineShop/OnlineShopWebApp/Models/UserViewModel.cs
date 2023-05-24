@@ -3,7 +3,7 @@ using OnlineShopWebApp.Areas.Admin.Models;
 
 namespace OnlineShopWebApp.Models
 {
-    public class User
+    public class UserViewModel
     {
         private static int counter = 1;
         public int Id { get; set; }
@@ -48,7 +48,7 @@ namespace OnlineShopWebApp.Models
 
         public Role Role { get; set; }
 
-        public User()
+        public UserViewModel()
         {
             Id = counter;
             counter++;

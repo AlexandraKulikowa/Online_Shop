@@ -59,7 +59,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(User user)
+        public IActionResult Edit(UserViewModel user)
         {
             if (user.Login == user.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
