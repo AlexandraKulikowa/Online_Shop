@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Controllers
             this.products = products;
         }
 
-        public IActionResult Index(string? sortOrder)
+        public IActionResult Index(string sortOrder)
         {
             var productsViewModels = new List<ProductViewModel>();
 
