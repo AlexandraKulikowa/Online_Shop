@@ -1,31 +1,25 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Win32;
 using OnlineShop.Db.Models;
-using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class LoginController : Controller
+    public class AccountController : Controller
     {
-        private readonly IUsersRepository users;
-        private readonly IRolesRepository roles;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public LoginController(IUsersRepository users, IRolesRepository roles, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            this.users = users;
-            this.roles = roles;
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public IActionResult Index(string returnUrl)
+
+        public IActionResult Login(string returnUrl)
         {
-            return View(new Authorization() { ReturnUrl = returnUrl});
+            return View(new Authorization() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
@@ -34,9 +28,9 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var result = signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false).Result;
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
-                    return Redirect(authorization.ReturnUrl);
+                    return Redirect("~/Home/Index/");
                 }
                 else
                 {
@@ -66,6 +60,14 @@ namespace OnlineShopWebApp.Controllers
                     signInManager.SignInAsync(user, false).Wait();
                     return RedirectToAction("Index", "Home");
                 }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                        return View("Registration", registration);
+                    }
+                }
             }
             return View("Registration", registration);
         }
@@ -74,7 +76,7 @@ namespace OnlineShopWebApp.Controllers
         {
             signInManager.SignOutAsync().Wait();
 
-            return RedirectToAction("~/Home/Index/");
+            return Redirect("~/Home/Index/");
         }
     }
 }

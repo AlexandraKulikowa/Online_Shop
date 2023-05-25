@@ -21,11 +21,11 @@
                 @if(User.Identity.IsAuthenticated)
                 {
                     <div class="btn enter">@User.Identity.Name</div>
-                    <a class="btn enter" asp-area="" asp-controller="login" asp-action="logout">Выход</a>
+                    <a class="btn enter" asp-area="" asp-controller="account" asp-action="logout">Выход</a>
                 }
                 else
                 {
-                    <a class="btn enter" asp-area="" asp-controller="login" asp-action="index">Вход</a>
+                    <a class="btn enter" asp-area="" asp-controller="account" asp-action="login">Вход</a>
                 }
 
                 @if(User.IsInRole(Constants.AdminRoleName))
