@@ -12,5 +12,6 @@ namespace OnlineShop.Db.Interfaces
         void Edit(Product product);
         void Delete(Product product);
         bool CheckNewProduct(Product product);
+        List<Product> GetByGenre(Genre genre);
     }
 }

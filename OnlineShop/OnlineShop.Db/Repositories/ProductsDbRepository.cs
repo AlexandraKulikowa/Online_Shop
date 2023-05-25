@@ -81,5 +81,11 @@ namespace OnlineShop.Db.Repositories
                 return false;
             return true;
         }
+
+        public List<Product> GetByGenre(Genre genre)
+        {
+            var result = databaseContext.Products.Include(x => x.Size).Where(x => x.Genre == genre).ToList();
+            return result;
+        }
     }
 }
