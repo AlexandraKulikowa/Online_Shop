@@ -48,6 +48,8 @@ namespace OnlineShopWebApp.Models
 
         public Role Role { get; set; }
 
+        public string ReturnUrl { get; set; }
+
         public UserViewModel()
         {
             Id = counter;

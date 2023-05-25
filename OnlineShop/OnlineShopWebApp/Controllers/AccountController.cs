@@ -30,6 +30,8 @@ namespace OnlineShopWebApp.Controllers
                 var result = signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false).Result;
                 if (result.Succeeded)
                 {
+                    if (authorization.ReturnUrl != null)
+                        return Redirect(authorization.ReturnUrl);
                     return Redirect("~/Home/Index/");
                 }
                 else
@@ -40,9 +42,9 @@ namespace OnlineShopWebApp.Controllers
             return View("Index", authorization);
         }
 
-        public IActionResult Registration()
+        public IActionResult Registration(string returnUrl)
         {
-            return View();
+            return View(new UserViewModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
@@ -58,7 +60,10 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     signInManager.SignInAsync(user, false).Wait();
-                    return RedirectToAction("Index", "Home");
+
+                    if (registration.ReturnUrl != null)
+                        return Redirect(registration.ReturnUrl);
+                    return Redirect("~/Home/Index/");
                 }
                 else
                 {

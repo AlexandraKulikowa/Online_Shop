@@ -44,9 +44,10 @@
             <input asp-for="isDistribution" type="checkbox" value="true">
             <label asp-for="isDistribution">Присылать мне уведомления о новинках</label>
 
+            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
 
         </fieldset>
-        <center><button type="submit" class="btn button-register" asp-controller="account" asp-action="register" role="button">Зарегистрироваться</button></center>
+        <center><button type="submit" class="btn button-register" asp-controller="account" asp-action="register" asp-route-returnUrl="@Model.ReturnUrl" role="button">Зарегистрироваться</button></center>
     </form>
 </div>
 
