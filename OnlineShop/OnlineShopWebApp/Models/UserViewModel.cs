@@ -5,8 +5,7 @@ namespace OnlineShopWebApp.Models
 {
     public class UserViewModel
     {
-        private static int counter = 1;
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required(ErrorMessage = "Укажите вашу фамилию")]
         [StringLength(26, MinimumLength = 2, ErrorMessage = "Ваша фамилия должна быть длиной от 2 до 26 символов")]
@@ -46,14 +45,9 @@ namespace OnlineShopWebApp.Models
 
         public bool isDistribution { get; set; }
 
-        public Role Role { get; set; }
+        public Role? Role { get; set; }
 
         public string ReturnUrl { get; set; }
 
-        public UserViewModel()
-        {
-            Id = counter;
-            counter++;
-        }
     }
 }

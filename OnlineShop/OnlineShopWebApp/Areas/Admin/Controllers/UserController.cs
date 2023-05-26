@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
-using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
+using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -10,66 +13,102 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class UserController : Controller
     {
-        private readonly IUsersRepository users;
-        public UserController(IUsersRepository users) => this.users = users;
+        private readonly UserManager<User> userManager;
+        public UserController(UserManager<User> userManager)
+        {
+            this.userManager = userManager;
+        }
 
         public IActionResult Index()
         {
-            var listUsers = users.GetAll();
-            return View(listUsers);
+            var listUsers = userManager.Users.ToList();
+            return View(listUsers.ToUserViewModels());
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(string id)
         {
-            var user = users.TryGetById(id);
-            return View(user);
+            var user = userManager.FindByIdAsync(id).Result;
+            var userVM = user.ToUserViewModel();
+            return View(userVM);
         }
-        
-        public IActionResult Delete(int id)
+
+        public IActionResult Delete(string id)
         {
-            users.Delete(id);
+            var user = userManager.FindByIdAsync(id).Result;
+            userManager.DeleteAsync(user);
             return RedirectToAction("Index");
         }
 
-        public IActionResult EditPassword(int id)
+        public IActionResult EditPassword(string id)
         {
-            var user = users.TryGetById(id);
-            return View(user);
+            var user = userManager.FindByIdAsync(id).Result;
+            var userVM = user.ToUserViewModel();
+            return View(userVM);
         }
 
         [HttpPost]
-        public IActionResult EditPassword(int id, string password, string confirmpassword)
+        public IActionResult EditPassword(string id, string oldPassword, string password, string confirmPassword)
         {
-            if (users.arePasswordsEqual(id, password))
+            if (password != confirmPassword)
+                ModelState.AddModelError("", "Пароли не совпадают!");
+
+            if (oldPassword == password)
                 ModelState.AddModelError("", "Новый пароль не должен быть идентичен старому!");
 
-            var user = users.TryGetById(id);
+
+            var user = userManager.FindByIdAsync(id).Result;
+
             if (ModelState.IsValid)
             {
-                users.ChangePassword(id, password, confirmpassword);
-                return RedirectToAction("Details", user);
+                userManager.ChangePasswordAsync(user, oldPassword, password).Wait();
+                user.NormalizedPassword = password;
+                var result = userManager.UpdateAsync(user).Result;
+                if (!result.Succeeded)
+                {
+                    foreach (var err in result.Errors)
+                    {
+                        ModelState.AddModelError("", err.Description);
+                        var userVMMM = user.ToUserViewModel();
+                        return View("EditPassword", userVMMM);
+                    }
+                }
+                user = userManager.FindByIdAsync(id).Result;
+                var userVMM = user.ToUserViewModel();
+                return RedirectToAction("Details", userVMM);
             }
-            return View("EditPassword", user);
+            var userVM = user.ToUserViewModel();
+            return View("EditPassword", userVM);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(string id)
         {
-            var user = users.TryGetById(id);
-            return View(user);
+            var user = userManager.FindByIdAsync(id).Result;
+            var userVM = user.ToUserViewModel();
+            return View(userVM);
         }
 
         [HttpPost]
-        public IActionResult Edit(UserViewModel user)
+        public IActionResult Edit(UserViewModel userVM)
         {
-            if (user.Login == user.Password)
+            if (userVM.Login == userVM.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
 
             if (ModelState.IsValid)
             {
-                users.ChangeUser(user);
-                return RedirectToAction("Details", user);
+                var user = userManager.FindByIdAsync(userVM.Id).Result;
+                user.ChangeUser(userVM);
+                var result = userManager.UpdateAsync(user).Result;
+                if (!result.Succeeded)
+                {
+                    foreach (var err in result.Errors)
+                    {
+                        ModelState.AddModelError("", err.Description);
+                        return View("Details", userVM);
+                    }
+                }
+                return RedirectToAction("Details", userVM);
             }
-            return View("Edit", user); 
+            return View("Edit", userVM);
         }
     }
 }
