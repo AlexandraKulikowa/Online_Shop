@@ -65,8 +65,8 @@ namespace OnlineShopWebApp.Controllers
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError("", error.Description);
-                        return View("Registration", registration);
                     }
+                    return View("Registration", registration);
                 }
             }
             return View("Registration", registration);
