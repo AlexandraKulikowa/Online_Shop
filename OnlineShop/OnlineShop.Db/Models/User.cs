@@ -8,6 +8,5 @@ namespace OnlineShop.Db.Models
         public string Name { get; set; }
         public string Fathername { get; set; }
         public bool isDistribution { get; set; }
-        public string NormalizedPassword { get; set; }
     }
 }

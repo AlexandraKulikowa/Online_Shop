@@ -39,16 +39,16 @@ namespace OnlineShopWebApp.Controllers
                     ModelState.AddModelError("", "Неправильный пароль");
                 }
             }
-            return View("Index", authorization);
+            return View("Login", authorization);
         }
 
         public IActionResult Registration(string returnUrl)
         {
-            return View(new UserViewModel() { ReturnUrl = returnUrl });
+            return View(new RegistrationViewModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public IActionResult Register(UserViewModel registration)
+        public IActionResult Register(RegistrationViewModel registration)
         {
             if (registration.Login == registration.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");

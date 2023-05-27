@@ -54,7 +54,6 @@ namespace OnlineShopWebApp
                 };
             });
 
-            //services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
             services.AddTransient<ICompareRepository, ComparesDbRepository>();
             services.AddTransient<IFavouriteRepository, FavouritesDbRepository>();

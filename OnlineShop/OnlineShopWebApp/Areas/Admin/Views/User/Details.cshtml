@@ -14,10 +14,6 @@
                 <td>@Model.Login</td>
             </tr>
             <tr>
-                <td>Пароль:</td>
-                <td>@Model.Password</td>
-            </tr>
-            <tr>
                 <td>E-mail:</td>
                 <td>@Model.Email</td>
             </tr>
@@ -52,7 +48,7 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="editpassword" asp-route-id="@Model.Id">Смена пароля</a></li>
+                <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="editpassword" asp-route-id="@Model.Id" >Смена пароля</a></li>
                 <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="edit" asp-route-id="@Model.Id">Редактирование данных</a></li>
                 <li><a class="dropdown-item" href="#"> Права доступа</a></li>
                 <li><hr class="dropdown-divider"></li>
