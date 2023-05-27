@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Interfaces;
+using System.Data;
+using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -10,13 +14,15 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class RoleController : Controller
     {
-        private readonly IRolesRepository roles;
-
-        public RoleController(IRolesRepository roles) => this.roles = roles;
+        private readonly RoleManager<Role> roleManager;
+        public RoleController(RoleManager<Role> roleManager)
+        {
+            this.roleManager = roleManager;
+        }
 
         public IActionResult Index()
         {
-            var rolesList = roles.GetAll();
+            var rolesList = roleManager.Roles.ToList();
             return View(rolesList);
         }
 
@@ -28,25 +34,22 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(Role role)
         {
-            if (role.Name == role.Options)
-            {
-                ModelState.AddModelError("", "Наименование роли не может совпадать с описанием её функций!");
-            }
-
-            if (!roles.CheckRole(role))
+            var check = roleManager.RoleExistsAsync(role.Name).Result;
+            if(check)
                 ModelState.AddModelError("", "Такая роль уже есть!");
 
             if (ModelState.IsValid)
             {
-                roles.Add(role);
+                roleManager.CreateAsync(role);
                 return RedirectToAction("Index");
             }
             return View(role);
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
-            roles.Delete(id);
+            var role = roleManager.FindByIdAsync(id).Result;
+            roleManager.DeleteAsync(role);
             return RedirectToAction("Index");
         }
     }
