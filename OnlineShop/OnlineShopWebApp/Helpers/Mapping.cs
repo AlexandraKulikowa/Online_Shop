@@ -184,7 +184,7 @@ namespace OnlineShopWebApp.Helpers
                 Telephone = contacts.Telephone
             };
         }
-        public static User ToUser(this UserViewModel registration)
+        public static User ToUser(this RegistrationViewModel registration)
         {
             return new User
             {
@@ -192,7 +192,6 @@ namespace OnlineShopWebApp.Helpers
                 Name = registration.Name,
                 Fathername = registration.Fathername,
                 UserName = registration.Login,
-                NormalizedPassword = registration.Password,
                 Email = registration.Email,
                 PhoneNumber = registration.Phone,
                 isDistribution = registration.isDistribution
@@ -209,8 +208,6 @@ namespace OnlineShopWebApp.Helpers
                 Name = user.Name,
                 Fathername = user.Fathername,
                 Login = user.UserName,
-                Password = user.NormalizedPassword,
-                ConfirmPassword = user.NormalizedPassword,
                 Email = user.Email,
                 Phone = user.PhoneNumber,
                 isDistribution = user.isDistribution

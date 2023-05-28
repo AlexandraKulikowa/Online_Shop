@@ -21,8 +21,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var listUsers = userManager.Users.ToList();
-            return View(listUsers.ToUserViewModels());
+            var users = userManager.Users.ToList();
+            return View(users.ToUserViewModels());
         }
 
         public IActionResult Details(string id)
@@ -35,49 +35,53 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Delete(string id)
         {
             var user = userManager.FindByIdAsync(id).Result;
-            userManager.DeleteAsync(user);
+            userManager.DeleteAsync(user).Wait();
             return RedirectToAction("Index");
         }
 
         public IActionResult EditPassword(string id)
         {
-            var user = userManager.FindByIdAsync(id).Result;
-            var userVM = user.ToUserViewModel();
-            return View(userVM);
+            var passwordVM = new PasswordViewModel { Id = id };
+            return View(passwordVM);
         }
 
         [HttpPost]
-        public IActionResult EditPassword(string id, string oldPassword, string password, string confirmPassword)
+        public IActionResult EditPassword(PasswordViewModel passwordVM)
         {
-            if (password != confirmPassword)
-                ModelState.AddModelError("", "Пароли не совпадают!");
+            var user = userManager.FindByIdAsync(passwordVM.Id).Result;
+            var userVM = new UserViewModel();
 
-            if (oldPassword == password)
-                ModelState.AddModelError("", "Новый пароль не должен быть идентичен старому!");
+            var checkOld = userManager.CheckPasswordAsync(user, passwordVM.OldPassword).Result;
+            if(!checkOld)
+            {
+                ModelState.AddModelError("", "Вы неверно ввели старый пароль!");
+            }
 
-
-            var user = userManager.FindByIdAsync(id).Result;
+            var checkNew = userManager.CheckPasswordAsync(user, passwordVM.NewPassword).Result;
+            if(checkNew)
+            {
+                ModelState.AddModelError("", "Пароль не должен быть идентичен старому!");
+            }
 
             if (ModelState.IsValid)
             {
-                userManager.ChangePasswordAsync(user, oldPassword, password).Wait();
-                user.NormalizedPassword = password;
+                userManager.ChangePasswordAsync(user, passwordVM.OldPassword, passwordVM.NewPassword).Wait();
                 var result = userManager.UpdateAsync(user).Result;
+
                 if (!result.Succeeded)
                 {
                     foreach (var err in result.Errors)
                     {
                         ModelState.AddModelError("", err.Description);
-                        var userVMMM = user.ToUserViewModel();
-                        return View("EditPassword", userVMMM);
                     }
+                    return View("EditPassword", passwordVM);
                 }
-                user = userManager.FindByIdAsync(id).Result;
-                var userVMM = user.ToUserViewModel();
-                return RedirectToAction("Details", userVMM);
+                user = userManager.FindByIdAsync(user.Id).Result;
+                userVM = user.ToUserViewModel();
+                return RedirectToAction("Details", passwordVM);
             }
-            var userVM = user.ToUserViewModel();
-            return View("EditPassword", userVM);
+            userVM = user.ToUserViewModel();
+            return View("EditPassword", passwordVM);
         }
 
         public IActionResult Edit(string id)
@@ -90,12 +94,16 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(UserViewModel userVM)
         {
-            if (userVM.Login == userVM.Password)
+            var user = userManager.FindByIdAsync(userVM.Id).Result;
+            var checkLogin = userManager.CheckPasswordAsync(user, userVM.Login).Result;
+            if (checkLogin)
+            {
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
+            }
 
             if (ModelState.IsValid)
             {
-                var user = userManager.FindByIdAsync(userVM.Id).Result;
+
                 user.ChangeUser(userVM);
                 var result = userManager.UpdateAsync(user).Result;
                 if (!result.Succeeded)
@@ -103,12 +111,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     foreach (var err in result.Errors)
                     {
                         ModelState.AddModelError("", err.Description);
-                        return View("Details", userVM);
                     }
+                    return View("Details", userVM);
                 }
-                return RedirectToAction("Details", userVM);
             }
-            return View("Edit", userVM);
+            return View("Details", userVM);
         }
     }
 }

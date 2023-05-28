@@ -1,9 +1,12 @@
-﻿
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-  color:burlywood;
+﻿a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-word;
+    font-size: 23px;
+    font-weight: 700;
+    user-select: none;
+    outline: none;
+    text-decoration: none;
 }
 
 a {
@@ -84,23 +87,46 @@ body {
     border-right-width: 5px;
     border-bottom-width: 5px;
 }
+
 .enter {
-    color:darkslategray;
+    color: darkslategray;
     user-select: none;
     text-decoration: double;
     outline: none;
-    background-color:lightsteelblue;
+    background-color: lightsteelblue;
     padding: 1em 1em;
     text-align: center;
     width: 110px;
     height: 60px;
     border-radius: 22px;
     box-shadow: 2px 2px 2px;
+    display: inline-block;
 }
 
 .enter:hover {
     background-color:lightslategrey;
 }
+
+.entered {
+    color:black;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    background-color:steelblue;
+    padding: 6px 1em 0px 1em;
+    text-align: center;
+    width: fit-content;
+    height: 60px;
+    border-radius: 22px;
+    box-shadow: 2px 2px 2px;
+    font-size: 14px;
+    justify-content: center;
+    align-items:center;
+}
+
+    .entered:hover {
+        background-color: lightslategrey;
+    }
 
 .compare {
     color:black;
@@ -478,7 +504,7 @@ label {
     font-weight: 600;
     box-shadow: 4px 4px 4px;
     text-align: left;
-    width: 73%;
+    width: 80%;
     margin-left:auto;
     margin-right:auto;
     padding: 10px 10px 10px 10px;
@@ -513,7 +539,7 @@ legend {
 }
 
 .changepassword {
-    width: 35%;
+    width: 39%;
     height: 35%;
     align-items: center;
     align-content: center;

@@ -31,24 +31,23 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     if (authorization.ReturnUrl != null)
+                    {
                         return Redirect(authorization.ReturnUrl);
+                    }
                     return Redirect("~/Home/Index/");
                 }
-                else
-                {
                     ModelState.AddModelError("", "Неправильный пароль");
-                }
             }
-            return View("Index", authorization);
+            return View("Login", authorization);
         }
 
         public IActionResult Registration(string returnUrl)
         {
-            return View(new UserViewModel() { ReturnUrl = returnUrl });
+            return View(new RegistrationViewModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public IActionResult Register(UserViewModel registration)
+        public IActionResult Register(RegistrationViewModel registration)
         {
             if (registration.Login == registration.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
@@ -57,21 +56,19 @@ namespace OnlineShopWebApp.Controllers
             {
                 var user = registration.ToUser();
                 var result = userManager.CreateAsync(user, registration.Password).Result;
+
                 if (result.Succeeded)
                 {
                     signInManager.SignInAsync(user, false).Wait();
 
                     if (registration.ReturnUrl != null)
                         return Redirect(registration.ReturnUrl);
+
                     return Redirect("~/Home/Index/");
                 }
-                else
+                foreach (var error in result.Errors)
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                        return View("Registration", registration);
-                    }
+                    ModelState.AddModelError("", error.Description);
                 }
             }
             return View("Registration", registration);
@@ -80,7 +77,6 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Logout()
         {
             signInManager.SignOutAsync().Wait();
-
             return Redirect("~/Home/Index/");
         }
     }
