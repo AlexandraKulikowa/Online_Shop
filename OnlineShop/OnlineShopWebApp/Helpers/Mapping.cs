@@ -1,4 +1,5 @@
-﻿using OnlineShop.Db;
+﻿using Microsoft.AspNetCore.Identity;
+using OnlineShop.Db;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
@@ -214,7 +215,6 @@ namespace OnlineShopWebApp.Helpers
             };
         }
 
-
         public static List<UserViewModel> ToUserViewModels(this List<User> users)
         {
             var userViewModels = new List<UserViewModel>();
@@ -232,6 +232,11 @@ namespace OnlineShopWebApp.Helpers
             user.Email = userVM.Email;
             user.PhoneNumber = userVM.Phone;
             user.isDistribution = userVM.isDistribution;
+        }
+
+        public static RoleViewModel ToRoleViewModel(this IdentityRole role)
+        {
+            return new RoleViewModel { Id = role.Id, Name = role.Name };
         }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Areas.Admin.Models;
-using OnlineShopWebApp.Interfaces;
-using System.Data;
+using OnlineShopWebApp.Helpers;
 using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -14,16 +12,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class RoleController : Controller
     {
-        private readonly RoleManager<Role> roleManager;
-        public RoleController(RoleManager<Role> roleManager)
+        private readonly RoleManager<IdentityRole> roleManager;
+        public RoleController(RoleManager<IdentityRole> roleManager)
         {
             this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
-            var rolesList = roleManager.Roles.ToList();
-            return View(rolesList);
+            var roles = roleManager.Roles.ToList();
+            var rolesVM = roles.Select(x => x.ToRoleViewModel()).ToList();
+            return View(rolesVM);
         }
 
         public IActionResult Add()
@@ -32,24 +31,32 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Role role)
+        public IActionResult Add(RoleViewModel roleVM)
         {
-            var check = roleManager.RoleExistsAsync(role.Name).Result;
-            if(check)
+            var check = roleManager.RoleExistsAsync(roleVM.Name).Result;
+            if (check)
                 ModelState.AddModelError("", "Такая роль уже есть!");
 
             if (ModelState.IsValid)
             {
-                roleManager.CreateAsync(role);
-                return RedirectToAction("Index");
+                var role = new IdentityRole { Name = roleVM.Name };
+                var result = roleManager.CreateAsync(role).Result;
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
             }
-            return View(role);
+            return View(roleVM);
         }
 
         public IActionResult Delete(string id)
         {
             var role = roleManager.FindByIdAsync(id).Result;
-            roleManager.DeleteAsync(role);
+            roleManager.DeleteAsync(role).Wait();
             return RedirectToAction("Index");
         }
     }

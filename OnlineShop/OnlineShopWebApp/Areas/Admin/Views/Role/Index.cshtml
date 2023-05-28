@@ -1,4 +1,4 @@
-﻿@model List<Role>
+﻿@model List<RoleViewModel>
 
 @await Html.PartialAsync("AdminPanel")
 
@@ -15,7 +15,7 @@ else
         <center><h2>Список ролей</h2></center>
         <table>
             <thead>
-                <tr><th>№</th><th>Название</th><th>Опции</th></tr>
+                <tr><th>№</th><th>Название</th></tr>
             </thead>
             @foreach (var role in Model)
             {
@@ -23,7 +23,6 @@ else
                     <tr>
                         <td>@role.Id</td>
                         <td>@role.Name</td>
-                        <td>@role.Options</td>
                         <td><a class="btn btn-sm btn-outline-dark" asp-area="admin" asp-controller="role" asp-action="delete" asp-route-id="@role.Id">Удалить</a></td>
                     </tr>
                 </tbody>
