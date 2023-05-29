@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
+using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -14,9 +16,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> userManager;
-        public UserController(UserManager<User> userManager)
+        private readonly RoleManager<IdentityRole> roleManager;
+        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -52,13 +56,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var userVM = new UserViewModel();
 
             var checkOld = userManager.CheckPasswordAsync(user, passwordVM.OldPassword).Result;
-            if(!checkOld)
+            if (!checkOld)
             {
                 ModelState.AddModelError("", "Вы неверно ввели старый пароль!");
             }
 
             var checkNew = userManager.CheckPasswordAsync(user, passwordVM.NewPassword).Result;
-            if(checkNew)
+            if (checkNew)
             {
                 ModelState.AddModelError("", "Пароль не должен быть идентичен старому!");
             }
@@ -116,6 +120,34 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 }
             }
             return View("Details", userVM);
+        }
+
+        public IActionResult Rights(string id)
+        {
+            var user = userManager.FindByIdAsync(id).Result;
+            var roles = userManager.GetRolesAsync(user).Result;
+            var rolesVM = roles.Select(x => new RoleViewModel { Name = x }).ToList();
+
+            var allRoles = roleManager.Roles.ToList();
+            var allRolesVM = allRoles.Select(x => x.ToRoleViewModel()).ToList();
+
+            var rightsVM = user.ToRightsViewModel(rolesVM, allRolesVM);
+            return View(rightsVM);
+        }
+
+        [HttpPost]
+
+        public IActionResult Rights(string id, Dictionary<string, string> userRolesVM)
+        {
+            var userSelectedRoles = userRolesVM.Select(x => x.Key);
+
+            var user = userManager.FindByIdAsync(id).Result;
+            var roles = userManager.GetRolesAsync(user).Result;
+
+            userManager.RemoveFromRolesAsync(user, roles).Wait();
+            userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
+
+            return RedirectToAction("Rights");
         }
     }
 }

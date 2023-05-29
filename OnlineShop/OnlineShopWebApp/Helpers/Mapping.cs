@@ -236,7 +236,19 @@ namespace OnlineShopWebApp.Helpers
 
         public static RoleViewModel ToRoleViewModel(this IdentityRole role)
         {
-            return new RoleViewModel { Id = role.Id, Name = role.Name };
+            return new RoleViewModel { Name = role.Name };
+        }
+
+        public static RightsViewModel ToRightsViewModel(this User user, List<RoleViewModel> userRoles, List<RoleViewModel> allRoles)
+        {
+            var rightsVM = new RightsViewModel
+            {
+                Id = user.Id,
+                Name = user.Name,
+                UserRoles = userRoles, 
+                AllRoles = allRoles
+            };
+            return rightsVM;
         }
     }
 }

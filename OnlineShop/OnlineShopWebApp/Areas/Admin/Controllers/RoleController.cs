@@ -53,9 +53,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(roleVM);
         }
 
-        public IActionResult Delete(string id)
+        public IActionResult Delete(string name)
         {
-            var role = roleManager.FindByIdAsync(id).Result;
+            var role = roleManager.FindByNameAsync(name).Result;
             roleManager.DeleteAsync(role).Wait();
             return RedirectToAction("Index");
         }

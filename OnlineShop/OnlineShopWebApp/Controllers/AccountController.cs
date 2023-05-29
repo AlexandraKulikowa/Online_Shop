@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Models;
+using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
+using Serilog;
+using Newtonsoft.Json;
+using System;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -61,6 +66,8 @@ namespace OnlineShopWebApp.Controllers
                 {
                     signInManager.SignInAsync(user, false).Wait();
 
+                    TryAssignUserRole(user);
+
                     if (registration.ReturnUrl != null)
                         return Redirect(registration.ReturnUrl);
 
@@ -72,6 +79,19 @@ namespace OnlineShopWebApp.Controllers
                 }
             }
             return View("Registration", registration);
+        }
+
+        private void TryAssignUserRole(User user)
+        {
+            try
+            {
+                userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+            }
+            catch (Exception ex)
+            {
+                StatusCode(500, ex.Message);
+            }
+            Ok(user);
         }
 
         public IActionResult Logout()
