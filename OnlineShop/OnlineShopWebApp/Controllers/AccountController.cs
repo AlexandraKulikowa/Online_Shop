@@ -30,12 +30,13 @@ namespace OnlineShopWebApp.Controllers
                 var result = signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false).Result;
                 if (result.Succeeded)
                 {
-                    return Redirect("~/Home/Index/");
+                    if(authorization.ReturnUrl != null)
+                    {
+                        return Redirect(authorization.ReturnUrl);
+                    }
+                    return RedirectToAction("Index", "Home");
                 }
-                else
-                {
                     ModelState.AddModelError("", "Неправильный пароль");
-                }
             }
             return View("Index", authorization);
         }
@@ -60,13 +61,9 @@ namespace OnlineShopWebApp.Controllers
                     signInManager.SignInAsync(user, false).Wait();
                     return RedirectToAction("Index", "Home");
                 }
-                else
+                foreach (var error in result.Errors)
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                    return View("Registration", registration);
+                    ModelState.AddModelError("", error.Description);
                 }
             }
             return View("Registration", registration);
@@ -75,7 +72,6 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Logout()
         {
             signInManager.SignOutAsync().Wait();
-
             return Redirect("~/Home/Index/");
         }
     }

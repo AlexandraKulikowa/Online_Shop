@@ -193,7 +193,6 @@ namespace OnlineShopWebApp.Helpers
                 NormalizedUserName = registration.Name,
                 Fathername = registration.Fathername,
                 UserName = registration.Login,
-                PasswordHash = registration.Password,
                 Email = registration.Email,
                 PhoneNumber = registration.Phone,
                 isDistribution = registration.isDistribution
