@@ -13,7 +13,7 @@
 else
 {
     <div class="card shadow adminproducts">
-        <center><h2>Список пользователей</h2></center>    
+        <center><h2>Список пользователей</h2></center>
         <table>
             <thead>
                 <tr>
@@ -21,8 +21,10 @@ else
                     <th>Фамилия</th>
                     <th>Логин</th>
                     <th>Телефон</th>
+                    <th>Роль</th>
                 </tr>
             </thead>
+
             @foreach (var user in Model)
             {
                 <tbody>
@@ -31,14 +33,23 @@ else
                         <td>@user.Surname</td>
                         <td>@user.Login</td>
                         <td>@user.Phone</td>
-                        <td><a class="btn btn-dark" asp-area="admin" asp-controller="user" asp-action="details" asp-route-id="@user.Id" role="button">Детали</a></td>
+                        <td>
+                            @foreach (var role in user.Roles)
+                            {
+                                @role
+                                <br />
+                            }
+                        </td>
+                        <td>
+                            <a class="btn btn-dark" asp-area="admin" asp-controller="user" asp-action="details" asp-route-id="@user.Id" role="button">Детали</a>
+                        </td>
                     </tr>
                 </tbody>
             }
         </table>
         <br>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-dark btn-lg" asp-area="" asp-controller="account" asp-action="registration" role="button">Добавить пользователя</a>
+            <a class="btn btn-dark btn-lg" asp-area="" asp-controller="account" asp-action="registration" role="button">Добавить пользователя</a>
         </div>
     </div>
 }

@@ -22,6 +22,16 @@
                 <td>@Model.Phone</td>
             </tr>
             <tr>
+                <td>Роль</td>
+                <td>
+                    @foreach (var role in @Model.Roles)
+                    {
+                        @role
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
                 <td>Согласие на получение новинок:</td>
                 <td>
                     @if (Model.isDistribution)

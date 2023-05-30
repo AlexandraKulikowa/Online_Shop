@@ -6,7 +6,9 @@ using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
@@ -26,13 +28,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var users = userManager.Users.ToList();
-            return View(users.ToUserViewModels());
+            var usersVM = new List<UserViewModel>();
+            foreach (var user in users)
+            {
+                var userVM = GetRolesAndBecomeVM(user);
+                usersVM.Add(userVM);
+            }
+            return View(usersVM);
         }
 
         public IActionResult Details(string id)
         {
             var user = userManager.FindByIdAsync(id).Result;
-            var userVM = user.ToUserViewModel();
+            var userVM = GetRolesAndBecomeVM(user);
             return View(userVM);
         }
 
@@ -147,7 +155,16 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             userManager.RemoveFromRolesAsync(user, roles).Wait();
             userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
 
-            return RedirectToAction("Rights");
+            var userVM = GetRolesAndBecomeVM(user);
+            return View("Details", userVM);
+        }
+
+        public UserViewModel GetRolesAndBecomeVM(User user)
+        {
+            var roles = userManager.GetRolesAsync(user).Result.ToList();
+            var userVM = user.ToUserViewModel();
+            userVM.Roles = roles;
+            return userVM;
         }
     }
 }

@@ -14,10 +14,5 @@ namespace OnlineShopWebApp.Areas.Admin.Models
             var role = (RoleViewModel)obj;
             return Name == role.Name;
         }
-
-        public override int GetHashCode()
-        {
-            return 123456;
-        }
     }
 }

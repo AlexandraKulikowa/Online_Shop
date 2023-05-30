@@ -211,8 +211,9 @@ namespace OnlineShopWebApp.Helpers
                 Login = user.UserName,
                 Email = user.Email,
                 Phone = user.PhoneNumber,
-                isDistribution = user.isDistribution
-            };
+                isDistribution = user.isDistribution, 
+                //Role = roleManager.FindByNameAsync(name).Result;
+        };
         }
 
         public static List<UserViewModel> ToUserViewModels(this List<User> users)
