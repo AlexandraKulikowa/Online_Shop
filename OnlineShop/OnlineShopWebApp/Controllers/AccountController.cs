@@ -30,11 +30,11 @@ namespace OnlineShopWebApp.Controllers
                 var result = signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false).Result;
                 if (result.Succeeded)
                 {
-                    if (authorization.ReturnUrl != null)
+                    if(authorization.ReturnUrl != null)
                     {
                         return Redirect(authorization.ReturnUrl);
                     }
-                    return Redirect("~/Home/Index/");
+                    return RedirectToAction("Index", "Home");
                 }
                     ModelState.AddModelError("", "Неправильный пароль");
             }

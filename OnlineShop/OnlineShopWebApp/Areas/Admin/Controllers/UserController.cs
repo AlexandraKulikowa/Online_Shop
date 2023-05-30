@@ -51,8 +51,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var user = userManager.FindByIdAsync(passwordVM.Id).Result;
             var userVM = new UserViewModel();
 
-            var checkOld = userManager.CheckPasswordAsync(user, passwordVM.OldPassword).Result;
-            if(!checkOld)
+            var checkOldPassword = userManager.CheckPasswordAsync(user, passwordVM.OldPassword).Result;
+            if(!checkOldPassword)
             {
                 ModelState.AddModelError("", "Вы неверно ввели старый пароль!");
             }
@@ -112,7 +112,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("", err.Description);
                     }
-                    return View("Details", userVM);
+                    return View("Edit", userVM);
                 }
             }
             return View("Details", userVM);
