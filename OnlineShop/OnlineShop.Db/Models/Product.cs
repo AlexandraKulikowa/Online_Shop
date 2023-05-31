@@ -25,7 +25,7 @@ namespace OnlineShop.Db.Models
 
         public bool IsPromo { get; set; }
 
-        public string ImagePath { get; set; }
+        public List<string> ImagePath { get; set; }
 
         public List<BasketItem> BasketItems { get; set; }
         

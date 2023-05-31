@@ -39,19 +39,23 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [RequestSizeLimit(8500000)]
         public IActionResult Add(ProductViewModel productVM)
         {
-            if (productVM.UploadedFile != null)
+            if (productVM.UploadedFiles != null)
             {
                 string productImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products");
                 if (!Directory.Exists(productImagesPath))
                 {
                     Directory.CreateDirectory(productImagesPath);
                 }
-                var fileName = Guid.NewGuid() + "." + productVM.UploadedFile.FileName.Split('.').Last();
-                using (var fileStream = new FileStream(productImagesPath + fileName, FileMode.Create))
+
+                foreach (var file in productVM.UploadedFiles)
                 {
-                    productVM.UploadedFile.CopyTo(fileStream);
+                    var fileName = Guid.NewGuid() + "." + file.FileName.Split('.').Last();
+                    using (var fileStream = new FileStream(productImagesPath + fileName, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    productVM.ImagePath.Add("/images/products" + fileName);
                 }
-                productVM.ImagePath = "/images/products" + fileName;
             }
 
             var product = productVM.ToProduct();
@@ -78,19 +82,23 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [RequestSizeLimit(8500000)]
         public IActionResult Edit(ProductViewModel productVM)
         {
-            if (productVM.UploadedFile != null)
+            if (productVM.UploadedFiles != null)
             {
                 string productImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products");
                 if (!Directory.Exists(productImagesPath))
                 {
                     Directory.CreateDirectory(productImagesPath);
                 }
-                var fileName = Guid.NewGuid() + "." + productVM.UploadedFile.FileName.Split('.').Last();
-                using (var fileStream = new FileStream(productImagesPath + fileName, FileMode.Create))
+
+                foreach (var file in productVM.UploadedFiles)
                 {
-                    productVM.UploadedFile.CopyTo(fileStream);
+                    var fileName = Guid.NewGuid() + "." + file.FileName.Split('.').Last();
+                    using (var fileStream = new FileStream(productImagesPath + fileName, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    productVM.ImagePath.Add("/images/products" + fileName);
                 }
-                productVM.ImagePath = "/images/products" + fileName;
             }
 
             var product = productVM.ToProduct();
