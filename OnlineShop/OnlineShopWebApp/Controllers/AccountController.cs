@@ -38,7 +38,7 @@ namespace OnlineShopWebApp.Controllers
                 }
                     ModelState.AddModelError("", "Неправильный пароль");
             }
-            return View("Index", authorization);
+            return View("Login", authorization);
         }
 
         public IActionResult Registration()
