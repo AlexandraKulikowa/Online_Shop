@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
+using System.IO;
+using System;
+using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -12,7 +16,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductsRepository products;
-        public ProductController(IProductsRepository products) => this.products = products;
+        private readonly IWebHostEnvironment appEnvironment;
+        public ProductController(IProductsRepository products, IWebHostEnvironment appEnvironment)
+        {
+            this.products = products;
+            this.appEnvironment = appEnvironment;
+        }
 
         public IActionResult Index()
         {
@@ -27,8 +36,24 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [RequestSizeLimit(8500000)]
         public IActionResult Add(ProductViewModel productVM)
         {
+            if (productVM.UploadedFile != null)
+            {
+                string productImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products");
+                if (!Directory.Exists(productImagesPath))
+                {
+                    Directory.CreateDirectory(productImagesPath);
+                }
+                var fileName = Guid.NewGuid() + "." + productVM.UploadedFile.FileName.Split('.').Last();
+                using (var fileStream = new FileStream(productImagesPath + fileName, FileMode.Create))
+                {
+                    productVM.UploadedFile.CopyTo(fileStream);
+                }
+                productVM.ImagePath = "/images/products" + fileName;
+            }
+
             var product = productVM.ToProduct();
 
             if (!products.CheckNewProduct(product))
@@ -50,8 +75,24 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [RequestSizeLimit(8500000)]
         public IActionResult Edit(ProductViewModel productVM)
         {
+            if (productVM.UploadedFile != null)
+            {
+                string productImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products");
+                if (!Directory.Exists(productImagesPath))
+                {
+                    Directory.CreateDirectory(productImagesPath);
+                }
+                var fileName = Guid.NewGuid() + "." + productVM.UploadedFile.FileName.Split('.').Last();
+                using (var fileStream = new FileStream(productImagesPath + fileName, FileMode.Create))
+                {
+                    productVM.UploadedFile.CopyTo(fileStream);
+                }
+                productVM.ImagePath = "/images/products" + fileName;
+            }
+
             var product = productVM.ToProduct();
 
             if (!products.CheckNewProduct(product))

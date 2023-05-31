@@ -48,6 +48,11 @@ namespace OnlineShop.Db
                         new Size { Id = 6, Width = 25, Height = 30, IsFrame = false },
                         new Size { Id = 7, Width = 20, Height = 15, IsFrame = false },
         });
+
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Cost)
+                .HasColumnType("decimal(18,2)");
         }
     }
 }

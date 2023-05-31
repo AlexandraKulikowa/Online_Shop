@@ -58,7 +58,7 @@ namespace OnlineShopWebApp.Helpers
                 Size = productVM.Size.ToSize(),
                 Year = productVM.Year,
                 IsPromo = productVM.IsPromo,
-                ImagePath = productVM.ImagePath,
+                ImagePath = productVM.ImagePath
             };
         }
 

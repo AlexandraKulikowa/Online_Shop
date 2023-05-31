@@ -27,10 +27,9 @@ else
                         <td><a asp-area="" asp-controller="product" asp-action="index" asp-route-id="@product.Id">@product.Name</a></td>
                         <td>@product.Cost</td>
                         <td><a asp-area="admin" asp-controller="product" asp-action="edit" asp-route-id="@product.Id">Редактировать</a></td>
-                        <td><button class="btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#deleteproduct" type="button">Удалить</button></td>
-                    </tr>
-                    
-                    <div class="modal fade modaldelete" id="deleteproduct" tabindex="-1" aria-labelledby="deleteproduct" aria-hidden="true">
+                        <td><button class="btn btn-sm btn-outline-dark" data-toggle="modal" data-target="#deleteproduct-@product.Id" type="button">Удалить</button>
+
+                            <div class="modal fade modaldelete" id="deleteproduct-@product.Id" tabindex="-1" aria-labelledby="deleteproduct" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header" style=" background-color:antiquewhite" >
@@ -47,6 +46,8 @@ else
                             </div>
                         </div>
                     </div>
+                        </td>
+                    </tr>
                 </tbody>
             }
         </table>

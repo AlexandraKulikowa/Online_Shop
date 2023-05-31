@@ -926,7 +926,7 @@ date::placeholder {
 
 .addproducts {
     width: 35%;
-    height: 92%;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top: auto;
@@ -984,7 +984,7 @@ modal-footer{
 
 .editproducts {
     width: 40%;
-    height: 85%;
+    height: 90%;
     margin-left: 14px;
     margin-right: auto;
     margin-top: auto;

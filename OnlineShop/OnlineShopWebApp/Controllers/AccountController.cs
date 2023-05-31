@@ -4,10 +4,7 @@ using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
-using Serilog;
-using Newtonsoft.Json;
 using System;
-using Microsoft.AspNetCore.Diagnostics;
 
 namespace OnlineShopWebApp.Controllers
 {
