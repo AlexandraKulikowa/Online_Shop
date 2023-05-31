@@ -19,8 +19,11 @@ namespace OnlineShop.Db.Repositories
         {
             return databaseContext.Baskets
                 .Include(x => x.BasketItems)
-                .ThenInclude(x => x.Product)
-                .ThenInclude(x => x.Size)
+                    .ThenInclude(x => x.Product)
+                        .ThenInclude(x => x.ImagePath)
+                .Include(x => x.BasketItems)
+                    .ThenInclude(x => x.Product)
+                        .ThenInclude(x => x.Size)
                 .FirstOrDefault(x => x.UserId == userId);
         }
 

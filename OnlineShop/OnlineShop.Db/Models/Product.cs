@@ -25,13 +25,14 @@ namespace OnlineShop.Db.Models
 
         public bool IsPromo { get; set; }
 
-        public List<string> ImagePath { get; set; }
+        public List<FilePath> ImagePath { get; set; }
 
         public List<BasketItem> BasketItems { get; set; }
         
         public Product()
         {
             BasketItems = new List<BasketItem>();
+            ImagePath = new List<FilePath>();
         }
 
     }

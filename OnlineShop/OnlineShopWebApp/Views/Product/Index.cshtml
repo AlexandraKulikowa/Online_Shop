@@ -3,7 +3,10 @@
 <body>
     <div class="col-8 card shadow card-body-product">
         <div class="card-body-product">
-            <img src=@Model.ImagePath alt="Фото картины">
+            @foreach (var image in Model.ImagePath)
+            {
+                <img src=@image alt="Фото картины">
+            }
             <br>
             <h3><b>@Model.Name</b><br></h3>
             @if (Model.IsPromo)

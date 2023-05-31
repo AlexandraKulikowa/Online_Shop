@@ -20,6 +20,11 @@ namespace OnlineShopWebApp.Helpers
 
         public static ProductViewModel ToProductViewModel(this Product product)
         {
+            var ProductVMImagePath = new List<string>();
+            foreach(var path in product.ImagePath)
+            {
+                ProductVMImagePath.Add(path.Path);
+            }
             return new ProductViewModel
             {
                 Id = product.Id,
@@ -31,7 +36,7 @@ namespace OnlineShopWebApp.Helpers
                 Size = product.Size.ToSizeViewModel(),
                 Year = product.Year,
                 IsPromo = product.IsPromo,
-                ImagePath = product.ImagePath,
+                ImagePath = ProductVMImagePath
             };
         }
 
@@ -47,6 +52,12 @@ namespace OnlineShopWebApp.Helpers
 
         public static Product ToProduct(this ProductViewModel productVM)
         {
+            var ProductImagePath = new List<FilePath>();
+            foreach (var path in productVM.ImagePath)
+            {
+                ProductImagePath.Add(new FilePath { Path = path });
+            }
+
             return new Product
             {
                 Id = productVM.Id,
@@ -58,7 +69,7 @@ namespace OnlineShopWebApp.Helpers
                 Size = productVM.Size.ToSize(),
                 Year = productVM.Year,
                 IsPromo = productVM.IsPromo,
-                ImagePath = productVM.ImagePath
+                ImagePath = ProductImagePath
             };
         }
 
@@ -212,7 +223,6 @@ namespace OnlineShopWebApp.Helpers
                 Email = user.Email,
                 Phone = user.PhoneNumber,
                 isDistribution = user.isDistribution, 
-                //Role = roleManager.FindByNameAsync(name).Result;
         };
         }
 

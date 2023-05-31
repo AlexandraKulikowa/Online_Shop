@@ -36,7 +36,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [RequestSizeLimit(8500000)]
         public IActionResult Add(ProductViewModel productVM)
         {
             if (productVM.UploadedFiles != null)
@@ -79,7 +78,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [RequestSizeLimit(8500000)]
         public IActionResult Edit(ProductViewModel productVM)
         {
             if (productVM.UploadedFiles != null)

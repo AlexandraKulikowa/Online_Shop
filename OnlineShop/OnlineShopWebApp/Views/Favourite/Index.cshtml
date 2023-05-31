@@ -15,7 +15,12 @@ else
         {
             <div class="col-2 card-shadow border-success favourlist">
                 <br>
-                <center><img src=@product.ImagePath alt="Фото картины" height="100"></center>
+                <center>
+                    @foreach (var image in product.ImagePath)
+                    {
+                        <img src=@image height="100" alt="Фото картины">
+                    }
+                </center>
                 <br>
                 <div class="mt-auto" style="display:-ms-inline-flexbox; flex-direction: column;">
                     <table class="table-favour">

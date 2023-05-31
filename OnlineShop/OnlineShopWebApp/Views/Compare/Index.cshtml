@@ -13,7 +13,12 @@ else
             <div class="col-3">
                 <div class="comparelist table-responsive">
                     <br>
-                    <center><img src=@product.ImagePath alt="Фото картины" height="150"></center>
+                    <center>
+                        @foreach (var image in product.ImagePath)
+                        {
+                            <img src=@image height="150" alt="Фото картины">
+                        }    
+                    </center>
                     <br>
                     <table class="table-compare">
                         <tr>
