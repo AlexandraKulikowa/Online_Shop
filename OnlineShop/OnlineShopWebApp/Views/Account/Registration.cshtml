@@ -1,4 +1,4 @@
-﻿@model User
+﻿@model UserViewModel
 <center><b><div class="validation" asp-validation-summary="All" style="color:aliceblue"></div></b></center>
 <div class="card shadow register">
     <form method="post">
@@ -43,8 +43,10 @@
             </p>
             <input asp-for="isDistribution" type="checkbox" value="true">
             <label asp-for="isDistribution">Присылать мне уведомления о новинках</label>
+
+
         </fieldset>
-        <center><button type="submit" class="btn button-register" asp-controller="login" asp-action="register" role="button">Зарегистрироваться</button></center>
+        <center><button type="submit" class="btn button-register" asp-controller="account" asp-action="register" role="button">Зарегистрироваться</button></center>
     </form>
 </div>
 

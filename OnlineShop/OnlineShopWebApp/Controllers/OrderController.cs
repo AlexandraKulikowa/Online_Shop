@@ -2,12 +2,14 @@
 using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Helpers;
-using OnlineShopWebApp.Repositories;
+using OnlineShop.Db.Repositories;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IBasketsRepository baskets;

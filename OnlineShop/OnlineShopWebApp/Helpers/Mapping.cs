@@ -4,6 +4,7 @@ using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Mvc;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -182,6 +183,19 @@ namespace OnlineShopWebApp.Helpers
                 Address = contacts.Address,
                 Index = contacts.Index,
                 Telephone = contacts.Telephone
+            };
+        }
+        public static User ToUser(this UserViewModel registration)
+        {
+            return new User
+            {
+                Surname = registration.Surname,
+                NormalizedUserName = registration.Name,
+                Fathername = registration.Fathername,
+                UserName = registration.Login,
+                Email = registration.Email,
+                PhoneNumber = registration.Phone,
+                isDistribution = registration.isDistribution
             };
         }
     }

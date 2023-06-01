@@ -11,7 +11,7 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Укажите ваш пароль")]
         [StringLength(12, MinimumLength = 6, ErrorMessage = "Ваш пароль должен быть длиной от 6 до 12 символов")]
         public string Password { get; set; }
-
         public bool IsRemember { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

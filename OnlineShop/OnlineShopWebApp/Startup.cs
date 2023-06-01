@@ -1,16 +1,19 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShop.Db;
 using OnlineShop.Db.Interfaces;
+using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
 using Serilog;
-
+using System;
 
 namespace OnlineShopWebApp
 {
@@ -27,6 +30,21 @@ namespace OnlineShopWebApp
             string connection = Configuration.GetConnectionString("OnlineShopKulikowa");
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
 
+            services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connection));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(8);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+                options.Cookie = new CookieBuilder
+                {
+                    IsEssential = true,
+                };
+            });
 
             services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
@@ -54,6 +72,9 @@ namespace OnlineShopWebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseAuthorization();
 

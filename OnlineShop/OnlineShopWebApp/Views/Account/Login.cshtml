@@ -5,6 +5,8 @@
         <fieldset>
             <legend>Авторизируйтесь</legend>
 
+            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+
             <label asp-for="Login">Логин</label>
             <input class="form-ctrlplus" type="text" placeholder="Логин" asp-for="Login">
             <br />
@@ -21,8 +23,8 @@
             <label for="isremember">Запомнить меня?</label>
 
         </fieldset>
-        <button type="submit" class="btn button-login" asp-controller="login" asp-action="enter" role="button">Войти</button>
+        <button type="submit" class="btn button-login" asp-controller="account" asp-action="enter" role="button">Войти</button>
         <br />
     </form>
-    <a class="btn button-registration" asp-controller="login" asp-action="registration" role="button">Регистрация нового пользователя</a>
+    <a class="btn button-registration" asp-controller="account" asp-action="registration" role="button">Регистрация нового пользователя</a>
 </div>

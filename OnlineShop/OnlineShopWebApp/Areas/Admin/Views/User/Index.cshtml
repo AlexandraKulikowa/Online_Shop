@@ -1,4 +1,4 @@
-﻿@model List<User>
+﻿@model List<UserViewModel>
 
 @await Html.PartialAsync("AdminPanel")
 
@@ -40,7 +40,7 @@ else
         </table>
         <br>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-dark btn-lg" asp-area="" asp-controller="login" asp-action="registration" role="button">Добавить пользователя</a>
+        <a class="btn btn-dark btn-lg" asp-area="" asp-controller="account" asp-action="registration" role="button">Добавить пользователя</a>
         </div>
     </div>
 }

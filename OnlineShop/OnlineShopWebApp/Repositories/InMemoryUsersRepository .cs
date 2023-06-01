@@ -7,17 +7,17 @@ namespace OnlineShopWebApp.Repositories
 {
     public class InMemoryUsersRepository : IUsersRepository
     {
-        private List<User> users = new List<User>();
-        public List<User> GetAll()
+        private List<UserViewModel> users = new List<UserViewModel>();
+        public List<UserViewModel> GetAll()
         {
             return users;
         }
-        public User TryGetById(int id)
+        public UserViewModel TryGetById(int id)
         {
             return users.FirstOrDefault(user => user.Id == id);
         }
 
-        public void Add(User checkUser)
+        public void Add(UserViewModel checkUser)
         {
             var user = TryGetById(checkUser.Id);
             if (user == null)
@@ -58,7 +58,7 @@ namespace OnlineShopWebApp.Repositories
             user.ConfirmPassword = confirmpassword;
         }
 
-        public void ChangeUser(User user)
+        public void ChangeUser(UserViewModel user)
         {
             var currentUser = TryGetById(user.Id);
 

@@ -1,4 +1,5 @@
-﻿<header>
+﻿@using OnlineShop.Db.Repositories;
+<header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent border-bottom box-shadow mb-3">
         <div class="container">
             <a class="navbar-brand" style="color:aliceblue" asp-area="" asp-controller="home" asp-action="index"><b>Галерея и онлайн-магазин <br />художника Софии Куликовой</b></a>
@@ -12,11 +13,25 @@
                         <a class="nav-link main" asp-area="" asp-controller="home" asp-action="index">Главная</a>
                     </li>
                 </ul>
-                <a class="btn enter" asp-area="" asp-controller="login" asp-action="index">Вход</a>
                 <a class="btn favourite" asp-area="" asp-controller="favourite" asp-action="index">Избранное</a>
                 <a class="btn compare" asp-area="" asp-controller="compare" asp-action="index">Сравнение</a>
                 @await Component.InvokeAsync("Basket")
-                <a class="btn admin" asp-area="admin" asp-controller="order" asp-action="index">Администратор</a>
+
+
+                @if(User.Identity.IsAuthenticated)
+                {
+                    <div class="btn enter">@User.Identity.Name</div>
+                    <a class="btn enter" asp-area="" asp-controller="account" asp-action="logout">Выход</a>
+                }
+                else
+                {
+                    <a class="btn enter" asp-area="" asp-controller="account" asp-action="login">Вход</a>
+                }
+
+                @if(User.IsInRole(Constants.AdminRoleName))
+                {
+                    <a class="btn admin" asp-area="admin" asp-controller="order" asp-action="index">Администратор</a>
+                }
             </div>
         </div>
     </nav>
