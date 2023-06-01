@@ -10,6 +10,7 @@
                 @foreach(var image in product.ImagePath)
                 {
                     <img src=@image alt="Фото картины">
+                    <br />
                 }
                 <div class="mt-auto align-items-end">
                     <a asp-controller="product" asp-action="index" asp-route-id=@product.Id>

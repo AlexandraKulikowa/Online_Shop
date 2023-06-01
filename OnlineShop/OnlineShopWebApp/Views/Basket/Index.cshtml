@@ -22,6 +22,7 @@ else
                             @foreach (var image in item.Product.ImagePath)
                             {
                                 <img src=@image height="110" object-fit="scale-down" alt="Фото картины">
+                                <br />
                             }
                         </td>
                         <td>@item.Product.Name <br> Жанр: @item.Product.Genre <br /> Написана в @item.Product.Year году</td>

@@ -40,7 +40,7 @@ namespace OnlineShopWebApp.Models
 
         public bool IsPromo { get; set; }
 
-        public List<string> ImagePath { get; set; }
+        public List<string>? ImagePath { get; set; }
 
         public List<IFormFile>? UploadedFiles { get; set; }
     }
