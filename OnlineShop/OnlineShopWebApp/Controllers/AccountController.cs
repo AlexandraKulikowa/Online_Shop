@@ -4,10 +4,7 @@ using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
-using Serilog;
-using Newtonsoft.Json;
 using System;
-using Microsoft.AspNetCore.Diagnostics;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -64,14 +61,18 @@ namespace OnlineShopWebApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    signInManager.SignInAsync(user, false).Wait();
+                    if (!User.IsInRole(Constants.AdminRoleName))
+                    {
+                        signInManager.SignInAsync(user, false).Wait();
+                        TryAssignUserRole(user);
 
+                        if (registration.ReturnUrl != null)
+                            return Redirect(registration.ReturnUrl);
+
+                        return Redirect("~/Home/Index/");
+                    }
                     TryAssignUserRole(user);
-
-                    if (registration.ReturnUrl != null)
-                        return Redirect(registration.ReturnUrl);
-
-                    return Redirect("~/Home/Index/");
+                    return Redirect("~/Admin/User/Index/");
                 }
                 foreach (var error in result.Errors)
                 {

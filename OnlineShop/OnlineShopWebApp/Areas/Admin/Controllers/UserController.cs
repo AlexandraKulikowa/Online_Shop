@@ -47,6 +47,10 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Delete(string id)
         {
             var user = userManager.FindByIdAsync(id).Result;
+            if (user.UserName == "admin@gmail.com")
+            {
+                return RedirectToAction("Error");
+            }
             userManager.DeleteAsync(user).Wait();
             return RedirectToAction("Index");
         }
@@ -165,6 +169,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var userVM = user.ToUserViewModel();
             userVM.Roles = roles;
             return userVM;
+        }
+
+        public IActionResult Error()
+        {
+            return View();
         }
     }
 }
