@@ -32,7 +32,15 @@ namespace OnlineShopWebApp
 
             services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connection));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 0;
+            })
                 .AddEntityFrameworkStores<IdentityContext>();
 
             services.ConfigureApplicationCookie(options =>
@@ -46,7 +54,6 @@ namespace OnlineShopWebApp
                 };
             });
 
-            services.AddSingleton<IUsersRepository, InMemoryUsersRepository>();
             services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
             services.AddTransient<ICompareRepository, ComparesDbRepository>();
             services.AddTransient<IFavouriteRepository, FavouritesDbRepository>();
@@ -55,6 +62,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IProductsRepository, ProductsDbRepository>();
             services.AddControllersWithViews();
         }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

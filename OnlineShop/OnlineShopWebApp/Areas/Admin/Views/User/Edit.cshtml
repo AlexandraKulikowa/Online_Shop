@@ -28,9 +28,6 @@
                 <input type="text" placeholder="Логин" asp-for="Login">
                 <span style="color:brown" asp-validation-for="Login"></span>
 
-                    <input type="hidden" asp-for="Password" value="@Model.Password" />
-                    <input type="hidden" asp-for="ConfirmPassword" value="@Model.ConfirmPassword" />
-
                 <label asp-for="Email">Е-mail</label>
                 <input type="email" style="background-color:white" asp-for="Email" placeholder="anna@yandex.ru">
 

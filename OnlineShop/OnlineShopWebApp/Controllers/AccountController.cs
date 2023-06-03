@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Models;
+using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
@@ -10,11 +11,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Login(string returnUrl)
@@ -41,13 +44,13 @@ namespace OnlineShopWebApp.Controllers
             return View("Login", authorization);
         }
 
-        public IActionResult Registration()
+        public IActionResult Registration(string returnUrl)
         {
-            return View();
+            return View(new RegistrationViewModel() { ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public IActionResult Register(UserViewModel registration)
+        public IActionResult Register(RegistrationViewModel registration)
         {
             if (registration.Login == registration.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
@@ -56,10 +59,19 @@ namespace OnlineShopWebApp.Controllers
             {
                 var user = registration.ToUser();
                 var result = userManager.CreateAsync(user, registration.Password).Result;
+
                 if (result.Succeeded)
                 {
-                    signInManager.SignInAsync(user, false).Wait();
-                    return RedirectToAction("Index", "Home");
+                    if (!User.IsInRole(Constants.AdminRoleName))
+                    {
+                        signInManager.SignInAsync(user, false).Wait();
+
+                        if (registration.ReturnUrl != null)
+                            return Redirect(registration.ReturnUrl);
+
+                        return Redirect("~/Home/Index/");
+                    }
+                    return Redirect("~/Admin/User/Index/");
                 }
                 foreach (var error in result.Errors)
                 {

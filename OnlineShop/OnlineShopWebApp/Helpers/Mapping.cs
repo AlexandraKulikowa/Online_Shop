@@ -4,7 +4,6 @@ using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -185,18 +184,54 @@ namespace OnlineShopWebApp.Helpers
                 Telephone = contacts.Telephone
             };
         }
-        public static User ToUser(this UserViewModel registration)
+        public static User ToUser(this RegistrationViewModel registration)
         {
             return new User
             {
                 Surname = registration.Surname,
-                NormalizedUserName = registration.Name,
+                Name = registration.Name,
                 Fathername = registration.Fathername,
                 UserName = registration.Login,
                 Email = registration.Email,
                 PhoneNumber = registration.Phone,
                 isDistribution = registration.isDistribution
             };
+        }
+
+        public static UserViewModel ToUserViewModel(this User user)
+        {
+
+            return new UserViewModel
+            {
+                Id = user.Id,
+                Surname = user.Surname,
+                Name = user.Name,
+                Fathername = user.Fathername,
+                Login = user.UserName,
+                Email = user.Email,
+                Phone = user.PhoneNumber,
+                isDistribution = user.isDistribution
+            };
+        }
+
+
+        public static List<UserViewModel> ToUserViewModels(this List<User> users)
+        {
+            var userViewModels = new List<UserViewModel>();
+            userViewModels = users.Select(x => x.ToUserViewModel()).ToList();
+
+            return userViewModels;
+        }
+
+        public static void ChangeUser(this User user, UserViewModel userVM)
+        {
+            user.Surname = userVM.Surname;
+            user.Name = userVM.Name;
+            user.Fathername = userVM.Fathername;
+            user.UserName = userVM.Login;
+            user.Email = userVM.Email;
+            user.PhoneNumber = userVM.Phone;
+            user.isDistribution = userVM.isDistribution;
         }
     }
 }

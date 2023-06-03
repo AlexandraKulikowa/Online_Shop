@@ -6,20 +6,12 @@
     <table>
         <tbody>
             <tr>
-                <td>ID пользователя</td>
-                <td>@Model.Id</td>
-            </tr>
-            <tr>
                 <td>ФИО:</td>
                 <td>@Model.Surname @Model.Name @Model.Fathername</td>
             </tr>
             <tr>
                 <td>Логин:</td>
                 <td>@Model.Login</td>
-            </tr>
-            <tr>
-                <td>Пароль:</td>
-                <td>@Model.Password</td>
             </tr>
             <tr>
                 <td>E-mail:</td>
@@ -44,7 +36,7 @@
             </tr>
             <tr>
                 <td>Роль:</td>
-                <td>@Model.Role.Name</td>
+@*                <td>@Model.Role.Name</td> Пока убрано до следующего задания 10_4*@ 
             </tr>
             <tr>
         </tbody>
@@ -56,7 +48,7 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="editpassword" asp-route-id="@Model.Id">Смена пароля</a></li>
+                <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="editpassword" asp-route-id="@Model.Id" >Смена пароля</a></li>
                 <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="edit" asp-route-id="@Model.Id">Редактирование данных</a></li>
                 <li><a class="dropdown-item" href="#"> Права доступа</a></li>
                 <li><hr class="dropdown-divider"></li>
