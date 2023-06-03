@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Models;
+using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
@@ -10,11 +11,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Login(string returnUrl)
@@ -59,12 +62,16 @@ namespace OnlineShopWebApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    signInManager.SignInAsync(user, false).Wait();
+                    if (!User.IsInRole(Constants.AdminRoleName))
+                    {
+                        signInManager.SignInAsync(user, false).Wait();
 
-                    if (registration.ReturnUrl != null)
-                        return Redirect(registration.ReturnUrl);
+                        if (registration.ReturnUrl != null)
+                            return Redirect(registration.ReturnUrl);
 
-                    return Redirect("~/Home/Index/");
+                        return Redirect("~/Home/Index/");
+                    }
+                    return Redirect("~/Admin/User/Index/");
                 }
                 foreach (var error in result.Errors)
                 {
