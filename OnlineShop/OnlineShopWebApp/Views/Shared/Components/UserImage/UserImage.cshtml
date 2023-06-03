@@ -1,0 +1,12 @@
+﻿@model string
+
+@if(Model == null)
+{
+    <a class="btn entered" asp-area="" asp-controller="account" asp-action="profile" asp-route-name="@User.Identity.Name">Личный кабинет</a>
+}
+else
+{
+    <a class="btn entered" asp-area="" asp-controller="account" asp-action="profile" asp-route-name="@User.Identity.Name">
+        <img src="@Model" alt="avatar" height="35">
+    </a>
+}

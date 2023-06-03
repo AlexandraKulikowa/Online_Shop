@@ -6,7 +6,6 @@ using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -61,7 +60,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult EditPassword(PasswordViewModel passwordVM)
         {
             var user = userManager.FindByIdAsync(passwordVM.Id).Result;
-            var userVM = new UserViewModel();
 
             var checkOldPassword = userManager.CheckPasswordAsync(user, passwordVM.OldPassword).Result;
             if(!checkOldPassword)
@@ -88,11 +86,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     }
                     return View("EditPassword", passwordVM);
                 }
-                user = userManager.FindByIdAsync(user.Id).Result;
-                userVM = user.ToUserViewModel();
                 return RedirectToAction("Details", passwordVM);
             }
-            userVM = user.ToUserViewModel();
             return View("EditPassword", passwordVM);
         }
 
