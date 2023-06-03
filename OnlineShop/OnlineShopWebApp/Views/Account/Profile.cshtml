@@ -1,0 +1,49 @@
+﻿@model UserViewModel
+
+<div class="edituser">
+
+    <center><h4>Личный кабинет пользователя @Model.Name</h4></center>
+                @if(Model.ImagePath != null)
+                    {
+                        <img class="card-img-top" src="@Model.ImagePath" height="200" width="200" alt="Аватар"/>
+                    }
+    <table>
+        <tbody>
+            <tr>
+                <td>ФИО:</td>
+                <td>@Model.Surname @Model.Name @Model.Fathername</td>
+            </tr>
+            <tr>
+                <td>Логин:</td>
+                <td>@Model.Login</td>
+            </tr>
+            <tr>
+                <td>E-mail:</td>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <td>Телефон:</td>
+                <td>@Model.Phone</td>
+            </tr>
+            <tr>
+                <td>Согласие 
+                    <br />на получение новинок:</td>
+                <td>
+                    @if (Model.isDistribution)
+                    {
+                        <div>получено</div>
+                    }
+                    else
+                    {
+                        <div>не получено</div>
+                    }
+                    <br />
+                </td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+        <center>
+        <a class="btn-lg btn-dark btn" asp-controller="account" asp-action="edituser" asp-route-id="@Model.Id" role="button">Редактирование данных</a>
+        </center>
+</div>

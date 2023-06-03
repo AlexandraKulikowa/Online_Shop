@@ -10,6 +10,7 @@ using OnlineShop.Db;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
+using OnlineShopWebApp.Helpers;
 using Serilog;
 using System;
 
@@ -55,6 +56,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IOrderRepository, OrdersDbRepository>();
             services.AddTransient<IBasketsRepository, BasketsDbRepository>();
             services.AddTransient<IProductsRepository, ProductsDbRepository>();
+            services.AddTransient<CreateUserImage>();
             services.AddControllersWithViews();
         }
 

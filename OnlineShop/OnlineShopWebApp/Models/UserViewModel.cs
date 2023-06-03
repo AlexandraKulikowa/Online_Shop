@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
@@ -38,5 +39,9 @@ namespace OnlineShopWebApp.Models
         public bool isDistribution { get; set; }
 
         public List<string>? Roles { get; set; }
+
+        public string? ImagePath { get; set; }
+
+        public IFormFile? UploadedFile { get; set; }
     }
 }

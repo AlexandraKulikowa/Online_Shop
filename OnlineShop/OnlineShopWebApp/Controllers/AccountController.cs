@@ -12,11 +12,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly CreateUserImage createUserImage;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, CreateUserImage createUserImage)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.createUserImage = createUserImage;
         }
 
         public IActionResult Login(string returnUrl)
@@ -32,13 +34,13 @@ namespace OnlineShopWebApp.Controllers
                 var result = signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false).Result;
                 if (result.Succeeded)
                 {
-                    if(authorization.ReturnUrl != null)
+                    if (authorization.ReturnUrl != null)
                     {
                         return Redirect(authorization.ReturnUrl);
                     }
                     return RedirectToAction("Index", "Home");
                 }
-                    ModelState.AddModelError("", "Неправильный пароль");
+                ModelState.AddModelError("", "Неправильный пароль");
             }
             return View("Login", authorization);
         }
@@ -95,6 +97,57 @@ namespace OnlineShopWebApp.Controllers
         {
             signInManager.SignOutAsync().Wait();
             return Redirect("~/Home/Index/");
+        }
+
+        public IActionResult Profile(string name)
+        {
+            var user = userManager.FindByNameAsync(name).Result;
+            var userVM = user.ToUserViewModel();
+            return View(userVM);
+        }
+
+        public IActionResult EditUser(string id)
+        {
+            var user = userManager.FindByIdAsync(id).Result;
+            var userVM = user.ToUserViewModel();
+            return View(userVM);
+        }
+
+        [HttpPost]
+        public IActionResult EditUser(UserViewModel userVM)
+        {
+            var user = userManager.FindByIdAsync(userVM.Id).Result;
+            var checkLogin = userManager.CheckPasswordAsync(user, userVM.Login).Result;
+            if (checkLogin)
+            {
+                ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                user.ChangeUser(userVM);
+                user.ImagePath = createUserImage.CreateImage(userVM);
+                var result = userManager.UpdateAsync(user).Result;
+                if (!result.Succeeded)
+                {
+                    foreach (var err in result.Errors)
+                    {
+                        ModelState.AddModelError("", err.Description);
+                    }
+                    return View("EditUser", userVM);
+                }
+            }
+            userVM = user.ToUserViewModel();
+            return View("Profile", userVM);
+        }
+
+        public IActionResult DeleteImage(string id)
+        {
+            var user = userManager.FindByIdAsync(id).Result;
+            user.ImagePath = null;
+            userManager.UpdateAsync(user).Wait();
+            var userVM = user.ToUserViewModel();
+            return RedirectToAction("EditUser",userVM);
         }
     }
 }

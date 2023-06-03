@@ -89,20 +89,20 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             productVM.ImagePath = new List<string>();
             if (productVM.UploadedFiles != null)
             {
-                var ImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products");
-                if (!Directory.Exists(ImagesPath))
+                var imagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products/");
+                if (!Directory.Exists(imagesPath))
                 {
-                    Directory.CreateDirectory(ImagesPath);
+                    Directory.CreateDirectory(imagesPath);
                 }
 
                 foreach (var file in productVM.UploadedFiles)
                 {
                     var fileName = Guid.NewGuid() + "." + file.FileName.Split('.').Last();
-                    using (var fileStream = new FileStream(ImagesPath + fileName, FileMode.Create))
+                    using (var fileStream = new FileStream(imagesPath + fileName, FileMode.Create))
                     {
                         file.CopyTo(fileStream);
                     }
-                    productVM.ImagePath.Add("/images/products" + fileName);
+                    productVM.ImagePath.Add("/images/products/" + fileName);
                 }
             }
 
