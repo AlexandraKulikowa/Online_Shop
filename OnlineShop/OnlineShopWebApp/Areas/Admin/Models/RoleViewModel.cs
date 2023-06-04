@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Areas.Admin.Models
     {
 
         [Required(ErrorMessage = "Не задано название роли")]
-        [StringLength(20, MinimumLength = 4, ErrorMessage = "Напишите корректное название")]
+        [StringLength(20, MinimumLength = 4, ErrorMessage = "Название должно быть длиной от 4 до 20 символов")]
         public string Name { get; set; }
 
         public override bool Equals(object obj)

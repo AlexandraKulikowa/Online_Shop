@@ -212,7 +212,6 @@ namespace OnlineShopWebApp.Helpers
                 Email = user.Email,
                 Phone = user.PhoneNumber,
                 isDistribution = user.isDistribution, 
-                //Role = roleManager.FindByNameAsync(name).Result;
         };
         }
 
