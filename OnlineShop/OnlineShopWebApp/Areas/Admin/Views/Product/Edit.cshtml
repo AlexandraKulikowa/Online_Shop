@@ -16,7 +16,8 @@
             <br />
 
             <label asp-for="Cost">Цена</label>
-            <input type="number" asp-for="Cost" value="@Model.Cost" onKeyUp="if(this.value>5000000){this.value='5000000';}">
+
+            @Html.EditorFor(x=>x.Cost)
             <span asp-validation-for="Cost"></span>
             <br />
 
