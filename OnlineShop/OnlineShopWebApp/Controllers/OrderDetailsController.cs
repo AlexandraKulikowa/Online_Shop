@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Helpers;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -14,9 +15,9 @@ namespace OnlineShopWebApp.Controllers
             this.orders = orders;
         }
 
-        public IActionResult Index(int id)
+        public async Task<IActionResult> Index(int id)
         {
-            var order = orders.GetOrder(id);
+            var order = await orders.GetOrderAsync(id);
             var orderVM = order.ToOrderViewModel();
             return View(orderVM);
         }

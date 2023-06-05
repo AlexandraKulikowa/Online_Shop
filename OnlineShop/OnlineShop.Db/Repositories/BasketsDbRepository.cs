@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Models;
@@ -15,21 +16,21 @@ namespace OnlineShop.Db.Repositories
             this.databaseContext = databaseContext;
         }
 
-        public Basket TryGetByUserId(string userId)
+        public async Task<Basket> TryGetByUserIdAsync(string userId)
         {
-            return databaseContext.Baskets
+            return await databaseContext.Baskets
                 .Include(x => x.BasketItems)
                     .ThenInclude(x => x.Product)
                         .ThenInclude(x => x.ImagePath)
                 .Include(x => x.BasketItems)
                     .ThenInclude(x => x.Product)
                         .ThenInclude(x => x.Size)
-                .FirstOrDefault(x => x.UserId == userId);
+                .FirstOrDefaultAsync(x => x.UserId == userId);
         }
 
-        public void Add(Product product, string userId)
+        public async Task AddAsync(Product product, string userId)
         {
-            var existingBasket = TryGetByUserId(userId);
+            var existingBasket = await TryGetByUserIdAsync(userId);
             if (existingBasket == null)
             {
                 var newBasket = new Basket
@@ -47,7 +48,7 @@ namespace OnlineShop.Db.Repositories
                         }
                     };
 
-                databaseContext.Baskets.Add(newBasket);
+                await databaseContext.Baskets.AddAsync(newBasket);
             }
             else
             {
@@ -66,12 +67,12 @@ namespace OnlineShop.Db.Repositories
                     });
                 }
             }
-            databaseContext.SaveChanges();
+            await databaseContext.SaveChangesAsync();
         }
 
-        public void ChangeAmount(int id, bool sign, string userId)
+        public async Task ChangeAmountAsync(int id, bool sign, string userId)
         {
-            var existingBasket = TryGetByUserId(userId);
+            var existingBasket = await TryGetByUserIdAsync(userId);
             if (existingBasket == null)
             { return; }
 
@@ -85,13 +86,13 @@ namespace OnlineShop.Db.Repositories
 
             if (!sign && product.Amount == 1)
             {
-                ClearItem(userId, id);
+                await ClearItemAsync(userId, id);
             }
             else
             {
                 ChangeAmountInBasketItem(sign, product);
             }
-            databaseContext.SaveChanges();
+            await databaseContext.SaveChangesAsync();
         }
 
         public void ChangeAmountInBasketItem(bool sign, BasketItem ProductForChange)
@@ -102,19 +103,19 @@ namespace OnlineShop.Db.Repositories
                 ProductForChange.Amount--;
         }
 
-        public void ClearItem(string userId, int id)
+        public async Task ClearItemAsync(string userId, int id)
         {
-            var basket = TryGetByUserId(userId);
+            var basket = await TryGetByUserIdAsync(userId);
             var basketitem = basket.BasketItems.FirstOrDefault(x => x.Product.Id == id);
             databaseContext.BasketItems.Remove(basketitem);
-            databaseContext.SaveChanges();
+            await databaseContext.SaveChangesAsync();
         }
 
-        public void Clear(string userId)
+        public async Task ClearAsync(string userId)
         {
-            var basket = TryGetByUserId(userId);
+            var basket = await TryGetByUserIdAsync(userId);
             databaseContext.Baskets.Remove(basket);
-            databaseContext.SaveChanges();
+            await databaseContext.SaveChangesAsync();
         }
     }
 }

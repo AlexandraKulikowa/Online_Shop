@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Models;
@@ -15,37 +16,38 @@ namespace OnlineShop.Db.Repositories
             this.databaseContext = databaseContext;
         }
 
-        public List<Order> GetAll()
+        public async Task<List<Order>> GetAllAsync()
         {
-            return databaseContext.Orders
+            return await databaseContext.Orders
                 .Include(x => x.Contacts)
                 .Include(x => x.OrderBasketItems)
                 .ThenInclude(x => x.Product)
                 .ThenInclude(x => x.Size)
-                .ToList();
+                .ToListAsync();
         }
 
-        public void Add(Order order)
+        public async Task AddAsync(Order order)
         {
-                databaseContext.Orders.Add(order);
-                databaseContext.SaveChanges();
+                await databaseContext.Orders.AddAsync(order);
+                await databaseContext.SaveChangesAsync();
         }
-        public Order GetOrder(int id)
+
+        public async Task<Order> GetOrderAsync(int id)
         {
-            var order = databaseContext.Orders
+            var order = await databaseContext.Orders
                 .Include(x => x.Contacts)
                 .Include(x => x.OrderBasketItems)
                 .ThenInclude(x => x.Product)
                 .ThenInclude(x => x.Size)
-                .FirstOrDefault(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
             return order;
         }
 
-        public void ChangeStatus(int id, Status status)
+        public async Task ChangeStatusAsync(int id, Status status)
         {
-            var existingOrder = GetOrder(id);
+            var existingOrder = await GetOrderAsync(id);
             existingOrder.Status = status;
-            databaseContext.SaveChanges();
+            await databaseContext.SaveChangesAsync();
         }
     }
 }

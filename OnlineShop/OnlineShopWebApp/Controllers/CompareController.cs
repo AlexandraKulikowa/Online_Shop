@@ -3,6 +3,7 @@ using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Helpers;
 using OnlineShop.Db.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -16,27 +17,27 @@ namespace OnlineShopWebApp.Controllers
             this.compareItem = compareItem;
             this.products = products;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var products = compareItem.GetAll(Constants.UserId);
+            var products = await compareItem.GetAllAsync(Constants.UserId);
             var listVM = products.ToProductViewModels();
             return View(listVM);
         }
-        public IActionResult Add(int id)
+        public async Task<IActionResult> AddAsync(int id)
         {
-            var product = products.TryGetById(id);
-            compareItem.Add(product, Constants.UserId);
+            var product = await products.TryGetByIdAsync(id);
+            await compareItem.AddAsync(product, Constants.UserId);
             return RedirectToAction("Index");
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            compareItem.DeleteProduct(Constants.UserId, id);
+            await compareItem.DeleteProductAsync(Constants.UserId, id);
             return RedirectToAction("Index");
         }
-        public IActionResult Clear()
+        public async Task<IActionResult> ClearAsync()
         {
-            compareItem.Clear(Constants.UserId);
+            await compareItem.ClearAsync(Constants.UserId);
             return RedirectToAction("Index");
         }
     }

@@ -45,7 +45,7 @@ namespace OnlineShopWebApp
             {
                 options.ExpireTimeSpan = TimeSpan.FromHours(8);
                 options.LoginPath = "/Account/Login";
-                options.LogoutPath = "/Account/Logout";
+                options.LogoutPath = "/Account/LogoutAsync";
                 options.Cookie = new CookieBuilder
                 {
                     IsEssential = true,

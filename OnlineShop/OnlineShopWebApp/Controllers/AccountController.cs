@@ -5,6 +5,7 @@ using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -27,11 +28,11 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Enter(Authorization authorization)
+        public async Task<IActionResult> EnterAsync(Authorization authorization)
         {
             if (ModelState.IsValid)
             {
-                var result = signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false).Result;
+                var result = await signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false);
                 if (result.Succeeded)
                 {
                     if (authorization.ReturnUrl != null)
@@ -51,7 +52,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegistrationViewModel registration)
+        public async Task<IActionResult> RegisterAsync(RegistrationViewModel registration)
         {
             if (registration.Login == registration.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
@@ -59,13 +60,13 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = registration.ToUser();
-                var result = userManager.CreateAsync(user, registration.Password).Result;
+                var result = await userManager.CreateAsync(user, registration.Password);
 
                 if (result.Succeeded)
                 {
-                    signInManager.SignInAsync(user, false).Wait();
+                    await signInManager.SignInAsync(user, false);
 
-                    TryAssignUserRole(user);
+                    await TryAssignUserRoleAsync(user);
 
                     if (registration.ReturnUrl != null)
                         return Redirect(registration.ReturnUrl);
@@ -80,11 +81,11 @@ namespace OnlineShopWebApp.Controllers
             return View("Registration", registration);
         }
 
-        private void TryAssignUserRole(User user)
+        private async Task TryAssignUserRoleAsync(User user)
         {
             try
             {
-                userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+                await userManager.AddToRoleAsync(user, Constants.UserRoleName);
             }
             catch (Exception ex)
             {
@@ -93,31 +94,31 @@ namespace OnlineShopWebApp.Controllers
             Ok(user);
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> LogoutAsync()
         {
-            signInManager.SignOutAsync().Wait();
+            await signInManager.SignOutAsync();
             return Redirect("~/Home/Index/");
         }
 
-        public IActionResult Profile(string name)
+        public async Task<IActionResult> ProfileAsync(string name)
         {
-            var user = userManager.FindByNameAsync(name).Result;
+            var user = await userManager.FindByNameAsync(name);
             var userVM = user.ToUserViewModel();
             return View(userVM);
         }
 
-        public IActionResult EditUser(string id)
+        public async Task<IActionResult> EditUserAsync(string id)
         {
-            var user = userManager.FindByIdAsync(id).Result;
+            var user = await userManager.FindByIdAsync(id);
             var userVM = user.ToUserViewModel();
             return View(userVM);
         }
 
         [HttpPost]
-        public IActionResult EditUser(UserViewModel userVM)
+        public async Task <IActionResult> EditUserAsync(UserViewModel userVM)
         {
-            var user = userManager.FindByIdAsync(userVM.Id).Result;
-            var checkLogin = userManager.CheckPasswordAsync(user, userVM.Login).Result;
+            var user = await userManager.FindByIdAsync(userVM.Id);
+            var checkLogin = await userManager.CheckPasswordAsync(user, userVM.Login);
             if (checkLogin)
             {
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
@@ -127,27 +128,27 @@ namespace OnlineShopWebApp.Controllers
             {
                 user.ChangeUser(userVM);
                 user.ImagePath = createUserImage.CreateImage(userVM);
-                var result = userManager.UpdateAsync(user).Result;
+                var result = await userManager.UpdateAsync(user);
                 if (!result.Succeeded)
                 {
                     foreach (var err in result.Errors)
                     {
                         ModelState.AddModelError("", err.Description);
                     }
-                    return View("EditUser", userVM);
+                    return View("EditUserAsync", userVM);
                 }
             }
             userVM = user.ToUserViewModel();
-            return View("Profile", userVM);
+            return View("ProfileAsync", userVM);
         }
 
-        public IActionResult DeleteImage(string id)
+        public async Task<IActionResult> DeleteImageAsync(string id)
         {
-            var user = userManager.FindByIdAsync(id).Result;
+            var user = await userManager.FindByIdAsync(id);
             user.ImagePath = null;
-            userManager.UpdateAsync(user).Wait();
+            await userManager.UpdateAsync(user);
             var userVM = user.ToUserViewModel();
-            return RedirectToAction("EditUser",userVM);
+            return RedirectToAction("EditUserAsync",userVM);
         }
     }
 }

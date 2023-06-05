@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using OnlineShop.Db.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -25,9 +26,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             this.appEnvironment = appEnvironment;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var productlist = products.GetAll();
+            var productlist = await products.GetAllAsync();
             var productsVM = productlist.ToProductViewModels();
             return View(productsVM);
         }
@@ -38,7 +39,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductViewModel productVM)
+        public async Task<IActionResult> AddAsync(ProductViewModel productVM)
         {
             var product = CreateProduct(productVM);
 
@@ -47,21 +48,21 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                products.Add(product);
+                await products.AddAsync(product);
                 return RedirectToAction("Index");
             }
-            return View("Add", productVM);
+            return View("AddAsync", productVM);
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> EditAsync(int id)
         {
-            var product = products.TryGetById(id);
+            var product = await products.TryGetByIdAsync(id);
             var productVM = product.ToProductViewModel();
             return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductViewModel productVM)
+        public async Task<IActionResult> EditAsync(ProductViewModel productVM)
         {
             var product = CreateProduct(productVM);
 
@@ -70,17 +71,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                products.Edit(product);
+                await products.EditAsync(product);
                 return RedirectToAction("Index");
             }
 
-            return View("Edit", productVM);
+            return View("EditAsync", productVM);
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            var product = products.TryGetById(id);
-            products.Delete(product);
+            var product = await products.TryGetByIdAsync(id);
+            await products.DeleteAsync(product);
             return RedirectToAction("Index");
         }
 
@@ -105,7 +106,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     productVM.ImagePath.Add("/images/products/" + fileName);
                 }
             }
-
             return productVM.ToProduct();
         }
     }

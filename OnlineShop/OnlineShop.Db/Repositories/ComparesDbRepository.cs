@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Models;
@@ -15,32 +16,32 @@ namespace OnlineShop.Db.Repositories
             this.databaseContext = databaseContext;
         }
 
-        public Comparison TryGetById(string userId, int id)
+        public async Task<Comparison> TryGetByIdAsync(string userId, int id)
         {
-            return databaseContext.Comparisons
+            return await databaseContext.Comparisons
                 .Include(x => x.Product)
                     .ThenInclude(x => x.Size)
                 .Include(x => x.Product)
                     .ThenInclude(x => x.ImagePath)
-                .FirstOrDefault(x => x.UserId == userId & x.Product.Id == id);
+                .FirstOrDefaultAsync(x => x.UserId == userId & x.Product.Id == id);
         }
 
-        public List<Product> GetAll(string userId)
+        public async Task<List<Product>> GetAllAsync(string userId)
         {
-            var products = databaseContext.Comparisons
+            var products = await databaseContext.Comparisons
                 .Include(x => x.Product)
                     .ThenInclude(x => x.Size)
                 .Include(x => x.Product)
                     .ThenInclude(x => x.ImagePath)
                 .Where(x => x.UserId == userId)
                 .Select(x => x.Product)
-                .ToList();
+                .ToListAsync();
             return products;
         }
 
-        public void Add(Product product, string userId)
+        public async Task AddAsync(Product product, string userId)
         {
-            var comparison = TryGetById(userId, product.Id);
+            var comparison = await TryGetByIdAsync(userId, product.Id);
 
             if (comparison == null)
             {
@@ -49,23 +50,23 @@ namespace OnlineShop.Db.Repositories
                     UserId = userId,
                     Product = product
                 };
-                databaseContext.Comparisons.Add(newComparison);
-                databaseContext.SaveChanges();
+                await databaseContext.Comparisons.AddAsync(newComparison);
+                await databaseContext.SaveChangesAsync();
             }
         }
 
-        public void DeleteProduct(string userId, int id)
+        public async Task DeleteProductAsync(string userId, int id)
         {
-            var comparison = TryGetById(userId, id);
+            var comparison = await TryGetByIdAsync(userId, id);
             databaseContext.Comparisons.Remove(comparison);
-            databaseContext.SaveChanges();
+            await databaseContext.SaveChangesAsync();
         }
 
-        public void Clear(string userId)
+        public async Task ClearAsync(string userId)
         {
-            var list = databaseContext.Comparisons.Where(x => x.UserId == userId).ToList();
+            var list = await databaseContext.Comparisons.Where(x => x.UserId == userId).ToListAsync();
             databaseContext.Comparisons.RemoveRange(list);
-            databaseContext.SaveChanges();
+            await databaseContext.SaveChangesAsync();
         }
     }
 }

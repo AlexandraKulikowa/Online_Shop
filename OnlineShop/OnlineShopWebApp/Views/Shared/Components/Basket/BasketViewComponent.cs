@@ -2,6 +2,7 @@
 using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Helpers;
 using OnlineShop.Db.Repositories;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Basket
 {
@@ -12,9 +13,9 @@ namespace OnlineShopWebApp.Views.Shared.Components.Basket
         {
             this.basketRepository = basketRepository;
         }
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var basket = basketRepository.TryGetByUserId(Constants.UserId);
+            var basket = await basketRepository.TryGetByUserIdAsync(Constants.UserId);
             var basketVM = basket.ToBasketViewModel();
             var productCounts = basketVM?.Amount() ?? 0;
             return View("Basket", productCounts);

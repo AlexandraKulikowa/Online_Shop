@@ -3,6 +3,7 @@ using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Helpers;
 using OnlineShop.Db.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -16,27 +17,27 @@ namespace OnlineShopWebApp.Controllers
             this.favourites = favourites;
             this.products = products;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = favourites.GetAll(Constants.UserId);
+            var list = await favourites.GetAllAsync(Constants.UserId);
             var listVM = list.ToProductViewModels();
             return View(listVM);
         }
 
-        public IActionResult Add(int id)
+        public async Task<IActionResult> AddAsync(int id)
         {
-            var product = products.TryGetById(id);
-            favourites.Add(product, Constants.UserId);
+            var product = await products.TryGetByIdAsync(id);
+            await favourites.AddAsync(product, Constants.UserId);
             return RedirectToAction("Index");
         }
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            favourites.DeleteFavourite(Constants.UserId, id);
+            await favourites.DeleteFavouriteAsync(Constants.UserId, id);
             return RedirectToAction("Index");
         }
-        public IActionResult Clear()
+        public async Task<IActionResult> ClearAsync()
         {
-            favourites.Clear(Constants.UserId);
+            await favourites.ClearAsync(Constants.UserId);
             return RedirectToAction("Index");
         }
     }

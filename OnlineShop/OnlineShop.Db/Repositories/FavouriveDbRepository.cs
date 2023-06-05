@@ -3,6 +3,7 @@ using OnlineShop.Db.Models;
 using OnlineShop.Db.Interfaces;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace OnlineShop.Db.Repositories
 {
@@ -15,32 +16,32 @@ namespace OnlineShop.Db.Repositories
             this.databaseContext = databaseContext;
         }
 
-        public Favourites TryGetById(string userId, int id)
+        public async Task<Favourites> TryGetByIdAsync(string userId, int id)
         {
-            return databaseContext.Favorites
+            return await databaseContext.Favorites
                 .Include(x => x.Product)
                     .ThenInclude(x => x.Size)
                 .Include(x => x.Product)
                     .ThenInclude(x => x.ImagePath)
-                .FirstOrDefault(x => x.UserId == userId & x.Product.Id == id);
+                .FirstOrDefaultAsync(x => x.UserId == userId & x.Product.Id == id);
         }
 
-        public List<Product> GetAll(string userId)
+        public async Task<List<Product>> GetAllAsync(string userId)
         {
-            var products = databaseContext.Favorites
+            var products = await databaseContext.Favorites
                 .Include(x => x.Product)
                     .ThenInclude(x => x.Size)
                 .Include(x => x.Product)
                     .ThenInclude(x => x.ImagePath)
                 .Where(x => x.UserId == userId)
                 .Select(x => x.Product)
-                .ToList();
+                .ToListAsync();
             return products;
         }
 
-        public void Add(Product product, string userId)
+        public async Task AddAsync(Product product, string userId)
         {
-            var existingFavourite = TryGetById(userId, product.Id);
+            var existingFavourite = await TryGetByIdAsync(userId, product.Id);
 
             if (existingFavourite == null)
             {
@@ -50,23 +51,23 @@ namespace OnlineShop.Db.Repositories
                     Product = product
                 };
 
-                databaseContext.Favorites.Add(newList);
-                databaseContext.SaveChanges();
+                await databaseContext.Favorites.AddAsync(newList);
+                await databaseContext.SaveChangesAsync();
             }
         }
 
-        public void DeleteFavourite(string userId, int id)
+        public async Task DeleteFavouriteAsync(string userId, int id)
         {
-            var favourite = TryGetById(userId, id);
+            var favourite = await TryGetByIdAsync(userId, id);
             databaseContext.Favorites.Remove(favourite);
-            databaseContext.SaveChanges();
+            await databaseContext.SaveChangesAsync();
         }
 
-        public void Clear(string userId)
+        public async Task ClearAsync(string userId)
         {
-            var list = databaseContext.Favorites.Where(x => x.UserId == userId).ToList();
+            var list = await databaseContext.Favorites.Where(x => x.UserId == userId).ToListAsync();
             databaseContext.Favorites.RemoveRange(list);
-            databaseContext.SaveChanges();
+            await databaseContext.SaveChangesAsync();
         }
     }
 }
