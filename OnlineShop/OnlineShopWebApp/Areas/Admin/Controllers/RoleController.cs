@@ -58,6 +58,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(string name)
         {
             var role = await roleManager.FindByNameAsync(name);
+            if(role == null)
+            {
+                ModelState.AddModelError("", "Невозможно удалить несуществующую роль!");
+            }
+            if(role.Name == "Admin")
+            {
+                return Redirect("~/Admin/User/Error/");
+            }
             await roleManager.DeleteAsync(role);
             return RedirectToAction("Index");
         }

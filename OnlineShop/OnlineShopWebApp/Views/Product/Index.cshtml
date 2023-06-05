@@ -5,10 +5,8 @@
         <div class="card-body-product">
             @foreach (var image in Model.ImagePath)
             {
-                {
-                    int h = 400 / Model.ImagePath.Count;
-                    <img src=@image alt="Фото картины" height="@h">
-                };
+                    var height = 400 / Model.ImagePath.Count;
+                    <img src=@image alt="Фото картины" height="@height">
                 <br />
             }
             <br>

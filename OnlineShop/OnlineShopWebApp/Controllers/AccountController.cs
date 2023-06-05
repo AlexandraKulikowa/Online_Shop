@@ -65,8 +65,10 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, false);
-
-                    await TryAssignUserRoleAsync(user);
+                    if (!TryAssignUserRole(user))
+                    {
+                        ModelState.AddModelError("", "Что-то пошло не так. Роль пользователю не добавлена.");
+                    }
 
                     if (registration.ReturnUrl != null)
                         return Redirect(registration.ReturnUrl);
@@ -81,17 +83,14 @@ namespace OnlineShopWebApp.Controllers
             return View("Registration", registration);
         }
 
-        private async Task TryAssignUserRoleAsync(User user)
+        private async Task TryAssignUserRole(User user)
         {
-            try
+            var result = await userManager.AddToRoleAsync(user, Constants.UserRoleName);
+            if (result.Succeeded)
             {
-                await userManager.AddToRoleAsync(user, Constants.UserRoleName);
+                return true;
             }
-            catch (Exception ex)
-            {
-                StatusCode(500, ex.Message);
-            }
-            Ok(user);
+            return false;
         }
 
         public async Task<IActionResult> LogoutAsync()

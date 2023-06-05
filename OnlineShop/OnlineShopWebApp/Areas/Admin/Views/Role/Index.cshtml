@@ -15,12 +15,22 @@ else
         <center><h2>Список ролей</h2></center>
         @foreach (var role in Model)
         {
-            <table>
-                <tr>
-                    <td>@role.Name</td>
-                    <td><a class="btn btn-sm btn-outline-dark" asp-area="admin" asp-controller="role" asp-action="delete" asp-route-name="@role.Name">Удалить</a></td>
-                </tr>
-            </table>
+            @if(role.Name == "Admin")
+            {
+                <table>
+                    <tr>
+                        <td>@role.Name</td>
+                </table>
+            }
+            else
+            {
+                <table>
+                    <tr>
+                        <td>@role.Name</td>
+                        <td><a class="btn btn-sm btn-outline-dark" asp-area="admin" asp-controller="role" asp-action="delete" asp-route-name="@role.Name">Удалить</a></td>
+                    </tr>
+                </table>
+            }
         }
         <br>
         <a class="btn button-add" asp-area="admin" asp-controller="role" asp-action="add" role="button">Добавить роль</a>

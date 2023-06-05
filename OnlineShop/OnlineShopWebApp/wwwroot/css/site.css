@@ -132,6 +132,24 @@ body {
         background-color: lightslategrey;
     }
 
+.entered-circle {
+    color: black;
+    user-select: none;
+    text-decoration: double;
+    outline: none;
+    background-color: steelblue;
+    text-align: center;
+    height: 60px;
+    border-radius: 45px;
+    box-shadow: 2px 2px 2px;
+    justify-content: center;
+    align-items: center;
+}
+
+    .entered-circle:hover {
+        background-color: lightslategrey;
+    }
+
 .compare {
     color:black;
     user-select: none;

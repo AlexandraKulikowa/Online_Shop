@@ -16,7 +16,8 @@
             <br />
 
             <label asp-for="Cost">Цена</label>
-            <input type="number" asp-for="Cost" value="@Model.Cost" onKeyUp="if(this.value>5000000){this.value='5000000';}">
+
+            @Html.EditorFor(x=>x.Cost)
             <span asp-validation-for="Cost"></span>
             <br />
 
@@ -63,7 +64,7 @@
             </div>
 
             <div class="btn-group" role="group">
-                <button class="btn-outline-secondary btn-lg" type="reset">Сбросить заполнение формы</button>
+                <button class="btn-outline-secondary btn-lg" type="reset">Сбросить изменение</button>
                 <button type="submit" class="btn-success btn-lg" asp-area="admin" asp-controller="product" asp-action="edit" role="button">Изменить продукт</button>
             </div>
 
