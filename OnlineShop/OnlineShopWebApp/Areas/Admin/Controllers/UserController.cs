@@ -67,7 +67,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var userVM = new UserViewModel();
 
             var checkOldPassword = userManager.CheckPasswordAsync(user, passwordVM.OldPassword).Result;
-            if(!checkOldPassword)
+            if (!checkOldPassword)
             {
                 ModelState.AddModelError("", "Вы неверно ввели старый пароль!");
             }
@@ -147,7 +147,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Rights(string id, Dictionary<string, string> userRolesVM)
         {
             var userSelectedRoles = userRolesVM.Select(x => x.Key);
@@ -156,7 +155,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var roles = userManager.GetRolesAsync(user).Result;
 
             userManager.RemoveFromRolesAsync(user, roles).Wait();
-            userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
+            try
+            {
+                userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
+            }
+            catch
+            {
+                userManager.AddToRolesAsync(user, roles).Wait();
+            }
 
             var userVM = GetRolesVM(user);
             return View("Details", userVM);
