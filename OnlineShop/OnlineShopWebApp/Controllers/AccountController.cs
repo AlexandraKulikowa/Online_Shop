@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
@@ -55,6 +57,22 @@ namespace OnlineShopWebApp.Controllers
         {
             if (registration.Login == registration.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
+
+            var listUsers = await userManager.Users.ToListAsync();
+            var logins = listUsers.Select(x => x.UserName).ToList();
+            var check = true;
+
+            foreach (var item in logins)
+            {
+                if (item == registration.Login)
+                {
+                    check = false; break;
+                }
+            }
+            if (check == false)
+            {
+                ModelState.AddModelError("", "Такой пользователь уже зарегистрирован!");
+            }
 
             if (ModelState.IsValid)
             {
