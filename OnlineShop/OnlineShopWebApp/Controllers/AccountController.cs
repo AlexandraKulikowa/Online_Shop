@@ -4,7 +4,7 @@ using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
-using System;
+
 using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
@@ -57,16 +57,8 @@ namespace OnlineShopWebApp.Controllers
             if (registration.Login == registration.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
 
-            var listNames = userManager.Users.Select(x => x.UserName).ToList();
-            var check = true;
-            foreach (var item in listNames)
-            {
-                if (item == registration.Login)
-                {
-                    check = false; break;
-                }
-            }
-            if (check == false)
+            var checkUser = userManager.FindByNameAsync(registration.Login).Result;
+            if (checkUser != null)
             {
                 ModelState.AddModelError("", "Такой пользователь уже зарегистрирован!");
             }
