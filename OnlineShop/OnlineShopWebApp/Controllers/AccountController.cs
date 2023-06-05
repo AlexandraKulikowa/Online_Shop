@@ -32,13 +32,13 @@ namespace OnlineShopWebApp.Controllers
                 var result = signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false).Result;
                 if (result.Succeeded)
                 {
-                    if(authorization.ReturnUrl != null)
+                    if (authorization.ReturnUrl != null)
                     {
                         return Redirect(authorization.ReturnUrl);
                     }
                     return RedirectToAction("Index", "Home");
                 }
-                    ModelState.AddModelError("", "Неправильный пароль");
+                ModelState.AddModelError("", "Неправильный пароль");
             }
             return View("Login", authorization);
         }
@@ -62,8 +62,10 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     signInManager.SignInAsync(user, false).Wait();
-
-                    TryAssignUserRole(user);
+                    if (!TryAssignUserRole(user))
+                    {
+                        ModelState.AddModelError("", "Что-то пошло не так. Роль пользователю не добавлена.");
+                    }
 
                     if (registration.ReturnUrl != null)
                         return Redirect(registration.ReturnUrl);
@@ -78,17 +80,14 @@ namespace OnlineShopWebApp.Controllers
             return View("Registration", registration);
         }
 
-        private void TryAssignUserRole(User user)
+        private bool TryAssignUserRole(User user)
         {
-            try
+            var result = userManager.AddToRoleAsync(user, Constants.UserRoleName).Result;
+            if (result.Succeeded)
             {
-                userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+                return true;
             }
-            catch (Exception ex)
-            {
-                StatusCode(500, ex.Message);
-            }
-            Ok(user);
+            return false;
         }
 
         public IActionResult Logout()

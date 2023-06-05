@@ -1,15 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
-using System.IO;
-using System;
-using System.Linq;
-using OnlineShop.Db.Models;
-using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -18,11 +12,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductsRepository products;
-        private readonly IWebHostEnvironment appEnvironment;
-        public ProductController(IProductsRepository products, IWebHostEnvironment appEnvironment)
+        private readonly CreateProductHelper createProductHelper;
+        public ProductController(IProductsRepository products, CreateProductHelper createProductHelper)
         {
             this.products = products;
-            this.appEnvironment = appEnvironment;
+            this.createProductHelper = createProductHelper;
         }
 
         public IActionResult Index()
@@ -40,7 +34,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Add(ProductViewModel productVM)
         {
-            var product = CreateProduct(productVM);
+            var product = createProductHelper.CreateProduct(productVM);
 
             if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
@@ -63,7 +57,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(ProductViewModel productVM)
         {
-            var product = CreateProduct(productVM);
+            var product = createProductHelper.CreateProduct(productVM);
 
             if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
@@ -84,29 +78,5 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public Product CreateProduct(ProductViewModel productVM)
-        {
-            productVM.ImagePath = new List<string>();
-            if (productVM.UploadedFiles != null)
-            {
-                var ImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products");
-                if (!Directory.Exists(ImagesPath))
-                {
-                    Directory.CreateDirectory(ImagesPath);
-                }
-
-                foreach (var file in productVM.UploadedFiles)
-                {
-                    var fileName = Guid.NewGuid() + "." + file.FileName.Split('.').Last();
-                    using (var fileStream = new FileStream(ImagesPath + fileName, FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-                    }
-                    productVM.ImagePath.Add("/images/products" + fileName);
-                }
-            }
-
-            return productVM.ToProduct();
-        }
     }
 }
