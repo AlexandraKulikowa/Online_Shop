@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Models;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Views.Shared.Components.UserImage
 {
@@ -12,9 +13,9 @@ namespace OnlineShopWebApp.Views.Shared.Components.UserImage
             this.userManager = userManager;
         }
 
-        public IViewComponentResult Invoke(string name)
+        public async Task<IViewComponentResult> InvokeAsync(string name)
         {
-            var user = userManager.FindByNameAsync(name).Result;
+            var user = await userManager.FindByNameAsync(name);
             var imagePath = user.ImagePath;
             return View("UserImage",imagePath);
         }

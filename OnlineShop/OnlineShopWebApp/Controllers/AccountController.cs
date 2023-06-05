@@ -4,7 +4,6 @@ using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
-using System;
 using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
@@ -65,7 +64,7 @@ namespace OnlineShopWebApp.Controllers
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, false);
-                    if (!TryAssignUserRole(user))
+                    if (!await TryAssignUserRoleAsync(user))
                     {
                         ModelState.AddModelError("", "Что-то пошло не так. Роль пользователю не добавлена.");
                     }
@@ -83,7 +82,7 @@ namespace OnlineShopWebApp.Controllers
             return View("Registration", registration);
         }
 
-        private async Task TryAssignUserRole(User user)
+        private async Task<bool> TryAssignUserRoleAsync(User user)
         {
             var result = await userManager.AddToRoleAsync(user, Constants.UserRoleName);
             if (result.Succeeded)
@@ -138,7 +137,7 @@ namespace OnlineShopWebApp.Controllers
                 }
             }
             userVM = user.ToUserViewModel();
-            return View("ProfileAsync", userVM);
+            return View("Profile", userVM);
         }
 
         public async Task<IActionResult> DeleteImageAsync(string id)
