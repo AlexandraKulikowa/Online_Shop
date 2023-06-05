@@ -15,23 +15,23 @@ namespace OnlineShopWebApp.Helpers
             this.appEnvironment = appEnvironment;
         }
 
-        public string CreateImage(UserViewModel userVM)
+        public string CreateImage(UserViewModel user)
         {
-            if (userVM.UploadedFile != null)
+            if (user.UploadedFile != null)
             {
                 var imagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/users/");
                 if (!Directory.Exists(imagesPath))
                 {
                     Directory.CreateDirectory(imagesPath);
                 }
-                var fileName = Guid.NewGuid() + "." + userVM.UploadedFile.FileName.Split('.').Last();
+                var fileName = Guid.NewGuid() + "." + user.UploadedFile.FileName.Split('.').Last();
                 using (var fileStream = new FileStream(imagesPath + fileName, FileMode.Create))
                 {
-                    userVM.UploadedFile.CopyTo(fileStream);
+                    user.UploadedFile.CopyTo(fileStream);
                 }
-                userVM.ImagePath = "/images/users/" + fileName;
+                user.ImagePath = "/images/users/" + fileName;
             }
-            return userVM.ImagePath;
+            return user.ImagePath;
         }
 }
 }
