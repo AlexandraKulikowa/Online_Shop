@@ -57,16 +57,8 @@ namespace OnlineShopWebApp.Controllers
             if (registration.Login == registration.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
 
-            var listnames = userManager.Users.Select(x => x.UserName).ToList();
-            var check = true;
-            foreach(var item in listnames)
-            {
-                if(item == registration.Login)
-                {
-                    check = false; break;
-                }
-            }
-            if (check == false)
+            var checkUser = userManager.FindByNameAsync(registration.Login).Result;
+            if (checkUser != null)
             {
                 ModelState.AddModelError("", "Такой пользователь уже зарегистрирован!");
             }
