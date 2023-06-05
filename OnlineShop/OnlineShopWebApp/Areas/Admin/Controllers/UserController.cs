@@ -30,7 +30,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var usersVM = new List<UserViewModel>();
             foreach (var user in users)
             {
-                var userVM = GetRolesAndBecomeVM(user);
+                var userVM = GetRolesVM(user);
                 usersVM.Add(userVM);
             }
             return View(usersVM);
@@ -39,13 +39,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Details(string id)
         {
             var user = userManager.FindByIdAsync(id).Result;
-            var userVM = GetRolesAndBecomeVM(user);
+            var userVM = GetRolesVM(user);
             return View(userVM);
         }
 
         public IActionResult Delete(string id)
         {
             var user = userManager.FindByIdAsync(id).Result;
+            if (user.UserName == "admin@gmail.com")
+            {
+                return RedirectToAction("Error");
+            }
             userManager.DeleteAsync(user).Wait();
             return RedirectToAction("Index");
         }
@@ -150,16 +154,21 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             userManager.RemoveFromRolesAsync(user, roles).Wait();
             userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
 
-            var userVM = GetRolesAndBecomeVM(user);
+            var userVM = GetRolesVM(user);
             return View("Details", userVM);
         }
 
-        public UserViewModel GetRolesAndBecomeVM(User user)
+        public UserViewModel GetRolesVM(User user)
         {
             var roles = userManager.GetRolesAsync(user).Result.ToList();
             var userVM = user.ToUserViewModel();
             userVM.Roles = roles;
             return userVM;
+        }
+
+        public IActionResult Error()
+        {
+            return View();
         }
     }
 }
