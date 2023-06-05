@@ -16,10 +16,8 @@ else
                 <div class="col-3 card shadow border-success card-body">
                     @foreach (var image in product.ImagePath)
                     {
-                        {
-                            int h = 400 / product.ImagePath.Count;
-                            <img src=@image alt="Фото картины" height="@h">
-                        };
+                        var height = 400 / product.ImagePath.Count;
+                        <img src=@image alt="Фото картины" height="@height">
                         <br />
                     }
                     <div class="mt-auto" style="display:-ms-inline-flexbox; flex-direction: column;">
