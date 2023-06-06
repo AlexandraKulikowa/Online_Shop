@@ -21,13 +21,13 @@ else
             {
                 @if (Model.UserRoles.Contains(role))
                 {
-                    <input class="custom-checkbox" type="checkbox" id="rolesChange" checked name="UserRolesVM[@role.Name]" value="true">
-                    <label style="color:saddlebrown" for="rolesChange">@role.Name</label>
+                    <input class="custom-checkbox" type="checkbox" id="UserRolesVM[@role.Name]" checked name="UserRolesVM[@role.Name]" value="true">
+                    <label style="color:saddlebrown" for="UserRolesVM[@role.Name]">@role.Name</label>
                 }
                 else
                 {
-                    <input class="custom-checkbox" type="checkbox" id="rolesChange2" name="UserRolesVM[@role.Name]" value="true">
-                    <label style="color:saddlebrown" for="rolesChange2">@role.Name</label>
+                    <input class="custom-checkbox" type="checkbox" id="UserRolesVM[@role.Name]" name="UserRolesVM[@role.Name]" value="true">
+                    <label style="color:saddlebrown" for="UserRolesVM[@role.Name]">@role.Name</label>
                 }
             }
             <button class="btn button-add" role="button" type="submit" asp-asp-area="admin" asp-asp-controller="user" asp-action="rights">Сменить роль</button>

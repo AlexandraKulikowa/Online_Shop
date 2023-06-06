@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Helpers;
@@ -15,9 +16,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
-        public RoleController(RoleManager<IdentityRole> roleManager)
+        private readonly UserManager<User> userManager;
+        public RoleController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             this.roleManager = roleManager;
+            this.userManager = userManager;
         }
 
         public async Task<IActionResult> Index()
@@ -66,7 +69,23 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             {
                 return Redirect("~/Admin/User/Error/");
             }
-            await roleManager.DeleteAsync(role);
+
+            var users = await userManager.Users.ToListAsync();
+            foreach (var user in users)
+            {
+                var listRoles = await userManager.GetRolesAsync(user);
+                var checkRole = listRoles.Where(x => x == name).ToList();
+                if (checkRole.Any())
+                {
+                    ModelState.AddModelError("", "Эта роль присвоена пользователю! Нельзя её удалить!");
+                    break;
+                }
+            }
+
+            if(ModelState.IsValid)
+            {
+                await roleManager.DeleteAsync(role);
+            }
             return RedirectToAction("Index");
         }
     }

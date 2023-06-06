@@ -120,6 +120,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
                 user.ChangeUser(userVM);
                 var result = await userManager.UpdateAsync(user);
+                userVM = await GetRolesVM(user);
                 if (!result.Succeeded)
                 {
                     foreach (var err in result.Errors)
