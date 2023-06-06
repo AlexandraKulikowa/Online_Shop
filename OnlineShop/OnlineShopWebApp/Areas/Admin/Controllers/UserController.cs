@@ -130,6 +130,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     return View("Edit", userVM);
                 }
             }
+            userVM = GetRolesVM(user);
             return View("Details", userVM);
         }
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Helpers;
@@ -13,9 +14,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
-        public RoleController(RoleManager<IdentityRole> roleManager)
+        private readonly UserManager<User> userManager;
+        public RoleController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             this.roleManager = roleManager;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
@@ -56,15 +59,31 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Delete(string name)
         {
             var role = roleManager.FindByNameAsync(name).Result;
-            if(role == null)
+            if (role == null)
             {
                 ModelState.AddModelError("", "Невозможно удалить несуществующую роль!");
             }
-            if(role.Name == "Admin")
+            if (role.Name == "Admin")
             {
                 return Redirect("~/Admin/User/Error/");
             }
-            roleManager.DeleteAsync(role).Wait();
+
+            var users = userManager.Users.ToList();
+            foreach (var user in users)
+            {
+                var listRoles = userManager.GetRolesAsync(user).Result;
+                var checkRole = listRoles.Where(x => x == name).ToList();
+                if (checkRole.Any())
+                {
+                    ModelState.AddModelError("", "Эта роль присвоена пользователю! Нельзя её удалить!");
+                    break;
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                roleManager.DeleteAsync(role).Wait();
+            }
             return RedirectToAction("Index");
         }
     }
