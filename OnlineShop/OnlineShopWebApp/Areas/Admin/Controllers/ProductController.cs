@@ -45,7 +45,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 await products.AddAsync(product);
                 return RedirectToAction("Index");
             }
-            return View("AddAsync", productVM);
+            return View("Add", productVM);
         }
 
         public async Task<IActionResult> EditAsync(int id)
@@ -69,7 +69,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View("EditAsync", productVM);
+            return View("Edit", productVM);
         }
 
         public async Task<IActionResult> DeleteAsync(int id)

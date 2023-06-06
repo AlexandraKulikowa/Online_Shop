@@ -5,6 +5,7 @@ using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -139,7 +140,7 @@ namespace OnlineShopWebApp.Controllers
                     {
                         ModelState.AddModelError("", err.Description);
                     }
-                    return View("EditUserAsync", userVM);
+                    return View("EditUser", userVM);
                 }
             }
             userVM = user.ToUserViewModel();
@@ -152,7 +153,7 @@ namespace OnlineShopWebApp.Controllers
             user.ImagePath = null;
             await userManager.UpdateAsync(user);
             var userVM = user.ToUserViewModel();
-            return RedirectToAction("EditUserAsync",userVM);
+            return RedirectToAction("EditUser",userVM);
         }
     }
 }

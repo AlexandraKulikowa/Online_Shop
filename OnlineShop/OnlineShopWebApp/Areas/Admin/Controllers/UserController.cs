@@ -90,17 +90,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("", err.Description);
                     }
-                    return View("EditPasswordAsync", passwordVM);
+                    return View("EditPassword", passwordVM);
                 }
-                return RedirectToAction("DetailsAsync", passwordVM);
+                return RedirectToAction("Details", passwordVM);
             }
-            return View("EditPasswordAsync", passwordVM);
+            return View("EditPassword", passwordVM);
         }
 
         public async Task<IActionResult> EditAsync(string id)
         {
             var user = await userManager.FindByIdAsync(id);
-            var userVM = user.ToUserViewModel();
+            var userVM = await GetRolesVM(user);
             return View(userVM);
         }
 
@@ -108,6 +108,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public async Task<IActionResult> EditAsync(UserViewModel userVM)
         {
             var user = await userManager.FindByIdAsync(userVM.Id);
+
             var checkLogin = await userManager.CheckPasswordAsync(user, userVM.Login);
             if (checkLogin)
             {
@@ -125,10 +126,10 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("", err.Description);
                     }
-                    return View("EditAsync", userVM);
+                    return View("Edit", userVM);
                 }
             }
-            return View("DetailsAsync", userVM);
+            return View("Details", userVM);
         }
 
         public async Task<IActionResult> RightsAsync(string id)
@@ -156,7 +157,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             await userManager.AddToRolesAsync(user, userSelectedRoles);
 
             var userVM = await GetRolesVM(user);
-            return View("DetailsAsync", userVM);
+            return View("Details", userVM);
         }
 
         public async Task<UserViewModel> GetRolesVM(User user)
