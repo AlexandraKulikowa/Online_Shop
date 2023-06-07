@@ -59,14 +59,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Delete(string name)
         {
             var role = roleManager.FindByNameAsync(name).Result;
-            if (role == null)
-            {
-                ModelState.AddModelError("", "Невозможно удалить несуществующую роль!");
-            }
-            if (role.Name == "Admin")
-            {
-                return Redirect("~/Admin/User/Error/");
-            }
 
             var users = userManager.Users.ToList();
             foreach (var user in users)
@@ -75,8 +67,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 var checkRole = listRoles.Where(x => x == name).ToList();
                 if (checkRole.Any())
                 {
-                    ModelState.AddModelError("", "Эта роль присвоена пользователю! Нельзя её удалить!");
-                    break;
+                    return RedirectToAction("DeleteError");
                 }
             }
 
@@ -85,6 +76,11 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                 roleManager.DeleteAsync(role).Wait();
             }
             return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteError()
+        {
+            return View();
         }
     }
 }
