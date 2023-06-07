@@ -59,7 +59,10 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult Delete(string name)
         {
             var role = roleManager.FindByNameAsync(name).Result;
-
+            if(role == null || role.Name == null)
+            {
+                return Redirect("~/Admin/User/Error/");
+            }
             var users = userManager.Users.ToList();
             foreach (var user in users)
             {
