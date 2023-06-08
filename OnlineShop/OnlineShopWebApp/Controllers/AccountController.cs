@@ -158,5 +158,27 @@ namespace OnlineShopWebApp.Controllers
             var userVM = user.ToUserViewModel();
             return RedirectToAction("EditUser", userVM);
         }
+
+        public IActionResult Check(string id)
+        {
+            return View(new CheckViewModel() { Id = id });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CheckAsync(CheckViewModel check)
+        {
+            var user = await userManager.FindByIdAsync(check.Id);
+            var checkPassword = await userManager.CheckPasswordAsync(user, check.Password);
+            if (!checkPassword)
+            {
+                ModelState.AddModelError("", "Пароль неверный!");
+            }
+            if (ModelState.IsValid)
+            {
+                var userVM = user.ToUserViewModel();
+                return View("EditUser", userVM);
+            }
+            return View("Check", check);
+        }
     }
 }
