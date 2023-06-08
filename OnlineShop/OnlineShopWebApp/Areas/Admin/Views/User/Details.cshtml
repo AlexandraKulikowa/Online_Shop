@@ -22,6 +22,16 @@
                 <td>@Model.Phone</td>
             </tr>
             <tr>
+                <td>Роль</td>
+                <td>
+                    @foreach (var role in @Model.Roles)
+                    {
+                        @role
+                        <br />
+                    }
+                </td>
+            </tr>
+            <tr>
                 <td>Согласие на получение новинок:</td>
                 <td>
                     @if (Model.isDistribution)
@@ -35,10 +45,6 @@
                 </td>
             </tr>
             <tr>
-                <td>Роль:</td>
-@*                <td>@Model.Role.Name</td> Пока убрано до следующего задания 10_4*@ 
-            </tr>
-            <tr>
         </tbody>
     </table>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -50,7 +56,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="editpassword" asp-route-id="@Model.Id" >Смена пароля</a></li>
                 <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="edit" asp-route-id="@Model.Id">Редактирование данных</a></li>
-                <li><a class="dropdown-item" href="#"> Права доступа</a></li>
+                <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="rights" asp-route-id="@Model.Id"> Права доступа</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" asp-area="admin" asp-controller="user" asp-action="delete" asp-route-id="@Model.Id">Удалить пользователя</a></li>
             </ul>

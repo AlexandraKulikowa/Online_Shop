@@ -10,8 +10,6 @@ using OnlineShop.Db;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
-using OnlineShopWebApp.Interfaces;
-using OnlineShopWebApp.Repositories;
 using Serilog;
 using System;
 
@@ -29,7 +27,6 @@ namespace OnlineShopWebApp
         {
             string connection = Configuration.GetConnectionString("OnlineShopKulikowa");
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
-
             services.AddDbContext<IdentityContext>(options => options.UseSqlServer(connection));
 
             services.AddIdentity<User, IdentityRole>(options =>
@@ -53,8 +50,6 @@ namespace OnlineShopWebApp
                     IsEssential = true,
                 };
             });
-
-            services.AddSingleton<IRolesRepository, InMemoryRolesRepository>();
             services.AddTransient<ICompareRepository, ComparesDbRepository>();
             services.AddTransient<IFavouriteRepository, FavouritesDbRepository>();
             services.AddTransient<IOrderRepository, OrdersDbRepository>();

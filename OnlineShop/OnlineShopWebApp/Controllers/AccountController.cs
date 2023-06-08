@@ -4,6 +4,7 @@ using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -33,13 +34,13 @@ namespace OnlineShopWebApp.Controllers
                 var result = signInManager.PasswordSignInAsync(authorization.Login, authorization.Password, authorization.IsRemember, false).Result;
                 if (result.Succeeded)
                 {
-                    if(authorization.ReturnUrl != null)
+                    if (authorization.ReturnUrl != null)
                     {
                         return Redirect(authorization.ReturnUrl);
                     }
                     return RedirectToAction("Index", "Home");
                 }
-                    ModelState.AddModelError("", "Неправильный пароль");
+                ModelState.AddModelError("", "Неправильный пароль");
             }
             return View("Login", authorization);
         }
@@ -62,23 +63,34 @@ namespace OnlineShopWebApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (!User.IsInRole(Constants.AdminRoleName))
+                    signInManager.SignInAsync(user, false).Wait();
+                    if (!TryAssignUserRole(user))
                     {
-                        signInManager.SignInAsync(user, false).Wait();
+                        ModelState.AddModelError("", "Что-то пошло не так. Роль пользователю не добавлена.");
+                    }
+
 
                         if (registration.ReturnUrl != null)
                             return Redirect(registration.ReturnUrl);
 
                         return Redirect("~/Home/Index/");
                     }
-                    return Redirect("~/Admin/User/Index/");
-                }
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
             }
             return View("Registration", registration);
+        }
+
+        private bool TryAssignUserRole(User user)
+        {
+            var result = userManager.AddToRoleAsync(user, Constants.UserRoleName).Result;
+            if (result.Succeeded)
+            {
+                return true;
+            }
+            return false;
         }
 
         public IActionResult Logout()

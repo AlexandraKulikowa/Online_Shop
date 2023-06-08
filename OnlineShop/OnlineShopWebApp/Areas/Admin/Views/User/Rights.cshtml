@@ -1,0 +1,36 @@
+﻿@model RightsViewModel
+
+@await Html.PartialAsync("AdminPanel")
+
+
+@if (Model.UserRoles == null)
+{
+    <div class="card shadow adminproducts">
+        <center><h4>Список ролей пользователя @Model.Name </h4></center>
+        Роли у пользователя отсутствуют.
+        <a class="button-role" asp-area="admin" asp-controller="role" asp-action="add" role="button">Добавить роль</a>
+    </div>
+}
+else
+{
+    <form method="post">
+        <div class="card shadow roles">
+            <center><h4>Список ролей пользователя @Model.Name</h4></center>
+            <input type="hidden" name="Id" value="@Model.Id">
+            @foreach (var role in Model.AllRoles)
+            {
+                @if (Model.UserRoles.Contains(role))
+                {
+                    <input class="custom-checkbox" type="checkbox" id="UserRolesVM[@role.Name]" checked="checked" name="UserRolesVM[@role.Name]" value="" autocomplete="off">
+                    <label style="color:saddlebrown" for="UserRolesVM[@role.Name]">@role.Name</label>
+                }
+                else
+                {
+                    <input class="custom-checkbox" type="checkbox" id="UserRolesVM[@role.Name]" name="UserRolesVM[@role.Name]" value="2" autocomplete="off">
+                    <label style="color:saddlebrown" for="UserRolesVM[@role.Name]">@role.Name</label>
+                }
+            }
+            <button class="btn button-add" role="button" type="submit" asp-asp-area="admin" asp-asp-controller="user" asp-action="rights">Сменить роль</button>
+        </div>
+    </form>
+}

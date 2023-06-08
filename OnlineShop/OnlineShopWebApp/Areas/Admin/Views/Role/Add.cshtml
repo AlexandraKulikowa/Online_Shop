@@ -1,23 +1,16 @@
-﻿@model Role
+﻿@model RoleViewModel
 
 @await Html.PartialAsync("AdminPanel")
 <div class="validation validation-message" asp-validation-summary="All"></div>
 <div class="card shadow addrole">
     <form method="post">
         <fieldset>
-            <center><legend>Добавление роли</legend></center>
+            <h3><legend>Добавление роли</legend></h3>
             <label asp-for="Name">Наименование</label>
-            <textarea type="text" asp-for="Name" rows="1" cols="40"><</textarea>
+            <textarea type="text" asp-for="Name" rows="1" cols="49"><</textarea>
             <br />
             <span asp-validation-for="Name"></span>
             <br />
-
-            <label asp-for="Options">Функции роли</label>
-            <textarea type="text" asp-for="Options" rows="3" cols="40"></textarea>
-            <br />
-            <span asp-validation-for="Options"></span>
-            <br />
-
             <button type="submit" class="button-role" asp-area="admin" asp-controller="role" asp-action="add" role="button">Добавить роль</button>
         </fieldset>
     </form>

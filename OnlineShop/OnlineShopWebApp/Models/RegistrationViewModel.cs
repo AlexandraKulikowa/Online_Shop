@@ -45,7 +45,7 @@ namespace OnlineShopWebApp.Models
 
         public bool isDistribution { get; set; }
 
-        public Role? Role { get; set; }
+        public RoleViewModel? Role { get; set; }
 
         public string ReturnUrl { get; set; }
 

@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
+
     public class UserViewModel
     {
         public string Id { get; set; }
@@ -34,5 +36,7 @@ namespace OnlineShopWebApp.Models
         public string Phone { get; set; }
 
         public bool isDistribution { get; set; }
+
+        public List<string>? Roles { get; set; }
     }
 }
