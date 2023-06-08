@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
@@ -70,24 +69,27 @@ namespace OnlineShopWebApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, false);
                     if (!await TryAssignUserRoleAsync(user))
                     {
                         ModelState.AddModelError("", "Что-то пошло не так. Роль пользователю не добавлена.");
                     }
-
-
-                        if (registration.ReturnUrl != null)
-                            return Redirect(registration.ReturnUrl);
-
-                        return Redirect("~/Home/Index/");
+                    if (!User.IsInRole(Constants.AdminRoleName))
+                    { 
+                        return RedirectToAction("SuccessRegistration");
                     }
+                    return Redirect("~/Admin/User/Index/");
+                }
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
                 }
             }
             return View("Registration", registration);
+        }
+
+        public IActionResult SuccessRegistration()
+        {
+            return View();
         }
 
         private async Task<bool> TryAssignUserRoleAsync(User user)
@@ -121,7 +123,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task <IActionResult> EditUserAsync(UserViewModel userVM)
+        public async Task<IActionResult> EditUserAsync(UserViewModel userVM)
         {
             var user = await userManager.FindByIdAsync(userVM.Id);
             var checkLogin = await userManager.CheckPasswordAsync(user, userVM.Login);
@@ -154,7 +156,7 @@ namespace OnlineShopWebApp.Controllers
             user.ImagePath = null;
             await userManager.UpdateAsync(user);
             var userVM = user.ToUserViewModel();
-            return RedirectToAction("EditUser",userVM);
+            return RedirectToAction("EditUser", userVM);
         }
     }
 }

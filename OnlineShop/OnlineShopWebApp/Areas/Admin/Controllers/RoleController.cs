@@ -61,7 +61,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(string name)
         {
             var role = await roleManager.FindByNameAsync(name);
-            if(role == null || role.Name == null))
+            if(role == null || role.Name == null)
             {
                 return Redirect("~/Admin/User/Error/");
             }

@@ -129,7 +129,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     return View("Edit", userVM);
                 }
             }
-            userVM = GetRolesVM(user);
+            userVM = await GetRolesVM(user);
             return View("Details", userVM);
         }
 
@@ -162,6 +162,10 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             catch
             {
                 await userManager.AddToRolesAsync(user, roles);
+                if(user.Email == "admin@gmail.com")
+                {
+                    return View("Error");
+                }
             }
 
             var userVM = await GetRolesVM(user);
