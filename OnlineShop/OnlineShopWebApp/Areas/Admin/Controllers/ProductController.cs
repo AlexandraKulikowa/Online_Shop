@@ -12,7 +12,12 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductsRepository products;
-        public ProductController(IProductsRepository products) => this.products = products;
+        private readonly CreateProductHelper createProductHelper;
+        public ProductController(IProductsRepository products, CreateProductHelper createProductHelper)
+        {
+            this.products = products;
+            this.createProductHelper = createProductHelper;
+        }
 
         public IActionResult Index()
         {
@@ -27,9 +32,10 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [RequestSizeLimit(8500000)]
         public IActionResult Add(ProductViewModel productVM)
         {
-            var product = productVM.ToProduct();
+            var product = createProductHelper.CreateProduct(productVM);
 
             if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
@@ -50,9 +56,10 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [RequestSizeLimit(8500000)]
         public IActionResult Edit(ProductViewModel productVM)
         {
-            var product = productVM.ToProduct();
+            var product = createProductHelper.CreateProduct(productVM);
 
             if (!products.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");

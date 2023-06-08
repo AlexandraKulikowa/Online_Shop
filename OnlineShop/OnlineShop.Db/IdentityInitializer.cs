@@ -2,7 +2,6 @@
 using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 
-
 namespace OnlineShop.Db
 {
     public class IdentityInitializer

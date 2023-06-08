@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineShopWebApp.Models
 
@@ -14,6 +17,7 @@ namespace OnlineShopWebApp.Models
 
         [Required(ErrorMessage = "Вы не ввели цену товара")]
         [Range(100, 5000000, ErrorMessage = "Введите верную цену товара")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Cost { get; set; }
 
         [Required(ErrorMessage = "Вы не ввели описание товара")]
@@ -35,9 +39,8 @@ namespace OnlineShopWebApp.Models
 
         public bool IsPromo { get; set; }
 
-        [RegularExpression(@"^((~)?)(\/.*\/)(?!\.\.$|\.$)([^\/]+)$", ErrorMessage = "Неверное значение")]
-        [StringLength(50, MinimumLength = 8, ErrorMessage = "Введите верное значение")]
         public string ImagePath { get; set; }
 
+        public IFormFile? UploadedFile { get; set; }
     }
 }

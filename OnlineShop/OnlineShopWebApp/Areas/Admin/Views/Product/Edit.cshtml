@@ -3,7 +3,7 @@
 @await Html.PartialAsync("AdminPanel")
 <div class="validation validation-message" asp-validation-summary="All"></div>
 <div class="card shadow editproducts">
-    <form class="form" autocomplete="off" method="post">
+    <form class="form" autocomplete="off" method="post" enctype="multipart/form-data">
         <fieldset>
             <center><legend>Изменение информации о продукте</legend></center>
 
@@ -49,10 +49,7 @@
             <span asp-validation-for="Year"></span>
             <br />
 
-            <label asp-for="ImagePath">Ссылка на изображение</label>
-            <input type="text" asp-for="ImagePath" value="@Model.ImagePath" size="35" />
-            <span asp-validation-for="ImagePath"></span>
-            <br />
+            <input type="hidden" asp-for="ImagePath" value="@Model.ImagePath" />
 
             <label asp-for="Size.IsFrame">Наличие рамки</label>
             @Html.CheckBoxFor(m =>m.Size.IsFrame)
@@ -60,8 +57,13 @@
             <label for="ispromo">Акция на товар</label>
             @Html.CheckBoxFor(m =>m.IsPromo)
 
+            <div class="form-group">
+                <label>Изменить изображение</label>
+                <input type="file" name="UploadedFile" class="form-control"/>
+            </div>
+
             <div class="btn-group" role="group">
-                <button class="btn-outline-secondary btn-lg" type="reset">Сбросить заполнение формы</button>
+                <button class="btn-outline-secondary btn-lg" type="reset">Сбросить изменение</button>
                 <button type="submit" class="btn-success btn-lg" asp-area="admin" asp-controller="product" asp-action="edit" role="button">Изменить продукт</button>
             </div>
 
