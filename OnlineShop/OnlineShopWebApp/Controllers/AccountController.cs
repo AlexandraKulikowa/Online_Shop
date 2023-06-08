@@ -12,11 +12,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Login(string returnUrl)
@@ -67,11 +69,12 @@ namespace OnlineShopWebApp.Controllers
                         ModelState.AddModelError("", "Что-то пошло не так. Роль пользователю не добавлена.");
                     }
 
-                    if (registration.ReturnUrl != null)
-                        return Redirect(registration.ReturnUrl);
 
-                    return Redirect("~/Home/Index/");
-                }
+                        if (registration.ReturnUrl != null)
+                            return Redirect(registration.ReturnUrl);
+
+                        return Redirect("~/Home/Index/");
+                    }
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);
