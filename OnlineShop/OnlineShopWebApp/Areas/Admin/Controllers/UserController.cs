@@ -117,7 +117,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-
                 user.ChangeUser(userVM);
                 var result = await userManager.UpdateAsync(user);
                 userVM = await GetRolesVM(user);
@@ -130,6 +129,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     return View("Edit", userVM);
                 }
             }
+            userVM = GetRolesVM(user);
             return View("Details", userVM);
         }
 
@@ -155,7 +155,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var roles = await userManager.GetRolesAsync(user);
 
             await userManager.RemoveFromRolesAsync(user, roles);
-            await userManager.AddToRolesAsync(user, userSelectedRoles);
+            try
+            {
+                await userManager.AddToRolesAsync(user, userSelectedRoles);
+            }
+            catch
+            {
+                await userManager.AddToRolesAsync(user, roles);
+            }
 
             var userVM = await GetRolesVM(user);
             return View("Details", userVM);
