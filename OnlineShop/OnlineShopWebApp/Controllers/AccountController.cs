@@ -76,11 +76,12 @@ namespace OnlineShopWebApp.Controllers
                         ModelState.AddModelError("", "Что-то пошло не так. Роль пользователю не добавлена.");
                     }
 
-                    if (registration.ReturnUrl != null)
-                        return Redirect(registration.ReturnUrl);
 
-                    return Redirect("~/Home/Index/");
-                }
+                        if (registration.ReturnUrl != null)
+                            return Redirect(registration.ReturnUrl);
+
+                        return Redirect("~/Home/Index/");
+                    }
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError("", error.Description);

@@ -64,10 +64,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         public IActionResult EditPassword(PasswordViewModel passwordVM)
         {
             var user = userManager.FindByIdAsync(passwordVM.Id).Result;
-            var userVM = new UserViewModel();
 
             var checkOldPassword = userManager.CheckPasswordAsync(user, passwordVM.OldPassword).Result;
-            if(!checkOldPassword)
+            if (!checkOldPassword)
             {
                 ModelState.AddModelError("", "Вы неверно ввели старый пароль!");
             }
@@ -91,11 +90,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     }
                     return View("EditPassword", passwordVM);
                 }
-                user = userManager.FindByIdAsync(user.Id).Result;
-                userVM = user.ToUserViewModel();
                 return RedirectToAction("Details", passwordVM);
             }
-            userVM = user.ToUserViewModel();
             return View("EditPassword", passwordVM);
         }
 
@@ -118,7 +114,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-
                 user.ChangeUser(userVM);
                 var result = userManager.UpdateAsync(user).Result;
                 if (!result.Succeeded)
@@ -130,6 +125,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     return View("Edit", userVM);
                 }
             }
+            userVM = GetRolesVM(user);
             return View("Details", userVM);
         }
 
@@ -147,7 +143,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Rights(string id, Dictionary<string, string> userRolesVM)
         {
             var userSelectedRoles = userRolesVM.Select(x => x.Key);
@@ -156,7 +151,14 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             var roles = userManager.GetRolesAsync(user).Result;
 
             userManager.RemoveFromRolesAsync(user, roles).Wait();
-            userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
+            try
+            {
+                userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
+            }
+            catch
+            {
+                userManager.AddToRolesAsync(user, roles).Wait();
+            }
 
             var userVM = GetRolesVM(user);
             return View("Details", userVM);

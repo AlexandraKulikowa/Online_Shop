@@ -1061,15 +1061,15 @@ modal-footer{
 }
 
 .custom-checkbox {
-    position: absolute;
-    z-index: -1;
-    opacity: 0;
+    display: none;
 }
 
     .custom-checkbox + label {
         display: inline-flex;
         align-items: center;
         user-select: none;
+        position: relative;
+        cursor: pointer;
     }
 
         .custom-checkbox + label::before {
