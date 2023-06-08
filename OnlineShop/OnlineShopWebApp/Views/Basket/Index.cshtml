@@ -18,7 +18,13 @@ else
             <table>
                 <tbody>
                     <tr>
-                        <td><img src=@item.Product.ImagePath height="110" object-fit="scale-down" alt="Фото картины"></td>
+                        <td>
+                            @foreach (var image in item.Product.ImagePath)
+                            {
+                                <img src=@image height="110" object-fit="scale-down" alt="Фото картины">
+                                <br />
+                            }
+                        </td>
                         <td>@item.Product.Name <br> Жанр: @item.Product.Genre <br /> Написана в @item.Product.Year году</td>
                         <td><a class="btn btn-outline-success btn-lg" role="button" asp-controller="basket" asp-action="changeamount" asp-route-id=@item.Product.Id asp-route-sign="false" asp-route-userId=@Model.UserId>-</a></td>
                         <td align="center">@item.Amount</td>

@@ -4,6 +4,7 @@ using OnlineShop.Db.Models;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Models;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace OnlineShopWebApp.Helpers
@@ -20,6 +21,9 @@ namespace OnlineShopWebApp.Helpers
 
         public static ProductViewModel ToProductViewModel(this Product product)
         {
+            var productVMImagePath = new List<string>();
+            productVMImagePath = product.ImagePath.Select(x => x.Path).ToList();
+
             return new ProductViewModel
             {
                 Id = product.Id,
@@ -31,7 +35,7 @@ namespace OnlineShopWebApp.Helpers
                 Size = product.Size.ToSizeViewModel(),
                 Year = product.Year,
                 IsPromo = product.IsPromo,
-                ImagePath = product.ImagePath,
+                ImagePath = productVMImagePath
             };
         }
 
@@ -47,6 +51,14 @@ namespace OnlineShopWebApp.Helpers
 
         public static Product ToProduct(this ProductViewModel productVM)
         {
+            var productImagePath = new List<FilePath>();
+            productImagePath = productVM.ImagePath.Select(x => new FilePath { Path = x }).ToList();
+
+            foreach (var path in productVM.ImagePath)
+            {
+                productImagePath.Add(new FilePath { Path = path });
+            }
+
             return new Product
             {
                 Id = productVM.Id,
@@ -58,7 +70,7 @@ namespace OnlineShopWebApp.Helpers
                 Size = productVM.Size.ToSize(),
                 Year = productVM.Year,
                 IsPromo = productVM.IsPromo,
-                ImagePath = productVM.ImagePath
+                ImagePath = productImagePath
             };
         }
 

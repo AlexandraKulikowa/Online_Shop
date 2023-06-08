@@ -14,7 +14,12 @@ else
             @foreach (var product in Model)
             {
                 <div class="col-3 card shadow border-success card-body">
-                    <img src=@product.ImagePath alt="Фото картины">
+                    @foreach (var image in product.ImagePath)
+                    {
+                        var height = 400 / product.ImagePath.Count;
+                        <img src=@image alt="Фото картины" height="@height">
+                        <br />
+                    }
                     <div class="mt-auto" style="display:-ms-inline-flexbox; flex-direction: column;">
                         <a asp-controller="product" asp-action="index" asp-route-id=@product.Id>
                             <h5><b>@product.Name</b></h5>

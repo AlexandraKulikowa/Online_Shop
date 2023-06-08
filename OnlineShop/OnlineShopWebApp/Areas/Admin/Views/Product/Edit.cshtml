@@ -16,7 +16,8 @@
             <br />
 
             <label asp-for="Cost">Цена</label>
-            <input type="number" asp-for="Cost" value="@Model.Cost" onKeyUp="if(this.value>5000000){this.value='5000000';}">
+
+            @Html.EditorFor(x=>x.Cost)
             <span asp-validation-for="Cost"></span>
             <br />
 
@@ -59,7 +60,7 @@
 
             <div class="form-group">
                 <label>Изменить изображение</label>
-                <input type="file" name="UploadedFile" class="form-control"/>
+                <input type="file" name="UploadedFiles" class="form-control" multiple accept=".jpg, .jpeg, .png, .svg, .gif" />
             </div>
 
             <div class="btn-group" role="group">

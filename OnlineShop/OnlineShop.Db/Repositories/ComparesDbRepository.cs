@@ -19,7 +19,9 @@ namespace OnlineShop.Db.Repositories
         {
             return databaseContext.Comparisons
                 .Include(x => x.Product)
-                .ThenInclude(x => x.Size)
+                    .ThenInclude(x => x.Size)
+                .Include(x => x.Product)
+                    .ThenInclude(x => x.ImagePath)
                 .FirstOrDefault(x => x.UserId == userId & x.Product.Id == id);
         }
 
@@ -27,7 +29,9 @@ namespace OnlineShop.Db.Repositories
         {
             var products = databaseContext.Comparisons
                 .Include(x => x.Product)
-                .ThenInclude(x => x.Size)
+                    .ThenInclude(x => x.Size)
+                .Include(x => x.Product)
+                    .ThenInclude(x => x.ImagePath)
                 .Where(x => x.UserId == userId)
                 .Select(x => x.Product)
                 .ToList();

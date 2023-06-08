@@ -32,7 +32,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [RequestSizeLimit(8500000)]
         public IActionResult Add(ProductViewModel productVM)
         {
             var product = createProductHelper.CreateProduct(productVM);
@@ -56,7 +55,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [RequestSizeLimit(8500000)]
         public IActionResult Edit(ProductViewModel productVM)
         {
             var product = createProductHelper.CreateProduct(productVM);
@@ -79,5 +77,6 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             products.Delete(product);
             return RedirectToAction("Index");
         }
+
     }
 }

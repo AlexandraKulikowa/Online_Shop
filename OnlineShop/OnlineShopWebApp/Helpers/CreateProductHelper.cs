@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using Microsoft.AspNetCore.Hosting;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Helpers
 {
@@ -15,24 +16,28 @@ namespace OnlineShopWebApp.Helpers
             this.appEnvironment = appEnvironment;
         }
 
-        public Product CreateProduct(ProductViewModel product)
+        public Product CreateProduct(ProductViewModel productVM)
         {
-            if (product.UploadedFile != null)
+            productVM.ImagePath = new List<string>();
+            if (productVM.UploadedFiles != null)
             {
-                var imagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products");
-                if (!Directory.Exists(imagesPath))
+                var ImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products");
+                if (!Directory.Exists(ImagesPath))
                 {
-                    Directory.CreateDirectory(imagesPath);
+                    Directory.CreateDirectory(ImagesPath);
                 }
-                var fileName = Guid.NewGuid() + "." + product.UploadedFile.FileName.Split('.').Last();
-                using (var fileStream = new FileStream(imagesPath + fileName, FileMode.Create))
-                {
-                    product.UploadedFile.CopyTo(fileStream);
-                }
-                product.ImagePath = "/images/products" + fileName;
-            }
 
-            return product.ToProduct();
+                foreach (var file in productVM.UploadedFiles)
+                {
+                    var fileName = Guid.NewGuid() + "." + file.FileName.Split('.').Last();
+                    using (var fileStream = new FileStream(ImagesPath + fileName, FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    productVM.ImagePath.Add("/images/products" + fileName);
+                }
+            }
+            return productVM.ToProduct();
         }
     }
 }

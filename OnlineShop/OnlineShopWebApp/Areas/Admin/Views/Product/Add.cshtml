@@ -47,8 +47,6 @@
             <span asp-validation-for="Year"></span>
             <br />
 
-            <input type="hidden" asp-for="ImagePath" value=""/>
-
             <label asp-for="Size.IsFrame">Наличие рамки</label>
             <input asp-for="Size.IsFrame" type="checkbox" value="true">
             <span asp-validation-for="Size.IsFrame"></span>
@@ -59,8 +57,9 @@
             <br />
 
             <div class="form-group">
-                <label>Загрузить изображение</label>
-                <input type="file" name="UploadedFile" class="form-control" />
+                <label class="file">Загрузить изображение
+                    <input type="file" name="UploadedFiles" class="form-control" multiple accept=".jpg, .jpeg, .png, .svg, .gif" />
+                </label>
             </div>
 
             <div class="btn-group" role="group">

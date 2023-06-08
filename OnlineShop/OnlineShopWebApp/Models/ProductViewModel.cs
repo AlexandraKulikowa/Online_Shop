@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -39,8 +40,8 @@ namespace OnlineShopWebApp.Models
 
         public bool IsPromo { get; set; }
 
-        public string ImagePath { get; set; }
+        public List<string>? ImagePath { get; set; }
 
-        public IFormFile? UploadedFile { get; set; }
+        public List<IFormFile>? UploadedFiles { get; set; }
     }
 }

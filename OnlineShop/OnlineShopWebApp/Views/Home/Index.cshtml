@@ -7,7 +7,11 @@
         @foreach (var product in Model)
         {
             <div class="col-3 card shadow card-body">
-                <img src=@product.ImagePath alt="Фото картины" height="250">
+                @foreach(var image in product.ImagePath)
+                {
+                    <img src=@image alt="Фото картины">
+                    <br />
+                }
                 <div class="mt-auto align-items-end">
                     <a asp-controller="product" asp-action="index" asp-route-id=@product.Id>
                         <h5><b>@product.Name</b></h5>

@@ -17,11 +17,17 @@ namespace OnlineShop.Db.Repositories
 
         public List<Product> GetAll()
         {
-            return databaseContext.Products.Include(x => x.Size).ToList();
+            return databaseContext.Products
+                .Include(x => x.Size)
+                .Include(x => x.ImagePath)
+                .ToList();
         }
         public Product TryGetById(int id)
         {
-            return databaseContext.Products.Include(x => x.Size).FirstOrDefault(product => product.Id == id);
+            return databaseContext.Products
+                .Include(x => x.Size)
+                .Include(x => x.ImagePath)
+                .FirstOrDefault(product => product.Id == id);
         }
 
         public List<Product> Search(string name)
@@ -29,7 +35,13 @@ namespace OnlineShop.Db.Repositories
             if (name == null)
                 return null;
             name = name.ToLower();
-            var result = databaseContext.Products.Include(x => x.Size).Where(x => x.Name.ToLower().Contains(name)).ToList();
+            var result = databaseContext.Products
+                .Include(x => x.Size)
+                .Include(x => x.ImagePath)
+                .Where(x => x.Name
+                .ToLower()
+                .Contains(name))
+                .ToList();
             return result;
         }
 
@@ -71,6 +83,7 @@ namespace OnlineShop.Db.Repositories
                 existingProduct.IsPromo = product.IsPromo;
                 existingProduct.ImagePath = product.ImagePath;
                 existingProduct.BasketItems = product.BasketItems;
+                existingProduct.ImagePath = product.ImagePath;
             }
             databaseContext.SaveChanges();
         }
@@ -84,7 +97,11 @@ namespace OnlineShop.Db.Repositories
 
         public List<Product> GetByGenre(Genre genre)
         {
-            var result = databaseContext.Products.Include(x => x.Size).Where(x => x.Genre == genre).ToList();
+            var result = databaseContext.Products
+                .Include(x => x.Size)
+                .Include(x => x.ImagePath)
+                .Where(x => x.Genre == genre)
+                .ToList();
             return result;
         }
     }
