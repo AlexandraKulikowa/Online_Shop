@@ -223,7 +223,8 @@ namespace OnlineShopWebApp.Helpers
                 Login = user.UserName,
                 Email = user.Email,
                 Phone = user.PhoneNumber,
-                isDistribution = user.isDistribution, 
+                isDistribution = user.isDistribution,
+                ImagePath = user.ImagePath
         };
         }
 

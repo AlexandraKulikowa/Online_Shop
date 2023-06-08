@@ -24,7 +24,7 @@
                 {   
                     if(!User.IsInRole(Constants.AdminRoleName))
                     {
-                        <div class="btn entered">@User.Identity.Name</div>
+                        <a class="btn entered" asp-area="" asp-controller="account" asp-action="profile" asp-route-name="@User.Identity.Name">Личный кабинет</a>
                     }               
                     <a class="btn enter" asp-area="" asp-controller="account" asp-action="logout">Выход</a>
                 }

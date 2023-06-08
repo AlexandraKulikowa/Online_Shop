@@ -4,7 +4,8 @@ using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
-using System;
+
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -12,13 +13,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly CreateUserImage createUserImage;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, CreateUserImage createUserImage)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.roleManager = roleManager;
+            this.createUserImage = createUserImage;
         }
 
         public IActionResult Login(string returnUrl)
@@ -55,6 +56,12 @@ namespace OnlineShopWebApp.Controllers
         {
             if (registration.Login == registration.Password)
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
+
+            var checkUser = userManager.FindByNameAsync(registration.Login).Result;
+            if (checkUser != null)
+            {
+                ModelState.AddModelError("", "Такой пользователь уже зарегистрирован!");
+            }
 
             if (ModelState.IsValid)
             {
@@ -97,6 +104,57 @@ namespace OnlineShopWebApp.Controllers
         {
             signInManager.SignOutAsync().Wait();
             return Redirect("~/Home/Index/");
+        }
+
+        public IActionResult Profile(string name)
+        {
+            var user = userManager.FindByNameAsync(name).Result;
+            var userVM = user.ToUserViewModel();
+            return View(userVM);
+        }
+
+        public IActionResult EditUser(string id)
+        {
+            var user = userManager.FindByIdAsync(id).Result;
+            var userVM = user.ToUserViewModel();
+            return View(userVM);
+        }
+
+        [HttpPost]
+        public IActionResult EditUser(UserViewModel userVM)
+        {
+            var user = userManager.FindByIdAsync(userVM.Id).Result;
+            var checkLogin = userManager.CheckPasswordAsync(user, userVM.Login).Result;
+            if (checkLogin)
+            {
+                ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                user.ChangeUser(userVM);
+                user.ImagePath = createUserImage.CreateImage(userVM);
+                var result = userManager.UpdateAsync(user).Result;
+                if (!result.Succeeded)
+                {
+                    foreach (var err in result.Errors)
+                    {
+                        ModelState.AddModelError("", err.Description);
+                    }
+                    return View("EditUser", userVM);
+                }
+            }
+            userVM = user.ToUserViewModel();
+            return View("Profile", userVM);
+        }
+
+        public IActionResult DeleteImage(string id)
+        {
+            var user = userManager.FindByIdAsync(id).Result;
+            user.ImagePath = null;
+            userManager.UpdateAsync(user).Wait();
+            var userVM = user.ToUserViewModel();
+            return RedirectToAction("EditUser",userVM);
         }
     }
 }

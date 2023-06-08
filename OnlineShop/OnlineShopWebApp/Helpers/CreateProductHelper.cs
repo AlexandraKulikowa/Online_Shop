@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Helpers
             productVM.ImagePath = new List<string>();
             if (productVM.UploadedFiles != null)
             {
-                var ImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products");
+                var ImagesPath = Path.Combine(appEnvironment.WebRootPath + "/images/products/");
                 if (!Directory.Exists(ImagesPath))
                 {
                     Directory.CreateDirectory(ImagesPath);
@@ -34,7 +34,7 @@ namespace OnlineShopWebApp.Helpers
                     {
                         file.CopyTo(fileStream);
                     }
-                    productVM.ImagePath.Add("/images/products" + fileName);
+                    productVM.ImagePath.Add("/images/products/" + fileName);
                 }
             }
             return productVM.ToProduct();
