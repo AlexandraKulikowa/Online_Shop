@@ -21,11 +21,11 @@
 
 
                 @if (User.Identity.IsAuthenticated)
-                {   
-                    if(!User.IsInRole(Constants.AdminRoleName))
+                {
+                    if (!User.IsInRole(Constants.AdminRoleName))
                     {
-                        <a class="btn entered" asp-area="" asp-controller="account" asp-action="profile" asp-route-name="@User.Identity.Name">Личный кабинет</a>
-                    }               
+                        @await Component.InvokeAsync("UserImage", User.Identity.Name)
+                    }    
                     <a class="btn enter" asp-area="" asp-controller="account" asp-action="logout">Выход</a>
                 }
                 else

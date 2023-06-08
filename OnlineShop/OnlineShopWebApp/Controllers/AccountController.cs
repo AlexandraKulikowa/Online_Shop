@@ -5,8 +5,6 @@ using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
 
-using System.Linq;
-
 namespace OnlineShopWebApp.Controllers
 {
     public class AccountController : Controller
@@ -154,7 +152,7 @@ namespace OnlineShopWebApp.Controllers
             user.ImagePath = null;
             userManager.UpdateAsync(user).Wait();
             var userVM = user.ToUserViewModel();
-            return RedirectToAction("EditUser",userVM);
+            return RedirectToAction("EditUser", userVM);
         }
     }
 }
