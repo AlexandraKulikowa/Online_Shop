@@ -4,6 +4,7 @@ using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -19,9 +20,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             this.createProductHelper = createProductHelper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var productlist = products.GetAll();
+            var productlist = await products.GetAllAsync();
             var productsVM = productlist.ToProductViewModels();
             return View(productsVM);
         }
@@ -32,7 +33,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductViewModel productVM)
+        public async Task<IActionResult> AddAsync(ProductViewModel productVM)
         {
             var product = createProductHelper.CreateProduct(productVM);
 
@@ -41,21 +42,21 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                products.Add(product);
+                await products.AddAsync(product);
                 return RedirectToAction("Index");
             }
             return View("Add", productVM);
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> EditAsync(int id)
         {
-            var product = products.TryGetById(id);
+            var product = await products.TryGetByIdAsync(id);
             var productVM = product.ToProductViewModel();
             return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductViewModel productVM)
+        public async Task<IActionResult> EditAsync(ProductViewModel productVM)
         {
             var product = createProductHelper.CreateProduct(productVM);
 
@@ -64,17 +65,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                products.Edit(product);
+                await products.EditAsync(product);
                 return RedirectToAction("Index");
             }
 
             return View("Edit", productVM);
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            var product = products.TryGetById(id);
-            products.Delete(product);
+            var product = await products.TryGetByIdAsync(id);
+            await products.DeleteAsync(product);
             return RedirectToAction("Index");
         }
 

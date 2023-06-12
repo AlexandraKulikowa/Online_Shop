@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Areas.Admin.Models;
 using OnlineShopWebApp.Helpers;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -21,9 +23,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var roles = roleManager.Roles.ToList();
+            var roles = await roleManager.Roles.ToListAsync();
             var rolesVM = roles.Select(x => x.ToRoleViewModel()).ToList();
             return View(rolesVM);
         }
@@ -34,16 +36,16 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(RoleViewModel roleVM)
+        public async Task<IActionResult> AddAsync(RoleViewModel roleVM)
         {
-            var check = roleManager.RoleExistsAsync(roleVM.Name).Result;
+            var check = await roleManager.RoleExistsAsync(roleVM.Name);
             if (check)
                 ModelState.AddModelError("", "Такая роль уже есть!");
 
             if (ModelState.IsValid)
             {
                 var role = new IdentityRole { Name = roleVM.Name };
-                var result = roleManager.CreateAsync(role).Result;
+                var result = await roleManager.CreateAsync(role);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -56,9 +58,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View(roleVM);
         }
 
-        public IActionResult Delete(string name)
+        public async Task<IActionResult> Delete(string name)
         {
-            var role = roleManager.FindByNameAsync(name).Result;
+            var role = await roleManager.FindByNameAsync(name);
             if(role == null || role.Name == null)
             {
                 return Redirect("~/Admin/User/Error/");
@@ -76,7 +78,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                roleManager.DeleteAsync(role).Wait();
+                await roleManager.DeleteAsync(role);
             }
             return RedirectToAction("Index");
         }

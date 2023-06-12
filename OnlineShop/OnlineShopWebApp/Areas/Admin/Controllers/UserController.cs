@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Areas.Admin.Models;
@@ -9,6 +10,7 @@ using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Admin.Controllers
 {
@@ -24,33 +26,33 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             this.roleManager = roleManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var users = userManager.Users.ToList();
+            var users = await userManager.Users.ToListAsync();
             var usersVM = new List<UserViewModel>();
             foreach (var user in users)
             {
-                var userVM = GetRolesVM(user);
+                var userVM = await GetRolesVM(user);
                 usersVM.Add(userVM);
             }
             return View(usersVM);
         }
 
-        public IActionResult Details(string id)
+        public async Task<IActionResult> DetailsAsync(string id)
         {
-            var user = userManager.FindByIdAsync(id).Result;
-            var userVM = GetRolesVM(user);
+            var user = await userManager.FindByIdAsync(id);
+            var userVM = await GetRolesVM(user);
             return View(userVM);
         }
 
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> DeleteAsync(string id)
         {
-            var user = userManager.FindByIdAsync(id).Result;
+            var user = await userManager.FindByIdAsync(id);
             if (user.UserName == "admin@gmail.com")
             {
                 return RedirectToAction("Error");
             }
-            userManager.DeleteAsync(user).Wait();
+            await userManager.DeleteAsync(user);
             return RedirectToAction("Index");
         }
 
@@ -61,17 +63,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditPassword(PasswordViewModel passwordVM)
+        public async Task<IActionResult> EditPasswordAsync(PasswordViewModel passwordVM)
         {
-            var user = userManager.FindByIdAsync(passwordVM.Id).Result;
+            var user = await userManager.FindByIdAsync(passwordVM.Id);
 
-            var checkOldPassword = userManager.CheckPasswordAsync(user, passwordVM.OldPassword).Result;
-            if (!checkOldPassword)
+            var checkOldPassword = await userManager.CheckPasswordAsync(user, passwordVM.OldPassword);
+            if(!checkOldPassword)
             {
                 ModelState.AddModelError("", "Вы неверно ввели старый пароль!");
             }
 
-            var checkNew = userManager.CheckPasswordAsync(user, passwordVM.NewPassword).Result;
+            var checkNew = await userManager.CheckPasswordAsync(user, passwordVM.NewPassword);
             if (checkNew)
             {
                 ModelState.AddModelError("", "Пароль не должен быть идентичен старому!");
@@ -79,8 +81,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                userManager.ChangePasswordAsync(user, passwordVM.OldPassword, passwordVM.NewPassword).Wait();
-                var result = userManager.UpdateAsync(user).Result;
+                await userManager.ChangePasswordAsync(user, passwordVM.OldPassword, passwordVM.NewPassword);
+                var result = await userManager.UpdateAsync(user);
 
                 if (!result.Succeeded)
                 {
@@ -95,18 +97,19 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             return View("EditPassword", passwordVM);
         }
 
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> EditAsync(string id)
         {
-            var user = userManager.FindByIdAsync(id).Result;
-            var userVM = user.ToUserViewModel();
+            var user = await userManager.FindByIdAsync(id);
+            var userVM = await GetRolesVM(user);
             return View(userVM);
         }
 
         [HttpPost]
-        public IActionResult Edit(UserViewModel userVM)
+        public async Task<IActionResult> EditAsync(UserViewModel userVM)
         {
-            var user = userManager.FindByIdAsync(userVM.Id).Result;
-            var checkLogin = userManager.CheckPasswordAsync(user, userVM.Login).Result;
+            var user = await userManager.FindByIdAsync(userVM.Id);
+
+            var checkLogin = await userManager.CheckPasswordAsync(user, userVM.Login);
             if (checkLogin)
             {
                 ModelState.AddModelError("", "Логин и пароль не могут совпадать!");
@@ -115,7 +118,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 user.ChangeUser(userVM);
-                var result = userManager.UpdateAsync(user).Result;
+                var result = await userManager.UpdateAsync(user);
+                userVM = await GetRolesVM(user);
                 if (!result.Succeeded)
                 {
                     foreach (var err in result.Errors)
@@ -125,17 +129,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
                     return View("Edit", userVM);
                 }
             }
-            userVM = GetRolesVM(user);
+            userVM = await GetRolesVM(user);
             return View("Details", userVM);
         }
 
-        public IActionResult Rights(string id)
+        public async Task<IActionResult> RightsAsync(string id)
         {
-            var user = userManager.FindByIdAsync(id).Result;
-            var roles = userManager.GetRolesAsync(user).Result;
+            var user = await userManager.FindByIdAsync(id);
+            var roles = await userManager.GetRolesAsync(user);
             var rolesVM = roles.Select(x => new RoleViewModel { Name = x }).ToList();
 
-            var allRoles = roleManager.Roles.ToList();
+            var allRoles = await roleManager.Roles.ToListAsync();
             var allRolesVM = allRoles.Select(x => x.ToRoleViewModel()).ToList();
 
             var rightsVM = user.ToRightsViewModel(rolesVM, allRolesVM);
@@ -143,30 +147,34 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Rights(string id, Dictionary<string, string> userRolesVM)
+        public async Task<IActionResult> RightsAsync(string id, Dictionary<string, string> userRolesVM)
         {
             var userSelectedRoles = userRolesVM.Select(x => x.Key);
 
-            var user = userManager.FindByIdAsync(id).Result;
-            var roles = userManager.GetRolesAsync(user).Result;
+            var user = await userManager.FindByIdAsync(id);
+            var roles = await userManager.GetRolesAsync(user);
 
-            userManager.RemoveFromRolesAsync(user, roles).Wait();
+            await userManager.RemoveFromRolesAsync(user, roles);
             try
             {
-                userManager.AddToRolesAsync(user, userSelectedRoles).Wait();
+                await userManager.AddToRolesAsync(user, userSelectedRoles);
             }
             catch
             {
-                userManager.AddToRolesAsync(user, roles).Wait();
+                await userManager.AddToRolesAsync(user, roles);
+                if(user.Email == "admin@gmail.com")
+                {
+                    return View("Error");
+                }
             }
 
-            var userVM = GetRolesVM(user);
+            var userVM = await GetRolesVM(user);
             return View("Details", userVM);
         }
 
-        public UserViewModel GetRolesVM(User user)
+        public async Task<UserViewModel> GetRolesVM(User user)
         {
-            var roles = userManager.GetRolesAsync(user).Result.ToList();
+            var roles = (await userManager.GetRolesAsync(user)).ToList();
             var userVM = user.ToUserViewModel();
             userVM.Roles = roles;
             return userVM;

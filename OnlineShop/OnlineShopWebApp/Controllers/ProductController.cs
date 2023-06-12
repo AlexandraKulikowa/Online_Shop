@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Helpers;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -11,17 +12,17 @@ namespace OnlineShopWebApp.Controllers
         {
             this.products = products;
         }
-        public IActionResult Index(int id)
+        public async Task<IActionResult> Index(int id)
         {
-            var product = products.TryGetById(id);
+            var product = await products.TryGetByIdAsync(id);
             var productVM = product.ToProductViewModel();
             return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult SearchResult(string search)
+        public async Task<IActionResult> SearchResultAsync(string search)
         {
-            var searchresult = products.Search(search);
+            var searchresult = await products.SearchAsync(search);
             var searchresultVM = searchresult.ToProductViewModels();
             return View(searchresultVM);
         }

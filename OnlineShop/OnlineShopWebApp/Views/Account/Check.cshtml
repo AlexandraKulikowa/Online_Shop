@@ -1,0 +1,21 @@
+﻿@model CheckViewModel
+
+<center><b><div class="validation" asp-validation-summary="All" style="color:aliceblue"></div></b></center>
+<div class="card shadow changepassword">
+    <form method="post">
+        <fieldset>
+            <legend>Чтобы изменить данные <br /> в личном кабинете, введите пароль</legend>
+
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <center>
+            <label asp-for="Password">Пароль</label>
+            <br>
+            <input type="password" asp-for="Password">
+            <br />
+        </fieldset>
+        <br />
+        <center><button type="submit" class="btn btn-success" asp-area="" asp-controller="account" asp-action="check" role="button">Редактировать данные</button></center>
+        <br />
+        </center>
+    </form>
+</div>

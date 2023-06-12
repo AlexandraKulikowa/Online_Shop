@@ -4,6 +4,7 @@ using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -15,24 +16,24 @@ namespace OnlineShopWebApp.Controllers
             this.products = products;
         }
 
-        public IActionResult Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var productsDb = products.GetAll();
+            var productsDb = await products.GetAllAsync();
             var result = new List<Product>();
 
             switch(sortOrder)
             {
                 case "genre_landscape":
-                    result = products.GetByGenre(Genre.Натюрморт);
+                    result = await products.GetByGenreAsync(Genre.Натюрморт);
                     break;
                 case "genre_still_life":
-                    result = products.GetByGenre(Genre.Пейзаж);
+                    result = await products.GetByGenreAsync(Genre.Пейзаж);
                     break;
                 case "genre_animalism":
-                    result = products.GetByGenre(Genre.Анималистика);
+                    result = await products.GetByGenreAsync(Genre.Анималистика);
                     break;
                 case "genre_portrait":
-                    result = products.GetByGenre(Genre.Портрет);
+                    result = await products.GetByGenreAsync(Genre.Портрет);
                     break;
                 case "cost_desc":
                     result = productsDb.OrderByDescending(x => x.Cost).ToList();

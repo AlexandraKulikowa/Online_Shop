@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -16,26 +17,26 @@ namespace OnlineShopWebApp.Controllers
             this.products = products;
             this.baskets = baskets;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var basket = baskets.TryGetByUserId(Constants.UserId);
+            var basket = await baskets.TryGetByUserIdAsync(Constants.UserId);
             var basketVM = basket.ToBasketViewModel();
             return View(basketVM);
         }
-        public IActionResult Add(int id)
+        public async Task<IActionResult> AddAsync(int id)
         {
-            var product = products.TryGetById(id);
-            baskets.Add(product, Constants.UserId);
+            var product = await products.TryGetByIdAsync(id);
+            await baskets.AddAsync(product, Constants.UserId);
             return RedirectToAction("Index");
         }
-        public IActionResult ChangeAmount(int id, bool sign)
+        public async Task<IActionResult> ChangeAmount(int id, bool sign)
         {
-            baskets.ChangeAmount(id, sign, Constants.UserId);
+            await baskets.ChangeAmountAsync(id, sign, Constants.UserId);
             return RedirectToAction("Index");
         }
-        public IActionResult Clear()
+        public async Task<IActionResult> Clear()
         {
-            baskets.Clear(Constants.UserId);
+            await baskets.ClearAsync(Constants.UserId);
             return RedirectToAction("Index");
         }
     }

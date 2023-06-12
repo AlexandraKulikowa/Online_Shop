@@ -6,6 +6,7 @@ using OnlineShop.Db.Repositories;
 using System;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -19,9 +20,9 @@ namespace OnlineShopWebApp.Controllers
             this.baskets = baskets;
             this.orders = orders;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var basket = baskets.TryGetByUserId(Constants.UserId);
+            var basket = await baskets.TryGetByUserIdAsync(Constants.UserId);
             var basketVM = basket.ToBasketViewModel();
             ViewBag.Basket = basketVM.BasketItems.Any();
             ViewBag.TotalCost = basketVM.TotalCost();
@@ -29,23 +30,23 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult ToCheckOut(OrderViewModel orderVM)
+        public async Task<IActionResult> ToCheckOutAsync(OrderViewModel orderVM)
         {
             if (ModelState.IsValid)
             {
-                var basket = baskets.TryGetByUserId(Constants.UserId);
+                var basket = await baskets.TryGetByUserIdAsync(Constants.UserId);
                 var order = orderVM.ToOrder();
                 order.OrderBasketItems.AddRange(basket.BasketItems.ToArray());
-                orders.Add(order);
-                baskets.Clear(Constants.UserId);
+                await orders.AddAsync(order);
+                await baskets.ClearAsync(Constants.UserId);
                 return RedirectToAction("Result");
             }
             return View(orderVM);
         }
 
-        public IActionResult Result()
+        public async Task<IActionResult> Result()
         {
-            ViewBag.Id = orders.GetAll().Count;
+            ViewBag.Id = (await orders.GetAllAsync()).Count;
             return View();
         }
 
