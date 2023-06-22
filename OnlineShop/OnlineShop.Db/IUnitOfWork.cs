@@ -11,8 +11,7 @@ namespace OnlineShop.Db
     {
         void Save();
 
-        //IProductsRepository ProductsRepository { get; }
+        IProductsRepository ProductsDbRepository { get; }
 
-        IRepository<T> Repository<T>() where T : class;
     }
 }

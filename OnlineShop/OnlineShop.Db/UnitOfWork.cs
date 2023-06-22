@@ -14,8 +14,9 @@ namespace OnlineShop.Db
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private IRepository<Product> productsRepo;
+        //private IRepository<Product> productsRepo;
         private DatabaseContext databaseContext;
+        private IProductsRepository productsDbRepository;
         private bool disposed = false;
 
         public UnitOfWork(DatabaseContext databaseContext)
@@ -27,7 +28,7 @@ namespace OnlineShop.Db
         {
             get
             {
-                return (IProductsRepository)productsRepo;
+                return productsDbRepository = productsDbRepository ?? new ProductsDbRepository(databaseContext);
             }
         }
 
@@ -36,18 +37,13 @@ namespace OnlineShop.Db
             this.databaseContext.SaveChanges();
         }
 
-        public IRepository<T> Repository<T>() where T : class
-        {
-            return new Repository<T>(databaseContext);
-        }
-
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
             {
                 if (disposing)
                 {
-                    da.Dispose();
+                    databaseContext.Dispose();
                 }
             }
             this.disposed = true;

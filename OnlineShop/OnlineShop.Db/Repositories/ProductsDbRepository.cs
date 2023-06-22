@@ -8,30 +8,30 @@ using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db.Repositories
 {
-    public class ProductsDbRepository : Repository<Product>, IProductsRepository 
+    public class ProductsDbRepository : IProductsRepository 
     {
         private readonly DatabaseContext databaseContext;
 
-        public ProductsDbRepository(DatabaseContext databaseContext) : base(databaseContext)
+        public ProductsDbRepository(DatabaseContext databaseContext)
         {
-            //this.databaseContext = databaseContext;
+            this.databaseContext = databaseContext;
         }
 
-        //public async Task<List<Product>> GetAllAsync()
-        //{
-        //    return await databaseContext.Products
-        //        .Include(x => x.Size)
-        //        .Include(x => x.ImagePath)
-        //        .ToListAsync();
-        //}
+        public async Task<List<Product>> GetAllAsync()
+        {
+            return await databaseContext.Products
+                .Include(x => x.Size)
+                .Include(x => x.ImagePath)
+                .ToListAsync();
+        }
 
-        //public async Task<Product> TryGetByIdAsync(int id)
-        //{
-        //    return await databaseContext.Products
-        //        .Include(x => x.Size)
-        //        .Include(x => x.ImagePath)
-        //        .FirstOrDefaultAsync(product => product.Id == id);
-        //}
+        public async Task<Product> TryGetByIdAsync(int id)
+        {
+            return await databaseContext.Products
+                .Include(x => x.Size)
+                .Include(x => x.ImagePath)
+                .FirstOrDefaultAsync(product => product.Id == id);
+        }
 
         public async Task<List<Product>> SearchAsync(string name)
         {
@@ -48,25 +48,25 @@ namespace OnlineShop.Db.Repositories
             return result;
         }
 
-        //public async Task AddAsync(Product product)
-        //{
-        //    var existingProduct = await TryGetByIdAsync(product.Id);
-        //    if (existingProduct == null)
-        //    {
-        //        await databaseContext.Products.AddAsync(product);
-        //        await databaseContext.SaveChangesAsync();
-        //    }
-        //}
+        public async Task AddAsync(Product product)
+        {
+            var existingProduct = await TryGetByIdAsync(product.Id);
+            if (existingProduct == null)
+            {
+                await databaseContext.Products.AddAsync(product);
+                await databaseContext.SaveChangesAsync();
+            }
+        }
 
-        //public async Task DeleteAsync(Product product)
-        //{
-        //    var existingProduct = await TryGetByIdAsync(product.Id);
-        //    if (existingProduct != null)
-        //    {
-        //        databaseContext.Products.Remove(product);
-        //        await databaseContext.SaveChangesAsync();
-        //    }
-        //}
+        public async Task DeleteAsync(Product product)
+        {
+            var existingProduct = await TryGetByIdAsync(product.Id);
+            if (existingProduct != null)
+            {
+                databaseContext.Products.Remove(product);
+                await databaseContext.SaveChangesAsync();
+            }
+        }
 
         public async Task EditAsync(Product product)
         {

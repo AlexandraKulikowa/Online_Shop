@@ -58,6 +58,7 @@ namespace OnlineShopWebApp
             services.AddTransient<IProductsRepository, ProductsDbRepository>();
             services.AddTransient<CreateProductHelper>();
             services.AddTransient<CreateUserImage>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews();
         }
 

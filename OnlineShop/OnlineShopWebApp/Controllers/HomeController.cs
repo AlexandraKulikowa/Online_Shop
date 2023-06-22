@@ -27,7 +27,6 @@ namespace OnlineShopWebApp.Controllers
             switch(sortOrder)
             {
                 case "genre_landscape":
-                    result = unitOfWork.
                     result = await unitOfWork.ProductsDbRepository.GetByGenreAsync(Genre.Натюрморт);
                     break;
                 case "genre_still_life":
