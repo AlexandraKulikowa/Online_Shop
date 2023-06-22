@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.Db;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Models;
 using OnlineShopWebApp.Helpers;
@@ -10,30 +12,32 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IProductsRepository products;
-        public HomeController(IProductsRepository products)
+        //private readonly IProductsRepository products;
+        IUnitOfWork unitOfWork;
+        public HomeController(IUnitOfWork unitOfWork)
         {
-            this.products = products;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<IActionResult> Index(string sortOrder)
         {
-            var productsDb = await products.GetAllAsync();
+            IList<Product> productsDb = await unitOfWork.ProductsDbRepository.GetAllAsync();
             var result = new List<Product>();
 
             switch(sortOrder)
             {
                 case "genre_landscape":
-                    result = await products.GetByGenreAsync(Genre.Натюрморт);
+                    result = unitOfWork.
+                    result = await unitOfWork.ProductsDbRepository.GetByGenreAsync(Genre.Натюрморт);
                     break;
                 case "genre_still_life":
-                    result = await products.GetByGenreAsync(Genre.Пейзаж);
+                    result = await unitOfWork.ProductsDbRepository.GetByGenreAsync(Genre.Пейзаж);
                     break;
                 case "genre_animalism":
-                    result = await products.GetByGenreAsync(Genre.Анималистика);
+                    result = await unitOfWork.ProductsDbRepository.GetByGenreAsync(Genre.Анималистика);
                     break;
                 case "genre_portrait":
-                    result = await products.GetByGenreAsync(Genre.Портрет);
+                    result = await unitOfWork.ProductsDbRepository.GetByGenreAsync(Genre.Портрет);
                     break;
                 case "cost_desc":
                     result = productsDb.OrderByDescending(x => x.Cost).ToList();
@@ -48,7 +52,7 @@ namespace OnlineShopWebApp.Controllers
                     result = productsDb.OrderByDescending(x => x.Id).ToList();
                     break;
                 default:
-                    result = productsDb;
+                    result = (List<Product>)productsDb;
                     break;
             }
                 return View(result.ToProductViewModels());
