@@ -1,43 +1,44 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Helpers;
 using OnlineShop.Db.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
+using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Controllers
 {
     [Authorize]
     public class CompareController : Controller
     {
-        private readonly ICompareRepository compareItem;
-        private readonly IProductsRepository products;
-        public CompareController(ICompareRepository compareItem, IProductsRepository products)
+        IUnitOfWork unitOfWork;
+        public CompareController(IUnitOfWork unitOfWork)
         {
-            this.compareItem = compareItem;
-            this.products = products;
+            this.unitOfWork = unitOfWork;
         }
         public async Task<IActionResult> Index()
         {
-            var products = await compareItem.GetAllAsync(Constants.UserId);
+            var products = await unitOfWork.CompareDbRepository.GetAllAsync(Constants.UserId);
             var listVM = products.ToProductViewModels();
             return View(listVM);
         }
         public async Task<IActionResult> AddAsync(int id)
         {
-            var product = await products.TryGetByIdAsync(id);
-            await compareItem.AddAsync(product, Constants.UserId);
+            var product = await unitOfWork.ProductsDbRepository.TryGetByIdAsync(id);
+            await unitOfWork.CompareDbRepository.AddAsync(product, Constants.UserId);
+            unitOfWork.Save();
             return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            await compareItem.DeleteProductAsync(Constants.UserId, id);
+            await unitOfWork.CompareDbRepository.DeleteProductAsync(Constants.UserId, id);
+            unitOfWork.Save();
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> ClearAsync()
         {
-            await compareItem.ClearAsync(Constants.UserId);
+            await unitOfWork.CompareDbRepository.ClearAsync(Constants.UserId);
+            unitOfWork.Save();
             return RedirectToAction("Index");
         }
     }

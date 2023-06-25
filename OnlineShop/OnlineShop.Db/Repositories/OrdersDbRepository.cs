@@ -28,7 +28,6 @@ namespace OnlineShop.Db.Repositories
         public async Task AddAsync(Order order)
         {
                 await databaseContext.Orders.AddAsync(order);
-                await databaseContext.SaveChangesAsync();
         }
 
         public async Task<Order> GetOrderAsync(int id)
@@ -46,7 +45,6 @@ namespace OnlineShop.Db.Repositories
         {
             var existingOrder = await GetOrderAsync(id);
             existingOrder.Status = status;
-            await databaseContext.SaveChangesAsync();
         }
     }
 }

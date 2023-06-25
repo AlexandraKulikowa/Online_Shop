@@ -12,7 +12,6 @@ namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly IProductsRepository products;
         IUnitOfWork unitOfWork;
         public HomeController(IUnitOfWork unitOfWork)
         {

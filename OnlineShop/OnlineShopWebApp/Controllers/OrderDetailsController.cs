@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db.Interfaces;
+using OnlineShop.Db;
 using OnlineShopWebApp.Helpers;
 using System.Threading.Tasks;
 
@@ -9,15 +9,15 @@ namespace OnlineShopWebApp.Controllers
     [Authorize]
     public class OrderDetailsController : Controller
     {
-        private readonly IOrderRepository orders;
-        public OrderDetailsController(IOrderRepository orders)
+        IUnitOfWork unitOfWork;
+        public OrderDetailsController(IUnitOfWork unitOfWork)
         {
-            this.orders = orders;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<IActionResult> Index(int id)
         {
-            var order = await orders.GetOrderAsync(id);
+            var order = await unitOfWork.OrderDbRepository.GetOrderAsync(id);
             var orderVM = order.ToOrderViewModel();
             return View(orderVM);
         }

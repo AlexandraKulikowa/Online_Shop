@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db.Interfaces;
+using OnlineShop.Db;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
 using OnlineShopWebApp.Models;
@@ -12,17 +12,17 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class ProductController : Controller
     {
-        private readonly IProductsRepository products;
+        IUnitOfWork unitOfWork;
         private readonly CreateProductHelper createProductHelper;
-        public ProductController(IProductsRepository products, CreateProductHelper createProductHelper)
+        public ProductController(IUnitOfWork unitOfWork, CreateProductHelper createProductHelper)
         {
-            this.products = products;
+            this.unitOfWork = unitOfWork;
             this.createProductHelper = createProductHelper;
         }
 
         public async Task<IActionResult> Index()
         {
-            var productlist = await products.GetAllAsync();
+            var productlist = await unitOfWork.ProductsDbRepository.GetAllAsync();
             var productsVM = productlist.ToProductViewModels();
             return View(productsVM);
         }
@@ -37,12 +37,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             var product = createProductHelper.CreateProduct(productVM);
 
-            if (!products.CheckNewProduct(product))
+            if (!unitOfWork.ProductsDbRepository.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
 
             if (ModelState.IsValid)
             {
-                await products.AddAsync(product);
+                await unitOfWork.ProductsDbRepository.AddAsync(product);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View("Add", productVM);
@@ -50,7 +51,7 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public async Task<IActionResult> EditAsync(int id)
         {
-            var product = await products.TryGetByIdAsync(id);
+            var product = await unitOfWork.ProductsDbRepository.TryGetByIdAsync(id);
             var productVM = product.ToProductViewModel();
             return View(productVM);
         }
@@ -60,12 +61,13 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         {
             var product = createProductHelper.CreateProduct(productVM);
 
-            if (!products.CheckNewProduct(product))
+            if (!unitOfWork.ProductsDbRepository.CheckNewProduct(product))
                 ModelState.AddModelError("", "Название товара не может совпадать с описанием!");
 
             if (ModelState.IsValid)
             {
-                await products.EditAsync(product);
+                await unitOfWork.ProductsDbRepository.EditAsync(product);
+                unitOfWork.Save();
                 return RedirectToAction("Index");
             }
 
@@ -74,8 +76,9 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
 
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var product = await products.TryGetByIdAsync(id);
-            await products.DeleteAsync(product);
+            var product = await unitOfWork.ProductsDbRepository.TryGetByIdAsync(id);
+            await unitOfWork.ProductsDbRepository.DeleteAsync(product);
+            unitOfWork.Save();
             return RedirectToAction("Index");
         }
 

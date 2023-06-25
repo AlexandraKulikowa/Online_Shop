@@ -67,7 +67,6 @@ namespace OnlineShop.Db.Repositories
                     });
                 }
             }
-            await databaseContext.SaveChangesAsync();
         }
 
         public async Task ChangeAmountAsync(int id, bool sign, string userId)
@@ -92,7 +91,6 @@ namespace OnlineShop.Db.Repositories
             {
                 ChangeAmountInBasketItem(sign, product);
             }
-            await databaseContext.SaveChangesAsync();
         }
 
         public void ChangeAmountInBasketItem(bool sign, BasketItem ProductForChange)
@@ -108,14 +106,12 @@ namespace OnlineShop.Db.Repositories
             var basket = await TryGetByUserIdAsync(userId);
             var basketitem = basket.BasketItems.FirstOrDefault(x => x.Product.Id == id);
             databaseContext.BasketItems.Remove(basketitem);
-            await databaseContext.SaveChangesAsync();
         }
 
         public async Task ClearAsync(string userId)
         {
             var basket = await TryGetByUserIdAsync(userId);
             databaseContext.Baskets.Remove(basket);
-            await databaseContext.SaveChangesAsync();
         }
     }
 }

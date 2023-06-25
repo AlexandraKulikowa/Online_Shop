@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Arch.EntityFrameworkCore.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Models;
@@ -54,7 +53,6 @@ namespace OnlineShop.Db.Repositories
             if (existingProduct == null)
             {
                 await databaseContext.Products.AddAsync(product);
-                await databaseContext.SaveChangesAsync();
             }
         }
 
@@ -64,7 +62,6 @@ namespace OnlineShop.Db.Repositories
             if (existingProduct != null)
             {
                 databaseContext.Products.Remove(product);
-                await databaseContext.SaveChangesAsync();
             }
         }
 
@@ -87,7 +84,6 @@ namespace OnlineShop.Db.Repositories
                 existingProduct.BasketItems = product.BasketItems;
                 existingProduct.ImagePath = product.ImagePath;
             }
-            await databaseContext.SaveChangesAsync();
         }
 
         public bool CheckNewProduct(Product product)

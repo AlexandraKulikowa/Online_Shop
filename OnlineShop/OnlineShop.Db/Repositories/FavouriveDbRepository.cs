@@ -52,7 +52,6 @@ namespace OnlineShop.Db.Repositories
                 };
 
                 await databaseContext.Favorites.AddAsync(newList);
-                await databaseContext.SaveChangesAsync();
             }
         }
 
@@ -60,14 +59,12 @@ namespace OnlineShop.Db.Repositories
         {
             var favourite = await TryGetByIdAsync(userId, id);
             databaseContext.Favorites.Remove(favourite);
-            await databaseContext.SaveChangesAsync();
         }
 
         public async Task ClearAsync(string userId)
         {
             var list = await databaseContext.Favorites.Where(x => x.UserId == userId).ToListAsync();
             databaseContext.Favorites.RemoveRange(list);
-            await databaseContext.SaveChangesAsync();
         }
     }
 }

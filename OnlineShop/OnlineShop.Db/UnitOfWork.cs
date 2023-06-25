@@ -1,22 +1,17 @@
-﻿using Arch.EntityFrameworkCore.UnitOfWork;
-using Microsoft.EntityFrameworkCore;
-using OnlineShop.Db.Interfaces;
-using OnlineShop.Db.Models;
+﻿using OnlineShop.Db.Interfaces;
 using OnlineShop.Db.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineShop.Db
 {
     public class UnitOfWork : IUnitOfWork
     {
-        //private IRepository<Product> productsRepo;
         private DatabaseContext databaseContext;
         private IProductsRepository productsDbRepository;
+        private IBasketsRepository basketsDbRepository;
+        private IOrderRepository orderDbRepository;
+        private ICompareRepository compareDbRepository;
+        private IFavouriteRepository favouriteDbRepository;
         private bool disposed = false;
 
         public UnitOfWork(DatabaseContext databaseContext)
@@ -28,7 +23,38 @@ namespace OnlineShop.Db
         {
             get
             {
-                return productsDbRepository = productsDbRepository ?? new ProductsDbRepository(databaseContext);
+                return new ProductsDbRepository(databaseContext);
+            }
+        }
+
+        public IBasketsRepository BasketsDbRepository
+        {
+            get
+            {
+                return new BasketsDbRepository(databaseContext);
+            }
+        }
+
+        public IOrderRepository OrderDbRepository
+        {
+            get
+            {
+                return new OrdersDbRepository(databaseContext);
+            }
+        }
+
+        public ICompareRepository CompareDbRepository
+        {
+            get
+            {
+                return new ComparesDbRepository(databaseContext);
+            }
+        }
+        public IFavouriteRepository FavouriteDbRepository
+        {
+            get
+            {
+                return new FavouritesDbRepository(databaseContext);
             }
         }
 
