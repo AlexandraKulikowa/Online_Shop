@@ -4,14 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OnlineShop.Db;
 
-namespace OnlineShop.Db.Migraions.Identity
+namespace OnlineShop.Db.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20230527152426_UpUserThree")]
-    partial class UpUserThree
+    [Migration("20230524111018_Identity")]
+    partial class Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -179,9 +177,6 @@ namespace OnlineShop.Db.Migraions.Identity
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
