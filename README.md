@@ -11,3 +11,6 @@
 - Dependency injection
 - ASP .Net Core Identity
 - Unit Of Work
+
+Логин администратора: admin@gmail.com
+Пароль администратора: _Aa123456
