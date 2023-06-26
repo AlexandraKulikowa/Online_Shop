@@ -23,7 +23,11 @@ namespace OnlineShop.Db
         {
             get
             {
-                return new ProductsDbRepository(databaseContext);
+                if(productsDbRepository == null)
+                {
+                    return new ProductsDbRepository(databaseContext);
+                }
+                return productsDbRepository;
             }
         }
 
@@ -31,7 +35,11 @@ namespace OnlineShop.Db
         {
             get
             {
-                return new BasketsDbRepository(databaseContext);
+                if(basketsDbRepository == null)
+                {
+                    return new BasketsDbRepository(databaseContext);
+                }
+                return basketsDbRepository;
             }
         }
 
@@ -39,7 +47,11 @@ namespace OnlineShop.Db
         {
             get
             {
-                return new OrdersDbRepository(databaseContext);
+                if(orderDbRepository == null)
+                {
+                    return new OrdersDbRepository(databaseContext);
+                }
+                return orderDbRepository;
             }
         }
 
@@ -47,14 +59,22 @@ namespace OnlineShop.Db
         {
             get
             {
-                return new ComparesDbRepository(databaseContext);
+                if(compareDbRepository == null)
+                {
+                    return new ComparesDbRepository(databaseContext);
+                }
+                return compareDbRepository;
             }
         }
         public IFavouriteRepository FavouriteDbRepository
         {
             get
             {
-                return new FavouritesDbRepository(databaseContext);
+                if(favouriteDbRepository == null)
+                {
+                    return new FavouritesDbRepository(databaseContext);
+                }
+                return favouriteDbRepository;
             }
         }
 
