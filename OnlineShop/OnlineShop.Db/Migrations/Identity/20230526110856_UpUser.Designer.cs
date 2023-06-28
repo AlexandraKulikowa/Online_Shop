@@ -4,14 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OnlineShop.Db;
 
-namespace OnlineShop.Db.Migraions.Identity
+namespace OnlineShop.Db.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20230524111018_Identity")]
-    partial class Identity
+    [Migration("20230526110856_UpUser")]
+    partial class UpUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -183,6 +181,9 @@ namespace OnlineShop.Db.Migraions.Identity
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedPassword")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)

@@ -16,6 +16,7 @@ namespace OnlineShop.Db
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
+            Database.EnsureDeleted();
             Database.Migrate();
         }
 
@@ -33,17 +34,20 @@ namespace OnlineShop.Db
                         new Product { Id = 6, Name = "Картина \"Девушка и ветер\"", Cost = 4000, Description = "Картина в подарок подруге", Genre = Genre.Портрет, PaintingTechnique = "масло", SizeId = 2, Year = 2021, IsPromo = false },
                         new Product { Id = 7, Name = "Картина \"Пеннивайз\"", Cost = 6000, Description = "Клоун из фильма \"Оно\"", Genre = Genre.Портрет, PaintingTechnique = "масло", SizeId = 6, Year = 2022, IsPromo = false },
                         new Product { Id = 8, Name = "Картина \"Депрессия\"", Cost = 5500, Description = "Картина в подарок подростку", Genre = Genre.Портрет, PaintingTechnique = "масло", SizeId = 7, Year = 2022, IsPromo = false },
-                        new Product { Id = 9, Name = "Картина \"Лара Крофт\"", Cost = 2800, Description = "Анджелина Джоли в роли Лары Крофт", Genre = Genre.Портрет, PaintingTechnique = "масло", SizeId = 2, Year = 2021, IsPromo = false }
+                        new Product { Id = 9, Name = "Картина \"Лара Крофт\"", Cost = 2800, Description = "Анджелина Джоли в роли Лары Крофт", Genre = Genre.Портрет, PaintingTechnique = "масло", SizeId = 2, Year = 2021, IsPromo = false },
+                        new Product { Id = 10, Name = "Картина \"Утро\"", Cost = 12000, Description = "Олени на водопое", Genre = Genre.Анималистика, PaintingTechnique = "масло", SizeId = 1, Year = 2023, IsPromo = true},
+                        new Product { Id = 11, Name = "Картина \"Лето\"", Cost = 6000, Description = "Пейзаж со струящейся рекой", Genre = Genre.Пейзаж, PaintingTechnique = "масло", SizeId = 1, Year = 2023, IsPromo = true},
+                        new Product { Id = 12, Name = "Картина \"Мудрость\"", Cost = 10000, Description = "Картина в кабинет", Genre = Genre.Натюрморт, PaintingTechnique = "масло", SizeId = 5, Year = 2023, IsPromo = false}
                     });
 
 
             modelBuilder.Entity<FilePath>()
                 .HasData(new
-                    {
-                        Id = 1,
-                        Path = "/images/River.jpg",
-                        ProductId = 1 
-                    },
+                {
+                    Id = 1,
+                    Path = "/images/River.jpg",
+                    ProductId = 1
+                },
                     new
                     {
                         Id = 2,
@@ -91,6 +95,24 @@ namespace OnlineShop.Db
                         Id = 9,
                         Path = "/images/LaraCroftBig.jpg",
                         ProductId = 9
+                    },
+                    new
+                    {
+                        Id = 10,
+                        Path = "/images/Morning.jpg",
+                        ProductId = 10
+                    },
+                    new
+                    {
+                        Id = 11,
+                        Path = "/images/Early.jpg",
+                        ProductId = 11
+                    },
+                    new
+                    {
+                        Id = 12,
+                        Path = "/images/Past.jpg",
+                        ProductId = 12
                     });
 
 

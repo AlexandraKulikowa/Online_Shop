@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OnlineShop.Db.Migraions.Identity
+namespace OnlineShop.Db.Migrations.Identity
 {
-    public partial class UpUser : Migration
+    public partial class UpUserTwo : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "NormalizedPassword",
+                name: "Name",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: true);
@@ -16,7 +16,7 @@ namespace OnlineShop.Db.Migraions.Identity
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "NormalizedPassword",
+                name: "Name",
                 table: "AspNetUsers");
         }
     }
