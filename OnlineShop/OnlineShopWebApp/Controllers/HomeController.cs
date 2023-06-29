@@ -24,10 +24,10 @@ namespace OnlineShopWebApp.Controllers
             switch(sortOrder)
             {
                 case "genre_landscape":
-                    result = await products.GetByGenreAsync(Genre.Натюрморт);
+                    result = await products.GetByGenreAsync(Genre.Пейзаж);
                     break;
                 case "genre_still_life":
-                    result = await products.GetByGenreAsync(Genre.Пейзаж);
+                    result = await products.GetByGenreAsync(Genre.Натюрморт);
                     break;
                 case "genre_animalism":
                     result = await products.GetByGenreAsync(Genre.Анималистика);

@@ -16,7 +16,6 @@ namespace OnlineShop.Db
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-            Database.EnsureDeleted();
             Database.Migrate();
         }
 
