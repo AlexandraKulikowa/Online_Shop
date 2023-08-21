@@ -7,7 +7,7 @@ using OnlineShop.Db.Models;
 
 namespace OnlineShop.Db.Repositories
 {
-    public class ProductsDbRepository : IProductsRepository
+    public class ProductsDbRepository : IProductsRepository 
     {
         private readonly DatabaseContext databaseContext;
 
@@ -53,7 +53,6 @@ namespace OnlineShop.Db.Repositories
             if (existingProduct == null)
             {
                 await databaseContext.Products.AddAsync(product);
-                await databaseContext.SaveChangesAsync();
             }
         }
 
@@ -63,7 +62,6 @@ namespace OnlineShop.Db.Repositories
             if (existingProduct != null)
             {
                 databaseContext.Products.Remove(product);
-                await databaseContext.SaveChangesAsync();
             }
         }
 
@@ -86,7 +84,6 @@ namespace OnlineShop.Db.Repositories
                 existingProduct.BasketItems = product.BasketItems;
                 existingProduct.ImagePath = product.ImagePath;
             }
-            await databaseContext.SaveChangesAsync();
         }
 
         public bool CheckNewProduct(Product product)

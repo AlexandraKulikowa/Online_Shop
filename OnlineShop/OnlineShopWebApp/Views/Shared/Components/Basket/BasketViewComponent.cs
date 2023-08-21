@@ -1,21 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db.Interfaces;
 using OnlineShopWebApp.Helpers;
 using OnlineShop.Db.Repositories;
 using System.Threading.Tasks;
+using OnlineShop.Db;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Basket
 {
     public class BasketViewComponent : ViewComponent
     {
-        private readonly IBasketsRepository basketRepository;
-        public BasketViewComponent(IBasketsRepository basketRepository)
+        IUnitOfWork unitOfWork;
+        public BasketViewComponent(IUnitOfWork unitOfWork)
         {
-            this.basketRepository = basketRepository;
+            this.unitOfWork = unitOfWork;
         }
+
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var basket = await basketRepository.TryGetByUserIdAsync(Constants.UserId);
+            var basket = await unitOfWork.BasketsDbRepository.TryGetByUserIdAsync(Constants.UserId);
             var basketVM = basket.ToBasketViewModel();
             var productCounts = basketVM?.Amount() ?? 0;
             return View("Basket", productCounts);

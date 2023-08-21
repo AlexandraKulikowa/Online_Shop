@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Db.Interfaces
 {
-    public interface IProductsRepository
+    public interface IProductsRepository 
     {
         Task<List<Product>> GetAllAsync();
         Task<Product> TryGetByIdAsync(int id);

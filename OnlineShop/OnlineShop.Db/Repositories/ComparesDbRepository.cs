@@ -51,7 +51,6 @@ namespace OnlineShop.Db.Repositories
                     Product = product
                 };
                 await databaseContext.Comparisons.AddAsync(newComparison);
-                await databaseContext.SaveChangesAsync();
             }
         }
 
@@ -59,14 +58,12 @@ namespace OnlineShop.Db.Repositories
         {
             var comparison = await TryGetByIdAsync(userId, id);
             databaseContext.Comparisons.Remove(comparison);
-            await databaseContext.SaveChangesAsync();
         }
 
         public async Task ClearAsync(string userId)
         {
             var list = await databaseContext.Comparisons.Where(x => x.UserId == userId).ToListAsync();
             databaseContext.Comparisons.RemoveRange(list);
-            await databaseContext.SaveChangesAsync();
         }
     }
 }

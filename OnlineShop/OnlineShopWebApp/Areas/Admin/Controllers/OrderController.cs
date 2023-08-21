@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Db.Interfaces;
+using OnlineShop.Db;
 using OnlineShop.Db.Models;
 using OnlineShop.Db.Repositories;
 using OnlineShopWebApp.Helpers;
@@ -12,19 +12,22 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class OrderController : Controller
     {
-        private readonly IOrderRepository orders;
-        public OrderController(IOrderRepository orders) => this.orders = orders;
+        IUnitOfWork unitOfWork;
+        public OrderController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
 
         public async Task<IActionResult> Index()
         {
-            var listOrders = await orders.GetAllAsync();
+            var listOrders = await unitOfWork.OrderDbRepository.GetAllAsync();
             var listOrdersVM = listOrders.ToOrderViewModels();
             return View(listOrdersVM);
         }
 
         public async Task<IActionResult> DetailsAsync(int id)
         {
-            var order = await orders.GetOrderAsync(id);
+            var order = await unitOfWork.OrderDbRepository.GetOrderAsync(id);
             var orderVM = order.ToOrderViewModel();
             return View(orderVM);
         }
@@ -32,7 +35,8 @@ namespace OnlineShopWebApp.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> EditStatusAsync(int id, Status status)
         {
-            await orders.ChangeStatusAsync(id, status);
+            await unitOfWork.OrderDbRepository.ChangeStatusAsync(id, status);
+            unitOfWork.Save();
             return RedirectToAction("Index");
         }
     }
